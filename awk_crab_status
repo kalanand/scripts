@@ -1,0 +1,6 @@
+rm -f junk
+touch junk
+foreach d(crab_0_*) 
+crab -status -c $d | awk '{if ($2=="Retrieved" && $4!="0") print $0}' >> junk
+echo " " >> junk
+end

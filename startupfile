@@ -1,0 +1,8 @@
+#!/bin/tcsh
+source /uscmst1/prod/sw/cms/setup/cshrc prod
+cd $HOME/work/jetmet/dev/CMSSW_1_6_0/src/
+echo "Using 1_6_0"
+eval `scramv1 runtime -csh`
+cd ~/work/jetmet/dev/CMSSW_1_6_0/src/JetMETCorrections/
+echo "You are in:"
+pwd
