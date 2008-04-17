@@ -1,0 +1,64 @@
+
+* compares off-res to MC
+
+chain off hbkDir/off_cut_3pi-1.hbk
+chain cont hbkDir/cca_cut_3pi-1.hbk
+chain cont hbkDir/cca_cut_3pi-2.hbk
+chain cont hbkDir/cca_cut_3pi-3.hbk
+chain cont hbkDir/udsa_cut_3pi-4.hbk
+chain cont hbkDir/udsa_cut_3pi-4.hbk
+chain cont hbkDir/udsa_cut_3pi-4.hbk
+chain cont hbkDir/udsa_cut_3pi-4.hbk
+
+1d 100 'nnout-off' 100 0 1
+1d 101 'bknnout-off' 100 0 1
+1d 102 'DE-off' 100 -.07 .12
+1d 103 'mes-off' 100 5.2 5.3
+1d 104 'mD-off' 100 1.805 1.924
+
+1d 200 'nnout-off' 100 0 1
+1d 201 'bknnout-off' 100 0 1
+1d 202 'DE-off' 100 -.07 .12
+1d 203 'mes-off' 100 5.2 5.3
+1d 204 'mD-off' 100 1.805 1.924
+
+cd //off
+nt/pl 1.nnout d0ppmass>0.508.or.d0ppmass<0.489 idh=100
+nt/pl 1.bknnout d0ppmass>0.508.or.d0ppmass<0.489 idh=101
+nt/pl 1.deltae d0ppmass>0.508.or.d0ppmass<0.489 idh=102
+nt/pl 1.mes d0ppmass>0.508.or.d0ppmass<0.489 idh=103
+nt/pl 1.d0mass d0ppmass>0.508.or.d0ppmass<0.489 idh=104
+
+cd //cont
+nt/pl 1.nnout d0ppmass>0.508.or.d0ppmass<0.489 idh=200
+nt/pl 1.bknnout d0ppmass>0.508.or.d0ppmass<0.489 idh=201
+nt/pl 1.deltae d0ppmass>0.508.or.d0ppmass<0.489 idh=202
+nt/pl 1.mes d0ppmass>0.508.or.d0ppmass<0.489 idh=203
+nt/pl 1.d0mass d0ppmass>0.508.or.d0ppmass<0.489 idh=204
+ 
+
+mess "== comparasion between off-peak data and continuum =="
+mess nnout
+diff 100 200
+mess bknnout
+diff 101 201
+mess DE
+diff 102 202
+mess mes
+diff 103 203
+mess mD
+diff 104 204
+
+opt nbox
+opt zfl
+zone 3 3
+
+do i=0,4
+  norm 10[i]
+  norm 20[i]
+  hi/pl 10[i]
+  hi/pl 20[i] s
+enddo
+
+pict/print compContOff.ps
+

@@ -1,0 +1,63 @@
+// calculates the additive and subtractive systematic error matrix,
+// naively copied from the systematic studies in the BAD.
+
+
+#ifndef ERRMATSYST
+#define ERRMATSYST
+
+#include <math.h>
+#include <iostream>
+#include "BToDKTo3piK/ErrMat.hh"
+
+class ErrMatSyst : public ErrMat {
+  // static members:
+public:
+  static void testClass();
+
+  struct Err {
+    Err(double err, double errProp, double errModel):
+      _err(err),
+      _errProp(errProp),
+      _errConst(sqrt(err*err - errProp*errProp)),
+      _errModel(errModel) {
+    }
+      
+    void Print() const {
+      std::cout << "_err=" << _err << " _errConst="
+		<< _errConst << " _errProp=" << _errProp << std::endl;
+    }
+
+    const double _err;
+    const double _errProp;
+    const double _errConst;
+    const double _errModel;
+  };
+
+  // instance members:
+public:
+  ErrMatSyst(Bool_t includeModel = kTRUE, Bool_t modelOnly = kFALSE);
+  virtual ~ErrMatSyst() {}
+  TMatrixD matrix(double rM, double tM, double rP, double tP) const;
+ 
+  const Err & errRm() const {return _errRm;}
+  const Err & errTm() const {return _errTm;}
+  const Err & errRp() const {return _errRp;}
+  const Err & errtp() const {return _errTp;}
+  Bool_t includeModel() const {return _includeModel;}
+  Bool_t modelOnly() const {return _modelOnly;}
+
+private:
+  Bool_t _includeModel;
+  Bool_t _modelOnly;
+  Err _errRm;
+  Err _errRp;
+  Err _errTm;
+  Err _errTp;
+
+#if !defined(__INTERACTIVE__)
+  ClassDef(ErrMatSyst,0)
+#endif  
+
+};
+
+#endif

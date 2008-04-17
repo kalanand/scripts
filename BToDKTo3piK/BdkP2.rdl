@@ -1,0 +1,62 @@
+// The class for a point that also knows how to transform itself under
+// the symmetry operations
+
+
+#ifndef BDKP2_HH
+#define BDKP2_HH
+
+#include <iostream>
+
+#include "TObject.h" // for ClassDef
+
+
+class BdkP2 {
+public:
+  BdkP2(double s12 = 0, double s13 = 0) : _s12(s12), _s13(s13) {}
+  BdkP2(const BdkP2 & p) : _s12(p._s12), _s13(p._s13) {}
+
+  virtual ~BdkP2() {}
+
+  BdkP2 & operator=(const BdkP2 & p) {
+    _s12 = p._s12;
+    _s13 = p._s13;
+    return *this;
+  }
+
+  void setS12(double s12) {_s12 = s12;}
+  void setS13(double s13) {_s13 = s13;}
+  void set(double s12, double s13) {_s12 = s12; _s13 = s13;}
+  void setS12S23(double s12, double s23);
+  void setS13S23(double s13, double s23);
+
+  BdkP2 R()   const {return BdkP2(s23(), s12());}
+  BdkP2 RR()  const {return R().R();}
+  BdkP2 E()   const {return BdkP2(s12(), s23());}
+  BdkP2 ER()  const {return R().E();}
+  BdkP2 ERR() const {return RR().E();}
+
+  double s12() const {return _s12;}
+  double s13() const {return _s13;}
+  double s23() const;
+
+  Bool_t inDalitz() const;
+
+  // Check if the two points are equal to within BdkDP::tolerance():
+  bool operator==(const BdkP2&p) const;
+  bool operator!=(const BdkP2&p) const {return !(*this == p);}
+
+  void Print(std::ostream & str = std::cout) const;
+  friend std::ostream & operator<<(std::ostream & str, const BdkP2 & p2);
+
+  void Draw(int fillColor = 1, double radius = 0.001, 
+	    int fillStyle = 1001) const;
+
+
+private:
+  double _s12;
+  double _s13;
+
+  ClassDef (BdkP2,0);
+};
+
+#endif

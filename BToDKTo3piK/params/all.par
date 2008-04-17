@@ -1,0 +1,9 @@
+include ../BToDKTo3piK/params/numEvts.par
+include ../BToDKTo3piK/params/deltaE.par
+include ../BToDKTo3piK/params/dalitzNorm.par
+include ../BToDKTo3piK/params/dalitzN.par
+include ../BToDKTo3piK/params/dalitzP.par
+include ../BToDKTo3piK/params/nnCont.par
+include ../BToDKTo3piK/params/nnComb.par
+include ../BToDKTo3piK/params/mD.par
+include ../BToDKTo3piK/params/mES.par

@@ -1,0 +1,100 @@
+* $Id: cuts.kumac,v 1.6 2006/03/02 00:54:14 fwinkl Exp $
+* Script to maintain the central cuts
+
+macro cuts finalcut=0 d=good bdecmode=DK 
+
+if [finalcut].eq.0 then
+  cut 91 (-0.07<deltae<0.06.and.1.83<d0mass<1.895.and.nnout>0.1.and.bknnout>0.25.and.(1.84>mixneumass.or.mixneumass>1.89).and.(0.489>d0ppupmass.or.d0ppupmass>0.508).and.d0flightdist<1.5)
+elseif [finalcut].eq.1 then
+  cut 91 (-0.07<deltae<0.06.and.nnout>0.1.and.bknnout>0.25.and.(1.84>mixneumass.or.mixneumass>1.89).and.(0.489>d0ppupmass.or.d0ppupmass>0.508).and.d0flightdist<1.5)
+else
+  mess no final cut
+endif
+
+if [d].eq.good then
+  cut 92 (trued0flg>0.and.d0recdec=3)
+  mess running on good D
+elseif [d].eq.bad then
+  cut 92 (trued0flg<=0.or.d0recdec!=3)
+  mess running on bad D
+else
+  cut 92 trued0flg>-2000
+  mess  no requirement on D
+endif
+ 
+if [bdecmode].eq.none then
+  mess no requiring on b1/2decmode
+  cut 93 b1decmode>-100
+
+elseif [bdecmode].eq.zero then
+  mess requiring b1decmode or b2decmode = 0 
+  cut 93 B1decmode=0.and.B2decmode=0
+
+elseif [bdecmode].eq.DK then
+  mess requiring b1decmode or b2decmode = 16
+* For DK, require/exclude correct full reconstruction, not only good D:
+  if [d].eq.good then
+    cut 93 excltruth==16
+    cut 92 excltruth==16
+  else 
+    cut 93 (B1decmode==16.or.B2decmode==16).and.excltruth!=16
+    cut 92 (B1decmode==16.or.B2decmode==16).and.excltruth!=16
+  endif
+
+elseif [bdecmode].eq.DPi then
+  mess requiring b1decmode or b2decmode = 156
+  cut 93 (b1decmode=156.or.b2decmode=156)
+
+elseif [bdecmode].eq.DKX then
+  mess requiring DKX
+  cut 93 ((B1decmode>9.and.B1decmode<16).or.(B1decmode>16.and.B1decmode<19).or.(B1decmode>59.and.B1decmode<79).or.(B1decmode>109.and.B1decmode<149).or.(B2decmode>9.and.B2decmode<16).or.(B2decmode>16.and.B2decmode<19).or.(B2decmode>59.and.B2decmode<79).or.(B2decmode>109.and.B2decmode<149))
+
+elseif [bdecmode].eq.DPiX then
+  mess requiring DPiX
+  cut 93 (B1decmode==50.or.(B1decmode>79.and.B1decmode<109).or.(B1decmode>149.and.B1decmode<156).or.(B1decmode>156.and.B1decmode<199).or.B2decmode==50.or.(B2decmode>79.and.B2decmode<109).or.(B2decmode>149.and.B2decmode<156).or.(B2decmode>156.and.B2decmode<199))
+
+elseif [bdecmode].eq.BBCD then
+  mess requiring BBCD
+  cut 93 ((B1decmode>199.or.B2decmode>199).or.(B1decmode<=0.and.B2decmode<=0))
+
+else
+  mess no cut on b1/2decmode
+  cut 93 b1decmode>-100
+endif
+
+cut 91 p
+cut 92 p
+cut 93 p
+
+
+mess ' '
+mess SR cut:
+cut 80 (-0.07<deltae<0.06.and.1.83<d0mass<1.895.and.nnout>0.1.and.bknnout>0.25.and.(1.84>mixneumass.or.mixneumass>1.89).and.mes>5.272)
+cut 80 p
+
+mess ' '
+mess upper DE cut:
+cut 81 (0.06<deltae<0.140.and.1.83<d0mass<1.895.and.nnout>0.1.and.bknnout>0.25.and.(1.84>mixneumass.or.mixneumass>1.89).and.mes>5.272)
+cut 81 p
+
+mess ' '
+mess lower DE cut:
+cut 82 (-0.140<deltae<-0.07.and.1.83<d0mass<1.895.and.nnout>0.1.and.bknnout>0.25.and.(1.84>mixneumass.or.mixneumass>1.89).and.mes>5.272)
+cut 82 p
+
+mess ' '
+mess mES cut:
+cut 83 (-0.07<deltae<0.06.and.1.83<d0mass<1.895.and.nnout>0.1.and.bknnout>0.25.and.(1.84>mixneumass.or.mixneumass>1.89).and.5.2<mes<5.272)
+cut 83 p
+
+mess ' '
+mess upper mD cut:
+cut 84 (-0.07<deltae<0.06.and.1.9<d0mass.and.nnout>0.1.and.bknnout>0.25.and.(1.84>mixneumass.or.mixneumass>1.89).and.mes>5.272)
+cut 84 p
+
+mess ' '
+mess lower mD cut:
+cut 85 (-0.07<deltae<0.06.and.d0mass<1.82.and.nnout>0.1.and.bknnout>0.25.and.(1.84>mixneumass.or.mixneumass>1.89).and.mes>5.272)
+cut 85 p
+
+

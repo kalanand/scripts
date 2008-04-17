@@ -1,0 +1,41 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkDalitzCfg.rdl,v 1.2 2007/04/03 16:14:29 fwinkl Exp $
+ * Description:
+ *   Singleton class to hold Dalitz plot configuration
+ * History:
+ *   Feb 19 2006, created, Frank Winklmeier
+ *
+ * Copyright (C) 2006 Colorado State University and SLAC
+ *****************************************************************************/
+
+#ifndef BDKDALITZCFG
+#define BDKDALITZCFG
+
+#include "BToDKTo3piK/BdkDalitzBase.hh"
+#include "RooFitCore/RooRealVar.hh"
+
+class BdkDalitzCfg : public BdkDalitzBase {
+public:
+  BdkDalitzCfg(const char *name, const char *title);
+
+  BdkDalitzCfg(const BdkDalitzCfg& other, const char* name);
+
+  virtual TObject* clone(const char* newname) const {
+    return new BdkDalitzCfg(*this,newname); }
+
+  virtual ~BdkDalitzCfg();
+
+  void setM23VetoMass(Double_t min, Double_t max);
+  void removeM23Veto() { _m23VetoMass->removeRange(); }
+  
+protected:
+  Double_t evaluate() const { return 0.0; }
+
+private:
+
+  ClassDef(BdkDalitzCfg,0)
+};
+
+#endif

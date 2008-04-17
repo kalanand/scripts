@@ -1,0 +1,58 @@
+// Holds 6 BdkBinWgt objects, one for each combination of the basic 
+// operators (I, R, E_12 and their unique products).
+// It also sets the correct coefficients (weights) based on its 
+// isospin operator
+
+#ifndef BDKBINWGTLIST
+#define BDKBINWGTLIST
+
+#include "BToDKTo3piK/BdkBinWgt.hh"
+#include "BToDKTo3piK/BdkIsoOp.hh"
+
+
+class BdkBinWgtList {
+public:
+  BdkBinWgtList(int op = BdkIsoOp::P32);
+
+
+  // Tell the list which bin to use for which basic operation.
+  void setI(const BdkTriBin & bin);
+  void setR(const BdkTriBin & bin);
+  void setRR(const BdkTriBin & bin);
+  void setE(const BdkTriBin & bin);
+  void setER(const BdkTriBin & bin);
+  void setERR(const BdkTriBin & bin);
+
+  
+  BdkIsoOp::Op op() const {return _op;}
+  const BdkBinWgt & i() const {return _i;}
+  const BdkBinWgt & r() const {return _r;}
+  const BdkBinWgt & rr() const {return _rr;}
+  const BdkBinWgt & e() const {return _e;}
+  const BdkBinWgt & er() const {return _er;}
+  const BdkBinWgt & err() const {return _err;}
+
+  // A way to access the binWgt with an integer:
+  const BdkBinWgt & binWgt(int symOp) const;
+
+  // The binWgt given a bin reference. This is useful for finding
+  // the reverse weight, which BdkBinning::calcEVs() needs in order
+  // to calculate the error matrix:
+  const BdkBinWgt * binWgt(const BdkTriBin & bin) const;
+
+
+private:
+  BdkIsoOp::Op _op;
+
+  BdkBinWgt _i;
+  BdkBinWgt _r;
+  BdkBinWgt _rr;
+  BdkBinWgt _e;
+  BdkBinWgt _er;
+  BdkBinWgt _err;
+
+
+  ClassDef(BdkBinWgtList,0);
+};
+
+#endif

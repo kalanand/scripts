@@ -1,0 +1,93 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdfComposite.rdl,v 1.1 2005/10/09 22:50:37 abi Exp $
+ * Authors:
+ *   Abi Soffer, Colorado State University, abi@slac.stanford.edu
+ * Description:
+ *   Base class for composite Pdf wrappers. Subclasses need to use the 
+ *   addComponent function to add their components. They also need to 
+ *   implement BdkPdfAbsBase functionalities.
+ * History:
+ *   21-Mar-2002 abi Created initial version
+ *   28-Mar-2002 ww  add dependents()
+ *
+ * Copyright (C) 2002 Colorado State University and SLAC
+ *****************************************************************************/
+#ifndef BDKPDFCOMPOSITE
+#define BDKPDFCOMPOSITE
+
+#include "TList.h"
+#include "BToDKTo3piK/BdkPdfAbsBase.hh"
+
+class RooArgSet;
+class RooArgList;
+
+class BdkPdfComposite : public BdkPdfAbsBase {
+public:
+  BdkPdfComposite();
+  BdkPdfComposite(BdkPdfComposite & other); // argument non-const!
+
+  BdkPdfComposite(const char * name, const char * desc);
+
+  BdkPdfComposite(const char * name, const char * desc, 
+		  BdkPdfAbsBase & component);
+
+  BdkPdfComposite(const char * name, const char * desc, 
+		  BdkPdfAbsBase & component1, BdkPdfAbsBase & component2);
+
+  BdkPdfComposite(const char * name, const char * desc, TList & components);
+
+  ~BdkPdfComposite();
+
+  BdkPdfComposite & operator=(BdkPdfComposite & other); // argument non-const
+
+  // Modifiers:
+  virtual void setVerbose(const char * val);
+
+  // Non-const accessors:
+  TIterator * compIter() {return _components.MakeIterator();}
+  BdkPdfAbsBase * component(int i) {return (BdkPdfAbsBase *)_components.At(i);}
+
+  // dependents() loops over dependents of _components
+  virtual RooArgSet dependents();  
+
+  // subDependents() may be implemented by subclasses, returning the 
+  // dependents that are UNRELATED to those of the _components. Since
+  // this is not envisioned to be the case often, the function is 
+  // implemented here to return an empty RooArgSet:
+  virtual RooArgSet subDependents();
+
+  // Returns a list of the RooAbsPdfs of the _coponents. This is
+  // useful for sums and product wrappers subclasses:
+  virtual RooArgList componentPdfs();
+  
+
+  // Accessors:
+  inline const TList & getComponents() const {return _components;};
+  int numComponents() const;
+
+  // Overrides base class function. Checks its own _isValid, as well
+  // as that of all components, returns true only if all are true:
+  virtual Bool_t getIsValid() const; 
+
+protected:
+  // Helpers:
+  void addComponent(BdkPdfAbsBase & component);
+  void addComponent(BdkPdfAbsBase * component);
+  void setComponents(TList & components); // erases previous components
+  void removeComponents();
+  inline TList & components() {return _components;};
+
+
+private:
+  TList _components;
+
+#if !defined(__INTERACTIVE__) 
+    ClassDef (BdkPdfComposite,0) // Composite pdf wrapper 
+#endif
+
+};
+
+#endif
+

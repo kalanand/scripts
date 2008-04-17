@@ -1,0 +1,127 @@
+#   Standalone Makefile for BToDKTo3piK
+#   -----------------------------------
+#
+#   Package: BToDKTo3piK
+#      File: $Id: GNUmakefile.standalone,v 1.1 2005/10/09 22:50:37 abi Exp $
+#   Author:
+#     WW, Wolfgang Walkowiak, UC Santa Cruz, walkowia@slac.stanford.edu
+#
+#   Original Authors (taken from RFM):
+#     WV, Wouter Verkerke, UC Santa Barbara, verkerke@slac.stanford.edu
+#     DK, David Kirkby, UC Irvine, kirkby@slac.stanford.edu
+#
+#   History:
+#     16-Feb-2002 WW Create initial version as modified copy
+#                    from RooFitModels/GNUmakefile.standalone
+#
+#   Instructions
+#       - Taylor 'external configuration' section below
+#         to match systems compilers setup and ROOT installation,
+#         and RooFitCore, RooFitModels installation
+#       - Build RooFitCore and RooFitModels first
+#       - run 'gmake -f GNUMakefile.standalone <target>' 
+#         from the BToDKTo3piK/ directory
+#
+#   Build targets
+#     lib   - make libBToDKTo3piK.a
+#     shlib - make libBToDKTo3piK.so
+#     clean - delete all intermediate and final build objects
+#  
+#   <NOTE TO USERS: This makefile is still a work in progress.>
+#
+#   Copyright (C) 2002 University of California
+
+
+# cc files not to be included in library
+LIBREMOVEFILES := 
+
+# External configuration (this one is for linux@slac) ---------
+CC         = /afs/slac.stanford.edu/package/gcc/i386_linux24/gcc-2.95.2/bin/g++
+CCFLAGS    = -O2
+MFLAGS     = -MM
+ROOTSYS    = $(BFROOT)/package/root/3.02-07/linux24/
+ROOFITCORE = /u/ec/walkowia/tmp/RFC/RooFitCore
+INCLUDES   = 
+WORKDIR    = tmp/
+LIBDIR     = $(WORKDIR)
+# -------------------------------------------------------------
+
+
+# Internal configuration
+PACKAGE=BToDKTo3piK
+LD_LIBRARY_PATH:=$(ROOTSYS)/lib
+OBJDIR=$(WORKDIR)/objects/$(PACKAGE)/
+INCDIR=$(WORKDIR)/$(PACKAGE)/
+VPATH=$(INCDIR) $(OBJDIR)
+
+INCLUDES += -I.. -I$(WORKDIR)/ -I$(ROOTSYS)/include -I$(ROOFITCORE)/$(WORKDIR)
+RDLLIST   = $(filter-out $(PACKAGE)_LinkDef.rdl $(patsubst %.cc,%.rdl,$(LIBREMOVEFILES)),$(wildcard *.rdl))
+CINTFILE  = $(PACKAGE)Cint.cc
+CINTOBJ   = $(PACKAGE)Cint.o
+LIBFILE   = $(LIBDIR)/lib$(PACKAGE).a
+SHLIBFILE = $(LIBDIR)/lib$(PACKAGE).so
+
+default: shlib
+
+# List of all includes files to copy from rdl
+HHLIST=$(patsubst %.rdl,%.hh,$(RDLLIST))
+
+# List of all object files to build
+OLIST=$(patsubst %.cc,%.o,$(filter-out $(LIBREMOVEFILES), $(wildcard *.cc)))
+
+# List of all dependency file to make
+DLIST=$(patsubst %.rdl,%.d,$(RDLLIST))
+
+# Implicit rule making all dependency Makefiles included at the end of this makefile
+$(INCDIR)/%.d: %.cc $(HHLIST)
+	@echo "Making $@"
+	@set -e; $(CC) $(MFLAGS) $(CPPFLAGS) $(INCLUDES) $< \
+	          | sed 's/\($(notdir $*)\)\.o[ :]*/\1.o $(notdir $@) : /g' > $@; \
+	        [ -s $@ ] || rm -f $@
+
+# Implicit rule copying all RDL to INCDIR/HH
+%.hh: %.rdl 
+	@mkdir -p $(INCDIR)
+	@cp $< $(INCDIR)/$@
+
+# Implicit rule to compile all classes
+%.o : %.cc 
+	@echo "Compiling $<"
+	@mkdir -p $(OBJDIR)
+	@$(CC) $(CCFLAGS) -c $< -o $(OBJDIR)/$(notdir $@) $(INCLUDES)
+
+
+# Rule to make ROOTCINT output file
+$(OBJDIR)/$(CINTOBJ): $(RDLLIST) 
+	@mkdir -p $(INCDIR)
+	@mkdir -p $(OBJDIR)
+	@echo "Running rootcint"
+	@cd $(INCDIR) ; $(ROOTSYS)/bin/rootcint -f $(CINTFILE) -c $(INCLUDES) $(HHLIST)
+	@echo "Compiling $(CINTFILE)"
+	@$(CC) $(CCFLAGS) -c $(INCDIR)/$(CINTFILE) -o $(OBJDIR)/$(CINTOBJ) $(INCLUDES)
+
+# Rule to combine objects into a library
+$(LIBFILE): $(OLIST) $(INCDIR)/$(CINTFILE)) $(patsubst %.cc,%.o,$(OBJDIR)/$(CINTFILE))
+	@echo "Making $(LIBFILE)"
+	@rm -f $(LIBFILE)
+	@ar q $(LIBFILE) $(addprefix $(OBJDIR)/,$(OLIST) $(patsubst %.cc,%.o,$(CINTFILE))) 
+	@ranlib $(LIBFILE)
+
+# Rule to combine objects into a shared library
+$(SHLIBFILE): $(OLIST) $(patsubst %.cc,%.o,$(OBJDIR)/$(CINTFILE))
+	@echo "Making $(SHLIBFILE)"
+	@rm -f $(SHLIBFILE)
+	@$(CC) $(addprefix $(OBJDIR)/,$(OLIST) $(patsubst %.cc,%.o,$(CINTFILE))) -shared -o $(SHLIBFILE)
+
+# Useful build targets
+lib: $(LIBFILE) 
+shlib: $(SHLIBFILE)
+clean:
+	rm -f $(OBJDIR)/*
+	rm -f $(INCDIR)/*
+	rm -f $(LIBFILE)
+	rm -f $(SHLIBFILE)
+
+.PHONY : shlib lib default clean
+
+-include $(addprefix $(INCDIR)/,$(DLIST))

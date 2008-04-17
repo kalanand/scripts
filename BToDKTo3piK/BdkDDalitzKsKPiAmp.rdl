@@ -1,0 +1,82 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkDDalitzKsKPiAmp.rdl,v 1.3 2008/01/02 20:30:10 fwinkl Exp $
+ * Description:
+ *   Implementation of D -> Ks K- pi+ Dalitz amplitude
+ *   Can also handle D -> Ks K+ pi- (piCharge in constructor)
+ * History:
+ *   11 Apr 2007, created, Frank Winklmeier
+ *
+ * Copyright (C) 2007 Colorado State University and SLAC
+ *****************************************************************************/
+
+#ifndef BDKDDALITZKSKPIAMP
+#define BDKDDALITZKSKPIAMP
+
+#include "BToDKTo3piK/BdkAbsDDalitzAmp.hh"
+
+class BdkDDalitzKsKPiAmp : public BdkAbsDDalitzAmp {
+  // Static members: -------------------------------------------
+public:
+  enum Component {KST0_1430  = 1,
+                  KST        = 2,
+                  KST1_1680  = 4,
+                  KST2_1430  = 8,
+                  KST0_1430P = 16,
+                  KSTP       = 32,
+                  KST1_1680P = 64,
+                  KST2_1430P = 128,
+                  A0M        = 256,
+                  A0_1450M   = 512,
+                  A2_1310M   = 1024,
+                  NONRES     = 2048};
+
+  enum ResType {BWRES = 0,
+                A0RES = 1};
+  
+  static int allComponents() {
+    return KST0_1430 + KST + KST1_1680 + KST2_1430 +
+      KST0_1430P + KSTP + KST1_1680P + KST2_1430P +
+      A0M + A0_1450M + A2_1310M + NONRES;
+   }
+  
+  
+
+  // Instance members: -------------------------------------------
+public:
+  /// constructors:
+  BdkDDalitzKsKPiAmp(const char * name, const char * title, 
+                     BdkDalitzBase * pdf,
+                     Int_t componentsBit = allComponents(),
+                     Int_t piCharge = +1);
+  
+  virtual  ~BdkDDalitzKsKPiAmp();
+
+  virtual RooComplex matrixElement(Double_t m12, Double_t m13, Int_t i) const;
+  
+  virtual void calDDbarNorm(int nEvents);
+  virtual Double_t efficiency(Double_t m12, Double_t m13) const;
+  virtual Double_t m12NormRange() const {return 3.0;}  // m(Ks K-)
+  virtual Double_t m13NormRange() const {return 2.0;}  // m(Ks pi+)
+  
+protected:
+  // helpers:
+  virtual void initResonance();
+
+
+private:
+  Int_t _piCharge;    // charge of the pion (D -> Ks K+ pi- or Ks K- pi+)
+
+  // coupling constants (squared) for coupled channel Breit-Wigner
+  RooRealVar* _a0gEtaPi;
+  RooRealVar* _a0gKK;
+  
+  BdkDDalitzKsKPiAmp(const BdkDDalitzKsKPiAmp & other);
+
+  ClassDef(BdkDDalitzKsKPiAmp,1)
+
+};
+
+#endif
+

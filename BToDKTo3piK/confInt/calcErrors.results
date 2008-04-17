@@ -1,0 +1,57 @@
+
+*****************
+Baseline results: all errors (stat, syst, model)
+*****************
+calcAllErrors( h3readDir + projFileName)
+readProjHists called to read /nfs/farm/babar/AWG16/Breco/abi/makeCLHists-projections.root
+
+--rB--
+Lowest CL is at 0.389 at bin 195, CL=0.00379856
+Upper error is 0.386 at bin 388, at value 0.775
+Lower error is 0.326 at bin 32, at value 0.063
+
+--gamma--
+Lowest CL is at 2.52 at bin 254, CL=0.00379856
+Upper error is 73.44 at bin 356, at value 75.96
+Lower error is 32.4 at bin 209, at value -29.88
+
+--delta--
+Lowest CL is at 58.68 at bin 332, CL=0.00379856
+Upper error is 19.44 at bin 359, at value 78.12
+Lower error is 85.68 at bin 213, at value -27
+
+
+Errors: Stat,   Syst,   Model:
+------------------------------
+rB+:    -999,    0,        0
+rB- :   0.3032, 0.0626252, 0.100813
+
+gamma+: 68.4,    22.482,   14.4718
+gamma-: 23.04,   8.27217,  21.2247
+
+delta+: 13.68,   11.6986,  7.34259
+delta-: 76.32,   14.8955,  35.9784
+
+
+
+**************************************
+With Bias:
+**************************************
+
+calcAllErrors( h3readDir + projFileNameBias, h3HistNameBias)
+readProjHists called to read /nfs/farm/babar/AWG16/Breco/abi/makeCLHists-projections-bias.root
+
+--rB--
+Lowest CL is at 0.385 at bin 193, CL=0.00396439
+Upper error is 0.388 at bin 387, at value 0.773
+Lower error is 0.326 at bin 30, at value 0.059
+
+--gamma--
+Lowest CL is at 2.52 at bin 254, CL=0.00396439
+Upper error is 74.16 at bin 357, at value 76.68
+Lower error is 33.12 at bin 208, at value -30.6
+
+--delta--
+Lowest CL is at 60.12 at bin 334, CL=0.00396439
+Upper error is 18.72 at bin 360, at value 78.84
+Lower error is 87.84 at bin 212, at value -27.72

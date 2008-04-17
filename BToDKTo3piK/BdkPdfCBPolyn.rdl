@@ -1,0 +1,106 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdfCBPolyn.rdl,v 1.1 2005/10/09 22:50:36 abi Exp $
+ * Authors:
+ *   Abi Soffer, Colorado State University, abi@slac.stanford.edu
+ * Description:
+ *   Class for a Gaussian + POLYN pdf with it's own 
+ *   variable definition to be used in conjunction with RooFitCore/Models.
+ * History:
+ *   6-Mar-2004 abi Created initial version
+ *
+ * Copyright (C) 2004 Colorado State University and SLAC
+ *****************************************************************************/
+#ifndef BDKPDFCBPOLYN
+#define BDKPDFCBPOLYN
+
+#include "BToDKTo3piK/BdkPdfComposite.hh"
+#include "BToDKTo3piK/BdkPdfCBShape.hh"
+#include "BToDKTo3piK/BdkPdfPolyn.hh"
+
+class RooRealVar;
+
+class BdkPdfCBPolyn : public BdkPdfComposite
+{
+
+public:
+  BdkPdfCBPolyn();
+  BdkPdfCBPolyn(const char * theName,
+		const char * theDesc,
+		RooRealVar & dependent,
+		Int_t lowestOrder = 0,
+		Int_t highestOrder = 0);
+  
+  virtual ~BdkPdfCBPolyn();
+  
+  void init(const char * theName,
+	    const char * theDesc,
+	    RooRealVar & dependent,
+	    Int_t lowestOrder = 0,
+	    Int_t highestOrder = 0);
+  
+  // Modifiers:
+  virtual void setDependent(RooRealVar & dependent);
+
+  void linkParameters(RooRealVar * m0=0,
+		      RooRealVar * sigma=0,
+                      RooRealVar * alpha=0,
+                      RooRealVar * enne=0, 		       	
+		      Int_t lowestOrder=0,
+		      Int_t hightestOrder=0,
+		      RooRealVar * fracCBShape=0);
+
+
+  // Non-const accessors:
+  BdkPdfCBShape & cbShape() {return _cbShape;}
+  BdkPdfPolyn & polyn() {return _polyn;}
+  RooRealVar * fracCBShape() {return _fracCBShape;}
+
+  RooRealVar * dependent() {return _dependent;}
+
+   
+protected:
+  virtual void createPdf();  
+  virtual void initParameters();
+
+  virtual void addComponents();
+
+  // Data:
+  RooRealVar * _dependent;
+
+private:
+  BdkPdfCBPolyn(const BdkPdfCBPolyn & pdf);
+
+  // Helpers:
+  void deleteFrac();
+
+  // Data:
+  BdkPdfCBShape _cbShape;
+  BdkPdfPolyn _polyn;
+  RooRealVar * _fracCBShape;
+
+  // the orders are only for initializing the polynomial:
+  Int_t _lowestOrder;
+  Int_t _highestOrder;
+
+#if !defined(__INTERACTIVE__)
+  ClassDef (BdkPdfCBPolyn,0)  
+#endif
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

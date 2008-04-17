@@ -1,0 +1,72 @@
+/*****************************************************************************
+ * File: $Id: BdkDKDalitz.rdl,v 1.19 2007/04/03 16:14:29 fwinkl Exp $
+ *
+ * History:
+ * Sep 19 2005, Abi sOffer, adapted from Ben Lau's RooDKminus
+ *                                                                           *
+ *****************************************************************************/
+#ifndef BDKDKDALITZ
+#define BDKDKDALITZ
+
+#include "RooFitCore/RooRealProxy.hh"
+#include "BToDKTo3piK/BdkAbsDDalitzAmp.hh"
+#include "BToDKTo3piK/BdkDalitzBase.hh"
+
+class RooAbsReal;
+class RooComplex;
+
+class BdkDKDalitz : public BdkDalitzBase {
+public:
+ 
+  // constructors, etc.:
+  BdkDKDalitz(const char *theName, const char *theTitle,
+	      RooAbsReal& m12, RooAbsReal& m13, 
+	      RooAbsReal& x, RooAbsReal& y,
+	      BdkDalitzBase::Flavor flavor, 
+	      BdkDalitzBase::Mode DdecMode = BdkDalitzBase::PPP0,
+              BdkAbsDDalitzAmp* amp = 0);
+
+  
+  BdkDKDalitz(const BdkDKDalitz& other, const char* name=0) ;
+  
+  virtual TObject* clone(const char* newname) const {
+    return new BdkDKDalitz(*this,newname);
+  }
+  
+  virtual ~BdkDKDalitz();
+  
+    // accessors:
+  double normOverNoCP() const {return getNormalization() / _dalitzAmp->normDSqr();}
+
+  Double_t getNormalization() const;
+  
+  Int_t getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analVars, 
+			      const char* rangeName) const ;
+  
+  Double_t analyticalIntegral(Int_t code, const char* rangeName) const ;
+  
+  Double_t evaluate() const ;  
+  RooComplex lastAmp() const {return _lastAmp;}  
+
+  BdkAbsDDalitzAmp * dalitzAmp() {return _dalitzAmp;}  
+  
+
+private:  
+  RooRealProxy _m12 ;
+  RooRealProxy _m13 ;
+  RooRealProxy _x;
+  RooRealProxy _y;
+
+  mutable RooComplex _lastAmp;
+
+  // the BdkDDalitzAmp needs to be a pointer to allow for PDF cloning.
+  // otherwise, we need to make a viable copy constructor for it, and
+  // with all the pointer data that's a mess:
+  BdkAbsDDalitzAmp * _dalitzAmp;  
+
+  ClassDef(BdkDKDalitz,0) 
+};
+
+#endif
+
+

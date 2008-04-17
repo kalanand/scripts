@@ -1,0 +1,203 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkDalitz.rdl,v 1.6 2007/04/18 11:57:05 fwinkl Exp $
+ * Description:
+ *   Base class for Dalitz PDFs
+ * History:
+ *   26 Oct 2005, created, Frank Winklmeier
+ *
+ * Copyright (C) 2005 Colorado State University and SLAC
+ *****************************************************************************/
+#ifndef BDKDALITZ
+#define BDKDALITZ
+
+class BdkDalitzCfg;
+class RooAbsFunc;
+class TH2;
+
+#include "RooFitCore/RooRealVar.hh"
+#include "RooFitCore/RooNumber.hh"
+#include "RooFitCore/RooAbsData.hh"
+
+class BdkDalitz {
+public:
+  // Static members: ---------------------------------------------------
+
+  enum Mode {PPP0 = 1,    // D -> pi+ pi- pi0
+             KPP0 = 2,    // D -> K+ pi- pi0
+             KKP0 = 3,    // D -> K+ K- pi0
+             PPK0 = 4,    // D -> p+ pi- Ks
+             KKK0 = 5,    // D -> K+ K- Ks
+             KPK0 = 6};   // D -> K- pi+ Ks
+
+  static const Double_t D0MASS;
+  static const Double_t PI0MASS;
+  static const Double_t PIMASS;
+  static const Double_t KMASS;
+  static const Double_t K0MASS;
+  static const Double_t ETAMASS;
+  
+  // In Flavor, values correspond to the kaon charge in the dominant B decay:
+  enum Flavor {D0 = -1, D0BAR = 1};
+
+
+  // Dalitz variables (m12, m13, m23) are the *squared* invariant masses
+
+  static Bool_t inDalitz(Double_t m12, Double_t m13, Double_t M, 
+                         Double_t m1, Double_t m2, Double_t m3);
+
+  static Bool_t inDalitzBounds(Double_t m12, Double_t m13, Double_t M, 
+                               Double_t m1, Double_t m2, Double_t m3);
+
+  static Double_t m13Max(Double_t m12, Double_t M, 
+                         Double_t m1, Double_t m2, Double_t m3);
+  
+  static Double_t m13Min(Double_t m12, Double_t M, 
+                         Double_t m1, Double_t m2, Double_t m3);
+
+  static Double_t m12Max(Double_t m13, Double_t M, 
+                         Double_t m1, Double_t m2, Double_t m3);
+  
+  static Double_t m12Min(Double_t m13, Double_t M, 
+                         Double_t m1, Double_t m2, Double_t m3);
+
+  static Double_t m13MaxLimit(Double_t M, Double_t m1, Double_t m2, Double_t m3) {
+    return (M-m2)*(M-m2);
+  }
+  static Double_t m13MinLimit(Double_t M, Double_t m1, Double_t m2, Double_t m3) {
+    return (m1+m3)*(m1+m3);
+  }
+  static Double_t m12MaxLimit(Double_t M, Double_t m1, Double_t m2, Double_t m3) {
+    return (M-m3)*(M-m3);
+  }
+  static Double_t m12MinLimit(Double_t M, Double_t m1, Double_t m2, Double_t m3) {
+    return (m1+m2)*(m1+m2);
+  }
+
+  static TGraph* drawBoundary(Double_t M, Double_t m1, Double_t m2, 
+			      Double_t m3, Int_t points = 100);
+
+  static Bool_t weightBins(Double_t M, Double_t m1, Double_t m2, Double_t m3,
+			   TH2* h, Bool_t weightContent = kTRUE,
+			   Double_t step = 0.001);
+
+  static Int_t inDalitzDataSet(Double_t M, Double_t m1, Double_t m2, Double_t m3,
+                               const RooAbsData& data, const RooRealVar& m12, const RooRealVar& m13,
+                               Bool_t useVetoWindow = kTRUE, Bool_t verbose = kFALSE);
+
+  /// Calculate the third Dalitz variable from the given two
+  static Double_t mOtherVal(Double_t d1, Double_t d2, Double_t M, 
+			    Double_t m1, Double_t m2, Double_t m3) {
+    return (M*M + m1*m1 + m2*m2 + m3*m3 - d1 - d2);
+  }
+
+  /// check if Dalitz point (m12,m13) is within veto window
+  static Bool_t inM23Veto(Double_t m12, Double_t m13,
+			  Double_t M, Double_t m1, Double_t m2, Double_t m3);
+
+  /// m23 veto min
+  inline static Double_t m23VetoMin() { 
+    return (_m23VetoMass ? _m23VetoMass->getMin()*_m23VetoMass->getMin() 
+	    : -RooNumber::infinity);
+  }
+  /// m23 veto max
+  inline static Double_t m23VetoMax() {
+    return (_m23VetoMass ? _m23VetoMass->getMax()*_m23VetoMass->getMax()
+	    : RooNumber::infinity);
+  }
+  /// m23 veto window assinged?
+  inline static Bool_t hasM23Veto() { 
+    return (_m23VetoMass && _m23VetoMass->hasMin() && _m23VetoMass->hasMax());
+  }
+ 
+  // Static data: --------------------------------------------------------
+private:
+
+protected:
+  static RooRealVar* _m23VetoMass;   /// non-squared m23 veto window
+  
+  // Instance members: ---------------------------------------------------
+public:
+  BdkDalitz(BdkDalitz::Flavor flavor = BdkDalitz::D0, 
+            BdkDalitz::Mode DdecMode = BdkDalitz::PPP0); 
+
+  BdkDalitz(const BdkDalitz& other);
+  
+  virtual ~BdkDalitz();
+
+  void setDdecMode (BdkDalitz::Mode DdecMode);
+  void setMasses(Double_t M, Double_t m1, Double_t m2, Double_t m3) 
+     {_M = M; _m1 = m1; _m2 = m2, _m3 = m3; }
+  
+  inline Bool_t inDalitz(Double_t m12, Double_t m13) const {
+    return inDalitz(m12, m13, _M, _m1, _m2, _m3);
+  }
+
+  inline Bool_t inDalitzBounds(Double_t m12, Double_t m13) const {
+    return inDalitzBounds(m12, m13, _M, _m1, _m2, _m3);
+  }
+
+  inline Bool_t inM23Veto(Double_t m12, Double_t m13) const {
+    return inM23Veto(m12, m13, _M, _m1, _m2, _m3);
+  } 
+  
+  Double_t m13Max(Double_t m12) const {return m13Max(m12, _M, _m1, _m2, _m3); }
+  Double_t m13Min(Double_t m12) const {return m13Min(m12, _M, _m1, _m2, _m3); }
+  Double_t m12Max(Double_t m13) const {return m12Max(m13, _M, _m1, _m2, _m3); }
+  Double_t m12Min(Double_t m13) const {return m12Min(m13, _M, _m1, _m2, _m3); }
+
+  /// Maximum of Dalitz plot in m13
+  Double_t m13MaxLimit() const {return m13MaxLimit(_M, _m1, _m2, _m3); }
+  /// Minimum of Dalitz plot in m13
+  Double_t m13MinLimit() const {return m13MinLimit(_M, _m1, _m2, _m3); }
+  /// Maximum of Dalitz plot in m12
+  Double_t m12MaxLimit() const {return m12MaxLimit(_M, _m1, _m2, _m3); }
+  /// Minimum of Dalitz plot in m12
+  Double_t m12MinLimit() const {return m12MinLimit(_M, _m1, _m2, _m3); }
+
+ 
+  //
+  // Utility methods
+  //
+  Int_t findIntersection(const RooAbsFunc& func, 
+                          Double_t& m12Left, Double_t& m12Right) const;
+
+  TGraph* drawBoundary(Int_t points = 100) const {
+    return drawBoundary(_M, _m1, _m2, _m3, points);
+  }
+
+  Bool_t weightBins(TH2* h, Bool_t weightContent = kTRUE, 
+		    Double_t step = 0.001) const {
+    return weightBins(_M, _m1, _m2, _m3, h, weightContent, step);
+  }
+
+  Int_t inDalitzDataSet(const RooAbsData& data, const RooRealVar& m12, const RooRealVar& m13,
+                        Bool_t useVetoWindow = kTRUE, Bool_t verbose = kFALSE) const {
+    return inDalitzDataSet(_M, _m1, _m2, _m3, data, m12, m13, useVetoWindow, verbose);
+  }
+
+  Double_t mOtherVal(Double_t d1, Double_t d2) const {
+    return mOtherVal(d1, d2, _M, _m1, _m2, _m3);
+  }
+
+
+  BdkDalitz::Flavor flavor() const {return _flavor;}
+  BdkDalitz::Mode getDdecMode() const { return _DdecMode; }
+
+  Double_t M()  const {return _M;}
+  Double_t m1() const {return _m1;}
+  Double_t m2() const {return _m2;}
+  Double_t m3() const {return _m3;}
+
+protected:
+  BdkDalitz::Flavor _flavor;                
+  Double_t _M, _m1, _m2, _m3;     // defines Dalitz boundaries
+  
+private:
+  BdkDalitz::Mode _DdecMode;  // D decay mode
+
+  ClassDef (BdkDalitz,0)      // Dalitz base class
+};
+
+#endif

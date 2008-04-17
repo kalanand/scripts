@@ -1,0 +1,42 @@
+*
+* This macro reads the fit summary file created by DKbgdStudy.cc
+* and plots the results
+*
+
+nt/cr 1 'fit' 22 ! ! stat1 RMgen TMgen RPgen TPgen   RMms RMmsE TMms TMmsE RPms RPmsE TPms TPmsE   statBias RMBias RMBiasE TMBias TMBiasE RPBias RPBiasE TPBias TPBiasE
+nt/read 1 DKbgdStudyAll.dat
+
+opt nbox
+opt zfl
+opt nsta
+opt fit -111
+opt stat
+opt err
+
+zone 2 2 
+nt/pl 1.(RMBias-RMms)
+hi/copy 1000000 101
+hi/fit 101 g
+
+nt/pl 1.(TMBias-TMms)
+hi/copy 1000000 102
+hi/fit 102 g
+
+nt/pl 1.(RPBias-RPms)
+hi/copy 1000000 103
+hi/fit 103 g
+
+nt/pl 1.(TPBias-TPms)
+hi/copy 1000000 104
+hi/fit 104 g
+
+hi/pl 101
+hi/pl 102
+hi/pl 103
+hi/pl 104
+
+pict/print DKbgdStudy-bias.eps
+wait
+
+
+

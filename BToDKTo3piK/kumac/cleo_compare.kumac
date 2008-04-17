@@ -1,0 +1,25 @@
+mess This macro uses the input file data.dat produced by cleo_compare.cc
+
+nt/cr 1 '1' 3 ! ! m12 m13 m23
+nt/read 1 data.dat
+
+zone 2 2
+opt nsta
+opt zfl
+opt nbox
+
+nt/pl 1.m12%m23
+nt/pl 1.m12%m13
+nt/pl 1.m13%m23
+pict/print cyclical.ps
+
+wait
+
+zone 2 2
+nt/pl 1.m12%m23
+nt/pl 1.m12
+nt/pl 1.m23
+nt/pl 1.m13
+pict/print cleo_compare.ps
+
+

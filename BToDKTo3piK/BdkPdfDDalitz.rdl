@@ -1,0 +1,95 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdfDDalitz.rdl,v 1.16 2007/08/07 18:42:06 kalanand Exp $
+ * Description:
+ *   Signal Dalitz PDF wrapper
+ * History:
+ *   18 Oct 2005, created, Abi soffer
+ *
+ * Copyright (C) 2005 Colorado State University and SLAC
+ *****************************************************************************/
+#ifndef BDKPDFDDALITZ
+#define BDKPDFDDALITZ
+
+#include "BToDKTo3piK/BdkPdfDalitzBase.hh"
+#include "BToDKTo3piK/BdkAbsDDalitzAmp.hh"
+#include "BToDKTo3piK/BdkDDalitzAmp.hh"
+
+class RooRealVar;
+class BdkDDalitz;
+
+
+class BdkPdfDDalitz : public BdkPdfDalitzBase {
+public:
+  BdkPdfDDalitz();
+
+  BdkPdfDDalitz(const char * theName, const char * theDesc,
+                RooAbsReal & m12, RooAbsReal & m13,
+                BdkDalitzBase::Flavor flavor = BdkDalitzBase::D0,
+                BdkAbsDDalitzAmp * externalAmp = 0,
+                Int_t componentsBit = BdkDDalitzAmp::allComponents(),
+                Int_t spinResComp = 1,
+                BdkDalitz::Mode DdecMode = BdkDalitz::PPP0);
+
+  virtual ~BdkPdfDDalitz();
+  
+  virtual void init(const char * theName, const char * theDesc,
+                    RooAbsReal  & m12, RooAbsReal & m13, 
+                    BdkDalitzBase::Flavor flavor = BdkDalitzBase::D0) {
+    init(theName, theDesc, m12, m13, flavor,
+         0, BdkDDalitzAmp::allComponents(),
+         1, BdkDalitz::PPP0);
+  }
+
+  void init(const char * theName, const char * theDesc,
+            RooAbsReal  & m12, RooAbsReal & m13, 
+            BdkDalitzBase::Flavor flavor,
+            BdkAbsDDalitzAmp * externalAmp,
+            Int_t componentsBit = BdkDDalitzAmp::allComponents(),
+            Int_t spinResComp = 1,
+            BdkDalitz::Mode DdecMode = BdkDalitz::PPP0);
+
+  void setComponentsBit(Int_t componentsBit);
+
+  virtual void setVerbose(const char * val);
+
+  virtual const BdkDalitzEff* efficiencyFunc() const;
+  virtual void setEfficiencyFunc(const BdkDalitzEff *f);
+
+  // access to the pdf in its native type:
+  BdkDDalitz * pdfType() {return (BdkDDalitz*)getPdf();}
+
+  virtual RooArgSet fitFractions() const;
+  virtual RooArgSet BreitWignerNormalizationCoefficients() const; 
+  virtual RooArgSet IntegralOverIsospin() const;
+
+protected:
+  // Helpers:
+    virtual void createPdf();    
+
+private:
+  // Data:
+  Int_t _componentsBit;  
+  Int_t _spinResComp;
+  BdkAbsDDalitzAmp * _externalAmp; // not owned
+
+  ClassDef (BdkPdfDDalitz,0)
+    
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

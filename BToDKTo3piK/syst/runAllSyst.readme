@@ -1,0 +1,72 @@
+# Describes what scripts to run to obtain the systematic errors
+
+# MC statistics
+../BToDKTo3piK/syst/mcStatSyst.csh
+
+# Dstar model
+bbrroot -q -b setup.cc '.x systAnyParFile.cc("../BToDKTo3piK/params/syst/dstar.parlist","-dstar")' > & ! systAnyParFile-dstar.log &
+
+# Statistical uncertainties from Dstar fit (amplitude and phase)
+# Uncomment everything in between "For D Dalitz systematics" START and END in mcStatSyst.cc
+bbrroot -q -b setup.cc '.x mcStatSyst.cc(BdkEvtTypes::SIG_GOOD_D,"syst/systDstarStat",true,"../BToDKTo3piK/params/dalitzN.par",true)'\ > & ! systDstarStat.log &
+
+# use this command to only select relevant resonances from the printMcStatSyst output
+egrep -A6 'F0_amp|F0_phase|Rho0|Rho-|Nonres' | grep dalitzHolderN.sigGoodD0.rho | awk '{print $4}' | sumsq
+
+# Systematic uncertainties from Dstar fit (amplitude and phase)
+bbrroot -q -b setup.cc '.x mcStatSyst.cc(BdkEvtTypes::SIG_GOOD_D,"syst/systDstarSyst",true,"../BToDKTo3piK/params/syst/dalitzN-syst.par",true)' > & ! systDstarSyst.log &
+
+
+# Dstar model with fixed BW width
+# Uncomment BdkDDalitzAmp::setUseFixedWidth(true); in systAnyParFile.cc
+bbrroot -q -b setup.cc '.x systAnyParFile.cc("../BToDKTo3piK/params/syst/pipipi0_nominal_fixedwidth.parlist","-dstarFixedBW")' > & ! systAnyParFile-dstarFixedBW.log &
+
+# Efficiency
+bbrroot -q -b setup.cc '.x systAnyParFile.cc("../BToDKTo3piK/params/syst/systEff.parlist","-systEff")' > & ! systAnyParFile-systEff.log &
+
+# 1D shapes
+# Do bkgShapeSyst() first if shapes changed!
+
+bbrroot -q -b setup.cc '.x systAnyParFile.cc("../BToDKTo3piK/params/syst/bkgShapeSyst-1D.parlist","-syst1D")' > & ! systAnyParFile-syst1D.log &
+
+# Fixed fractions
+bbrroot -q -b setup.cc ".x fixedFracSyst.cc" >& fixedFracSyst.log &
+
+# Subtractive systematic errors
+bbrroot -q -b setup.cc ".x yieldsNllSyst.cc" >& yieldsNllSyst.log &
+
+# Background Dalitz shapes
+.L bkgHistSyst.cc
+bkgHistSystData(BdkEvtTypes::SIG_BAD_D)
+bkgHistSystData(BdkEvtTypes::DPiX)
+
+# DKX and Global asymmetries
+bbrroot -q -b setup.cc '.x systAnyParFile.cc("../BToDKTo3piK/params/syst/asym.parlist","-asym")' > & ! systAnyParFile-asym.log &
+
+# Asymmetric efficiency
+bbrroot -q -b setup.cc asymEffSyst.cc > & ! asymEffSyst.log &
+
+# bad signal asymmetry
+
+1) in setupPdfs.cc uncomment line 
+        opt = BdkPdfOnRes::linkGoodBadSigAsym;
+2) Run setup.cc and fit the data again.
+   bbrroot -q -b setup.cc 'fitData.cc("-badSigAsym")' > & ! fitData-badSigAsym.log &
+
+3) Don't forget to comment the above line again!
+
+
+# charge asymmetry in qqGoodD
+in setupPdfHolder.cc set flipQqGoodDFlavor to true
+  bbrroot -q -b setup.cc 'fitData.cc("-qqGoodD")' > & ! fitData-qqGoodD.log &
+
+# DKBadD shape
+bbrroot -q -b setup.cc sigBadResSyst.cc >& sigBadResSyst.log &
+
+# DKBadD shape due to wrong sign kaons
+same as above but change the histogram that is read in
+
+
+# Uncertainty on x0 (not used for overall systematic error)
+
+cat syst/systDstarStat/systDstarStat.log syst/systDstarSyst/systDstarSyst.log | grep "Recalculated x0 =" | cut -d" " -f4 | awk '{print $1-0.85}' | sumsq

@@ -1,0 +1,84 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkDDalitzAmp.rdl,v 1.31 2007/04/05 15:47:34 fwinkl Exp $
+ * Description:
+ *   Implementation of D0 -> pi+pi-pi0 Dalitz amplitude
+ * History:
+ *   04 Apr 2007, created, Frank Winklmeier
+ *
+ * Copyright (C) 2007 Colorado State University and SLAC
+ *****************************************************************************/
+
+#ifndef BDKDDALITZAMP
+#define BDKDDALITZAMP
+
+#include "BToDKTo3piK/BdkAbsDDalitzAmp.hh"
+
+class BdkDDalitzAmp : public BdkAbsDDalitzAmp {
+  // Static members: -------------------------------------------
+public:
+  enum Component {RHOP     = 1,
+		  RHO0     = 2,
+		  RHOM     = 4,
+		  NONRES   = 8,
+		  SIGMA    = 16,
+		  OMEGA    = 32,
+		  RHO2SP   = 64,
+		  RHO2S0   = 128,
+		  RHO2SM   = 256,
+		  F0       = 512,
+		  F2       = 1024,
+		  F0_1370  = 2048,
+		  RHO1700P = 4096,
+		  RHO17000 = 8192,
+		  RHO1700M = 16384,
+		  F0_1710  = 32768,
+		  F0_1500  = 65536,
+		  F2P1525  = 131072,
+		  NRPW_PM  = 262144,
+		  NRPW_M0  = 524288,
+		  NRPW_0P  = 1048576};
+		  
+   static int allComponents() {
+     return RHOP + RHO0 + RHOM + NONRES +
+       SIGMA + OMEGA + 
+       RHO2SP + RHO2S0 + RHO2SM +
+       F0 + F2 + F0_1370 + F0_1710 +
+       RHO1700P + RHO17000 + RHO1700M +
+       F0_1500 + F2P1525 +
+       NRPW_PM + NRPW_M0 + NRPW_0P;
+   }
+  
+  enum {SIZE = 40};
+
+  // Instance members: -------------------------------------------
+public:
+  /// constructors:
+  BdkDDalitzAmp(const char * name, const char * title, 
+		BdkDalitzBase * pdf,
+		Int_t componentsBit = allComponents(),
+		Int_t defaultRhoSpin = SPIN1);
+  
+  virtual  ~BdkDDalitzAmp();
+   
+  virtual Double_t efficiency(Double_t m12, Double_t m13) const;
+  virtual Double_t m12NormRange() const {return 3.0;}
+  virtual Double_t m13NormRange() const {return 3.0;}
+  
+protected:
+  Int_t _defaultRhoSpin; // default spin of the rho, if want to set to 0
+  
+  // helpers:
+  virtual void initResonance();
+
+
+private:
+  BdkDDalitzAmp(const BdkDDalitzAmp & other);
+
+  ClassDef(BdkDDalitzAmp,1)
+
+};
+
+#endif
+

@@ -1,0 +1,55 @@
+/***************************************************************************
+ *BdkPdfHist.rdl                                                           *    
+ ***************************************************************************/
+#ifndef BDKPDFHIST
+#define BDKPDFHIST
+
+#include "BToDKTo3piK/BdkPdfAbsBase.hh"
+
+class RooRealVar;
+class RooDataHist;
+class RooAbsReal;
+
+class BdkPdfHist : public BdkPdfAbsBase {
+public:
+    BdkPdfHist();
+    BdkPdfHist(const char * theName,
+   	       const char * theDesc,
+	       const RooArgSet & vars,
+	       const RooDataHist & dhist, 
+	       Int_t intOrder=1);
+   		 
+    ~BdkPdfHist();
+
+    void init( const char * theName,
+	       const char * theDesc,
+               const RooArgSet & vars,
+	       const RooDataHist & dhist,
+	       Int_t intOrder=0);
+
+    void setDataHist(const RooDataHist& dhist);  
+    void setDependents(const RooArgSet & vars );
+    void setOrder(Int_t intOrder); 
+ 
+    virtual RooArgSet dependents();     
+
+protected:
+    virtual void createPdf();    
+    virtual void initParameters();
+
+private :
+  // data:
+    RooArgSet _vars;
+    RooDataHist * _dataHist;
+    Int_t _order;
+
+private :
+    // private members
+     
+    ClassDef(BdkPdfHist,0)
+};
+
+#endif
+
+
+  		 

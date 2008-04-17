@@ -1,0 +1,83 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkDDalitzKsPiPiAmp.rdl,v 1.4 2008/01/02 20:30:10 fwinkl Exp $
+ * Description:
+ *   Implementation of D0 -> pi+pi-Ks Dalitz amplitude
+ * History:
+ *   04 Apr 2007, created, Frank Winklmeier
+ *
+ * Copyright (C) 2007 Colorado State University and SLAC
+ *****************************************************************************/
+
+#ifndef BDKDDALITZKSPIPIAMP
+#define BDKDDALITZKSPIPIAMP
+
+#include "BToDKTo3piK/BdkAbsDDalitzAmp.hh"
+
+class BdkDDalitzKsPiPiAmp : public BdkAbsDDalitzAmp {
+  // Static members: -------------------------------------------
+public:
+  enum Component {RHO0     = 1,
+                  NONRES   = 2,
+                  SIGMA    = 4,
+                  OMEGA    = 8,
+                  RHO2S0   = 16,
+                  F0       = 32,
+                  F2       = 64,
+                  F0_1370  = 128,
+                  KSTP     = 256,
+                  KSTM     = 512,                              
+                  KST0_1430P = 1024,
+                  KST0_1430M = 2048,                  
+                  KST2_1430P = 4096,
+                  KST2_1430M = 8192,                 
+                  KST_1410M  = 16384,
+                  KST_1680M  = 32768,
+                  KST_1680P  = 65536,
+                  SIGMA2     = 131072};
+  
+  enum ResType {BWRES = 0,
+		GSRES = 1};
+	  
+  static int allComponents() {
+    return RHO0 + NONRES +
+      SIGMA + OMEGA + RHO2S0 + 
+      F0 + F2 + F0_1370 +
+      KSTP + KSTM + KST0_1430P + KST0_1430M +
+      KST2_1430P + KST2_1430M + KST_1410M + KST_1680M +
+      KST_1680P + SIGMA2;
+  }
+ 
+
+  // Instance members: -------------------------------------------
+public:
+  /// constructors:
+  BdkDDalitzKsPiPiAmp(const char * name, const char * title, 
+		BdkDalitzBase * pdf,
+		Int_t componentsBit = allComponents(),
+		Int_t defaultRhoSpin = SPIN1);
+  
+  virtual  ~BdkDDalitzKsPiPiAmp();
+   
+  virtual Double_t efficiency(Double_t m12, Double_t m13) const;
+  virtual Double_t m12NormRange() const {return 3.0;}
+  virtual Double_t m13NormRange() const {return 3.0;}
+  virtual RooComplex matrixElement(Double_t m12, Double_t m13, Int_t i) const;
+
+protected:
+  Int_t _defaultRhoSpin; // default spin of the rho, if want to set to 0
+  
+  // helpers:
+  virtual void initResonance();
+
+
+private:
+  BdkDDalitzKsPiPiAmp(const BdkDDalitzKsPiPiAmp & other);
+
+  ClassDef(BdkDDalitzKsPiPiAmp,1)
+
+};
+
+#endif
+

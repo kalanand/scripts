@@ -1,0 +1,49 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkDalitzBase.rdl,v 1.20 2006/04/20 16:47:08 fwinkl Exp $
+ * Description:
+ *   Base class for Dalitz PDFs
+ * History:
+ *   26 Oct 2005, created, Frank Winklmeier
+ *
+ * Copyright (C) 2005 Colorado State University and SLAC
+ *****************************************************************************/
+#ifndef BDKDALITZBASE
+#define BDKDALITZBASE
+
+#include "RooFitCore/RooAbsPdf.hh"
+#include "BToDKTo3piK/BdkDalitz.hh"
+
+class BdkDalitzEff;
+
+class BdkDalitzBase : public RooAbsPdf, public BdkDalitz {
+  
+  // Instance members: ---------------------------------------------------
+public:
+  BdkDalitzBase(const char * name, const char * title,
+		BdkDalitzBase::Flavor flavor = BdkDalitzBase::D0, 
+		BdkDalitzBase::Mode DdecMode = BdkDalitzBase::PPP0); 
+
+  BdkDalitzBase(const BdkDalitzBase& other, const char * name);
+
+  virtual ~BdkDalitzBase();
+
+  /// Efficiency
+  const BdkDalitzEff* efficiencyFunc() const {return _efficiencyFunc;}
+  void setEfficiencyFunc(const BdkDalitzEff * f);
+  void linkEfficiency(const BdkDalitzBase& other) {setEfficiencyFunc(other.efficiencyFunc());}
+
+  /// The value of the efficiency for current m12, m13:
+  Double_t efficiency(Double_t m12, Double_t m13);
+
+
+protected:
+  // Efficiency function
+  const BdkDalitzEff * _efficiencyFunc;  // not owned
+  Bool_t _effFirstEval;
+
+  ClassDef (BdkDalitzBase,0)      // Dalitz base class
+};
+
+#endif

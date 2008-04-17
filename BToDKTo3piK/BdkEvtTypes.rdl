@@ -1,0 +1,49 @@
+
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkEvtTypes.rdl,v 1.2 2006/02/17 06:46:19 abi Exp $
+ * Authors:
+ *   Abi Soffer, Colorado State University, abi@slac.stanford.edu
+ * Description:
+ *   Class for the product PDF
+ *
+ * History:
+ *   12-Mar-2004 abi  Created initial version
+ *
+ * Copyright (C) 2004 Colorado State University and SLAC
+ *****************************************************************************/
+
+#ifndef BDKEVTTYPES
+#define BDKEVTTYPES
+
+#include "TObject.h" // This is just to define ClassDef
+
+class BdkEvtTypes {
+public:
+  enum Type {
+    SIG_BAD_D    = 0,
+    SIG_GOOD_D   = 1,
+    DPi_BAD_D    = 2,
+    DPi_GOOD_D   = 3,
+    DPiX         = 4,
+    DKX          = 5,
+    BB_BAD_D     = 6,
+    BB_GOOD_D    = 7,
+    QQ_BAD_D     = 8,
+    QQ_GOOD_D    = 9
+  };
+
+  enum {NTYPES       = 10};
+
+  static const char * name(int t);
+
+
+#if !defined(__INTERACTIVE__) 
+    ClassDef (BdkEvtTypes,0) //  defines event types
+#endif
+
+};
+
+#endif
+

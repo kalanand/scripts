@@ -1,0 +1,53 @@
+h/del *
+
+exec ../BToDKTo3piK/kumac/chainhbk
+
+cd //sigflat
+
+opt zfl
+opt nbox
+
+
+do i=1,3
+  hi/cr/2d [i]2 'm12-m13'  10 0 3 10 0 3
+  hi/cr/2d [i]3 'm13-m12'  10 0 3 10 0 3
+  hi/cr/2d [i]4 'diff'     10 0 3 10 0 3
+  hi/cr/2d [i]5 'sum'      10 0 3 10 0 3
+  hi/cr/2d [i]6 'asym'     10 0 3 10 0 3
+  
+  if ([i] .eq. 1) then
+    cut $11 HdTrkChge>-1000
+  endif
+  if ([i] .eq. 2) then
+    cut $11 HdTrkChge==1
+  endif
+  if ([i] .eq. 3) then
+    cut $11 HdTrkChge==-1
+  endif   
+
+  nt/pl 1.d0pppupmass**2%d0ppmupmass**2 excltruth==16&&$11 idh=[i]2 
+  nt/pl 1.d0ppmupmass**2%d0pppupmass**2 excltruth==16&&$11 idh=[i]3
+  pict/print eff[i].ps
+  
+  diff [i]2 [i]3
+  
+  zone 2 2
+  hi/pl [i]2
+  hi/pl [i]3
+  
+  hi/op/sub [i]2 [i]3 [i]4
+  hi/op/add [i]2 [i]3 [i]5
+  hi/op/div [i]4 [i]5 [i]6
+  
+  zone 2 2
+  opt stat
+  hi/pl [i]2 lego
+  opt nsta
+  hi/pl [i]3 lego
+  hi/pl [i]4 lego
+  hi/pl [i]6 lego
+  
+  pict/print eff-asym[i].ps
+enddo
+
+

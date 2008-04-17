@@ -1,0 +1,39 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package:
+ *    File: $Id: BdkRooRealVar.rdl,v 1.1 2006/06/12 22:42:02 fwinkl Exp $
+ * Authors:
+ *   Frank Winklmeier, Colorado State University, fwinkl@slac.stanford.edu
+ * Description:
+ *   Sortable RooRealVar
+ *
+ * History:
+ *   12-Jun-2006 fwinkl  Created initial version
+ *
+ * Copyright (C) 2006 Colorado State University and SLAC
+ *****************************************************************************/
+
+#ifndef BDKROOREALVAR
+#define BDKROOREALVAR
+
+#include "TObject.h"
+
+#include "RooFitCore/RooRealVar.hh"
+
+class BdkRooRealVar : public RooRealVar {
+public:
+    // Constructors, assignment etc.
+  BdkRooRealVar(const char *name, const char *title,
+                Double_t value, const char *unit= "") ;
+  BdkRooRealVar(const char *name, const char *title, Double_t minValue, 
+                Double_t maxValue, const char *unit= "");
+  BdkRooRealVar(const char *name, const char *title, Double_t value, 
+                Double_t minValue, Double_t maxValue, const char *unit= "") ;
+  BdkRooRealVar(const RooRealVar& other, const char* name=0);
+
+  virtual Int_t Compare(const TObject* obj) const;
+
+  ClassDef(BdkRooRealVar,0)
+};
+
+#endif

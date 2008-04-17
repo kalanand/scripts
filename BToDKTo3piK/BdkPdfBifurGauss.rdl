@@ -1,0 +1,98 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdfBifurGauss.rdl,v 1.1 2005/10/09 22:50:36 abi Exp $
+ * Authors:
+ *   WW, Wolfgang Walkowiak, UC Santa Cruz, walkowia@scipp.ucsc.edu
+ * Description:
+ *   Class for a BifurGauss pdf with it's own variable definition
+ *   To be used in conjunction with RooFitCore/Models.
+ * History:
+ *   18-Mar-2002 WW Created initial version
+ *   28-Mar-2002 WW add dependents(), delete generate()
+ *   16-Aug-2002 WW Force numerical integration for RooBifurGauss until 
+ *                  normalization problem in RooBifurGauss is solved.
+ *
+ * Copyright (C) 2002 University of California and SLAC
+ *****************************************************************************/
+#ifndef BDKPDFBIFURGAUSS
+#define BDKPDFBIFURGAUSS
+
+#include "BToDKTo3piK/BdkPdfAbsBase.hh"
+
+class RooRealVar;
+class RooDataSet;
+class RooArgSet;
+
+class BdkPdfBifurGauss : public BdkPdfAbsBase {
+public:
+    BdkPdfBifurGauss();
+    BdkPdfBifurGauss(const char * theName,
+		     const char * theDesc,
+		     RooRealVar & dependent);
+    
+    virtual ~BdkPdfBifurGauss();
+    
+    void init(const char * theName,
+	      const char * theDesc,
+	      RooRealVar & dependent);
+    
+    // Modifiers:
+    void setDependent(RooRealVar & dependent);
+    
+    void linkParameters(const BdkPdfBifurGauss & pdf2);
+    
+    void linkParameters(RooRealVar *mean=0, 
+			RooRealVar *sigl=0,
+			RooRealVar *sigr=0);
+    
+    
+    // Non-const accessors:
+    RooRealVar * dependent() {return _dependent;}
+
+    RooRealVar * mean() {return _mean;}
+    RooRealVar * sigl() {return _sigl;}
+    RooRealVar * sigr() {return _sigr;}
+
+    virtual RooArgSet dependents(); 
+    
+    
+protected:
+    virtual void createPdf();
+    
+    virtual void initParameters();
+    
+private: 
+    BdkPdfBifurGauss(BdkPdfBifurGauss & pdf);
+
+    //
+    // data members
+    //
+protected:
+    // protected members
+    RooRealVar *_mean,*_sigl,*_sigr;
+    
+    RooRealVar  *_dependent;
+    
+private:
+    // private members
+    
+    ClassDef (BdkPdfBifurGauss,0) // BifurGauss pdf wrapper on top of RooFitCore
+
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

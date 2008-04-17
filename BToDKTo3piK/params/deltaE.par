@@ -1,0 +1,124 @@
+pdfOnResDK.BBbadD0N.deltaEPdf.fracGauss =  0.0000 C L(0 - 1) 
+pdfOnResDK.BBbadD0N.deltaEPdf.gauss.b =  0.0000 C 
+pdfOnResDK.BBbadD0N.deltaEPdf.gauss.s =  1.0000 C 
+pdfOnResDK.BBbadD0N.deltaEPdf.polyn.coef0 =  1.0000 C 
+pdfOnResDK.BBbadD0N.deltaEPdf.polyn.coef1 = -9.1689 +/- 1.1484 
+pdfOnResDK.BBbadD0N.deltaEPdf.polyn.coef2 = -54.810 +/- 32.735 
+pdfOnResDK.BBbadD0N.deltaEPdf.polyn.offset =  0.0000 C L(-100 - 100) 
+//$
+//       1.3188535      -1.017621
+//       -1.017621       1071.574
+//$
+
+pdfOnResDK.BBgoodD0N.deltaEPdf.fracGauss =  1.0000 C L(0 - 1) 
+pdfOnResDK.BBgoodD0N.deltaEPdf.gauss.b = -0.070000 C 
+pdfOnResDK.BBgoodD0N.deltaEPdf.gauss.s =  0.062774 +/- 0.011730 
+pdfOnResDK.BBgoodD0N.deltaEPdf.polyn.coef0 =  0.0000 C 
+pdfOnResDK.BBgoodD0N.deltaEPdf.polyn.coef1 =  0.0000 C 
+pdfOnResDK.BBgoodD0N.deltaEPdf.polyn.coef2 =  0.0000 C 
+pdfOnResDK.BBgoodD0N.deltaEPdf.polyn.offset =  0.0000 C L(-100 - 100) 
+//$
+//               0
+//$
+
+pdfOnResDK.sigBadD0N.deltaEPdf.fracGauss =  0.50215 +/- 0.052072 L(0 - 1) 
+pdfOnResDK.sigBadD0N.deltaEPdf.gauss.b = -0.0022559 +/- 0.00040304 
+pdfOnResDK.sigBadD0N.deltaEPdf.gauss.s =  0.020045 +/- 0.0010034 
+pdfOnResDK.sigBadD0N.deltaEPdf.polyn.coef0 =  1.0000 C 
+pdfOnResDK.sigBadD0N.deltaEPdf.polyn.coef1 = -2.1014 +/- 0.75518 
+pdfOnResDK.sigBadD0N.deltaEPdf.polyn.coef2 = -80.503 +/- 73.017 
+pdfOnResDK.sigBadD0N.deltaEPdf.polyn.offset =  0.0000 C L(-100 - 100) 
+//$
+//     0.002711541 -9.7689963e-07  4.9468435e-05    0.010488021      3.6620851
+//  -9.7689963e-07   1.624404e-07 -8.2245739e-09 -0.00015798524  -0.0022963923
+//   4.9468435e-05 -8.2245739e-09  1.0067405e-06  0.00015368234    0.064199157
+//     0.010488021 -0.00015798524  0.00015368234     0.57029694      18.649368
+//       3.6620851  -0.0022963923    0.064199157      18.649368      5331.5063
+//$
+
+pdfOnResDK.sigGoodD0N.deltaEPdf.fracGauss =  0.90538 +/- 0.0074291 L(0 - 1) 
+pdfOnResDK.sigGoodD0N.deltaEPdf.gauss.b = -0.0010199 +/- 0.000082596 
+pdfOnResDK.sigGoodD0N.deltaEPdf.gauss.s =  0.017123 +/- 0.00011520 
+pdfOnResDK.sigGoodD0N.deltaEPdf.polyn.coef0 =  1.0000 C 
+pdfOnResDK.sigGoodD0N.deltaEPdf.polyn.coef1 = -1.1260 +/- 0.61888 
+pdfOnResDK.sigGoodD0N.deltaEPdf.polyn.coef2 = -353.64 +/- 19.445 
+pdfOnResDK.sigGoodD0N.deltaEPdf.polyn.offset =  0.0000 C L(-100 - 100) 
+//$
+//   5.5192024e-05  -7.430603e-08  7.1953593e-07   0.0016516764     0.11806081
+//   -7.430603e-08  6.8220714e-09 -7.7735074e-10 -1.7352801e-05 -0.00031395492
+//   7.1953593e-07 -7.7735074e-10  1.3271778e-08  1.7043474e-05   0.0013927879
+//    0.0016516764 -1.7352801e-05  1.7043474e-05     0.38301218      7.2104759
+//      0.11806081 -0.00031395492   0.0013927879      7.2104759      378.12103
+//$
+
+pdfOnResDK.DKXN.deltaEPdf.fracGauss =  0.0000 C L(0 - 1) 
+pdfOnResDK.DKXN.deltaEPdf.gauss.b =  0.0000 C 
+pdfOnResDK.DKXN.deltaEPdf.gauss.s =  1.0000 C 
+pdfOnResDK.DKXN.deltaEPdf.polyn.coef0 =  1.0000 C 
+pdfOnResDK.DKXN.deltaEPdf.polyn.coef1 = -14.528 +/- 1.8919 
+pdfOnResDK.DKXN.deltaEPdf.polyn.coef2 =  45.775 +/- 56.112 
+pdfOnResDK.DKXN.deltaEPdf.polyn.offset =  0.0000 C L(-100 - 100) 
+//$
+//       3.5791163     -15.272633
+//      -15.272633      3148.5898
+//$
+
+pdfOnResDK.DpiBadD0N.deltaEPdf.fracGauss =  0.0000 C L(0 - 1) 
+pdfOnResDK.DpiBadD0N.deltaEPdf.gauss.b =  0.0000 C 
+pdfOnResDK.DpiBadD0N.deltaEPdf.gauss.s =  1.0000 C 
+pdfOnResDK.DpiBadD0N.deltaEPdf.polyn.coef0 = -0.80000 C 
+pdfOnResDK.DpiBadD0N.deltaEPdf.polyn.coef1 =  0.0000 C 
+pdfOnResDK.DpiBadD0N.deltaEPdf.polyn.coef2 =  91.242 +/- 40.717 
+pdfOnResDK.DpiBadD0N.deltaEPdf.polyn.offset = -0.070000 C L(-100 - 100) 
+//$
+//               0
+//$
+
+pdfOnResDK.DpiGoodD0N.deltaEPdf.fracGauss =  1.0000 C L(0 - 1) 
+pdfOnResDK.DpiGoodD0N.deltaEPdf.gauss.b =  0.047680 +/- 0.0031829 
+pdfOnResDK.DpiGoodD0N.deltaEPdf.gauss.s =  0.024187 +/- 0.0017534 
+pdfOnResDK.DpiGoodD0N.deltaEPdf.polyn.coef0 =  0.0000 C L(-100 - 100) 
+pdfOnResDK.DpiGoodD0N.deltaEPdf.polyn.coef1 =  0.0000 C L(-100 - 100) 
+pdfOnResDK.DpiGoodD0N.deltaEPdf.polyn.coef2 =  0.0000 C L(-100 - 100) 
+pdfOnResDK.DpiGoodD0N.deltaEPdf.polyn.offset =  0.0000 C L(-100 - 100) 
+//$
+//   1.0131107e-05  4.8074935e-06
+//   4.8074935e-06  3.0744484e-06
+//$
+
+pdfOnResDK.DPiXN.deltaEPdf.fracGauss =  0.0000 C L(0 - 1) 
+pdfOnResDK.DPiXN.deltaEPdf.gauss.b =  1.0000 C 
+pdfOnResDK.DPiXN.deltaEPdf.gauss.s =  0.0000 C 
+pdfOnResDK.DPiXN.deltaEPdf.polyn.coef0 =  1.0000 C 
+pdfOnResDK.DPiXN.deltaEPdf.polyn.coef1 = -8.2910 +/- 0.90049 
+pdfOnResDK.DPiXN.deltaEPdf.polyn.coef2 =  53.097 +/- 27.253 
+pdfOnResDK.DPiXN.deltaEPdf.polyn.offset =  0.0000 C L(-100 - 100) 
+//$
+//      0.81087428   -0.094970368
+//    -0.094970368      742.73499
+//$
+
+pdfOnResDK.ContBadD0N.deltaEPdf.fracGauss =  0.0000 C L(0 - 1) 
+pdfOnResDK.ContBadD0N.deltaEPdf.gauss.b =  0.0000 C 
+pdfOnResDK.ContBadD0N.deltaEPdf.gauss.s =  1.0000 C 
+pdfOnResDK.ContBadD0N.deltaEPdf.polyn.coef0 =  1.0000 C 
+pdfOnResDK.ContBadD0N.deltaEPdf.polyn.coef1 = -3.7136 +/- 0.82350 
+pdfOnResDK.ContBadD0N.deltaEPdf.polyn.coef2 =  32.255 +/- 24.681 
+pdfOnResDK.ContBadD0N.deltaEPdf.polyn.offset =  0.0000 C L(-100 - 100) 
+//$
+//      0.67815793      3.1560359
+//       3.1560359      609.15198
+//$
+
+pdfOnResDK.ContGoodD0N.deltaEPdf.fracGauss =  0.0000 C L(0 - 1) 
+pdfOnResDK.ContGoodD0N.deltaEPdf.gauss.b =  0.0000 C 
+pdfOnResDK.ContGoodD0N.deltaEPdf.gauss.s =  1.0000 C 
+pdfOnResDK.ContGoodD0N.deltaEPdf.polyn.coef0 =  1.0000 C 
+pdfOnResDK.ContGoodD0N.deltaEPdf.polyn.coef1 =  0.22407 +/- 6.8439 
+pdfOnResDK.ContGoodD0N.deltaEPdf.polyn.coef2 = -95.941 +/- 173.52 
+pdfOnResDK.ContGoodD0N.deltaEPdf.polyn.offset =  0.0000 C L(-100 - 100) 
+//$
+//       46.838627      408.84363
+//       408.84363      30107.736
+//$
+

@@ -1,0 +1,240 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * File: $Id: BdkAbsDDalitzAmp.rdl,v 1.7 2008/01/02 20:30:08 fwinkl Exp $
+ * History:
+ *     - Nov 2005, Abi, adapted from Ben's RooDPManager
+ *  NOTE: Only works when particles 2 and 3 are CP-conjugates of each other
+ *****************************************************************************/
+
+#ifndef BDKABSDDALITZAMP
+#define BDKABSDDALITZAMP
+
+#include <vector>
+
+#include "TNamed.h"
+#include "TString.h"
+#include "TVectorD.h"
+#include "RooFitCore/RooComplex.hh"
+#include "RooFitCore/RooAbsArg.hh"
+#include "RooFitCore/RooRealVar.hh"
+#include "RooFitCore/RooArgList.hh"
+
+class BdkDalitzBase;
+
+class BdkAbsDDalitzAmp : public TNamed {
+
+  // Declare this as friend so that it can reuse our D/Dbar normalization constants.
+  // Ugly hack. Should have defined normalization constants in BdkDKDalitz, etc.
+  friend class BdkDKNonCDalitz;
+  
+  // Static members: -------------------------------------------
+public:
+
+  static const Double_t _mD;
+  static const Double_t DEGTORAD;     // = PI/180
+
+  // Normalize all objects:
+  static void normalizeAll(int nEvents = (int)1.e06); 
+
+  // Empty the registry
+  static void cleanRegistry();
+
+  // Access to the registry, really only needed for debugging:
+  static const std::vector<BdkAbsDDalitzAmp *> & registry() {return _registry;}  
+
+  static const Double_t F_D;
+
+  static const Bool_t _enforceTransversality;
+
+
+protected:
+  // A list of objects:
+  static std::vector<BdkAbsDDalitzAmp *> _registry;
+  
+  
+private:
+  // The init function adds an object to the registry:
+  static void registerObject(BdkAbsDDalitzAmp * amp);  
+  // Remove object from registry
+  static void deregisterObject(BdkAbsDDalitzAmp * amp);
+
+
+  // Instance members: -------------------------------------------
+public:
+
+  enum Spin {SPIN0 = 0, SPIN1 = 1, SPIN2 = 2};
+
+  enum ResDaughters {PIP_PIM_PI0 = 0, PIP_PIM = 1, PIM_PI0 = 2, PI0_PIP = 3};
+
+  // constructors:
+  BdkAbsDDalitzAmp(const char * name, const char * title, 
+                   BdkDalitzBase * pdf,
+                   Int_t componentsBit);
+    
+  virtual  ~BdkAbsDDalitzAmp();
+
+  //
+  // pure virtual functions to be implemented by derived classes
+  //
+  virtual Double_t efficiency(Double_t m12, Double_t m13) const = 0;
+
+  // Range used for MC sampling in normalization
+  virtual Double_t m12NormRange() const = 0;   
+  virtual Double_t m13NormRange() const = 0;
+
+  
+  // modifiers:  
+  void setPdf(BdkDalitzBase * pdf, Bool_t registerParamsWithPdf = kFALSE);
+  void registerParams(BdkDalitzBase * pdf);
+  void setVerbose(const char * val) {_verbose = val;}
+  void useAutoNorm(Bool_t use = kTRUE) {_useAutoNorm = use;}
+  
+  // Use fixed/running resonance widths:
+  void setUseFixedWidth(Bool_t val); 
+
+  void calNorm(int events = (int)1e6,
+               Bool_t enforceNormalizeAll = kTRUE);
+
+  TVectorD calDIntNorm(BdkAbsDDalitzAmp* amp2, int nEvents = (int)1e6) const;
+  virtual void calDDbarNorm(int nEvents = (int)1e6);
+
+  // accessors:
+  virtual RooComplex getamp(Double_t m12, Double_t m13) const;
+
+  virtual RooComplex RelativisticBW(Double_t m12,Double_t m13, Double_t m0,
+                                    Double_t width, Int_t i) const;
+
+  virtual RooComplex matrixElement(Double_t m12, Double_t m13, Int_t i) const;
+  
+  Bool_t inDalitz(Double_t m12, Double_t m13) const;
+  
+  const TString & verbose() const {return _verbose;}
+  inline RooArgList & params() { return _params ; }
+
+  RooRealVar* ampRes(int i) const {return _ampRes[i];}
+  RooRealVar* phaseRes(int i) const {return _phaseRes[i];}
+  RooRealVar* massRes(int i) const {return _massRes[i];}
+  RooRealVar* gammaRes(int i) const {return _gammaRes[i];}
+
+  RooArgList* ampRes() const;
+  RooArgList* phaseRes() const;
+  RooArgList* massRes() const;
+  RooArgList* gammaRes() const;
+
+  inline const RooArgList & params() const { return _params ; }
+  inline const RooArgList & normParams() const { return _normParams ; }
+  Int_t componentsBit() const {return _componentsBit;}
+  Bool_t useFixedWidth() const {return _useFixedWidth;}
+  Int_t nComps() const {return _nComps;}
+  
+  const TString & nameRes(int i) const {return _nameRes[i];}
+  Int_t spinRes(int i) const {return _spinRes[i];}
+  Int_t typeRes(int i) const {return _typeRes[i];}
+  ResDaughters trackinfo(int i) const {return _trackinfo[i];}
+  
+  Double_t getNormalization() const;
+  Double_t unNormalizedFitFraction(int j) const;
+  RooArgSet fitFractions() const;
+  Double_t IntegralOverBreitWigner(int j) const;
+  RooArgSet BreitWignerNormalizationCoefficients() const;
+  RooArgSet IntegralOverIsospin() const;
+
+  Double_t normDSqr()    const  {return _normDSqr->getVal();}
+  Double_t normDbarSqr() const  {return _normDbarSqr->getVal();}
+  Double_t normReDDbar() const  {return _normReDDbar->getVal();}
+  Double_t normImDDbar() const  {return _normImDDbar->getVal();}
+  Double_t x0() const {return -normReDDbar() / normDSqr();}
+  Double_t y0() const {return normImDDbar() / normDSqr();}
+  
+  void setIsNormalized();
+  void setNeedToNormalize(int component);
+  void setNeedToNormalizeAll();
+  Bool_t needToNormalize(int component) const;
+  Bool_t needToNormalizeAny() const;
+  void printDDbarNorm() const;
+
+protected:
+
+  // Max # of resonances (must be big enough for ALL derived classes)
+  enum {SIZE = 30};
+  
+  Double_t _mDaug[4];
+  BdkDalitzBase * _pdf;
+
+  // resonance parameters:
+  RooRealVar* _massRes[SIZE];    // mass
+  RooRealVar* _gammaRes[SIZE];   // width
+  Int_t _spinRes[SIZE];          // spin
+  TString _nameRes[SIZE];        // name
+  Int_t _typeRes[SIZE];          // type (can be used by derived classes)
+
+  ResDaughters _trackinfo[SIZE];
+  RooRealVar* _ampRes[SIZE];
+  RooRealVar* _phaseRes[SIZE];
+
+  // radial parameter
+  RooRealVar* _resRadius;
+
+  RooArgList _params;
+  
+  
+  // helpers:
+  virtual void initResonance() = 0;
+  void createParams();
+  
+  virtual Double_t SpinFactor(Double_t m12, Double_t m13, Int_t spin, 
+                              Int_t n, Int_t i) const;
+
+  virtual Double_t runningWidth(Double_t m12,Double_t m13, Double_t m0,
+                                Double_t width, Int_t spin, Int_t n) const;
+  
+  virtual Double_t dampingFactorSquared(Double_t s, Int_t n, Int_t spin) const;
+
+  virtual Double_t FrEval(Double_t s, Double_t m0, Int_t n, Int_t spin) const;
+
+  Double_t betaKin(Double_t s, Double_t m ) const;
+  Double_t pionCMmom(Double_t s, Double_t m1, Double_t m2 ) const;
+  Double_t pionCMmom(Double_t s, Int_t n) const;
+
+  Double_t kinematics(Double_t m12, Double_t m13, Int_t n) const;
+  
+  void addComp(const char * name, double amp, double phase, 
+               double mass, double width, 
+               ResDaughters trackingInfo, Int_t spin,
+               Int_t parSource = -1, Int_t resType = 0); 
+
+private:
+  
+  BdkAbsDDalitzAmp(const BdkAbsDDalitzAmp & other);
+
+  Int_t _componentsBit;  // the bitwise integer describing the components
+  Bool_t _useFixedWidth;
+  Int_t _nComps;         // the # of components
+
+  // normalization parameters:
+  RooRealVar * _normReal[SIZE][SIZE];
+  RooRealVar * _normImag[SIZE][SIZE];
+
+  // normalization parameters for D/Dbar interference
+  RooRealVar* _normDSqr;
+  RooRealVar* _normDbarSqr;
+  RooRealVar* _normReDDbar;
+  RooRealVar* _normImDDbar;
+
+  RooArgList _normParams;
+
+  Double_t _massResLast[SIZE];
+  Double_t _gammaResLast[SIZE];
+
+  TString _verbose;
+  
+  // enable the auto normalize functionality
+  // (this is somewhat experimental!)
+  Bool_t _useAutoNorm;
+
+  ClassDef(BdkAbsDDalitzAmp,1)
+
+};
+
+#endif
+

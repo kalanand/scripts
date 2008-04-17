@@ -1,0 +1,78 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkDKNonCDalitz.rdl,v 1.1 2007/04/18 11:57:05 fwinkl Exp $
+ * Description:
+ *    A PDF with two non C eigenstate Dalitz amplitudes
+ * History:
+ *   11 Apr 2007, created, Frank Winklmeier
+ *
+ * Copyright (C) 2007 Colorado State University and SLAC
+ *****************************************************************************/
+
+#ifndef BDKDKNONCDALITZ
+#define BDKDKNONCDALITZ
+
+#include "RooFitCore/RooRealProxy.hh"
+#include "BToDKTo3piK/BdkAbsDDalitzAmp.hh"
+#include "BToDKTo3piK/BdkDalitzBase.hh"
+
+class RooAbsReal;
+class RooComplex;
+
+class BdkDKNonCDalitz : public BdkDalitzBase {
+public:
+ 
+  // constructors, etc.:
+  BdkDKNonCDalitz(const char *theName, const char *theTitle,
+                  RooAbsReal& m12, RooAbsReal& m13, 
+                  RooAbsReal& x, RooAbsReal& y, RooAbsReal& deltaD,
+                  BdkDalitzBase::Flavor flavor, 
+                  BdkDalitzBase::Mode DdecMode,
+                  BdkAbsDDalitzAmp* amp,
+                  BdkAbsDDalitzAmp* ampBar);
+
+  
+  BdkDKNonCDalitz(const BdkDKNonCDalitz& other, const char* name=0) ;
+  
+  virtual TObject* clone(const char* newname) const {
+    return new BdkDKNonCDalitz(*this,newname);
+  }
+  
+  virtual ~BdkDKNonCDalitz();
+  
+    // accessors:
+  double normOverNoCP() const {return getNormalization() / _dalitzAmp->normDSqr();}
+
+  Int_t getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analVars, 
+			      const char* rangeName) const ;
+  
+  Double_t analyticalIntegral(Int_t code, const char* rangeName) const ;
+  Double_t getNormalization() const;
+  void calDDbarNorm(int nEvents = (int)1e6);
+  Double_t evaluate() const ;  
+
+  
+  BdkAbsDDalitzAmp * dalitzAmp() const {return _dalitzAmp;}
+  BdkAbsDDalitzAmp * dalitzAmpBar() const {return _dalitzAmpBar;}  
+  
+
+private:  
+  RooRealProxy _m12 ;
+  RooRealProxy _m13 ;
+  RooRealProxy _x;
+  RooRealProxy _y;
+  RooRealProxy _deltaD;
+  
+  // the BdkDDalitzAmp needs to be a pointer to allow for PDF cloning.
+  // otherwise, we need to make a viable copy constructor for it, and
+  // with all the pointer data that's a mess:
+  BdkAbsDDalitzAmp * _dalitzAmp;
+  BdkAbsDDalitzAmp * _dalitzAmpBar;  
+
+  ClassDef(BdkDKNonCDalitz,0) 
+};
+
+#endif
+
+

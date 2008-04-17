@@ -1,0 +1,82 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdfGeneric.rdl,v 1.1 2005/10/09 22:50:37 abi Exp $
+ * Authors:
+ *   WW, Wolfgang Walkowiak, UC Santa Cruz, walkowia@scipp.ucsc.edu
+ * Description:
+ *   Generic pdf wrapper for any RooAbsPdf.
+ *   To be used in conjunction with RooFitCore/Models.
+ * History:
+ *   20-Mar-2002 WW Created initial version
+ *   20-Sep-2002 WW Adjust code for compilation on SunOS 5.8
+ *   04-Nov-2002 Abi Added dependents() capability
+ *
+ * Copyright (C) 2002 University of California and SLAC
+ *****************************************************************************/
+#ifndef BDKPDFGENERIC
+#define BDKPDFGENERIC
+
+#include "BToDKTo3piK/BdkPdfAbsBase.hh"
+#include "RooFitCore/RooArgSet.hh"
+
+class RooAbsPdf;
+class RooDataSet;
+
+class BdkPdfGeneric : public BdkPdfAbsBase 
+{
+public:
+  BdkPdfGeneric();
+
+  BdkPdfGeneric(const char * theName,
+		const char * theDesc,
+		RooAbsPdf & rooPdf, 
+		Bool_t owned = kTRUE,
+		RooArgSet * dependents = 0);
+  
+  ~BdkPdfGeneric();
+  
+  void init(const char * theName,
+	    const char * theDesc,
+	    RooAbsPdf & rooPdf, 
+	    Bool_t owned = kTRUE,
+	    RooArgSet * dependents = 0);
+  
+  virtual void setPdf(RooAbsPdf & thePdf, Bool_t owned = kTRUE);
+  virtual void setDependents(RooArgSet * deps);
+  
+  virtual RooArgSet dependents();
+  
+  Bool_t setDependentsCalled() const {return _setDependentsCalled;}
+  
+protected:
+  virtual void createPdf();
+  
+  virtual void initParameters();
+  
+private:     
+  //
+  // data members
+  //
+  Bool_t _setDependentsCalled;
+  RooArgSet _dependents;    
+  
+  ClassDef (BdkPdfGeneric,0) // Pdf wrapper for any RooAbsPdf on top of RooFitCore
+    
+    };
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

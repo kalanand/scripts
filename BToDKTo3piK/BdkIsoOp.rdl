@@ -1,0 +1,29 @@
+// An enum of isospin operators 
+#ifndef BDKISOOP_HH
+#define BDKISOOP_HH
+
+#include "TObject.h" // for ClassDef
+
+class BdkIsoOp {
+public:
+  enum {NOPS = 7}; // number of (valid) operators
+
+  enum Op {P32 = 0, 
+	   P22 = 1, 
+	   P12 = 2, 
+	   P21 = 3, 
+	   P11 = 4, 
+	   P01 = 5, 
+	   P10 = 6};
+
+  static const char * name(int);
+  static Op op(int i);
+
+
+private:
+  ClassDef(BdkIsoOp, 0);
+};
+
+
+
+#endif

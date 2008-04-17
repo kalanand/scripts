@@ -1,0 +1,138 @@
+pdfOnResDK.BBbadD0N.nnCombPdf.bifur.mean =  0.45066 +/- 0.049827 
+pdfOnResDK.BBbadD0N.nnCombPdf.bifur.sigl =  1.2815 +/- 0.039995 
+pdfOnResDK.BBbadD0N.nnCombPdf.bifur.sigr =  0.20638 +/- 0.034282 
+pdfOnResDK.BBbadD0N.nnCombPdf.fracGauss =  0.56482 +/- 0.033381 L(0 - 1) 
+pdfOnResDK.BBbadD0N.nnCombPdf.gauss.b = -0.15052 +/- 0.016122 
+pdfOnResDK.BBbadD0N.nnCombPdf.gauss.s =  0.58619 +/- 0.0096703 
+//$
+//    0.0024826815   0.0015292908  -0.0015638258  0.00090596935 -0.00036814177  0.00014040271
+//    0.0015292908   0.0015995763 -0.00095307059   0.0010390908 -0.00017818753  2.7361599e-05
+//   -0.0015638258 -0.00095307059   0.0011752682   -0.000612195  0.00014756669 -0.00012552638
+//   0.00090596935   0.0010390908   -0.000612195   0.0011143064 -0.00017262474  5.9313541e-05
+//  -0.00036814177 -0.00017818753  0.00014756669 -0.00017262474  0.00025991866 -5.0331393e-05
+//   0.00014040271  2.7361599e-05 -0.00012552638  5.9313541e-05 -5.0331393e-05  9.3515249e-05
+//$
+
+pdfOnResDK.BBgoodD0N.nnCombPdf.bifur.mean =  1.3848 +/- 0.20938 C 
+pdfOnResDK.BBgoodD0N.nnCombPdf.bifur.sigl =  0.36599 +/- 0.14194 C 
+pdfOnResDK.BBgoodD0N.nnCombPdf.bifur.sigr =  0.41266 +/- 0.14358 C 
+pdfOnResDK.BBgoodD0N.nnCombPdf.fracGauss =  1.0000 C L(0 - 1) 
+pdfOnResDK.BBgoodD0N.nnCombPdf.gauss.b =  0.29094 +/- 1.0000 
+pdfOnResDK.BBgoodD0N.nnCombPdf.gauss.s =  0.48508 +/- 1.0000 
+//$
+//               1              0
+//               0              1
+//$
+
+pdfOnResDK.sigBadD0N.nnCombPdf.bifur.mean =  0.44110 +/- 0.075278 
+pdfOnResDK.sigBadD0N.nnCombPdf.bifur.sigl =  1.1883 +/- 0.058942 
+pdfOnResDK.sigBadD0N.nnCombPdf.bifur.sigr =  0.26120 +/- 0.065402 
+pdfOnResDK.sigBadD0N.nnCombPdf.fracGauss =  0.41673 +/- 0.078847 L(0 - 1) 
+pdfOnResDK.sigBadD0N.nnCombPdf.gauss.b = -0.095971 +/- 0.042367 
+pdfOnResDK.sigBadD0N.nnCombPdf.gauss.s =  0.63015 +/- 0.026211 
+//$
+//    0.0056667128   0.0035679538  -0.0045509092   0.0042473865 -0.00083900156  0.00080693071
+//    0.0035679538   0.0034742043  -0.0028883019   0.0038321835 -0.00014444601  0.00011267274
+//   -0.0045509092  -0.0028883019    0.004277423  -0.0036458389   0.0001124394 -0.00081820186
+//    0.0042473865   0.0038321835  -0.0036458389   0.0062167943 -0.00069267937  0.00039280156
+//  -0.00083900156 -0.00014444601   0.0001124394 -0.00069267937   0.0017949971 -0.00035381355
+//   0.00080693071  0.00011267274 -0.00081820186  0.00039280156 -0.00035381355  0.00068702688
+//$
+
+pdfOnResDK.sigGoodD0N.nnCombPdf.bifur.mean =  0.88314 +/- 0.73694 
+pdfOnResDK.sigGoodD0N.nnCombPdf.bifur.sigl =  1.0929 +/- 0.74380 
+pdfOnResDK.sigGoodD0N.nnCombPdf.bifur.sigr =  0.000012488 +/- 0.73695 
+pdfOnResDK.sigGoodD0N.nnCombPdf.fracGauss =  0.66993 +/- 0.30548 L(0 - 1) 
+pdfOnResDK.sigGoodD0N.nnCombPdf.gauss.b =  0.34410 +/- 0.73700 
+pdfOnResDK.sigGoodD0N.nnCombPdf.gauss.s =  0.58959 +/- 0.73758 
+//$
+//      0.54307717  0.00013593871  1.9233478e-06   0.0005985382 -0.00023314827  7.0815884e-05
+//   0.00013593871     0.55323881 -8.7354829e-06   0.0023786372  0.00086347794   -0.002360919
+//   1.9233478e-06 -8.7354829e-06     0.54310155 -4.1172691e-05  1.6162248e-05 -5.1103675e-06
+//    0.0005985382   0.0023786372 -4.1172691e-05    0.093320191   0.0040167682   -0.003393214
+//  -0.00023314827  0.00086347794  1.6162248e-05   0.0040167682      0.5431751  0.00070438255
+//   7.0815884e-05   -0.002360919 -5.1103675e-06   -0.003393214  0.00070438255     0.54402995
+//$
+
+pdfOnResDK.DKXN.nnCombPdf.bifur.mean = -0.60295 +/- 0.41017 
+pdfOnResDK.DKXN.nnCombPdf.bifur.sigl =  0.92529 +/- 0.079825 
+pdfOnResDK.DKXN.nnCombPdf.bifur.sigr =  0.40000 +/- 1.9090 L(0.4 - +INF) 
+pdfOnResDK.DKXN.nnCombPdf.fracGauss =  0.67806 +/- 0.12460 L(0 - 1) 
+pdfOnResDK.DKXN.nnCombPdf.gauss.b =  0.13270 +/- 0.19158 
+pdfOnResDK.DKXN.nnCombPdf.gauss.s =  0.48788 +/- 0.062571 
+//$
+//      0.16824244   -0.027791956    -0.77609277   -0.050515007    0.077693209   -0.024783131
+//    -0.027791956   0.0063719684     0.13458177   0.0086903768   -0.013534832   0.0043998263
+//     -0.77609277     0.13458177      3.6442001      0.2345034    -0.36356187     0.11640994
+//    -0.050515007   0.0086903768      0.2345034    0.015526212   -0.023631042   0.0075915842
+//     0.077693209   -0.013534832    -0.36356187   -0.023631042    0.036701892   -0.011735639
+//    -0.024783131   0.0043998263     0.11640994   0.0075915842   -0.011735639   0.0039151623
+//$
+
+pdfOnResDK.DpiBadD0N.nnCombPdf.bifur.mean =  0.0000 C 
+pdfOnResDK.DpiBadD0N.nnCombPdf.bifur.sigl =  1.0000 C 
+pdfOnResDK.DpiBadD0N.nnCombPdf.bifur.sigr =  1.0000 C 
+pdfOnResDK.DpiBadD0N.nnCombPdf.fracGauss =  1.0000 C L(0 - 1) 
+pdfOnResDK.DpiBadD0N.nnCombPdf.gauss.b = -0.21131 +/- 0.10568 
+pdfOnResDK.DpiBadD0N.nnCombPdf.gauss.s =  0.70894 +/- 0.074664 
+//$
+//     0.011168957  8.8084425e-06
+//   8.8084425e-06   0.0055747074
+//$
+
+pdfOnResDK.DpiGoodD0N.nnCombPdf.bifur.mean =  0.46377 +/- 1.0000 
+pdfOnResDK.DpiGoodD0N.nnCombPdf.bifur.sigl =  0.57147 +/- 1.0000 
+pdfOnResDK.DpiGoodD0N.nnCombPdf.bifur.sigr =  0.36286 +/- 1.0000 
+pdfOnResDK.DpiGoodD0N.nnCombPdf.fracGauss =  0.14869 +/- 0.29938 L(0 - 1) 
+pdfOnResDK.DpiGoodD0N.nnCombPdf.gauss.b = -0.23449 +/- 1.0000 
+pdfOnResDK.DpiGoodD0N.nnCombPdf.gauss.s =  1.0962 +/- 1.0000 
+//$
+//               1              0              0              0              0              0
+//               0              1              0              0              0              0
+//               0              0              1              0              0              0
+//               0              0              0    0.089628845              0              0
+//               0              0              0              0              1              0
+//               0              0              0              0              0              1
+//$
+
+pdfOnResDK.DPiXN.nnCombPdf.bifur.mean =  0.31469 +/- 0.045840 
+pdfOnResDK.DPiXN.nnCombPdf.bifur.sigl =  1.3723 +/- 0.039055 
+pdfOnResDK.DPiXN.nnCombPdf.bifur.sigr = -0.23428 +/- 0.032160 
+pdfOnResDK.DPiXN.nnCombPdf.fracGauss =  0.59443 +/- 0.028941 L(0 - 1) 
+pdfOnResDK.DPiXN.nnCombPdf.gauss.b = -0.34670 +/- 0.012836 
+pdfOnResDK.DPiXN.nnCombPdf.gauss.s =  0.57426 +/- 0.0093506 
+//$
+//    0.0021013077   0.0013593365   0.0013132746  0.00069620315 -0.00021484798  0.00014857398
+//    0.0013593365   0.0015252694  0.00085979427  0.00088031939 -7.2883784e-05  9.9956189e-05
+//    0.0013132746  0.00085979427   0.0010342728  0.00051803235 -5.4631026e-05  0.00015607649
+//   0.00069620315  0.00088031939  0.00051803235  0.00083756656  -4.263896e-05    0.000123772
+//  -0.00021484798 -7.2883784e-05 -5.4631026e-05  -4.263896e-05  0.00016477145 -1.7520217e-05
+//   0.00014857398  9.9956189e-05  0.00015607649    0.000123772 -1.7520217e-05  8.7433757e-05
+//$
+
+pdfOnResDK.ContBadD0N.nnCombPdf.bifur.mean =  0.31714 +/- 0.042708 
+pdfOnResDK.ContBadD0N.nnCombPdf.bifur.sigl =  1.3119 +/- 0.029894 
+pdfOnResDK.ContBadD0N.nnCombPdf.bifur.sigr =  0.25116 +/- 0.028895 
+pdfOnResDK.ContBadD0N.nnCombPdf.fracGauss =  0.57896 +/- 0.021938 L(0 - 1) 
+pdfOnResDK.ContBadD0N.nnCombPdf.gauss.b = -0.27494 +/- 0.010165 
+pdfOnResDK.ContBadD0N.nnCombPdf.gauss.s =  0.61346 +/- 0.0061401 
+//$
+//    0.0018239428   0.0011040452  -0.0011694137  0.00063917466 -0.00025795618  0.00012676619
+//    0.0011040452  0.00089362683 -0.00070399645  0.00055081048 -0.00013882309  5.8894468e-05
+//   -0.0011694137 -0.00070399645  0.00083491154 -0.00042981422  0.00013006094 -9.9689642e-05
+//   0.00063917466  0.00055081048 -0.00042981422  0.00048125791 -9.8087396e-05  5.2012339e-05
+//  -0.00025795618 -0.00013882309  0.00013006094 -9.8087396e-05  0.00010331933 -2.4807956e-05
+//   0.00012676619  5.8894468e-05 -9.9689642e-05  5.2012339e-05 -2.4807956e-05  3.7700236e-05
+//$
+
+pdfOnResDK.ContGoodD0N.nnCombPdf.bifur.mean =  0.0000 +/- 0.10000 C 
+pdfOnResDK.ContGoodD0N.nnCombPdf.bifur.sigl =  0.50000 +/- 0.10000 C 
+pdfOnResDK.ContGoodD0N.nnCombPdf.bifur.sigr =  0.50000 +/- 0.10000 C 
+pdfOnResDK.ContGoodD0N.nnCombPdf.fracGauss =  1.0000 C L(0 - 1) 
+pdfOnResDK.ContGoodD0N.nnCombPdf.gauss.b =  0.28663 +/- 0.031833 
+pdfOnResDK.ContGoodD0N.nnCombPdf.gauss.s =  0.62054 +/- 0.022511 
+//$
+//    0.0010133283  4.4896598e-07
+//   4.4896598e-07  0.00050673005
+//$
+

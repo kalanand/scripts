@@ -1,0 +1,183 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdfProdAll.rdl,v 1.8 2006/05/30 04:47:25 fwinkl Exp $
+ * Authors:
+ *   Abi Soffer, Colorado State University, abi@slac.stanford.edu
+ * Description:
+ *   Class for the product PDF
+ *
+ * History:
+ *   6-Mar-2004 abi  Created initial version
+ *
+ * Copyright (C) 2004 Colorado State University and SLAC
+ *****************************************************************************/
+
+#ifndef BDKPDFPRODAll
+#define BDKPDFPRODAll
+
+//#include "BToDKTo3piK/BdkPdfGaussArgus.hh"
+#include "BToDKTo3piK/BdkPdfCBArgus.hh"
+#include "BToDKTo3piK/BdkPdfGaussPolyn.hh"
+#include "BToDKTo3piK/BdkPdfBifurGaussGauss.hh"
+#include "BToDKTo3piK/BdkPdf2CBACBP.hh"
+#include "BToDKTo3piK/BdkPdfGaussArgus.hh"
+
+class BdkPdfProdAll : public BdkPdfComposite {
+public:
+  enum Var {
+    DELTAE,
+    MD,
+    MES,
+    DALITZ,
+    NNCONT,
+    NNCOMB,
+  };
+
+  BdkPdfProdAll();
+  
+  BdkPdfProdAll(const char * theName,
+		const char * theDesc,
+		RooRealVar& deltaE,
+		RooRealVar& mD,
+		RooRealVar& mes,
+		RooRealVar& nnCont,
+		RooRealVar& nnComb,
+                BdkPdfAbsBase* nnContPdf=0,
+                BdkPdfAbsBase* nnCombPdf=0,
+		BdkPdfAbsBase* dalitzPdf=0);
+
+  BdkPdfProdAll(const char * theName,
+		const char * theDesc,
+		BdkPdfAbsBase* deltaEPdf = 0,
+		BdkPdfAbsBase* mDPdf=0,
+		BdkPdfAbsBase* mesPdf=0,
+		BdkPdfAbsBase* nnContSupPdf=0,
+		BdkPdfAbsBase* nnCombSupPdf=0,
+		BdkPdfAbsBase* dalitzPdf=0);
+
+  
+  ~BdkPdfProdAll();
+
+  void init(const char * theName,
+	    const char * theDesc,
+	    RooRealVar& deltaE,
+	    RooRealVar& mD,
+	    RooRealVar& mes,
+	    RooRealVar& nnCont,
+            RooRealVar& nnComb,
+            BdkPdfAbsBase* nnContPdf=0,
+            BdkPdfAbsBase* nnCombPdf=0,
+            BdkPdfAbsBase* dalitzPdf=0);
+ 
+  void init(const char * theName,
+            const char * theDesc,
+	    BdkPdfAbsBase* deltaEPdf = 0,
+	    BdkPdfAbsBase* mDPdf=0,
+	    BdkPdfAbsBase* mesPdf=0,
+	    BdkPdfAbsBase* nnContSupPdf=0,
+	    BdkPdfAbsBase* nnCombSupPdf=0,
+	    BdkPdfAbsBase* dalitzPdf=0);
+
+ 
+  // Modifiers: 
+
+  // decide which variables are to be included in the product PDF.
+  // The default is to include everything, except if the tedious pointer is 0.
+  // these functions can override it:
+  void includeDeltaE(Bool_t include = kTRUE);
+  void includeMD(Bool_t include = kTRUE);
+  void includeMes(Bool_t include = kTRUE);
+  void includeDalitz(Bool_t include = kTRUE);
+  void includeNnCont(Bool_t include = kTRUE);
+  void includeNnComb(Bool_t include = kTRUE);
+
+  // Set the PDFs. See also useOwned***Pdf().
+  void setDeltaEPdf(BdkPdfAbsBase& theDeltaEPdf);
+  void setMDPdf(BdkPdfAbsBase& theMDPdf);
+  void setMesPdf(BdkPdfAbsBase& theMesPdf);
+  void setDalitzPdf(BdkPdfAbsBase& theDalitzPdf);
+  void setNnContPdf(BdkPdfAbsBase& theNnContPdf);
+  void setNnCombPdf(BdkPdfAbsBase& theNnCombPdf);
+
+  // call set***Pdf(owned***Pdf) to use the owned PDFs. see also set***Pdf(...)
+  void useOwnedDeltaEPdf() {setDeltaEPdf(_ownedDeltaEPdf);}
+  void useOwnedMDPdf()     {setMDPdf(_ownedMDPdf);}
+  void useOwnedMesPdf()     {setMesPdf(_ownedMesPdf);}
+  void useOwnedNnContPdf() {setNnContPdf(_ownedNnContPdf);}
+  void useOwnedNnCombPdf() {setNnCombPdf(_ownedNnCombPdf);}
+
+  // Non-const accessors:
+  BdkPdfAbsBase * getDeltaEPdf() {return _deltaEPdf;}
+  BdkPdfAbsBase * getMDPdf()     {return _mDPdf;}
+  BdkPdfAbsBase * getMesPdf()    {return _mesPdf;}
+  BdkPdfAbsBase * getDalitzPdf() {return _dalitzPdf;}
+  BdkPdfAbsBase * getNnContPdf() {return _nnContPdf;}
+  BdkPdfAbsBase * getNnCombPdf() {return _nnCombPdf;}
+
+  // Get the same functions with a single function and an argument:
+  BdkPdfAbsBase * getVarPdf(Var var);
+  
+  // Accessors to the owned objects.
+  BdkPdfGaussPolyn & getOwnedDeltaEPdf() {return _ownedDeltaEPdf;}
+  BdkPdfCBPolyn & getOwnedMDPdf()     {return _ownedMDPdf;}
+  BdkPdfGaussArgus & getOwnedMesPdf()     {return _ownedMesPdf;}
+
+  // Accessors:
+  // Check if this object owns the PDFs:
+  Bool_t deltaEPdfIsOwned() const;
+  Bool_t mDPdfIsOwned() const;
+  Bool_t mesPdfIsOwned() const;
+  Bool_t nnContPdfIsOwned() const;
+  Bool_t nnCombPdfIsOwned() const;
+
+  // Check if the component is included
+  Bool_t isIncludedDeltaE() const {return _includeDeltaE;}
+  Bool_t isIncludedMD() const     {return _includeMD;}
+  Bool_t isIncludedMes() const    {return _includeMes;}
+  Bool_t isIncludedDalitz() const {return _includeDalitz;}
+  Bool_t isIncludedNnCont() const {return _includeNnCont;}
+  Bool_t isIncludedNnComb() const {return _includeNnComb;}
+   
+  // Print active components
+  void printVariables();
+
+protected:
+  virtual void createPdf();
+  virtual void initParameters();
+  virtual void commonInit();
+
+
+private: 
+  // Data:
+  // owned PDFs:
+  BdkPdfGaussPolyn       _ownedDeltaEPdf;
+  BdkPdfCBPolyn          _ownedMDPdf;
+  BdkPdfGaussArgus       _ownedMesPdf;
+  BdkPdfBifurGaussGauss  _ownedNnContPdf;
+  BdkPdfBifurGaussGauss  _ownedNnCombPdf;
+
+  // PDF pointers, possibly to the owned PDFs:
+  BdkPdfAbsBase * _deltaEPdf; 
+  BdkPdfAbsBase * _mDPdf;
+  BdkPdfAbsBase * _mesPdf;
+  BdkPdfAbsBase * _dalitzPdf;     
+  BdkPdfAbsBase * _nnContPdf;
+  BdkPdfAbsBase * _nnCombPdf;
+
+  // What to include in the product:
+  Bool_t _includeDeltaE;
+  Bool_t _includeMD;
+  Bool_t _includeMes;
+  Bool_t _includeDalitz;
+  Bool_t _includeNnCont;
+  Bool_t _includeNnComb;
+
+
+#if !defined(__INTERACTIVE__) 
+    ClassDef (BdkPdfProdAll,1) // product PDF wrapper
+#endif
+
+};
+
+#endif
