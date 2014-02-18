@@ -1,0 +1,163 @@
+Dear Christos, Kira, and Lovedeep,
+ I read the Analysis Note on W/Z+jets -- a version
+that Bryan forwarded to me last week but has date August 
+10, 2009 on the cover. Here are some of my comments. Not 
+all of these comments/suggestions need to go to to this 
+version of the AN, but eventually  I hope these will help 
+improve the documentation and the analysis.   
+
+
+Abstract:
+---------
+  - Include the word "MadGraph, integrated pT range" (I 
+    think that is what you used to make all the plots).
+    Otherwise people may think that you used Pythia 
+    pt-hat bins and combined them weighting by cross-section 
+    to obtain the full pt spectrum, as is generally done 
+    by in a typical analysis with jets.
+ 
+ - (Optional) It may be helpful to readers if we can outline 
+   here, in a sentence or two, the goal of the study along 
+   the lines Rick Cavanaugh proposed in his talk a few 
+   weeks ago (e.g., early data [10--50 pb^-1]: integral 
+   cross-section measurement as a function of nJet; with 
+   100--200 pb^-1: measurement of differential cross-section 
+   in pt, etc.).
+
+
+Introduction:
+-------------
+ - The immediate and most important use of Z+jet(s) analysis
+   in the calibration of jet energy scale. Next, the W/Z+jets
+   events will be used to commission missing ET, since these 
+   events contain small (in case of W) or no (in case of Z) 
+   real MET. 
+
+ - Almost immediately these events will be used to tune our 
+  Monte Carlo.
+ 
+ - You can elaborate here a little bit on how these events 
+  test the perturbative QCD (e.g., via sensitivity to the 
+  parton distribution functions), but we can do this only with 
+  very large amount of data (~ fb^-1), since the PDF uncertainties 
+  are much smaller than our expected systematic uncertainty in 
+  this analysis. 
+
+ - Typically, "Introduction" section is a good place to talk 
+  about some physics. For example, we can add the two 
+  leading order Feynamn diagrams that give rise to W/Z+jets
+  in the final state. This will elucidate why these samples 
+  contain high fraction of quark-initiated jets, unlike the 
+  case of QCD dijet events which are gluon dominated.
+
+
+Event selection:
+-----------------
+sect 3.1, HLT: Are you sure that "HLT_Ele15_LW_L1R" path in the 8E29 
+    menu is seeded by L1_SingleEG5 ? Last time I checked, the 
+    Level-1 seed for this path was L1_SingleEG8. Please take 
+    a look at:
+
+    https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideEgammaHLT
+
+    Or, did you use "HLT_Ele10_LW_L1R" path, in which case 
+    the rest of the text is fine ? 
+
+
+section 3.2: The description of isolation and id cuts is a 
+    little disorganized. If I understand the text correctly, 
+    you used the same electron id cuts as in the inclusive 
+    W/Z analysis (your reference 5, BTW - it should read 
+    PAS EWK-09-004). If so, you should just give tables 4 and 
+    5 and skip the rest of the text. Simply give reference to 
+    Ref[5], where these things are explained in more detail.
+
+    I do not understand why you do not also use the same 
+    optimized electron isolation cuts as in the inclusive W/Z 
+    analysis. In the inclusive analysis, we optimized the 
+    id and isolation cuts together. The isolation deposits from 
+    tracks, in ECAL, and in HCAL peak at different points, so 
+    applying a cut on the sum of the three isolation variables 
+    (your Eq. 2) doesn't make any sense, because you lose some 
+    of the discrimination power. I know that such a cut 
+    is V+jets group's recommendation, but it is sort of poor 
+    man's cuts appropriate for, say, Higgs or SUSY searches. 
+    Besides, when using such an isolation cut, the id cuts  
+    from inclusive W/Z analysis (tables 4, 5) are no longer optimal.
+
+
+
+section 3.3 Jet Reconstruction and Selection:
+---------------------------------------------
+ - Reference to jet algorithm is missing. A good reference would be:
+   Gavin P. Salam, "Towards Jetography", arXiv:0906.1833 [hep-ph] 
+   (2009).
+
+ - It's inaccurate to say that iterative cone is computationally 
+   time consuming and SISCone is not. In fact, the converse is true.
+   This is part of the reason that JetMET group has made anti-kT as
+   default CMS jet alogorithm.
+  
+ - section 3.3.2: Jet energy corrections:
+   These nomenclatures are obsolete. The JEC/JetMET group doesn't 
+   call corrected jets as "L2", "L3", ... etc. any more. It is 
+   however true that the PAT still uses such an obsolete nomencloture 
+   and sometimes and sometime has obsolete corrections applied.
+
+ - section 3.3.3: You are NOT removing the electrons faking as jets by 
+   deltaR matching. These are almost all REAL electrons. These are 
+   also part of the jet collection simply because they deposit energy 
+   in the calorimeter. We just remove them. The title "jet fake removal"
+   is very misleading.
+
+ - Why go select jets only in |eta| < 2.5 ? We can go upto eta = 3 in 
+   this analysis. The calorimeter endcap coverage goes upto 3. It's 
+   true that forward jets (in HF) aren't understood well, and we do 
+   not want to go beyound 3.
+
+
+section 4.1: W events:
+----------------------  
+Figures 22 and 23 for MET and MT for W events are missing.
+
+Table 15: # W+1 jet events / W+0 jet events = 0.25 
+          # W+2 jet events / W+1 jet events = 0.26 
+          # W+3 jet events / W+2 jet events = 0.26 
+          # W+4 jet events / W+3 jet events = 0.34 
+         
+          (from the right-most column, after all analysis cuts are applied).
+          Isn't it way too high ? I would naively expect these to be 
+          close to 0.12 (value of \alpha_s) -- a little smaller in fact, 
+          because the electron reconstruction goes down as a function nJets.
+          Do you undestand what is going on here ? Did I miss something ?
+          Also, I do not understand how come you get these many 4 jet events.
+
+         I get essentially the same ratios from Table 19.
+
+
+ Figures 24 and 25 are missing.
+
+
+section 4.2: Z events:
+----------------------  
+    
+Fig 27a: Why there is a turnover (extra bump) at low pT should be explained.
+         Same is true for Fig 30a, which looks more weird. Something wrong 
+         here ?
+
+Table 22: Again, # Z+ (N+1) jets / # Z+N jets = 0.25
+          Again the same question ?
+
+        We expect a value close to 0.1. See, for example, the CDF 
+        plot in there final Z(ee)+ jets paper, which was published 
+        last year in PRL:
+
+        http://www-cdf.fnal.gov/physics/new/qcd/zjets_08/N_N-1_ratio.gif
+
+       The reference for this paper is:
+       T. Aaltonen et al. (CDF Collaboration), Phys. Rev. Lett. 100, 102001 (2008) 
+
+  That's all I have.
+
+Regards,
+Kalanand
