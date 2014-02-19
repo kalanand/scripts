@@ -1,0 +1,40 @@
+probe->Scan("event_runNo:event_evtNo:gsfele_et:gsfele_eta:gsfele_phi:event_calo_met:event_tc_met:event_pf_met", "gsfele_nGsfEle>1")  
+
+
+
+## with dielectron mass
+probe->Scan("event_runNo:event_evtNo:sqrt((gsfele_e[0]+gsfele_e[1])**2 - (gsfele_px[0]+gsfele_px[1])**2 - (gsfele_py[0]+gsfele_py[1])**2 - (gsfele_pz[0]+gsfele_pz[1])**2):event_calo_met:event_tc_met:event_pf_met","gsfele_nGsfEle>1")  
+
+
+
+#### sqrt((gsfele_e[0]+gsfele_e[1])**2 - (gsfele_px[0]+gsfele_px[1])**2 - (gsfele_py[0]+gsfele_py[1])**2 - (gsfele_pz[0]+gsfele_pz[1])**2)
+
+
+####### scan J/psi ->ee canditates using sc ##############################
+TCut cut = "sc_nSC>1 && ((sc_e[0]+sc_e[1])**2 -(sc_pt[0]+sc_pt[1])**2 - (sc_pz[0]+sc_pz[1])**2 >2.5) && ((sc_e[0]+sc_e[1])**2 - (sc_pt[0]+sc_pt[1])**2 - (sc_py[0]+sc_py[1])**2 - (sc_pz[0]+sc_pz[1])**2 <3.5)"
+
+probe->Scan("event_runNo:event_evtNo:(sc_e[0]+sc_e[1])**2 - (sc_pt[0]+sc_pt[1])**2 - (sc_pz[0]+sc_pz[1])**2:sc_et[0]:sc_et[1]:sc_eta[0]:sc_phi[0]:sc_eta[1]:sc_phi[1]:event_calo_met:event_tc_met:event_pf_met", cut)
+
+
+
+####### scan J/psi ->ee canditates using gsfEle ##############################
+TCut cut = "gsfele_nGsfEle>1 && ((gsfele_e[0]+gsfele_e[1])**2 -(gsfele_pt[0]+gsfele_pt[1])**2 - (gsfele_pz[0]+gsfele_pz[1])**2 >2.5) && ((gsfele_e[0]+gsfele_e[1])**2 - (gsfele_pt[0]+gsfele_pt[1])**2 - (gsfele_py[0]+gsfele_py[1])**2 - (gsfele_pz[0]+gsfele_pz[1])**2 <3.5)"
+
+probe->Scan("event_runNo:event_evtNo:(gsfele_e[0]+gsfele_e[1])**2 - (gsfele_pt[0]+gsfele_pt[1])**2 - (gsfele_pz[0]+gsfele_pz[1])**2:gsfele_et[0]:gsfele_et[1]:gsfele_eta[0]:gsfele_phi[0]:gsfele_eta[1]:gsfele_phi[1]:event_calo_met:event_tc_met:event_pf_met", cut)
+
+
+
+####### scan J/psi ->ee canditates using SC+gsfEle ##############################
+TH1D* h1 = new TH1D("h1", "SC-gsfEle invariant mass", 10, 2, 4);
+probe->Draw("(gsfele_e[0]+sc_e[1])**2 - (gsfele_pt[0]+sc_pt[1])**2 - (gsfele_pz[0]+sc_pz[1])**2>>h1", "gsfele_nGsfEle>1 && sc_nSC>1");
+probe->Draw("(sc_e[0]+gsfele_e[1])**2 - (sc_pt[0]+gsfele_pt[1])**2 - (sc_pz[0]+gsfele_pz[1])**2>>+h1", "gsfele_nGsfEle>1 && sc_nSC>1");
+
+
+
+####### scan J/psi ->mumu canditates using global ##############################
+
+
+TCut cut = "mu_nMuons>1 && ((mu_e[0]+mu_e[1])**2 -(mu_pz[0]*tan(mu_theta[0])+mu_pz[1]*tan(mu_theta[1]))**2 - (mu_pz[0]+mu_pz[1])**2 >2.9) && ((mu_e[0]+mu_e[1])**2 - (mu_pz[0]*tan(mu_theta[0])+mu_pz[1]*tan(mu_theta[1]))**2 - (mu_py[0]+mu_py[1])**2 - (mu_pz[0]+mu_pz[1])**2 <3.1)"
+
+probe->Scan("event_runNo:event_evtNo:(mu_e[0]+mu_e[1])**2 - (mu_pz[0]*tan(mu_theta[0])+mu_pz[1]*tan(mu_theta[1]))**2 - (mu_pz[0]+mu_pz[1])**2:mu_et[0]:mu_et[1]:mu_eta[0]:mu_phi[0]:mu_eta[1]:mu_phi[1]:event_calo_met:event_tc_met:event_pf_met", cut)
+
