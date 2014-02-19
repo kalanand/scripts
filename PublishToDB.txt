@@ -1,0 +1,139 @@
+STEP 1: Collect information from the files you want to publish 
+---------------------------------------------------------------
+
+ Need to know the name, file-size, and number of entries in each 
+ of the ROOT files. The first thing you need to do is to make text 
+ files (like ~kalanand/files_PublishToDB/files_*.txt) which contain 
+ the file names to be published in DBS. 
+ Then run "entries.csh" which will give output text files like 
+ "info_list_1.txt". 
+
+
+
+STEP 2: Setup DBS area (work in bash shell)
+-------------------------------------------
+
+bash
+export CVSROOT=:pserver:anonymous@cmscvs.cern.ch:/cvs_server/repositories/CMSSW
+export CVS_RSH=ssh
+cvs -d `echo $CVSROOT | awk -F@ '{print $1":98passwd\@"$2}'` login
+cvs co -r DBS_2_0_2 DBS/Clients/Python
+cd DBS/Clients/Python
+source setup.sh
+
+
+
+STEP 3: Setup env/config variables
+-----------------------------------
+
+cd DBSAPI
+emacs dbs.config &    
+
+
+==> Change DBS VERSION and host URL
+==> The following combinations seems to work fine:
+
+
+VERSION=DBS_2_0_2
+URL=http://cmssrv48.fnal.gov:8383/DBS/servlet/DBSServlet
+
+
+[rather old]
+
+VERSION=DBS_1_0_9
+URL=http://cmssrv46.fnal.gov:8080/DBS111LFNOPT/servlet/DBSServlet
+
+
+
+STEP 3: Setup env/config variables
+-----------------------------------
+
+cd UserExamples
+
+==> Need to modify "dbsInsertEverything.py". 
+    It will better to copy directly from my (working) sample file:
+    /uscms/home/kalanand/files_PublishToDB/dbsInsertEverything.py
+
+
+   Make sure to do the following changes:
+   
+   1. The field "primary = DbsPrimaryDataset (Name = ...., Type = ....)" 
+      defines the primary name of the dataset. The conventional naming 
+      scheme is:  primary_name/process_name/type
+      e.g., /Madgraph_ttbarjets_FNAL/CMSSW_1_6_12_Fastsim/RECO
+
+   2. In field "contents=open( <config file name> ).read()", set the 
+     absolute path name for an example configuration script.
+
+   3. Set the correct CMSSW version in "algo = DbsAlgorithm ( ..., 
+        ApplicationVersion= "CMSSW_1_6_12", ...)".
+
+   4. Set the correct process name in field "proc = DbsProcessedDataset 
+       (..., Name="CMSSW_1_6_12_Fastsim", ...)".
+ 
+   5. Append the correct summary file names:
+
+      filepath.append("/uscms_data/d1/kalanand/junk/Madgraph_simulation/dbs/info_list_0.txt")
+
+   6. Set the complete dataset name in the field "block = DbsFileBlock (
+            Name= ..., ...)".
+      Also, this name should match the primary and process names of steps 1,4.
+      Otherwise you will get an error message.
+
+   7. Complete the "LogicalFileName".
+
+ 
+   ***** Important: In the first try, add word "test" before the dataset 
+        names in steps 1,6. This is because once inserted, the names cannot 
+        be removed if something goes wrong.
+
+   
+
+
+STEP 4: Publish in the local DB at Fermilab
+--------------------------------------------
+
+
+python dbsInsertEverything.py
+
+
+==> check if the dataset got into the DBS or not:
+
+    dbs search --query="find dataset where dataset = /test1_Madgraph_ttbarjets_FNAL/CMSSW_1_6_12_Fastsim/RECO"
+
+   
+   The usual options are:
+     
+   find dataset, find block, find files 
+ 
+
+   The old way of querying:
+
+   dbs lsd --path=/test1_Madgraph_ttbarjets_FNAL/CMSSW_1_6_12_Fastsim/RECO
+   dbs lsb --path=/test1_Madgraph_ttbarjets_FNAL/CMSSW_1_6_12_Fastsim/RECO
+   dbs lsf --path=/test1_Madgraph_ttbarjets_FNAL/CMSSW_1_6_12_Fastsim/RECO 
+
+
+
+STEP 5: Test: transfer dataset from one local server to another
+---------------------------------------------------------------
+
+python dbsMigrateWithParents.py  <host_server>  <destination>  <dataset> 
+
+For example:
+
+python dbsMigrateWithParents.py http://cmssrv48.fnal.gov:8383/DBS/servlet/DBSServlet http://cmssrv46.fnal.gov:8080/DBS111LFNOPT/servlet/DBSServlet /test1_Madgraph_ttbarjets_FNAL/CMSSW_1_6_12_Fastsim/RECO
+ 
+
+
+
+STEP 6: Get proxy and FINALLY publish in global DBS
+---------------------------------------------------
+
+voms-proxy-init -voms cms
+
+python dbsMigrateWithParents.py  <host_server>  <destination>  <dataset> 
+
+For example:
+
+python dbsMigrateWithParents.py http://cmssrv46.fnal.gov:8080/DBS111LFNOPT/servlet/DBSServlet https://cmsdbsprod.cern.ch:8443/cms_dbs_prod_global_writer/servlet/DBSServlet /Madgraph_ttbarjets_FNAL/CMSSW_1_6_12_Fastsim/RECO
