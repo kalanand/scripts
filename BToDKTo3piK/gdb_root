@@ -1,0 +1,17 @@
+#!/bin/sh
+# This script allows you to run gdb on interactive root:
+#   1) Start the root session
+#   2) In another window, run this script to attach gdb to the root session
+#      Set breakpoints (if you like) and type 'continue'
+#   3) In the window in which you started root, execute your script or other 
+#      commands
+#
+
+
+line=`ps -wwfu $USER | grep root.exe | grep -v grep | tail -1`
+if [ "$line" = "" ] ; then
+   echo "No ROOT session running"
+   exit 1
+fi
+set $line
+exec gdb $8 $2

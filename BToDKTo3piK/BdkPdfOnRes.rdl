@@ -1,0 +1,335 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdfOnRes.rdl,v 1.27 2006/07/11 21:24:33 fwinkl Exp $
+ * Authors:
+ *   Abi Soffer, Colorado State University, abi@slac.stanford.edu
+ * Description:
+ *   Class for the product PDF
+ *
+ * History:
+ *   12-Mar-2004 abi  Created initial version
+ *
+ * Copyright (C) 2004 Colorado State University and SLAC
+ *****************************************************************************/
+
+#ifndef BDKPDFONRES
+#define BDKPDFONRES
+
+#include "BToDKTo3piK/BdkPdfProdAll.hh"
+#include "BToDKTo3piK/BdkPdfSum.hh"
+#include "BToDKTo3piK/BdkEvtTypes.hh"
+#include "BToDKTo3piK/BdkPdfComposite.hh"
+#include "BToDKTo3piK/BdkPdfCB2A.hh"
+#include "BToDKTo3piK/BdkPdf2GPolyn.hh"
+
+//class
+class BdkPdfHolder;
+class RooAbsReal;
+class RooRealVar;
+class RooArgSet;
+class RooFormulaVar;
+class RooExtendPdf;
+class RooDataSet;
+class RooFitResult;
+class RooMinuit;
+
+class BdkPdfOnRes : public BdkPdfComposite {
+public:
+
+  // Some options that can be used in the constructor/init
+  // Need to be multiples of 2
+  enum Options {
+    none               = 0,
+    linkGoodBadSigAsym = 1
+  };
+
+  BdkPdfOnRes();
+  
+  BdkPdfOnRes(const char * theName,
+	      const char * theDesc,
+              int maxRange,
+	      RooCategory& charge,
+	      RooRealVar& deltaE,
+	      RooRealVar& mD0,  
+	      RooRealVar& mes,  
+	      RooRealVar& nnCont,  
+	      RooRealVar& nnComb,  
+              BdkPdfHolder* nnContHolder = 0,
+              BdkPdfHolder* nnCombHolder = 0,
+              BdkPdfHolder * dalitzHolderN = 0,
+	      BdkPdfHolder * dalitzHolderP = 0,
+              BdkPdfOnRes::Options opt = BdkPdfOnRes::none);
+
+  ~BdkPdfOnRes();
+
+  void init(const char * theName,
+	    const char * theDesc,
+            int maxRange,
+	    RooCategory& charge,
+	    RooRealVar& deltaE,
+	    RooRealVar& mD0,  
+	    RooRealVar& mes,  
+            RooRealVar& nnCont,  
+            RooRealVar& nnComb,  
+            BdkPdfHolder* nnContHolder = 0,
+            BdkPdfHolder* nnCombHolder = 0,
+	    BdkPdfHolder * dalitzHolderN = 0,
+	    BdkPdfHolder * dalitzHolderP = 0,
+            BdkPdfOnRes::Options opt = BdkPdfOnRes::none);
+
+ 
+  // Modifiers:   
+  void setNsigAsymFromXY(Bool_t recalcErrors = kFALSE); 
+
+  // others:
+  virtual RooArgSet dependents();
+  virtual RooDataSet* generate(Int_t nEvents, Bool_t fluctuateNevt); 
+  virtual RooDataSet* generate(Int_t nEvents, RooDataSet* protoDataSet=0); 
+  virtual RooDataSet* generate(RooDataSet* protoDataSet=0); 
+
+  // Do yield and x/y fit
+  Bool_t fit(RooAbsData& data, 
+             Bool_t usePenalty = kTRUE, Bool_t usePenaltyOnly = kFALSE);
+
+  // Only do x/y fit. Initialize corrNsigAsym from yieldFitResult
+  Bool_t fit(RooAbsData& data, const RooFitResult& yieldFitResult,
+             Bool_t usePenalty = kTRUE, Bool_t usePenaltyOnly = kFALSE);
+
+  // Only do x/y fit.
+  Bool_t fit(RooAbsData& data, Double_t corrNsigAsym,
+             Bool_t usePenalty = kTRUE, Bool_t usePenaltyOnly = kFALSE);
+
+
+  // Fit settings
+  void useMinos(Bool_t use = kTRUE) {_useMinos = use;}
+  void setMinuitPrintLevel(Int_t printLevel) {_minuitPrintLevel = printLevel;}
+  Int_t minuitPrintLevel() const {return _minuitPrintLevel;}
+
+  void setNLLYieldsSystBit(Int_t systBit) {_nllYieldsSystBit = systBit;}
+
+  // Non-const accessors:
+  // The PDFs for B+:
+  BdkPdfProdAll & sigBadD0P() {return _sigBadD0ProdP;}
+  BdkPdfProdAll & sigGoodD0P() {return _sigGoodD0ProdP;}
+  BdkPdfProdAll & DpiBadD0P() {return _DpiBadD0ProdP;}
+  BdkPdfProdAll & DpiGoodD0P() {return _DpiGoodD0ProdP;}
+  BdkPdfProdAll & DPiXP() {return _DPiXProdP;}
+  BdkPdfProdAll & DKXP() {return _DKXProdP;}
+  BdkPdfProdAll & BBBadD0P() {return _BBBadD0ProdP;}
+  BdkPdfProdAll & BBGoodD0P() {return _BBGoodD0ProdP;}
+  BdkPdfProdAll & qqBadD0P() {return _qqBadD0ProdP;}
+  BdkPdfProdAll & qqGoodD0P() {return _qqGoodD0ProdP;}
+
+  BdkPdfProdAll * prodP(int i);
+
+  // The PDFs for B-:
+  BdkPdfProdAll & sigBadD0N() {return _sigBadD0ProdN;}
+  BdkPdfProdAll & sigGoodD0N() {return _sigGoodD0ProdN;}
+  BdkPdfProdAll & DpiBadD0N() {return _DpiBadD0ProdN;}
+  BdkPdfProdAll & DpiGoodD0N() {return _DpiGoodD0ProdN;}
+  BdkPdfProdAll & DPiXN() {return _DPiXProdN;}
+  BdkPdfProdAll & DKXN() {return _DKXProdN;}
+  BdkPdfProdAll & BBBadD0N() {return _BBBadD0ProdN;}
+  BdkPdfProdAll & BBGoodD0N() {return _BBGoodD0ProdN;}
+  BdkPdfProdAll & qqBadD0N() {return _qqBadD0ProdN;}
+  BdkPdfProdAll & qqGoodD0N() {return _qqGoodD0ProdN;}
+
+  BdkPdfProdAll * prodN(int i);
+
+  // change usage of variables in the PDF:
+  void useNnCont(Bool_t use = kTRUE);
+  void useNnComb(Bool_t use = kTRUE);
+  void useDE(Bool_t use = kTRUE);
+  void useMd(Bool_t use = kTRUE);
+  void useMes(Bool_t use = kTRUE);
+  void useDalitz(Bool_t use = kTRUE);
+  void useVar(BdkPdfProdAll::Var var, Bool_t use = kTRUE);
+
+  // print current variables used in PDF
+  void printVariables();
+
+  //access to the event numbers and asymmetries:
+  RooAbsReal * numEvt(int type);
+  RooArgSet    numEvt();
+  RooAbsReal * asym(int type);
+  RooRealVar * typeAsym(int type);
+
+  // link asymmetry of typeIndex to sourceIndex
+  void asymLink(int typeIndex, int sourceIndex);
+
+  // The charge-dependent #'s of events:
+  RooFormulaVar * numEvtPos(int type);
+  RooArgSet       numEvtPos();
+  RooFormulaVar * numEvtNeg(int type);
+  RooArgSet       numEvtNeg();
+
+  //access to the extended PDFs: 
+  RooExtendPdf * extPdfPos(int index);
+  RooExtendPdf * extPdfNeg(int index);
+
+  // And the RooAddPdfs:
+  RooAddPdf * addPdfPos() {return _addPdfPos;}
+  RooAddPdf * addPdfNeg() {return _addPdfNeg;}
+
+  // The total # of events:
+  double totalNumEvts() const;
+
+  RooRealVar * sigGoodD0NumEvts() {return _sigGoodD0NumEvts;}
+  RooRealVar * DpiGoodD0NumEvts() {return _DpiGoodD0NumEvts;}
+  RooRealVar * totBBNumEvts()     {return _totBBNumEvts;}
+  RooRealVar * qqBadD0NumEvts()   {return _qqBadD0NumEvts;}
+
+  RooRealVar * sigBadD0Frac() {return _sigBadD0Frac;}
+  RooRealVar * DpiBadD0Frac() {return _DpiBadD0Frac;}
+  RooRealVar * BBGoodD0Frac() {return _BBGoodD0Frac;}
+  RooRealVar * qqGoodD0Frac() {return _qqGoodD0Frac;}
+  RooRealVar * DKXFrac()      {return _DKXFrac;}
+  RooRealVar * DPiXFrac()     {return _DPiXFrac;}
+
+  // The CP parameters:
+  RooRealVar * xPlus();
+  RooRealVar * yPlus();
+  RooRealVar * xMinus();
+  RooRealVar * yMinus();
+
+  RooRealVar * rhoPlus();
+  RooRealVar * thetaPlus();
+  RooRealVar * rhoMinus();
+  RooRealVar * thetaMinus();
+
+  RooArgSet cpParams();
+
+  // Parameters used by BdkOnResNLLYields
+  RooRealVar * nBB() {return _nBB;}
+  RooRealVar * absoluteEff() {return _absoluteEff;}
+  RooRealVar * brBtoDK() {return _brBtoDK;}
+  RooRealVar * brDtoK2pi() {return _brDtoK2pi;}
+  RooRealVar * brDto3piOverK2pi() {return _brDto3piOverK2pi;}
+
+  // fit results stored by fit()
+  RooFitResult * yieldFitResult() {return _yieldFitResult;}
+  RooFitResult * xyFitResult() {return _xyFitResult;}
+  RooArgSet * fitResult();
+  RooMinuit* minuit() {return _minuit;}
+
+protected:
+  virtual void createPdf(); 
+  virtual void initParameters(BdkPdfOnRes::Options opt = BdkPdfOnRes::none);
+  
+  virtual void setMaxRange(int theMaxRange); 
+
+  void setCharge(RooCategory & charge) {_charge = &charge;}
+
+private: 
+  RooCategory * _charge;
+
+  //The individual PDFs for B+:
+  BdkPdfProdAll  _sigBadD0ProdP;
+  BdkPdfProdAll  _sigGoodD0ProdP;
+  BdkPdfProdAll  _DpiBadD0ProdP;
+  BdkPdfProdAll  _DpiGoodD0ProdP;
+  BdkPdfProdAll  _DPiXProdP;
+  BdkPdfProdAll  _DKXProdP;
+  BdkPdfProdAll  _BBBadD0ProdP;
+  BdkPdfProdAll  _BBGoodD0ProdP;
+  BdkPdfProdAll  _qqBadD0ProdP;
+  BdkPdfProdAll  _qqGoodD0ProdP;
+
+  //and for B-:
+  BdkPdfProdAll  _sigBadD0ProdN;
+  BdkPdfProdAll  _sigGoodD0ProdN;
+  BdkPdfProdAll  _DpiBadD0ProdN;
+  BdkPdfProdAll  _DpiGoodD0ProdN;
+  BdkPdfProdAll  _DPiXProdN;
+  BdkPdfProdAll  _DKXProdN;
+  BdkPdfProdAll  _BBBadD0ProdN;
+  BdkPdfProdAll  _BBGoodD0ProdN;
+  BdkPdfProdAll  _qqBadD0ProdN;
+  BdkPdfProdAll  _qqGoodD0ProdN;
+
+  // #'s of events variables:
+  RooRealVar * _sigGoodD0NumEvts; 
+  RooRealVar * _DpiGoodD0NumEvts;
+  RooRealVar * _totBBNumEvts ;
+  RooRealVar * _qqBadD0NumEvts ;
+
+  // relative fraction of bad/good or good/bad D events:
+  RooRealVar * _sigBadD0Frac;
+  RooRealVar * _DpiBadD0Frac ;
+
+  RooRealVar * _BBGoodD0Frac ;
+  RooRealVar * _qqGoodD0Frac ;
+
+  //relative fraction of D0 K other(DKX) to D0 Pi other (DPiX)
+  RooRealVar * _DKXFrac;
+  RooRealVar * _DPiXFrac;
+
+//  RooRealVar * _DPOFrac;
+  
+  // The relative fractions and the #'s ofgood D evts give the #'s of
+  // bad D evts:
+  RooFormulaVar * _sigBadD0NumEvts;
+  RooFormulaVar * _DpiBadD0NumEvts ;
+
+  RooFormulaVar * _BBGoodD0NumEvts ;
+  RooFormulaVar * _qqGoodD0NumEvts ;
+
+  RooFormulaVar * _DKXNumEvts ;
+  RooFormulaVar * _DPiXNumEvts ;
+  RooFormulaVar * _BBBadD0NumEvts;
+  
+  int _maxRange;
+
+  // #'s of events for extended PDFs:
+  RooAbsReal * _numEvt[BdkEvtTypes::NTYPES];
+  RooFormulaVar * _numEvtPos[BdkEvtTypes::NTYPES];
+  RooFormulaVar * _numEvtNeg[BdkEvtTypes::NTYPES];
+
+  // The type-dependent asymmetries and their sum wit the _globalAsym:
+  RooRealVar * _typeAsym[BdkEvtTypes::NTYPES];
+  RooFormulaVar * _asym[BdkEvtTypes::NTYPES];
+  
+  // The global asymmetry:
+  RooRealVar * _globalAsym;
+
+  // extended PDFs:
+  RooExtendPdf * _extPdfPos[BdkEvtTypes::NTYPES];
+  RooExtendPdf * _extPdfNeg[BdkEvtTypes::NTYPES];
+
+  // sum PDFs:
+  RooAddPdf * _addPdfPos;
+  RooAddPdf * _addPdfNeg;
+
+  // number of BB pairs and absolute efficiency
+  // (only needed by BdkOnResNLLYields)
+  RooRealVar* _nBB;
+  RooRealVar* _absoluteEff;
+  RooRealVar* _brBtoDK;
+  RooRealVar* _brDtoK2pi;
+  RooRealVar* _brDto3piOverK2pi;
+
+
+  // fit results stored by fit()
+  RooFitResult* _yieldFitResult;
+  RooFitResult* _xyFitResult;
+
+  // use MINOS in fit
+  Bool_t _useMinos;
+
+  // pointer to RooMinuit object used in fit
+  RooMinuit* _minuit;
+
+  // Minuit print level
+  Int_t _minuitPrintLevel;
+
+  // Systematics bit for BdkOnResNLLYields
+  Int_t _nllYieldsSystBit;
+
+#if !defined(__INTERACTIVE__) 
+    ClassDef (BdkPdfOnRes,0) // sum over event types PDF wrapper
+#endif
+
+};
+
+#endif

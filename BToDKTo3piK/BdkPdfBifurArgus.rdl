@@ -1,0 +1,96 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdfBifurArgus.rdl,v 1.1 2005/10/09 22:50:36 abi Exp $
+ * Authors:
+ *   Abi Soffer, Colorado State University, abi@slac.stanford.edu
+ * Description:
+ *   Class for a Bifurcated Gaussian + ARGUS pdf with it's own 
+ *   variable definition to be used in conjunction with RooFitCore/Models.
+ * History:
+ *   21-Mar-2002 abi Created initial version
+ *   28-Mar-2002 ww  add dependents(), delete generate()
+ *   17-Sep-2002 WW Bug fixes for SunOS 5.8 compilation.
+ *
+ * Copyright (C) 2002 Colorado State University and SLAC
+ *****************************************************************************/
+#ifndef IHFPDFBIFURARGUS
+#define IHFPDFBIFURARGUS
+
+#include "BToDKTo3piK/BdkPdfComposite.hh"
+#include "BToDKTo3piK/BdkPdfBifurGauss.hh"
+#include "BToDKTo3piK/BdkPdfArgus.hh"
+
+class RooRealVar;
+
+class BdkPdfBifurArgus : public BdkPdfComposite {
+public:
+  BdkPdfBifurArgus();
+  BdkPdfBifurArgus(const char * theName,
+		   const char * theDesc,
+		   RooRealVar & dependent);
+  
+  virtual ~BdkPdfBifurArgus();
+  
+  void init(const char * theName,
+	    const char * theDesc,
+	    RooRealVar & dependent);
+  
+  // Modifiers:
+  virtual void setDependent(RooRealVar & dependent);
+
+  void linkParameters(RooRealVar * mean=0,
+		      RooRealVar * sigl=0, 
+		      RooRealVar * sigr=0,
+		      RooRealVar * endPoint=0, 
+		      RooRealVar * exp=0,
+		      RooRealVar * fracBifur=0);
+
+
+  // Non-const accessors:
+  BdkPdfBifurGauss & bifur() {return _bifur;}
+  BdkPdfArgus & argus() {return _argus;}
+  RooRealVar * fracBifur() {return _fracBifur;}
+
+  RooRealVar * dependent() {return _dependent;}
+
+   
+protected:
+  virtual void createPdf();  
+  virtual void initParameters();
+
+  virtual void addComponents();
+
+  // Data:
+  RooRealVar * _dependent;
+
+private:
+  BdkPdfBifurArgus(const BdkPdfBifurArgus & pdf);
+
+  // Helpers:
+  void deleteFrac();
+
+  // Data:
+  BdkPdfBifurGauss _bifur;
+  BdkPdfArgus _argus;
+  RooRealVar * _fracBifur;
+
+  ClassDef (BdkPdfBifurArgus,0) // Bifur + Argus pdf wrapper 
+
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

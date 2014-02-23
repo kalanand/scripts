@@ -1,0 +1,67 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkDDalitzKsKKAmp.rdl,v 1.3 2008/01/02 20:30:09 fwinkl Exp $
+ * Description:
+ *   Implementation of D0 -> K+K-Ks Dalitz amplitude
+ * History:
+ *   10 Apr 2007, created, Frank Winklmeier
+ *
+ * Copyright (C) 2007 Colorado State University and SLAC
+ *****************************************************************************/
+
+#ifndef BDKDDALITZKSKKAMP
+#define BDKDDALITZKSKKAMP
+
+#include "BToDKTo3piK/BdkAbsDDalitzAmp.hh"
+
+class BdkDDalitzKsKKAmp : public BdkAbsDDalitzAmp {
+  // Static members: -------------------------------------------
+public:
+  enum Component {A0P = 1,
+                  A00 = 2,
+                  PHI = 4,
+                  F0_1370 = 8};
+
+   enum ResType {BWRES = 0,
+                 A0RES = 1};
+  
+   static int allComponents() {
+     return A0P + A00 + PHI + F0_1370;
+   }
+  
+  
+
+  // Instance members: -------------------------------------------
+public:
+  /// constructors:
+  BdkDDalitzKsKKAmp(const char * name, const char * title, 
+                    BdkDalitzBase * pdf,
+                    Int_t componentsBit = allComponents());
+  
+  virtual  ~BdkDDalitzKsKKAmp();
+  
+  virtual RooComplex matrixElement(Double_t m12, Double_t m13, Int_t i) const;
+     
+  virtual Double_t efficiency(Double_t m12, Double_t m13) const;
+  virtual Double_t m12NormRange() const {return 2.0;}
+  virtual Double_t m13NormRange() const {return 2.0;}
+  
+protected:
+  
+  // helpers:
+  virtual void initResonance();
+
+
+private:
+  RooRealVar* _a0gEtaPi;
+  RooRealVar* _a0gKK;
+  
+  BdkDDalitzKsKKAmp(const BdkDDalitzKsKKAmp & other);
+
+  ClassDef(BdkDDalitzKsKKAmp,1)
+
+};
+
+#endif
+

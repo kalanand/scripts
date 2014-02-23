@@ -1,0 +1,15 @@
+chain -sig
+chain sig SmallN/sig5712_wt2-1.hbk SmallN/sig5712_wt2-2.hbk SmallN/sig5712_wt2-3.hbk SmallN/sig5712_wt2-4.hbk
+
+chain -sigflat
+chain sigflat SmallN/sig4854_wt2-1.hbk SmallN/sig4854_wt2-2.hbk SmallN/sig4854_wt2-3.hbk SmallN/sig4854_wt2-4.hbk SmallN/sig4854_wt2-5.hbk
+
+chain -Bchdk
+chain Bchdk SmallN/1235other_wt2-1.hbk SmallN/1235other_wt2-3.hbk SmallN/1235other_wt2-4.hbk SmallN/1235other_wt2-5.hbk SmallN/1235other_wt2-6.hbk SmallN/1235other_wt2-7.hbk SmallN/1237other_wt2-1.hbk SmallN/1237other_wt2-2.hbk
+
+chain -Bchdpi
+chain Bchdpi SmallN/1235dpi_wt2-1.hbk
+
+chain -qq
+chain qq SmallN/1005other_wt2-1.hbk SmallN/1005other_wt2-2.hbk SmallN/1005other_wt2-3.hbk SmallN/1005other_wt2-4.hbk SmallN/1005other_wt2-5.hbk SmallN/1005other_wt2-6.hbk SmallN/1005other_wt2-7.hbk SmallN/998other_wt2-1.hbk SmallN/998other_wt2-10.hbk SmallN/998other_wt2-2.hbk SmallN/998other_wt2-3.hbk SmallN/998other_wt2-4.hbk SmallN/998other_wt2-5.hbk SmallN/998other_wt2-6.hbk SmallN/998other_wt2-7.hbk SmallN/998other_wt2-8.hbk SmallN/998other_wt2-9.hbk
+

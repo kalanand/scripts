@@ -1,0 +1,87 @@
+* $Id: checkNNDalitzCorr.kumac,v 1.2 2005/11/01 22:35:24 abi Exp $
+* Script to plot/calculate the KS probabilities between the Dalitz variables
+* and the NN variables for the various event types.
+* Needs to be run over the "small" ntuples which get chained in chainhbk.kumac.
+* Those currently reside at /nfs/farm/babar/AWG17/BCK/SmallN
+
+macro checkNNDalitzCorr finalcut=0 d=good bdecmode=DK GenBB=Bc dir=sig
+
+h/del *
+exe ../BToDKTo3piK/kumac/chainhbk
+
+exe ../BToDKTo3piK/kumac/cuts [finalcut] [d] [bdecmode] [GenBB]
+
+r1=0.6
+r2=0.9
+r3=1.5
+
+cd //[dir]
+opt stat
+for/file 66 dalitz_[dir]_[bdecmode]_[d]_cut_[finalcut].ps
+meta 66 -111
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pppupmass bflegendre [r1] [r2] [r3] -2.5 2.5 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppmupmass bflegendre [r1] [r2] [r3] -2.5 2.5 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppupmass bflegendre [r1] [r2] [r3] -2.5 2.5 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pppupmass bandbroezinlog [r1] [r2] [r3] -10.0 2.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppmupmass bandbroezinlog [r1] [r2] [r3] -10.0 2.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppupmass bandbroezinlog [r1] [r2] [r3] -10.0 2.0 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pppupmass cosbthetat [r1] [r2] [r3] -1.0 1.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppmupmass cosbthetat [r1] [r2] [r3] -1.0 1.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppupmass cosbthetat [r1] [r2] [r3] -1.0 1.0 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pppupmass kbd0docainlog [r1] [r2] [r3] -12.0 2.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppmupmass kbd0docainlog [r1] [r2] [r3] -12.0 2.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppupmass kbd0docainlog [r1] [r2] [r3] -12.0 2.0 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pppupmass probb0lep [r1] [r2] [r3] 0.0 4.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppmupmass probb0lep [r1] [r2] [r3] 0.0 4.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppupmass probb0lep [r1] [r2] [r3]  0.0 4.0 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pppupmass pi0mass [r1] [r2] [r3] 0.110 0.155 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppmupmass pi0mass [r1] [r2] [r3] 0.110 0.155 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppupmass pi0mass [r1] [r2] [r3]  0.110 0.155 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pppupmass pi0cmmom [r1] [r2] [r3] 0.0 4.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppmupmass pi0cmmom [r1] [r2] [r3] 0.0 4.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppupmass pi0cmmom [r1] [r2] [r3]  0.0 4.0 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pppupmass pi0hel [r1] [r2] [r3] -1.0 1.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppmupmass pi0hel [r1] [r2] [r3] -1.0 1.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppupmass pi0hel [r1] [r2] [r3]  -1.0 1.0 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pppupmass best2gmamass1 [r1] [r2] [r3] 0.0 1.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppmupmass best2gmamass1 [r1] [r2] [r3] 0.0 1.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppupmass best2gmamass1 [r1] [r2] [r3]  0.0 1.0 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pppupmass best2gmamass2 [r1] [r2] [r3] 0.0 1.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppmupmass best2gmamass2 [r1] [r2] [r3] 0.0 1.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppupmass best2gmamass2 [r1] [r2] [r3]  0.0 1.0 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pppupmass bestcos2gmahel1 [r1] [r2] [r3] -1.0 1.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppmupmass bestcos2gmahel1 [r1] [r2] [r3] -1.0 1.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppupmass bestcos2gmahel1 [r1] [r2] [r3]  -1.0 1.0 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pppupmass bestcos2gmahel2 [r1] [r2] [r3] -1.0 1.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppmupmass bestcos2gmahel2 [r1] [r2] [r3] -1.0 1.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppupmass bestcos2gmahel2 [r1] [r2] [r3]  -1.0 1.0 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pppupmass cosbmomdthrdfm [r1] [r2] [r3] -1.0 1.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppmupmass cosbmomdthrdfm [r1] [r2] [r3] -1.0 1.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppupmass cosbmomdthrdfm [r1] [r2] [r3]  -1.0 1.0 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pppupmass cosbdvtxdmom [r1] [r2] [r3] -1.0 1.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppmupmass cosbdvtxdmom [r1] [r2] [r3] -1.0 1.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppupmass cosbdvtxdmom [r1] [r2] [r3]  -1.0 1.0 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pppupmass nnout [r1] [r2] [r3] 0.1 1.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppmupmass nnout [r1] [r2] [r3] 0.1 1.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppupmass nnout [r1] [r2] [r3]  0.1 1.0 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pppupmass bknnout [r1] [r2] [r3] 0.1 1.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppmupmass bknnout [r1] [r2] [r3] 0.1 1.0 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0ppupmass bknnout [r1] [r2] [r3]  0.1 1.0 $91&&$92&&$93
+close 66
+
+she mv prob.txt NNDalitz_[dir]_[bdecmode]_[d]_cut_[finalcut].txt

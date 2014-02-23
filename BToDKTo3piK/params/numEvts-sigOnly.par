@@ -1,0 +1,12 @@
+// $Id: numEvts-sigOnly.par,v 1.1 2006/10/07 17:33:15 abi Exp $
+//
+// Has only signal events
+
+pdfOnResDK.sigBadD0Frac                     = 0 +/- 0.0022000 C
+
+pdfOnResDK.DpiGoodD0NumEvts             = 0 +/- 19.644 L(-INF - INF)
+pdfOnResDK.qqBadD0NumEvts               = 0 +/- 70.836 L(-INF - INF)
+pdfOnResDK.sigGoodD0NumEvts             = 170.19 +/- 28.997 L(-INF - INF)
+pdfOnResDK.totBBNumEvts                 = 0 +/- 76.354 L(-INF - INF)
+
+

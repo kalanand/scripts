@@ -1,0 +1,34 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkMath.rdl,v 1.2 2007/05/11 12:31:07 fwinkl Exp $
+ * Description:
+ *   Some math functions and macros
+ * History:
+ *   04 Apr 2007, created, Frank Winklmeier, 
+ *
+ * Copyright (C) 2007 Colorado State University and SLAC
+ *****************************************************************************/
+#ifndef BDKMATH
+#define BDKMATH
+
+#include "TObject.h"
+
+// Some math macros
+#define sqr(x) ((x)*(x))
+#define pow3(x) ((x)*(x)*(x))
+#define pow4(x) ((x)*(x)*(x)*(x))
+
+class TMatrix;
+class RooFitResult;
+
+class BdkMath {
+public:
+  BdkMath() {}
+
+  static void getCovCorMatrix(RooFitResult* res, TMatrix& cov, TMatrix& cor);
+    
+  ClassDef(BdkMath,1)
+};
+  
+#endif

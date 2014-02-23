@@ -1,0 +1,80 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdf2DpolyDalitz.rdl,v 1.12 2006/04/21 19:12:52 fwinkl Exp $
+ * Description:
+ *   2Dpoly PDF wrapper
+ * History:
+ *   25 Oct 2005, created, Frank Winklmeier
+ *
+ * Copyright (C) 2005 Colorado State University and SLAC
+ *****************************************************************************/
+
+#ifndef BDKPDF2DPOLYDALITZ
+#define BDKPDF2DPOLYDALITZ
+
+#include "BToDKTo3piK/BdkPdfDalitzBase.hh"
+#include "BToDKTo3piK/BdkDalitzEff.hh"
+
+class RooAbsReal;
+class RooRealVar;
+
+
+class BdkPdf2DpolyDalitz : public BdkPdfDalitzBase {
+public:
+  BdkPdf2DpolyDalitz();
+
+  BdkPdf2DpolyDalitz(const char * theName, const char * theDesc, 
+		     RooAbsReal &m12, RooAbsReal &m13,
+		     BdkDalitzBase::Flavor flavor = BdkDalitzBase::D0,
+		     RooRealVar* c[10] = 0);
+  
+  virtual ~BdkPdf2DpolyDalitz();
+  
+  virtual void init(const char * theName, const char * theDesc,
+		    RooAbsReal &m12, RooAbsReal &m13, 
+		    BdkDalitzBase::Flavor flavor = BdkDalitzBase::D0) {
+    init(theName, theDesc, m12, m13, flavor, 0);
+  }
+
+  virtual void init(const char * theName, const char * theDesc,
+		    RooAbsReal &m12, RooAbsReal &m13, 
+		    BdkDalitzBase::Flavor flavor,
+		    RooRealVar* c[10]);
+
+  // accessors:
+  RooRealVar* c(int n) { return (n<=9 ? _c[n] : 0); }
+  RooRealVar* s(int n) { return ((n>0)&&(n<=5) ? _c[n] : 0); }
+  RooRealVar* a(int n) { return ((n>0)&&(n<=4) ? _c[n+5] : 0); }
+
+  const RooRealVar* c(int n) const { return (n<=9 ? _c[n] : 0); }
+  const RooRealVar* s(int n) const { return ((n>0)&&(n<=5) ? _c[n] : 0); }
+  const RooRealVar* a(int n) const { return ((n>0)&&(n<=4) ? _c[n+5] : 0); }
+
+protected:
+  // Helpers:
+  virtual void createPdf();    
+  
+private:
+  // Data:
+  RooRealVar* _c[10];
+
+  ClassDef (BdkPdf2DpolyDalitz,0)
+    
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

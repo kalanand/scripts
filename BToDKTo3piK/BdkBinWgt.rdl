@@ -1,0 +1,35 @@
+// Holds a TriBin pointer and a weight, determined by the isospin
+// transformation coefficients
+
+#ifndef BDKTRIBINWGT_HH
+#define BDKTRIBINWGT_HH
+
+#include "TObject.h" // for ClassDef
+
+class BdkTriBin;
+
+
+class BdkBinWgt {
+public:
+  BdkBinWgt();
+  BdkBinWgt(const BdkTriBin * bin, double weight);
+  BdkBinWgt(const BdkBinWgt & source);
+  BdkBinWgt & operator=(const BdkBinWgt & source);
+
+  void setBin(const BdkTriBin * bin) {_bin = bin;}
+  void setWeight(double wgt) {_weight = wgt;}
+
+
+  const BdkTriBin * bin() const {return _bin;}
+  double weight() const {return _weight;}
+
+
+private:
+  const BdkTriBin * _bin;
+  double _weight;
+
+  ClassDef(BdkBinWgt, 0);
+};
+
+#endif
+

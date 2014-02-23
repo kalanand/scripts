@@ -1,0 +1,93 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdfGaussArgus.rdl,v 1.1 2005/10/09 22:50:37 abi Exp $
+ * Authors:
+ *   Abi Soffer, Colorado State University, abi@slac.stanford.edu
+ * Description:
+ *   Class for a Gaussian + ARGUS pdf with it's own 
+ *   variable definition to be used in conjunction with RooFitCore/Models.
+ * History:
+ *   6-Mar-2004 abi Created initial version
+ *
+ * Copyright (C) 2004 Colorado State University and SLAC
+ *****************************************************************************/
+#ifndef BDKPDFGAUSSARGUS
+#define BDKPDFGAUSSARGUS
+
+#include "BToDKTo3piK/BdkPdfComposite.hh"
+#include "BToDKTo3piK/BdkPdfGauss.hh"
+#include "BToDKTo3piK/BdkPdfArgus.hh"
+
+class RooRealVar;
+
+class BdkPdfGaussArgus : public BdkPdfComposite {
+public:
+  BdkPdfGaussArgus();
+  BdkPdfGaussArgus(const char * theName,
+		   const char * theDesc,
+		   RooRealVar & dependent);
+  
+  virtual ~BdkPdfGaussArgus();
+  
+  void init(const char * theName,
+	    const char * theDesc,
+	    RooRealVar & dependent);
+  
+  // Modifiers:
+  virtual void setDependent(RooRealVar & dependent);
+
+  void linkParameters(RooRealVar * mean=0,
+		      RooRealVar * sigma=0, 
+		      RooRealVar * endPoint=0, 
+		      RooRealVar * exp=0,
+		      RooRealVar * fracGauss=0);
+
+
+  // Non-const accessors:
+  BdkPdfGauss & gauss() {return _gauss;}
+  BdkPdfArgus & argus() {return _argus;}
+  RooRealVar * fracGauss() {return _fracGauss;}
+
+  RooRealVar * dependent() {return _dependent;}
+
+   
+protected:
+  virtual void createPdf();  
+  virtual void initParameters();
+
+  virtual void addComponents();
+
+  // Data:
+  RooRealVar * _dependent;
+
+private:
+  BdkPdfGaussArgus(const BdkPdfGaussArgus & pdf);
+
+  // Helpers:
+  void deleteFrac();
+
+  // Data:
+  BdkPdfGauss _gauss;
+  BdkPdfArgus _argus;
+  RooRealVar * _fracGauss;
+
+  ClassDef (BdkPdfGaussArgus,0) // Gauss + Argus pdf wrapper 
+
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,611 @@
+History
+-------
+
+V00-05-05 Frank 03 Jan 2008
+- Use Sakurai parameterization for rhos in KsPiPi
+- Renormalize all aux PDFs
+- Add scripts for SW paper to swpaper/
+- Use Antimo's a0 parameterization for KsKPi
+
+V00-05-04 Frank 11 May 2007
+- Don't save RooFitResults in toy studies (too large)
+  Rather save generated CP parameters and cov. matrix
+- Add analysis scripts for rndToy
+
+V00-05-03 Frank 10 May 2007
+Add customME() virtual method to BdkAbsDDalitzAmp for implementing
+custom matrix elements.
+Add coupled channel Breit-Wigner for a0/f0
+Add option to save all RooFitResults in toy studies
+Add method to set rho/theta from rB/gamma/delta
+
+V00-05-02 Frank 18 April 2007
+Add more modes
+Consistently use DdecMode in wrapper and PDF classes
+More fixes for non-C symmetric modes
+
+V00-05-01 Frank 05 April 2007
+Add amplitude for KKpi (from Kalanand's KKPDaliztAmp)
+Disable auto normalize by default (see BdkAbsDDalitzAmp::useAutoNorm())
+Remove numerical particle masses and use new constants from BdkDalitz
+
+V00-05-00 Frank 03 April 2007
+Introduce abstract base class for all Dalitz amplitudes.
+Only refactoring so far. No functional changes.
+Add amplitude for KsPiPi (BdkDDalitzKsPiPiAmp)
+
+
+V00-04-08 Frank 02 April 2007
+Some updates for the last systematic studies concerning theta-
+
+V00-04-07 Abi 21 Feb 2007
+ BdkDDalitzAmp.rdl: trivial change
+ BdkPdfDKDalitz: Added functions recalcX0() and setPolarCoords(x,y)
+ analysis/fitShapedFlat.cc: Fixed wrong usage of RooDataSet::get(int)
+ analysis/fitShapedFlat.csh: updates
+ analysis/fitShapedFlat.kumac: updates
+ toy/DKbgdStudy.cc: updates for wrong-kaon-charge DK_bgd study
+ toy/DKbgdStudy.csh: updates
+ toy/DKbgdStudy.kumac: updates
+ utils/coordConvert.cc: x0 now poperly obtained, not hard-coded
+
+
+V00-04-06 Abi 14 Oct 2006
+Typo fix.
+
+V00-04-05 Abi 13 Oct 2006
+BdkDDalitzAmp can now do running or fixed BW width. 
+Added toy/DKbgdStudy.*.
+BdkPdfOnRes::generate() now gives more detailed progress messages.
+
+V00-04-04 Abi 7 Oct 2006
+analysis/fitShapedFlat.* improved for use of yields in fit.
+params/dalitzNormFlatEff.par added.
+params/numEvts-sigOnly.par added.
+utils/coordConvert.cc now used to convert between Cartesian and polar coords.
+analysis/sensitivity.cc makes better plots of 2nd derivative of NLL.
+
+V00-04-03 Frank 04 Aug 2006
+Update to PDG06 BRs
+Allow for a RooFormulaVar for either m12 or m13.
+
+V00-04-02 Frank 11 July 2006
+Add option to BdkPdfOnRes to link good and bad D asymmetries
+
+V00-04-01 Frank 03 July 2006
+No longer allow change of coordinates on the fly
+Use option in setup() instead
+
+V00-04-00 Frank 29 June 2006
+Share dalitzAmps between B+ and B-
+Move B normalization to BdkDDalitzAmp and persist values
+Recalculate normalization constants with 1e7 events
+Fix bug in efficiency function initialization in createPdf()
+
+V00-03-47 Frank 28 June 2006
+Force re-creation of PDF in useCartesian() and usePolar()
+
+V00-03-46 Frank 26 June 2006
+Changes to several scripts to work with polar coordinates
+
+V00-03-45 Abi 26 June 2006
+Modified:
+analysis/dpiFit.cc: Totally rewarked to do fit with penalty
+analysis/getDalitzParams.cc: Trivial hist title change
+analysis/plotNLL.cc: Make the names of the hists global
+analysis/plotNLL_RhoPhases.cc: Migration to post-polar coordinate interface
+
+Added:
+analysis/DrhoCutEff.cc: Calculates Drho cut efficiency for a given tree
+analysis/NLLParabFit.cc: Does a parabolic fit to an NLL plot 
+analysis/NRPW.cc: Studies non-resonant P wave
+analysis/plotDPXY.cc: Plots x and y dependence of Dalitz plot
+analysis/plotNLL_RhoAmpsPhases2.cc: 2D plots of NLL for different rho- phases and amplitudes
+analysis/plotNLL_RhoPhases2.cc: 2D plots of NLL for different rho- phases
+
+
+V00-03-44 Frank 22 June 2006
+Before introducing polar coordinates
+
+V00-03-43 Abi 15 June 2006
+Resolved function overloading in fit.cc.
+Added capability for setNsigAsymFromXY() to apply statistical errors
+Started working on penalty fit in dpiFit.cc
+
+V00-03-42 Frank 14 June 2006
+Remove the remaining hardcoded BR's from BdkOnResNLLYields.
+All constants are now set in numEvts.par.
+
+V00-03-41 Frank 12 June 2006
+Use average of asymmetric errors in BdkOnResNLLYields if 
+there is no parabolic error available.
+
+V00-03-40 Frank 08 June 2006
+Some minor changes to BdkPdfOnRes::fit()
+
+V00-03-39 Abi 07 June 2006
+Added setVerbose() in BdkPdfDKDalitz, passed on to BdkDDalitzAmp.
+Added more verbosity in BdkOnResNLLYields.
+
+BdkDDalitzAmp: Only renormalizing if change in mass or width is less 
+than 5% of the width. However, on-demand normalization doesn't currently work 
+due to the symmetrization of the norm matrix. Will fix if want to later.
+
+
+V00-03-38 Frank 06 June 2006
+Add option to BdkPdfOnRes::generate() that allows to 
+fluctuate B+ and B- yields separately.
+
+V00-03-37 Frank 05 June 2006
+Updated Dalitz shapes
+
+V00-03-36 Frank 05 June 2006
+Renormalized Dalitz amplitudes
+
+V00-03-35 Frank 05 June 2006
+Update efficiency function using PID corrections
+
+V00-03-34 Frank 03 June 2006
+Do not call setNsigAsymFromXY() after Poisson fluctuation of nEvt
+
+V00-03-33 Frank 01 June 2006
+Use RooRealVar in pdfOnResDK for absolute efficiency
+
+V00-03-32 Frank 31 May 2006
+Use generate() instead of generator context in toys
+Do not Poisson fluctuate nEvt
+
+V00-03-31 Frank 31 May 2006
+Update dalitzNorm.par
+Use symmetry of normalization constants in BdkDDalitzAmp::calNorm()
+
+V00-03-30 Frank 30 May 2006
+Add support for two-stage fit to BdkBatchMCStudy
+This tag is used for "fullToy-6" toy MC
+
+V00-03-29 Frank 29 May 2006
+Add BdkPdfOnRes::fit()
+Add printVariables() to BdkPdfOnRes and BdkPdfProdAll
+Add nBB as RooRealVar to BdkPdfOnRes
+
+
+V00-03-28 Abi 29 May 2006
+Added BdkOnResNLLYields::defaultErrorLevel()
+Added analysis/fitWYields.cc and removed it from toy/
+Many developments in analysis/plotNLL.cc
+
+
+V00-03-27 Abi 28 May 2006
+Added class BdkOnResNLLYields.
+
+BdkPdfOnRes: Removed blinding. Added methods to set nsig and asym from 
+CP parameters. Added x and y accessors.
+
+globals/setupPdfs.cc: removed blinding var from pdfOnResDK init.
+
+utils/fit.cc: Added penalty (yields) NLL
+
+Added analysis/plotNLL.cc and removed analysis/plotNorms.cc (superceded)
+
+utils/printFitResult.cc: fit result print is now not verbose, so as 
+not to print all the fixed vars, of which we have about 2000...
+
+params/numEvts.par: set the asymmetry and nsig errors to what comes
+out of the DE-q'-d' fit.
+
+Added toy/fitWYields.cc
+
+
+V00-03-26 Abi 25 May 2006
+BdkDDalitzAmp: Denominator in spinFactor is now mAB^2 = the invariant mass
+squared of the daughters of the resonance. It was previously set to the 
+mass of the peak of the resonance, based on CLEO's Kpipi0 paper, 
+PRD 63 0902001. Talking to the paper's author, Dave Asner, he says that 
+using mAB^2 is probably more correct, but that the difference is small.
+Anyway, doing it this way enables us to add p-wave nonres terms
+A static flag enables us to turn this on or off (but with recompilation).
+
+Added 3 p-wave nonres terms.
+
+Fixed a bug in on-demand renormalization, which caused only diagonal terms 
+to be recalculated.
+
+Created params/peak-mass and moved the 4 Dalitz files there.
+
+Recalculated norm parameters in dalitzNorm.par and in dstar.par 
+with the mAB^2 spin factor.
+
+Added the p-wave nonres parameters to dalitzN.par, dalitzP.par, and dstar.par.
+
+
+
+
+V00-03-25 Abi 25 May 2006
+Added analysis/plotNorms.cc. 
+BdkDDalitzAmp: Added p-wave nonres components
+
+V00-03-24 Abi 24 May 2006
+BdkDKDalitz: Added access to the last calculated value of the
+amplitude following an evaluate() call. Also providing normOverNoCP()
+normalization ratio over no-CP case.
+
+
+Tagless Abi 22 May 2006
+Added analysis/plotAllPdfs.cc and plotAmp.cc.
+Added BdkDKDalitz::lastAmp()
+
+V00-03-23 Abi/Frank 19 May 2006
+Added mes as a fit variable. Also, Frank added possibility to use 
+NN HistPdfs.
+
+V00-03-22 Frank 16 May 2006
+Fix bug in BdkDDalitzAmp (rho- was decaying into pi0 pi+)
+
+V00-03-21 Abi 13 May 2006
+Recycling rho*+ mass and width for rho*- and rho*0.
+
+V00-03-20 Abi 13 May 2006
+Added f0(1500), f0(1700), and f2'(1525) states.
+
+BdkDDalitzAmp:
+- masses and widths of resonances are now RRV's and can be changed.
+- calNorm() now has the behavior that, when called with default 2nd 
+  argument (kTRUE), it enforces normalization of full norm matrices. 
+  This is same as old behavior.
+- when 2nd argument is kFALSE, normalizes only the rows and columns
+  that need normalizing, determined by whether _massRes (_widthRes)
+  and _massResLast (_widthResLast) are identical or not.
+- Usual printout every 1/10th of the events is given only when 
+  2nd argument is kTRUE (default).
+- Verbosity flag "n" (can be set directly or by giving it to the wrapper
+  with additional flag "+") prints additional normalization info for the
+  individual resonances that require normalization.
+- the getamp() function now automatically normalizes the resonances that
+  require it.
+
+analysis/plotComponents.cc made smarter.
+
+
+V00-03-19 Abi 09 May 2006
+Fixed excited rho- naming convention and added rho(1700) to plotComponents.
+
+V00-03-18 Abi 09 May 2006
+Added rho(1700) states, also analysis/compareNorms.csh.
+Also, Frank added a function to change N2 cuts. 
+
+V00-03-17 Abi 09 May 2006
+Slightly changed rho mass (.7755 to .7758) to conform to PDG.
+Added f0(1370) to analysis/plotComponents.cc. 
+Added params/plotComponents.par.
+
+
+V00-03-16 Abi 08 May 2006
+Added f0(1370)
+
+V00-03-15 Frank 08 May 2006
+Before reverting to random best selection ntuples
+
+V00-03-14 Abi 06 May 2006
+Corrected f0 and f2 spin and f2 mass, and added analysis/plotComponents.cc
+
+V00-03-13 Abi 06 May 2006
+Changed sigma width to 400 MeV (Brian's suggestion)
+
+V00-03-12 Abi 05 May 2006
+updated params/dalitzNorm.par and params/dstar.par with the normalization
+parameters after adding f0 and f2.
+
+V00-03-11 Abi 05 May 2006
+Added f0 and f2 resonances. f0 given width of 70 MeV. PDF says it's between 
+40 and 100.
+
+V00-03-10 Abi 05 May 2006
+Added fitFractions() function
+
+V00-03-09 Abi 03 May 2006
+Added params/dstar.par for D*->Dpi setup
+
+V00-03-08 Abi 03 May 2006
+UPdated params for new resonances
+
+V00-03-07 Abi 03 May 2006
+Add new resonances: rho(2S), sigma, omega.
+More dev in generator code.
+Added analysis/sensitivity.cc.
+
+V00-03-06 Frank 03 May 2006
+Add Blatt-Weisskopf penetration factor to BdkDDalitzAmp
+
+V00-03-05 Frank 27 Apr 2006
+Tag before introducing penetration factor in BdkDDalitzAmp
+
+V00-03-04 Frank 26 Apr 2006
+Updated numEvts.par
+
+V00-03-03 Frank 25 Apr 2006
+New ntuples in chains. dalitzHolderP initialized correctly now.
+
+V00-03-02 Frank 21 Apr 2006
+Tag before changing to the new (final) ntuples
+
+V00-03-01 Abi 20 Apr 2006
+Added mode generator-related stuff to study PTO3P in generator subdir.
+
+V00-03-00 Frank 20 Apr 2006
+Implement multiple efficiency functions.
+
+V00-02-00 Frank 18 Apr 2006
+Fix up some scripts to make them compile
+Do use this tag do in your workdir:
+ ln -s RELEASE/tmp/$BFARCH/RooFitCore RooFitCore
+ ln -s RELEASE/tmp/$BFARCH/RooFitModels RooFitModels
+ ln -s RELEASE/tmp/$BFARCH/BToDKTo3piK BToDKTo3piK
+
+Also, add the following to workdir/RooLogon.C:
+ gSystem->AddIncludePath(" -IRELEASE/tmp/$BFARCH/");
+
+V00-01-08 Frank 14 Apr 2006
+Implement blinding for x and y
+
+V00-01-07 Frank 12 Apr 2006
+Full set of R16/R18 ntuples
+
+V00-01-06 Abi 6 Apr 2006
+Finalized analysis/fitShapedFlat and related files.
+
+V00-01-05 Frank 04 Apr 2006
+Seems the full fit is working now (at least on toy MC)
+Includes the latest fixes to BdkDalitzHist
+Added trees and files for R18 ntuples
+
+V00-01-04 Frank 27 Mar 2006
+Fixed integration bug in BdkDalitzHist
+
+V00-01-03 Frank 22 Mar 2006
+Add new classes for Dalitz histograms
+Separate BdkDalitzBase into BdkDalitz and RooAbsPdf
+DKBadD now histogram based PDF
+
+V00-01-02 Abi 21 Mar 2006
+Added utils/generateFromFlat.cc
+
+V00-01-01 Abi 01 Mar 2006
+Set the values of the 6 fractions in params/numEvts.par from MC. 
+Also changed names of DPOFrac and DKOFrac to DPiXFrac and DKXFrac, 
+respectively.
+
+V00-01-00 Frank 01 Mar 2006
+Change nnout from PDF hist to analytic PDF
+DeltaE and nnout parametrization done 
+
+V00-00-39 Abi 23 Feb 2006
+Added params/dalitzNorm.par for normalization parameters, automatically
+read when calling setup.cc. BdkDDalitzAmp::normalizeAll() prints them out.
+
+V00-00-38 Abi 22 Feb 2006
+BdkDalitzPdfHolder1 now recycles the resonant components of its various
+BdkPdfDDalitzInc objects.
+
+
+V00-00-37 Abi 20 Feb 2006
+Added:
+ GqaMCAnalysis.cc
+ cleo.csh
+ cleo.dec
+ cleo.tcl
+to study the CLEO shape in full MC.
+
+Changed:
+ BdkDDalitz: Added capability to use external DalitzAmp
+ BdkDDalitzAmp: Can now be shared among objects more smoothly
+ BdkDKDalitz: Added access to DalitzAmp to share among all true D types
+ BdkDalitzPdfHolder1: bug fixes and more access options
+ BdkPdfDDalitz: Added capability to use external DalitzAmp
+ BdkPdfDDalitzInc: BdkDDalitz interfacr change
+ BdkPdfDKDalitz: Added access to DalitzAmp to share among all true D types
+ BdkPdfOnRes: Bug fixes in use of Dalitz PDFs
+
+
+
+untagged Abi 20 Feb 2006
+Bdk2DpolyDalitz now flips coordinates if its flavor is B0BAR.
+
+V00-00-36 Frank 20 Feb 2006
+Added square Dalitz variables to dataset in read()
+Tag before "big change" in how to handle the PDF flips
+
+V00-00-35 Abi 18 Feb 2006
+Added BdkDalitzPdfHolder1. Also added previously-missing forward 
+declaration in BdkPdfDDalitz.rdl.
+
+V00-00-34 Frank 18 Feb 2006
+Add reweighting of Dalitz plot bins
+
+V00-00-33 Abi 16 Feb 2006
+Changed charmless to DKX, Dpipi to DPiX.
+
+Simplified BdkPdfProdAll and BdkPdfOnRes, removing mES and pid PDFs.
+
+Started coding Dalitz plot capability into BdkPdfOnRes, with needed
+changes in BdkPdfProdAll. Next need to create the appropriate Dalitz
+Pdf holder.
+
+
+V00-00-32 Frank 27 Jan 2006
+Move m23 veto window to BdkDalitzEff class
+BdkDalitzEff now inherits from BdkDalitzBase
+BdkPdf2DpolyDalitz no longer inherits from BdkDalitzEff
+
+V00-00-31 Frank 26 Jan 2006
+Implemented m23 mass veto window in efficiency
+
+V00-00-30 Abi 19 Jan 2006
+Included Cartesian coordinates in BdkPdfDKDalitz.
+
+V00-00-29 Abi 12 Dec 2005
+But fix in BdkDDalitzAmp::calNorm(): previously didn't divide the 
+normalization coefficients by the # of toy events.
+
+updates and fixes in 
+kumac/bgdDalitzSB.kumac
+kumac/chainhbk.kumac
+kumac/cuts.kumac
+
+globals/cuts.hh: added mixneumass cut to cutBasic.
+
+
+V00-00-28 Abi 10 Dec 2005
+Cleanup in cuts.hh, also added new cuts
+cutPiVT("very tight pi PID", "Pippidbit==15&&Pimpidbit==15");
+cutPiT("tight pi PID", "Pippidbit>6&&Pimpidbit>6");
+cutNN("cutNN", "nnout>0.1&&bknnout>0.25");
+
+In vars.hh, Kmpidbit replaced by Pimpidbit (similarly Kp by Pip).
+
+
+V00-00-27 Abi 10 Dec 2005
+Added utils/chargeCut.cc and analysis/mixNeuMassStudy.cc
+
+V00-00-26 Abi 9 Dec 2005
+vars.hh and setupVars.cc: Added variable mixneumass, the Kpi inv mass.
+read.cc: fixed some coding problems.
+setupChains.cc: SmallN is now defined from workdir, not BToDKTo3piK.
+
+V00-00-25 Frank 6 Dez 2005
+Implemented Dalitz comparison of data and MC
+
+V00-00-24 Abi 3 Dec 2005
+BdkDDalitzAmp now has a static registry, used to normalize all objects
+with the static function normalizeAll().
+
+
+V00-00-23 Abi 3 Dec 2005
+Changed m12 and m13 to RooAbsReal from RooRealVar in the constructors
+of some Dalitz PDF wrappers.
+
+BdkPdfAbsBase now has a static dependents list, set from the outside
+by the user (in globals/setupVars.cc). This is necessary in order to
+keep out of the parameters() set any RRV's that feed into
+RooFormulaVars that are given as the dependents of a PDF.
+
+globals/setupPdefs.cc: used to crash when reading parameters with
+paramsPath() + "eff.par". This is fixed by expanding paramsPath().
+Not a good solution, but works in the meanwhile. The crash is in the
+parameters reading, not the PDF. Also, the crash doesn't occur when
+doing the read outside of the script files. Strange.
+
+
+V00-00-22 Abi 3 Dec 2005
+Added BdkDalitzEff.rdl (forgot to do last tag)
+
+V00-00-21 Abi 3 Dec 2005
+Added some Dalitz PDFs to globals/pdfs.hh and setupPdfs.cc.
+
+V00-00-20 Abi 3 Dec 2005
+BdkDalitzBase now has a static efficiency function. It is currently
+used by all resonances, butnot by the non-resonant component.
+
+BdkDalitzBase subclass constructors now have a default D0 flavor.
+
+Some bug fixes in clean use of flavor from the base class
+(previously had some leftovers where it was also handled by 
+subclasses). 
+
+
+V00-00-19 Abi 1 Dec 2005
+BdkDDalitz::evaluate() and BdkDKDalitz::evaluate() no longer call inDalitz().
+This is now done by BdkDDalitzAmp::getamp().
+
+BdkDalitzBase.rdl: Flavor is now D0=-1, D0BAR=1, to correspond to the
+K change in the dominant B decay.
+
+BdkPdfDKDalitz: _phase is not a RooAbsReal, not RooRealVar, so it can
+be supplied from the outside as a RooFormulaVar.
+
+
+V00-00-18 Abi 1 Dec 2005
+BdkDDalitzAmp.cc: Fixed bugs in the assignment of trackinfo and its use
+in spinFactor(), which resulted in some bad symptons: we couldn't
+get the CLEO distribution with their parameters, and plots of m12%m13,
+m13%m23, m23%m12 didn't all look the same when the resonances had equal
+phases and amplitudes. With this fix, both these problems go away, as 
+long as we use the rho- phase CLEO had in their hep-ex/0306048 V1,
+which was -4 degrees, rather than the one in PRD 72, 031102, which is
+176. It seems that they changed some definition by 180 degrees, as Ben
+has observed in the past. 
+
+V00-00-17 Frank 1 Dec 2005
+Fix initialization bug in Bdk2DpolyDalitz PDF
+
+V00-00-16 Abi 1 Dec 2005
+Fixed flavor-flipping but in BdkDDalitz::evaluate().
+Modified BdkDDalitzAmp::calNorm().
+
+V00-00-15 Frank 30 Nov 2005
+Add sym/asym parametrization to Bdk2DpolyDalitz class
+Make BdkPdf2DpolyDalitz use this parametrization by default
+Changed some RooRealVar's to RooAbsReal's
+
+V00-00-14 Abi 29 Nov 2005
+Some cleanup in Dalitz PDFs: kCharge converted to BdkDalitzBase::Flavor.
+
+BdkDDalitzAmp's normalization parameters are now part of the PDF parameters,
+so they can be read in from the par files.
+
+Added phase input to BdkPdfDKDalitz so we can handle delta +/- gamma later.
+
+
+V00-00-13 Abi 25 Nov 2005
+bug fixes in dataMCSBCompare.cc, added R2Frame plot to plots.hh
+
+V00-00-12 Abi 23 Nov 2005
+Bug fixes in Bdk2DpolyDalitz.cc, chains.hh, and setupChains.cc.
+Added R2 to allVars in setupVars.cc. 
+Developments in dataMCSBCompare.cc
+
+
+V00-00-11 Frank 21 Nov 2005
+Efficiency fit done. analysis/effPdf.par contains parameters
+
+V00-00-10 Frank 21 Nov 2005
+Added 1D analytic integration of 2D polynomial over m12/m13
+Added scripts to test Dalitz methods and efficiency fit
+
+V00-00-09 Frank 21 Nov 2005
+Setup the TTree's and TFile's for data samples
+First version of 2D poly partial analytic integration
+
+V00-00-08 Abi 21 Nov 2005
+FW added ntuple/SmallN/Bdkh2root.
+Abi added r2 variable to global vars and a read function that 
+reads from a TTRee.
+
+V00-00-07 Abi 20 Nov 2005
+Added read(file) functionality. Cleaned up cuts and chains. 
+Added some scripts from previous analysis. 
+
+V00-00-06 Abi 19 Nov 2005
+Frank worked on Dalitz fit classes, especially the 3rd order polynomial.
+Abi updated cuts.kumac and setupChains.cc
+
+V00-00-05 Abi 6 Nov 2005
+Bug fix in params names in BdkPdf2DpolyDalitz. Moved old params/ files to params/old/.
+
+
+V00-00-04 Abi 4 Nov 2005
+BdkPdfAbsBase::initParameters() is no longer abstract, since many 
+subclasses don't implement it as a separate function.
+
+V00-00-03 Abi 4 Nov 2005
+Many updates to Dalitz PDFs and wrappers
+
+V00-00-02 Abi 24 Oct 2005
+Updated paths and .par and .root files used for shapes
+
+V00-00-01 Abi 18 Oct 2005
+Worked on signal Dalitz PDF code. Some cleanup in older PDFs. 
+Updates of variable correlation kumacs.
+
+
+V00-00-00 Abi 9 Oct 2005
+First commit based on BDKFit

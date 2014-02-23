@@ -1,0 +1,33 @@
+* $Id: checkCorrAll.kumac,v 1.5 2006/03/02 00:54:14 fwinkl Exp $
+
+macro checkCorrAll scriptNo=0
+
+if [scriptNo].eq.0 then
+  script = '../BToDKTo3piK/kumac/checkFitVarCorr'
+elseif [scriptNo].eq.1 then
+  script = '../BToDKTo3piK/kumac/checkNNDalitzCorr'
+endif
+
+
+exec [script] 1 good DK   sig
+exec [script] 1 bad  DK   sig
+exec [script] 1 good DPi  Bchdpi
+exec [script] 1 bad  DPi  Bchdpi
+exec [script] 1 bad  DKX  Bchdk
+exec [script] 1 bad  DPiX Bchdk
+exec [script] 1 bad  BBCD Bchdk
+exec [script] 1 good BBCD Bchdk
+exec [script] 1 bad  QQ   qq
+exec [script] 1 good QQ   qq
+
+*exec [script] 0 good DK   sig
+*exec [script] 0 bad  DK   sig
+*exec [script] 0 good DPi  Bchdpi
+*exec [script] 0 bad  DPi  Bchdpi
+*exec [script] 0 bad  DKX  Bchdk
+*exec [script] 0 bad  DPiX Bchdk
+*exec [script] 0 bad  BBCD Bchdk
+*exec [script] 0 good BBCD Bchdk
+*exec [script] 0 bad  QQ   qq
+*exec [script] 0 good QQ   qq
+

@@ -1,0 +1,32 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkAmp.rdl,v 1.1 2008/01/02 20:30:09 fwinkl Exp $
+ * Description:
+ *   Collection of amplitudes
+ * History:
+ *   09 Nov 2007, created, Frank Winklmeier
+ *
+ * Copyright (C) 2007 Colorado State University and SLAC
+ *****************************************************************************/
+
+#ifndef BDKAMP
+#define BDKAMP
+
+#include "Rtypes.h"
+#include "RooFitCore/RooComplex.hh"
+
+class BdkAmp {
+public:
+  static RooComplex a0Amp(Double_t s, Double_t m0, Double_t gEtaPi, Double_t gKK);
+  static RooComplex f0Amp(Double_t s, Double_t m0, Double_t gPiPi, Double_t gKK);
+  static RooComplex a0AmpAntimo(Double_t s, Double_t m0, Double_t gEtaPi, Double_t gKK);
+  static RooComplex GS_Rho(Double_t m0, Double_t g0, Double_t k0,
+			   Double_t s, Double_t g, Double_t k);
+private:
+  inline static Double_t GS_h(const Double_t& m, const Double_t& k);
+  inline static Double_t GS_dhds(const Double_t& m0, const Double_t& k0);
+  ClassDef(BdkAmp,1)
+};
+
+#endif

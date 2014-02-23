@@ -1,0 +1,34 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkDalitzEff.rdl,v 1.5 2006/02/20 21:27:39 abi Exp $
+ * Description:
+ *   Base class for efficiency functions
+ * History:
+ *   Dec 1 2005, created, Abi Soffer
+ *
+ * Copyright (C) 2005 Colorado State University and SLAC
+ *****************************************************************************/
+
+#ifndef BDKDALITZEFF
+#define BDKDALITZEFF
+
+#include "BToDKTo3piK/BdkDalitzBase.hh"
+
+class BdkDalitzEff : public BdkDalitzBase {
+public:
+  BdkDalitzEff(const char *name, const char *title, 
+	       BdkDalitzBase::Flavor flavor, BdkDalitzBase::Mode DdecMode);
+
+  BdkDalitzEff(const BdkDalitzEff& other, const char* name);
+
+  virtual ~BdkDalitzEff();
+
+  virtual Double_t evaluateAt(Double_t m12, Double_t m13) const = 0;
+  
+private:
+
+  ClassDef(BdkDalitzEff,0)
+};
+
+#endif

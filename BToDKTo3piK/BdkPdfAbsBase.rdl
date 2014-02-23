@@ -1,0 +1,128 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdfAbsBase.rdl,v 1.3 2005/12/04 00:21:10 abi Exp $
+ * Authors:
+ *   WW, Wolfgang Walkowiak, UC Santa Cruz, walkowia@scipp.ucsc.edu
+ * Description:
+ *   Abstract base class for pdfs which define their own variables.
+ *   To be used in conjunction with RooFitCore/Models.
+ * History:
+ *   18-Mar-2002 WW Created initial version
+ *   17-Sep-2002 WW Bug fix for SunOS 5.8 compiler.
+ *
+ * Copyright (C) 2001 University of California and SLAC
+ *****************************************************************************/
+#ifndef BDKPDFABSBASE
+#define BDKPDFABSBASE
+
+#include "TNamed.h"
+#include "TString.h"
+
+class RooAbsArg;
+class RooAbsPdf;
+class RooArgSet;
+class RooAbsCollection;
+class RooDataSet;
+
+
+class BdkPdfAbsBase : public TNamed
+{
+  // Static members:
+public:
+  // The static dependents list is needed in order for parameters() to return
+  // only RRV's that are not on the list, since RooAbsArg doesn't provide
+  // a way to find all the dependents without some input:
+  static const RooArgSet * allAnalysisVars() {return _allAnalysisVars;}
+  static void setAllAnalysisVars(RooArgSet * vars) {_allAnalysisVars = vars;}
+
+private:
+  static const RooArgSet * _allAnalysisVars;
+  
+
+  // Instance members:
+public:
+    BdkPdfAbsBase();
+
+    virtual ~BdkPdfAbsBase();
+
+    virtual RooAbsPdf *getPdf();
+    
+    virtual RooArgSet *getArgSet();
+    
+    virtual RooAbsArg *find(const char *name);
+    
+    virtual Bool_t getIsValid() const;
+
+    // Subclasses should use this to return all their dependent RooRealVars:
+    virtual RooArgSet dependents() = 0 ;
+
+    virtual RooArgSet parameters();
+
+    virtual RooArgSet parametersFree(Bool_t freeOnly = kTRUE);
+
+    virtual RooDataSet* generate(Int_t nEvents, RooDataSet* protoDataSet=0);
+
+    virtual void fixAll(Bool_t val = kTRUE);
+
+    virtual void setVerbose(const char * val);
+    
+    inline const TString & verbose() {return _verbose;};
+
+    inline Bool_t pdfOwned() const {return _pdfOwned;}
+
+protected:
+    
+    virtual void setPdf(RooAbsPdf & thePdf, Bool_t owned = kTRUE);
+    
+    virtual void setIsValid(Bool_t isValid);
+
+    virtual void baseInit(const char *theName,
+			  const char *theDesc); 
+    
+    // Initialization of RooRealVars, etc. Put here as a reminder:
+    virtual void initParameters();
+    
+    // Creates the _thePdf. Called from getPdf() to ensure that _thePdf
+    // is ready when it's needed:
+    virtual void createPdf() = 0;
+
+    virtual RooAbsArg* findReplace(RooAbsArg& arg, RooAbsCollection& set);
+    
+private:    
+
+    BdkPdfAbsBase(BdkPdfAbsBase & pdf);
+    BdkPdfAbsBase & operator=(BdkPdfAbsBase & pdf);
+
+    void deletePdf();
+
+public:
+
+protected:
+    // resulting pdf
+    RooAbsPdf* _thePdf;
+
+private:    
+    // validity of resulting pdf
+    Bool_t _isValid;
+    TString _verbose;
+    Bool_t _pdfOwned;
+    
+    ClassDef (BdkPdfAbsBase,0) // Pdf wrapper base on top of RooFitCore
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

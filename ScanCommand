@@ -1,0 +1,3 @@
+
+fitter_tree->SetScanField(-1);
+fitter_tree->Scan("run:event:lumi:mass:tag_sc_et:tag_sc_eta:tag_sc_phi:tag_gsfEle_charge:tag_gsfEle_deltaEta:tag_gsfEle_deltaPhi:tag_gsfEle_sigmaIetaIeta:tag_gsfEle_EoverP:tag_gsfEle_HoverE:tag_gsfEle_bremFraction:tag_gsfEle_trackiso_dr03:tag_gsfEle_ecaliso_dr03:tag_gsfEle_hcaliso_dr03:tag_gsfEle_missingHits:event_nPV","tag_gsfEle_ecalDrivenSeed && probe_gsfEle_ecalDrivenSeed"); > a.out

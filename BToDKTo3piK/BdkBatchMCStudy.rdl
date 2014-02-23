@@ -1,0 +1,83 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkBatchMCStudy.rdl,v 1.9 2007/08/22 07:59:04 fwinkl Exp $
+ * Authors:
+ *   Frank Winklmeier
+ * Description:
+ *   Extension of RooMCStudy that supports batch queues
+ *
+ * Copyright (C) 2006 Colorado State University
+ *****************************************************************************/
+
+#ifndef BDKBATCHMCSTUDY
+#define BDKBATCHMCSTUDY
+
+#include <vector>
+
+#include "RooFitCore/RooMCStudy.hh"
+#include "BToDKTo3piK/BdkPdfOnRes.hh"
+
+class RooRealVar;
+
+class BdkBatchMCStudy : public RooMCStudy
+{
+public:
+
+  BdkBatchMCStudy(const RooAbsPdf& model, const RooArgSet& observables, 
+                  RooCmdArg arg1=RooCmdArg::none, RooCmdArg arg2=RooCmdArg::none,
+                  RooCmdArg arg3=RooCmdArg::none, RooCmdArg arg4=RooCmdArg::none, 
+                  RooCmdArg arg5=RooCmdArg::none, RooCmdArg arg6=RooCmdArg::none, 
+                  RooCmdArg arg7=RooCmdArg::none, RooCmdArg arg8=RooCmdArg::none);
+	
+  BdkBatchMCStudy(const RooAbsPdf& genModel, const RooAbsPdf& fitModel, 
+                  const RooArgSet& dependents, const char* genOptions="",
+                  const char* fitOptions="", const RooDataSet* genProtoData=0,
+                  const RooArgSet& projDeps=RooArgSet());
+
+  BdkBatchMCStudy(const BdkPdfOnRes& genModel, const BdkPdfOnRes& fitModel, 
+                  const RooArgSet& dependents, const char* genOptions="",
+                  const char* fitOptions="", const RooDataSet* genProtoData=0,
+                  const RooArgSet& projDeps=RooArgSet());
+
+  virtual ~BdkBatchMCStudy();
+
+  void generateBatch(const char* mcFile, Int_t nSamples, Int_t nEvtPerSample = 0); 
+  Bool_t init(const char* mcFile);
+  Bool_t fitBatch(const char* fitFile, Int_t firstSample = 0, Int_t nSamples = -1);
+  Bool_t generateAndFitBatch(const char* fitFile, Int_t nEvents, Int_t nSamples);
+  std::vector<std::string> createScripts(const char* mcFile, const char* fitFileBase, 
+                                         const char* setupScript, Int_t fitsPerJob,
+                                         Int_t nSamples = 0, Int_t nEvtPerSample = 0); 
+
+  void setSubmitOption(const char* opt) { opt ? _submitOption = opt : _submitOption = "";}
+  void useRandomCP(Bool_t use = kTRUE) { _useRandomCP = use; }
+  void setRandomSeed(UInt_t seed) { _seed = seed; }
+  UInt_t randomSeed() const { return _seed; }
+  
+private:
+  TString _mcFile;
+  TString _genOptions;
+  BdkPdfOnRes* _onResPdf;
+  RooRealVar* _xyNllVar;
+  TList* _fitResults;
+  TString _submitOption;
+  Bool_t _useRandomCP;
+  UInt_t _seed;   // if 0(default), use system time as seed
+  Double_t _rhoPgen, _rhoNgen, _thetaPgen, _thetaNgen;
+  Double_t _xPgen, _xNgen, _yPgen, _yNgen;
+  Double_t _rB, _gamma, _delta;
+  
+  TString argSetToString(RooArgSet &set);
+  void writeScript(const char* mcFile, const char* fitFile, const char* scriptFile,
+                   const char* setupScript, Int_t firstSample, Int_t nSamples,
+                   Int_t nEvents = 0);
+
+  Bool_t onResGenerateAndFit(Int_t nEvtPerSample, Int_t nSamples);
+  void setRandomCP();
+  void saveExtInfo(const RooArgSet& parSet);
+  
+  ClassDef(BdkBatchMCStudy,0)   // Batch version of RooMCStudy
+};
+
+#endif

@@ -1,0 +1,28 @@
+pdfOnResDK.DPiXFrac =  0.52669 +/-  (-0.1542, 0.1608) L(0 - 1) 
+pdfOnResDK.DpiGoodD0NumEvts =  57.252 +/-  (-19.0504, 20.2146) 
+pdfOnResDK.asymSigGoodD = -0.023814 +/-  (-0.1491, 0.1511) L(-1 - 1) 
+pdfOnResDK.qqBadD0NumEvts =  2382.8 +/-  (-70.6220, 71.0679) 
+pdfOnResDK.sigGoodD0NumEvts =  170.14 +/-  (-28.4611, 29.5082) 
+pdfOnResDK.totBBNumEvts =  1138.1 +/-  (-75.4612, 77.2676) 
+nllVar = -20506 C 
+dalitzHolderN.sigGoodD0.rho =  0.96775 +/-  (-0.3683, 1.2358) L(0 - +INF) 
+dalitzHolderN.sigGoodD0.theta =  174.52 +/-  (-39.8903, 58.1193) L(0 - 360) 
+dalitzHolderP.sigGoodD0.rho =  0.91926 +/-  (-0.2743, 0.5397) L(0 - +INF) 
+dalitzHolderP.sigGoodD0.theta =  147.32 +/-  (-23.8920, 24.7697) L(0 - 360) 
+xyNllVar = -19069 C 
+//$
+//               0              0             -0              0              0             -0
+//               0              0             -0              0             -0             -0
+//              -0             -0              0             -0             -0              0
+//               0              0             -0              0              0             -0
+//               0             -0             -0              0              0             -0
+//              -0             -0              0             -0             -0              0
+//$
+
+//$
+//               0              0              0              0
+//               0              0              0              0
+//               0              0              0              0
+//               0              0              0              0
+//$
+

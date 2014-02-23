@@ -1,0 +1,87 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdfGauss.rdl,v 1.1 2005/10/09 22:50:37 abi Exp $
+ * Authors:
+ *   WW, Wolfgang Walkowiak, UC Santa Cruz, walkowia@scipp.ucsc.edu
+ * Description:
+ *   Class for a  gaussian pdf with it's own variable definitions
+ *   To be used in conjunction with RooFitTools.
+ * History:
+ *   20-Mar-2002 WW Created initial version
+ *
+ * Copyright (C) 2002 University of California and SLAC
+ *****************************************************************************/
+#ifndef BDKPDFGAUSS
+#define BDKPDFGAUSS
+
+#include "BToDKTo3piK/BdkPdfAbsBase.hh"
+
+class RooRealVar;
+class RooAbsPdf;
+class RooDataSet;
+
+
+class BdkPdfGauss : public BdkPdfAbsBase {
+public:
+    BdkPdfGauss();
+    BdkPdfGauss(const char * theName,
+		const char * theDesc,
+		RooRealVar & dt); 
+    
+    ~BdkPdfGauss();
+    
+    void init(const char * theName,
+	      const char * theDesc,
+	      RooRealVar & dt); 
+    
+    void setDependent(RooRealVar & dt);
+    
+    void linkResolution(const BdkPdfGauss & pdf2);
+    
+    void linkResolution(RooRealVar *b1=0, RooRealVar *s1=0);
+    
+    virtual RooArgSet dependents();
+
+    RooRealVar * b() {return _b;}
+
+    RooRealVar * s() {return _s;}
+
+protected:
+    virtual void createPdf();
+    
+    virtual void initParameters();
+    
+private: 
+    
+    //
+    // data members
+    //
+protected:
+    // protected members
+    RooRealVar *_b,*_s;
+    
+    RooRealVar *_dt;
+    
+private:
+  // private members
+    
+    ClassDef (BdkPdfGauss,0) // Gaussian pdf wrapper on top of RooFitCore
+
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

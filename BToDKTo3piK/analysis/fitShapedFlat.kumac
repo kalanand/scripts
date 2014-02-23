@@ -1,0 +1,37 @@
+*
+* This macro reads the fit summary file created by fitShapedFlat.cc
+* and plots the results
+*
+
+nt/cr 1 'fit' 22 ! ! stat RMgen TMgen RPgen TPgen   RMms RMmsE TMms TMmsE RPms RPmsE TPms TPmsE   statTr RMtr RMtrE TMtr TMtrE RPtr RPtrE TPtr TPtrE
+nt/read 1 fitShapedFlat.dat
+
+opt nbox
+opt zfl
+opt nsta
+
+zone 2 2
+nt/pl 1.(RMtr-RMgen)/RMtrE
+nt/pl 1.(TMtr-TMgen)/TMtrE
+nt/pl 1.(RMtr-RMgen)
+nt/pl 1.(TMtr-TMgen)
+pict/print sig-valid-true-DPvars-M.eps
+wait
+
+zone 2 2
+nt/pl 1.(RPtr-RPgen)/RPtrE
+nt/pl 1.(TPtr-TPgen)/TPtrE
+nt/pl 1.(RPtr-RPgen)
+nt/pl 1.(TPtr-TPgen)
+pict/print sig-valid-true-DPvars-P.eps
+wait
+
+zone 2 2 
+nt/pl 1.(RMms-RMtr)
+nt/pl 1.(TMms-TMtr)
+nt/pl 1.(RPms-RPtr)
+nt/pl 1.(TPms-TPtr)
+pict/print sig-valid-resolution.eps
+wait
+
+

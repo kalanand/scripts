@@ -1,0 +1,35 @@
+// $Id: numEvts_mesSB.par,v 1.1 2006/06/02 23:53:07 fwinkl Exp $
+//
+// all fixed numbers from analysis/calcFitFractions.cc
+// number of events and fit fractions in mES SB
+
+
+//  -----------------Various fractions (MC stat errors):
+pdfOnResDK.qqGoodD0Frac                     = 0.0068950 +/- 0.00029801 C
+pdfOnResDK.BBGoodD0Frac                     = 0.000048237 +/- 0.000034110 C
+pdfOnResDK.DpiBadD0Frac                     = 70.000 +/- 70.498 C
+pdfOnResDK.DKXFrac                          = 0.095441 +/- 0.0021373 C
+pdfOnResDK.DPiXFrac                         = 0.56659 +/- 0.0046759 C
+pdfOnResDK.sigBadD0Frac                     = 8.6339 +/- 0.40464 C
+
+
+//  -----------------#'s of events:
+pdfOnResDK.DpiGoodD0NumEvts             =  0.16156 +/- 0.16156 C
+pdfOnResDK.asymSigGoodD                 =  0 C
+pdfOnResDK.qqBadD0NumEvts               =  46235 +/- 165.86 C
+pdfOnResDK.sigGoodD0NumEvts             =  1.6704 +/- 0.074113 C
+pdfOnResDK.totBBNumEvts                 =  6698.3 +/- 33.282 C
+
+
+// -----------------Asymmetries:
+pdfOnResDK.globalAsym                       =  0   +/- 0.004 C L(-1 - 1)
+pdfOnResDK.asymBbBadD                       =  0 C L(-1 - 1)
+pdfOnResDK.asymBbGoodD                      =  0 C L(-1 - 1)
+pdfOnResDK.asymDKX                          =  0 C L(-1 - 1)
+pdfOnResDK.asymDpiBadD                      =  0 C L(-1 - 1)
+pdfOnResDK.asymDpiGoodD                     =  0 C L(-1 - 1)
+pdfOnResDK.asymDpiX                         =  0 C L(-1 - 1)
+pdfOnResDK.asymQqBadD                       =  0 C L(-1 - 1)
+pdfOnResDK.asymQqGoodD                      =  0 C L(-1 - 1)
+pdfOnResDK.asymSigBadD                      =  0 C L(-1 - 1)
+

@@ -1,0 +1,159 @@
+ To  get the true flavor of a matched calojet is a non-trivial exercise 
+ which involves a few steps. Here is a detailed recipe which works for me 
+ in CMSSW_1_6_X, but would need some tweaking in later releases.
+ Also, please have a look at the following twiki documentation for basic ideas:
+
+  https://twiki.cern.ch/twiki/bin/view/CMS/WorkBookBTagging#BtagMCTools
+ 
+
+-------------------------------------------------------------------------
+
+1.)  Include  "JetFlavourIdentifier" (be careful of the spelling of 
+     "Flavour" here) class header in your analyzer header and intantiate 
+     like this:
+
+
+    #include "RecoBTag/MCTools/interface/JetFlavour.h"
+    #include "RecoBTag/MCTools/interface/JetFlavourIdentifier.h"
+
+    private:
+    std::map<reco::CaloJetRef, unsigned int> flavoursMapf;
+    edm::Handle<reco::CandMatchMap> theJetPartonMapf;
+
+    JetFlavourIdentifier jetFlavourIdentifier_;
+
+
+
+
+ 2.) In your analyzer (<your_analyzer>.cc) include the following snippet:
+
+   #include "SimDataFormats/JetMatching/interface/JetFlavourMatching.h"
+ 
+----------------------------------------------------------------------
+        // Jet Flavor identification
+    flavourMatchOptionf
+      = iConfig.getUntrackedParameter<std::string>
+                                ("flavourMatchOption", "genParticle");
+    const edm::InputTag flavourSource("tagJet");
+    if (flavourMatchOptionf == "fastMC") {
+      flavourSourcef = iConfig.getUntrackedParameter<edm::InputTag>
+                                      ("flavourSource", flavourSource);
+    } else if (flavourMatchOptionf == "hepMC") {
+      jetIdParameters_ =
+        iConfig.getParameter<edm::ParameterSet>("jetIdParameters");
+      jfi = JetFlavourIdentifier(jetIdParameters_);
+    } else if (flavourMatchOptionf == "genParticle") {
+      flavourSourcef = iConfig.getUntrackedParameter<edm::InputTag> 
+                                        ("flavourSource", flavourSource);
+    }
+--------------------------------------------------------------------------
+
+
+
+ 3.)   In the  "analyze()" function of your analyzer:
+
+      /****************    Jet Flavor    ***************/
+    edm::Handle<JetFlavourMatchingCollection> jetMC;
+    if (flavourMatchOptionf == "fastMC") {
+      // initialize flavour identifiers
+      iEvent.getByLabel(flavourSourcef, jetMC);
+      for(JetFlavourMatchingCollection::const_iterator iter =
+            jetMC->begin(); iter != jetMC->end(); iter++)
+        flavoursMapf.insert(*iter);
+    }
+    else if (flavourMatchOptionf == "hepMC") {
+      jfi.readEvent(iEvent);
+    }
+    else if (flavourMatchOptionf == "genParticle") {
+      iEvent.getByLabel (flavourSourcef, theJetPartonMapf);
+    }
+    /****************    Jet Flavor    ***************/
+
+
+
+
+
+  4.)  Copy the following member function called "getMatchedParton" 
+       in your analyzer code (.cc file) and also declare it in your header:
+
+  ---------------------------------------------------------------------
+
+   JetFlavour  getMatchedParton(const reco::CaloJet &jet) {
+
+    JetFlavour jetFlavour;
+
+    if (flavourMatchOptionf == "fastMC") {
+      jetFlavour.underlyingParton4Vec(jet.p4());
+    }
+    else if (flavourMatchOptionf == "hepMC") {
+      jetFlavour = jfi.identifyBasedOnPartons(jet);
+    }
+    else if (flavourMatchOptionf == "genParticle") {
+
+      for( reco::CandMatchMap::const_iterator f  = theJetPartonMapf->begin();
+           f != theJetPartonMapf->end(); f++) {
+        const reco::Candidate *theJetInTheMatchMap = &*(f->key);
+        const reco::Candidate *theMatchedParton    = &*(f->val);
+
+        if(theJetInTheMatchMap->hasMasterClone ()) {
+          const reco::CaloJet* theMasterClone =
+            dynamic_cast<const reco::CaloJet*>
+            (theJetInTheMatchMap->masterClone().get());
+
+          if( fabs(theMasterClone->phi() - jet.phi()) < 1.e-5 &&
+              fabs(theMasterClone->eta() - jet.eta())< 1.e-5 ){
+
+            jetFlavour.flavour(abs(theMatchedParton->pdgId()));
+            jetFlavour.underlyingParton4Vec(theMatchedParton->p4());
+            return jetFlavour;
+          }
+        }
+      }
+    }
+    return jetFlavour;
+  }
+ -------------------------------------------------------------------------
+
+
+ 
+ 5.)  Now, you can get the jet flavor inside your CaloJet  iterator 
+      loop in the following way:
+
+
+
+      edm::Handle<reco::CaloJetCollection> jets;
+      iEvent.getByLabel( reco::iterativeCone5CaloJets,  jets );
+
+     reco::CaloJetCollection::const_iterator jet = jets->begin ();
+     for (; jet != jets->end (); jet++) {
+        int flavor = getMatchedParton(*jet).flavour();
+        .....
+      }
+
+ 
+      /** Jet flavor classification code:
+        if ( flavor == 1 ) : Down
+        if ( flavor == 2 ) : Up
+        if ( flavor == 3 ) : Strange
+        if ( flavor == 4 ) : Charm
+        if ( flavor == 5 ) : Bottom
+        if ( flavor == 21 ): Gluon
+   */
+
+   
+
+
+ 6.)   Finally, in your configuration define the tagJet collection and 
+       include it in your path:
+
+
+  
+       module tagJet = CandJetFlavourIdentifier{
+         InputTag jets = iterativeCone5CaloJets
+         double coneSizeToAssociate = 0.3
+         bool physicsDefinition = true
+         bool debug = false
+         vstring vetoFlavour = {  }
+       }
+
+ --------------------------------------------------------------------------

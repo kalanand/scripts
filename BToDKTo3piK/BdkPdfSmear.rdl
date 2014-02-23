@@ -1,0 +1,67 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdfSmear.rdl,v 1.2 2006/03/17 01:13:57 fwinkl Exp $
+ * Description:
+ *   BdkSmear PDF wrapper
+ * History:
+ *   15 Mar 2006, created, Frank Winklmeier
+ *
+ * Copyright (C) 2006 Colorado State University
+ *****************************************************************************/
+
+#ifndef BDKPDFSMEAR
+#define BDKPDFSMEAR
+
+#include "BToDKTo3piK/BdkPdfAbsBase.hh"
+#include "BToDKTo3piK/BdkSmear.hh"
+#include "RooFitCore/RooArgList.hh"
+#include "RooFitCore/RooArgSet.hh"
+
+class RooArgList;
+class RooArgSet;
+
+class BdkPdfSmear : public BdkPdfAbsBase {
+public:
+  BdkPdfSmear();
+
+  BdkPdfSmear(const char * theName, const char * theDesc, BdkPdfAbsBase& pdf);
+  virtual ~BdkPdfSmear();
+
+  Bool_t addResolutionModel(BdkPdfAbsBase& model);
+  void removeResolutionModels();
+  
+  void setEventBuffer(Int_t events) {((BdkSmear*)getPdf())->setEventBuffer(events);}
+  
+  virtual RooArgSet dependents() {return _pdf->dependents();}
+
+protected:
+  // Helpers:
+  virtual void createPdf();    
+  
+private:
+
+  BdkPdfAbsBase* _pdf;
+  RooArgSet _pdfVars;
+  RooArgList _resModels;
+  RooArgList _resVars;
+  
+  ClassDef (BdkPdfSmear,0)
+    
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

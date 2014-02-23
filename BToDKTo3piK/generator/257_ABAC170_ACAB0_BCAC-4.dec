@@ -1,0 +1,55 @@
+
+###################################################
+#                                                 #
+# ccbar continuum production                      #
+# D*+ -> D0 pi+, D0 -> pi- pi+ pi0                #
+# with PTO3P D decay                              #
+#                                                 #
+# created: Abi Soffer 1 March 2006                #
+###################################################
+
+#
+Decay vpho 
+1.00    JSCONT 4;
+Enddecay
+#
+Decay D*+
+1.000     D0  pi+                        VSS;
+Enddecay
+#
+Decay D0
+1.0 pi+ pi- pi0 PTO3P 
+
+        MAXPDF 178.7
+        #SCANPDF 10000
+ 
+        # Non-resonant 
+
+        AMPLITUDE       PHASESPACE
+        COEFFICIENT     POLAR_DEG       1.03    257
+ 
+        # rho0(770) 
+
+        AMPLITUDE       RESONANCE       AB      rho0
+                        ANGULAR         AC
+                        TYPE            RBW_CLEO
+        COEFFICIENT     POLAR_DEG       0.56    170
+ 
+        # rho+(770)
+
+        AMPLITUDE       RESONANCE       AC      rho+
+                        ANGULAR         AB
+                        TYPE            RBW_CLEO
+        COEFFICIENT     POLAR_DEG       1     0
+
+        # rho-(770)
+
+        AMPLITUDE       RESONANCE       BC      rho-
+                        ANGULAR         AC
+                        TYPE            RBW_CLEO
+        COEFFICIENT     POLAR_DEG       0.65     -4
+
+	;
+Enddecay
+#         
+End

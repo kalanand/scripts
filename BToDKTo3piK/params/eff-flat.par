@@ -1,0 +1,31 @@
+//////////////////////////////////////////////////////////////
+                   *GoodD efficiency
+//////////////////////////////////////////////////////////////
+
+eff.a1 =  0 C
+eff.a2 =  0 C
+eff.a3 =  0 C
+eff.a4 =  0 C
+
+eff.c0 =  1.0000 C
+eff.s1 =  0 C
+eff.s2 =  0 C
+eff.s3 =  0 C
+eff.s4 =  0 C
+eff.s5 =  0 C
+
+//////////////////////////////////////////////////////////////
+                  *BadD efficiency 
+//////////////////////////////////////////////////////////////
+
+effOther.a1 =  0 C
+effOther.a2 =  0 C
+effOther.a3 =  0 C
+effOther.a4 =  0 C
+
+effOther.c0 =  1.0000 C
+effOther.s1 =  0 C 
+effOther.s2 =  0 C
+effOther.s3 =  0 C
+effOther.s4 =  0 C
+effOther.s5 =  0 C

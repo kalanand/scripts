@@ -1,0 +1,140 @@
+/*******
+ * Dalitz PDFs
+ *******/
+
+#ifndef BDKDALITZPDFHOLDER1
+#define BDKDALTIZPDFHOLDER1
+
+#include "TNamed.h"
+#include "RooFitCore/RooArgSet.hh"
+#include "RooFitCore/RooCategory.hh"
+#include "BToDKTo3piK/BdkEvtTypes.hh"
+#include "BToDKTo3piK/BdkDalitzEff.hh"
+#include "BToDKTo3piK/BdkPdfHolder.hh"
+#include "BToDKTo3piK/BdkPdfDalitzHist.hh"
+#include "BToDKTo3piK/BdkPdfDKDalitz.hh"
+#include "BToDKTo3piK/BdkPdfDDalitzInc.hh"
+#include "BToDKTo3piK/BdkPdfDDalitz.hh"
+
+class BdkPdfAbsBase;
+class TFile;
+class TH2;
+class RooAbsReal;
+
+//class definition:
+
+//class BdkDalitzPdfHolder1 :public TNamed, public BdkPdfHolder {
+class BdkDalitzPdfHolder1 : public BdkPdfHolder, public TNamed {
+public:
+  BdkDalitzPdfHolder1();
+  BdkDalitzPdfHolder1(const char * theName, 
+ 		      const char * theDesc,
+		      RooAbsReal & m12, 
+		      RooAbsReal & m13, 
+		      BdkDalitzBase::Flavor flavor,
+                      BdkPdfDKDalitz::COORD coord,
+                      BdkDalitzEff* effDKGoodD,
+                      BdkDalitzEff* effOther,
+	              const char * DPiXfileName,
+  	              const char * sigBadD0fileName,
+                      RooCategory& blindMode,
+                      BdkDalitzPdfHolder1* pdfSource = 0,
+                      Bool_t flipQqGoodDFlavor = kFALSE);
+  
+  ~BdkDalitzPdfHolder1();
+
+  void init(const char * theName,
+            const char * theDesc,
+	    RooAbsReal & m12, 
+	    RooAbsReal & m13, 
+	    BdkDalitzBase::Flavor flavor,
+            BdkPdfDKDalitz::COORD coord,
+            BdkDalitzEff* effDKGoodD,
+            BdkDalitzEff* effOther,
+            const char * DPiXfileName,
+            const char * sigBadD0fileName,
+            RooCategory& blindMode,
+            BdkDalitzPdfHolder1* pdfSource = 0,
+            Bool_t flipQqGoodDFlavor = kFALSE);
+    
+  void initDPiXHist(const char * DPiXfileName);
+  void initSigBadD0Hist(const char * sigBadD0fileName);
+
+  void setDPiXHist(const TH2& h2);
+  void setSigBadD0Hist(const TH2& h2);
+
+
+  // base class implementation:
+  virtual BdkPdfAbsBase * sigBadD0() {return &_sigBadD0;};
+  virtual BdkPdfAbsBase * sigGoodD0() {return &_sigGoodD0;};
+  virtual BdkPdfAbsBase * DpiBadD0() {return &_DpiBadD0;};
+  virtual BdkPdfAbsBase * DpiGoodD0() {return &_DpiGoodD0;};
+  virtual BdkPdfAbsBase * DPiX() {return &_DPiX;};
+  virtual BdkPdfAbsBase * DKX() {return &_DKX;};
+  virtual BdkPdfAbsBase * BBBadD0() {return &_BBbadD0;};
+  virtual BdkPdfAbsBase * BBGoodD0() {return &_BBgoodD0;};
+  virtual BdkPdfAbsBase * qqBadD0() {return &_qqBadD0;};
+  virtual BdkPdfAbsBase * qqGoodD0() {return &_qqGoodD0;};
+
+  // full type accessors:
+  BdkPdfDKDalitz & sigGoodD0Type() {return _sigGoodD0;}
+  BdkPdfDDalitz & DpiGoodD0Type() {return _DpiGoodD0;}
+  BdkPdfDDalitz & BBgoodD0Type() {return _BBgoodD0;}
+  BdkPdfDDalitz & qqGoodD0Type() {return _qqGoodD0;}
+  BdkPdfDDalitzInc & DpiBadD0Type() {return _DpiBadD0;}
+  BdkPdfDDalitzInc & DKXType() {return _DKX;}
+  BdkPdfDDalitzInc & BBbadD0Type() {return _BBbadD0;}
+  BdkPdfDDalitzInc & qqBadD0Type() {return _qqBadD0;}
+  BdkPdfDalitzHist & sigBadD0Type() {return _sigBadD0;}
+  BdkPdfDalitzHist & DPiXType() {return _DPiX;}    
+
+
+private:
+  // Forbidden:
+  BdkDalitzPdfHolder1(const BdkDalitzPdfHolder1 & source);
+
+  // efficencies
+  BdkDalitzEff* _effDKGoodD;
+  BdkDalitzEff* _effOther;
+
+  //data member, oranized by class type:
+  BdkPdfDKDalitz _sigGoodD0;
+
+  BdkPdfDDalitz _DpiGoodD0;
+  BdkPdfDDalitz _BBgoodD0;
+  BdkPdfDDalitz _qqGoodD0;
+
+  BdkPdfDDalitzInc _DpiBadD0;
+  BdkPdfDDalitzInc _DKX;
+  BdkPdfDDalitzInc _BBbadD0;
+  BdkPdfDDalitzInc _qqBadD0;
+
+  BdkPdfDalitzHist _DPiX;    
+  BdkPdfDalitzHist _sigBadD0;
+
+  // These are the owned pointers
+  TH2 * _ownedDPiXHist;
+  TH2 * _ownedSigBadD0Hist;    
+
+  RooAbsReal * _m12;
+  RooAbsReal * _m13;
+  BdkDalitzBase::Flavor _flavor;
+
+  RooCategory* _blindMode;
+
+private:
+#if !defined(__INERACTIVE__)
+  ClassDef(BdkDalitzPdfHolder1,0) // PdfHist holder
+#endif
+};
+
+#endif 
+ 
+
+
+
+
+
+
+
+

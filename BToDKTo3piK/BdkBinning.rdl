@@ -1,0 +1,106 @@
+// Handles the entire binning of the DP
+
+#ifndef BDKBINNING_HH
+#define BDKBINNING_HH
+
+#include <vector>
+
+#include "TMatrixD.h"
+
+#include "BToDKTo3piK/BdkTriBin.hh"
+#include "BToDKTo3piK/BdkIsoOp.hh"
+
+
+class TTree;
+class TCanvas;
+
+
+class BdkBinning {
+public:	
+  BdkBinning(int nDivMid = 5,    // # of divisions up to middle of DP
+	     TTree * dataSR = 0, 
+	     TTree * dataSB = 0);
+
+  virtual ~BdkBinning();
+
+  // MODIFIERS:
+  void setNDivMid(int nDivMid);
+  void setData(TTree * dataSR, TTree * dataSB);
+
+  // Divide a bin and all its symmetry-related bins into
+  // three. Returns true if found the bin, false otherwise:
+  Bool_t divideBin(int index);
+  Bool_t divideBin(const BdkP2 & point);
+
+  // Builds the symmetry relations between the bins. This function is
+  // automatically called by calculateEVs(), but is made public for
+  // extra handling capability:
+  void buildWgtLists();
+
+  // Gives bins their data. This function is
+  // automatically called by calculateEVs(), but is made public for
+  // extra handling capability:
+  void calcWFs(double mDratioSRtoSB = 0.1967);
+
+  // Calculate operator expectation values and errors:
+  void calcEVs();
+
+  // Tag a bin and its symmetry-related bins:
+  void tagBin(int binIndex, const char * name);
+
+  // Show different information about bins:
+  void setBinNamesIndex();
+  void setBinNamesNEventsSR();
+  void setBinNamesNEventsSB();
+  void setBinNamesWaveFunc();
+  void setBinNamesWaveFuncErr();
+  void setBinNamesInDalitzFrac();
+  void setBinNamesEff();
+
+
+  // ACCESSORS:
+  int nDivMid() const {return _nDivMid;}
+		
+  // Access to the list of bins:
+  const std::vector<BdkTriBin> & bins() const {return _bins;}
+  int nBins() const {return _bins.size();}
+
+  // Ways to identify a bin:
+  const BdkTriBin & bin(int index) const {return _bins.at(index);}
+  const BdkTriBin & bin(const BdkP2 & point) const;  // bin containing point
+  int binIndexContaining(const BdkP2 & point) const;  // bin containing point
+  int binIndex(const BdkTriBin & bin) const;  // same center() and area()
+
+  // The expectation values and their error and correlation matrices:
+  double ev(int isoOp) const;
+  double evErr(int isoOp) const {return _evErr(isoOp, isoOp);}
+  const TMatrixD & evErr() const {return _evErr;}
+
+  // Draw the binning and additional info:
+  TCanvas * Draw(Bool_t writeBinName = kFALSE,
+		 Bool_t drawSymLines = kTRUE,
+		 const char * drawDataOption = "SR") const; // or "SB" or empty
+
+
+protected:
+  void addBin(BdkTriBin & bin);
+  void setDataToBins(TTree * tree);
+
+
+private:
+  int _nDivMid;              // # of divisions to middle of DP
+  std::vector<BdkTriBin> _bins;   // the actual bins
+  TTree * _dataSR;  // non-const so can be Draw'n, but not owned
+  TTree * _dataSB;
+
+  Bool_t _wgtListsMade;
+  Bool_t _wfCalculated;
+
+  double _ev[BdkIsoOp::NOPS];
+  TMatrixD _evErr;
+
+  ClassDef(BdkBinning,0);
+};
+
+
+#endif

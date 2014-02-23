@@ -1,0 +1,78 @@
+// Handles stuff related to the Dalitz plot itself
+
+#ifndef BDKDP_HH
+#define BDKDP_HH
+
+class TLine;
+
+#include "BToDKTo3piK/BdkP2.hh"
+
+#include "TObject.h" // for ClassDef and Double_t
+#include "Gtypes.h"
+
+
+class BdkDP {
+public:
+  // STATIC MEMBERS:
+  // Directly Dalitz-plot related:
+  static double edge() {return 3.0;}  // edge of the DP
+  static double mD() {return 1.8645;}
+  static double m3() {return 0.139570;}  // pi+ mass
+  static double m2() {return 0.139570;}  // pi- mass
+  static double m1() {return 0.139570;}  // pi0 mass
+  static double mDsq() {return mD()*mD();}
+  static double m3sq() {return m3()*m3();}  // pi+ mass
+  static double m2sq() {return m2()*m2();}  // pi- mass
+  static double m1sq() {return m1()*m1();}  // pi0 mass
+  static double s13Max() {return mD()*mD() + m1()*m1() - 2 * mD() * m2();}
+
+  static double s13Min(Double_t s12);
+  static double s13Max(Double_t s12);
+
+  static double sumMasses2() {
+    return mD()* mD() + m1()* m1() + m2()* m2() + m3()* m3();
+  }
+
+  static double symValue() {return sumMasses2() / 3;}
+  static BdkP2 symPoint() {return BdkP2(symValue(), symValue());}
+
+  static Bool_t inBox(const BdkP2 & point);
+  static Bool_t inDalitz(const BdkP2 & point);
+
+  // Tolerance for floating-point operations where comparison between
+  // numbers is involved:
+  static double tolerance() {return 1.e-10;}
+
+
+  // Graphics:
+  static void drawBoundary(int npoints = 200, 
+			   int color = kBlack, 
+			   int width = 2, 
+			   int style = 1);
+
+  static TLine * line(const BdkP2 & p1, const BdkP2 & p2, 
+		      int color = kBlack, int width = 1, 
+		      int style = 1);
+  
+  static TLine * line(double x1, double y1, double x2, double y2, 
+		      int color = kBlack, int width = 1, 
+		      int style = 1);
+  
+  static TLine * lineEdge(double x1, double y1, double x2, double y2, 
+			  int color = kBlack, int width = 1, 
+			  int style = 1);  
+  
+  static TLine * lineEdgeSlope(double x1, double y1, double slope, 
+			       int color = kBlack, int width = 1, 
+			       int style = 1);
+
+  static TLine * drawE12Line();
+  static TLine * drawE13Line();
+  static TLine * drawE23Line();
+  
+  
+private:
+  ClassDef(BdkDP,0);
+};
+
+#endif

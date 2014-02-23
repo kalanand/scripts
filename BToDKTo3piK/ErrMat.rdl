@@ -1,0 +1,25 @@
+// Class ErrMat is a base class for objects that can provide an
+// error matrix for the measurement given the true polar
+// coordinates.
+
+#ifndef ERRMAT
+#define ERRMAT
+#include "TObject.h" // just for ClassDef
+#include "TMatrixD.h"
+
+class ErrMat {
+public:	
+  ErrMat();
+  virtual ~ErrMat();
+  
+  double square(double x) const {return x*x;}
+  virtual TMatrixD matrix(double rM, double tM, double rP, double tP) const =0;
+
+
+private:
+#if !defined(__INTERACTIVE__)
+  ClassDef(ErrMat,0)
+#endif   
+};
+    
+#endif

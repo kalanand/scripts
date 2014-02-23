@@ -1,0 +1,103 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdfGaussPolyn.rdl,v 1.1 2005/10/09 22:50:37 abi Exp $
+ * Authors:
+ *   Abi Soffer, Colorado State University, abi@slac.stanford.edu
+ * Description:
+ *   Class for a Gaussian + POLYN pdf with it's own 
+ *   variable definition to be used in conjunction with RooFitCore/Models.
+ * History:
+ *   6-Mar-2004 abi Created initial version
+ *
+ * Copyright (C) 2004 Colorado State University and SLAC
+ *****************************************************************************/
+#ifndef BDKPDFGAUSSPOLYN
+#define BDKPDFGAUSSPOLYN
+
+#include "BToDKTo3piK/BdkPdfComposite.hh"
+#include "BToDKTo3piK/BdkPdfGauss.hh"
+#include "BToDKTo3piK/BdkPdfPolyn.hh"
+
+class RooRealVar;
+
+class BdkPdfGaussPolyn : public BdkPdfComposite {
+public:
+  BdkPdfGaussPolyn();
+  BdkPdfGaussPolyn(const char * theName,
+		   const char * theDesc,
+		   RooRealVar & dependent,
+		   Int_t lowestOrder = 0,
+		   Int_t highestOrder = 0);
+  
+  virtual ~BdkPdfGaussPolyn();
+  
+  void init(const char * theName,
+	    const char * theDesc,
+	    RooRealVar & dependent,
+	    Int_t lowestOrder = 0,
+	    Int_t highestOrder = 0);
+  
+  // Modifiers:
+  virtual void setDependent(RooRealVar & dependent);
+
+  void linkParameters(RooRealVar * mean=0,
+		      RooRealVar * sigma=0,
+		      Int_t lowestOrder=0,
+		      Int_t hightestOrder=0, 
+		      RooRealVar * fracGauss=0);
+
+  void linkParameters( BdkPdfGaussPolyn & pdf2);
+
+  // Non-const accessors:
+  BdkPdfGauss & gauss() {return _gauss;}
+  BdkPdfPolyn & polyn() {return _polyn;}
+  RooRealVar * fracGauss() {return _fracGauss;}
+
+  RooRealVar * dependent() {return _dependent;}
+
+   
+protected:
+  virtual void createPdf();  
+  virtual void initParameters();
+
+  virtual void addComponents();
+
+  // Data:
+  RooRealVar * _dependent;
+
+private:
+  BdkPdfGaussPolyn(const BdkPdfGaussPolyn & pdf);
+
+  // Helpers:
+  void deleteFrac();
+
+  // Data:
+  BdkPdfGauss _gauss;
+  BdkPdfPolyn _polyn;
+  RooRealVar * _fracGauss;
+
+  // the orders are only for initializing the polynomial:
+  Int_t _lowestOrder;
+  Int_t _highestOrder;
+
+
+  ClassDef (BdkPdfGaussPolyn,0) // Gauss + Polyn pdf wrapper 
+
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

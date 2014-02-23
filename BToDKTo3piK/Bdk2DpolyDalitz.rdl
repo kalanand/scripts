@@ -1,0 +1,109 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: Bdk2DpolyDalitz.rdl,v 1.13 2006/01/27 17:50:48 fwinkl Exp $
+ * Description:
+ *   2D polynomial
+ * History:
+ *   25 Oct 2005, created, Frank Winklmeier, 
+ *                adapted from Kalanand Mishra's Roo2Dpoly_hhPi0
+ *
+ * Copyright (C) 2005 Colorado State University and SLAC
+ *****************************************************************************/
+
+#ifndef BDK2DPOLYDALITZ
+#define BDK2DPOLYDALITZ
+
+#include "BToDKTo3piK/BdkDalitzEff.hh"
+#include "RooFitCore/RooAbsPdf.hh"
+#include "RooFitCore/RooRealProxy.hh"
+#include "RooFitCore/RooComplex.hh"
+#include "RooFitCore/RooListProxy.hh"
+#include "RooFitCore/RooArgSet.hh"
+#include "RooFitCore/RooRealVar.hh"
+#include "RooFitCore/RooFormulaVar.hh"
+
+class RooRealVar;
+
+class Bdk2DpolyDalitz : public BdkDalitzEff {
+public:
+
+  Bdk2DpolyDalitz(const char *name, const char *title, 
+		  BdkDalitzBase::Flavor flavor, BdkDalitzBase::Mode DdecMode, 
+		  RooAbsReal& m12, RooAbsReal& m13, 
+		  RooAbsReal& c0, RooAbsReal& c1, RooAbsReal& c2, 
+		  RooAbsReal& c3, RooAbsReal& c4, RooAbsReal& c5, 
+		  RooAbsReal& c6, RooAbsReal& c7, RooAbsReal& c8, 
+		  RooAbsReal& c9);
+
+  Bdk2DpolyDalitz(const char *name, const char *title, 
+		  BdkDalitzBase::Flavor flavor, BdkDalitzBase::Mode DdecMode, 
+		  RooAbsReal& m12, RooAbsReal& m13, 
+		  RooAbsReal& c0, RooAbsReal& s1, RooAbsReal& s2, 
+		  RooAbsReal& s3, RooAbsReal& s4, RooAbsReal& s5, 
+		  RooAbsReal& a1, RooAbsReal& a2, RooAbsReal& a3, 
+		  RooAbsReal& a4, Bool_t saParams);
+
+  Bdk2DpolyDalitz(const Bdk2DpolyDalitz& other, const char* name=0) ;
+
+  virtual TObject* clone(const char* newname) const { 
+		return new Bdk2DpolyDalitz(*this,newname); }
+
+  virtual ~Bdk2DpolyDalitz() { };
+  	
+  Int_t getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analVars, 
+			      const char* rangeName=0) const ;
+
+  Double_t analyticalIntegral(Int_t code,const char* rangeName=0) const ;
+    
+  /// Choose analytical integration method
+  void customInt(Int_t code) {_customInt = code;}
+
+  /// Set convergence criteria for numerical integration
+  void setEpsRel(Double_t eps) {_epsRel = eps;}
+
+  /// Get convergence criteria for numerical integration
+  inline Double_t epsRel() const { return _epsRel; }
+
+  /// The BdkDalitzEff pure virtual:
+  virtual Double_t evaluateAt(Double_t m12, Double_t m13) const ;  
+
+protected:
+  Double_t evaluate() const ;  
+
+
+private:
+  RooRealProxy _m12 ;
+  RooRealProxy _m13 ;
+  RooFormulaVar _s1,_s2,_s3,_s4,_a1,_a2,_a3,_a4;
+  RooRealProxy _c0,_c1,_c2,_c3,_c4,_c5,_c6,_c7,_c8,_c9;
+
+  Int_t      _customInt;           // custom integration method
+  Double_t   _epsRel;              // relative precision
+  
+  Double_t intPolym12(Double_t m12, Double_t m13) const;
+  Double_t intPolym13(Double_t m12, Double_t m13) const;
+
+  Double_t intPolym13Dalitz(Double_t m12) const;
+  Double_t intPolym12Dalitz(Double_t m13) const;
+
+  Double_t intM23Veto(Double_t m12Min, Double_t m12Max) const;
+
+  ClassDef(Bdk2DpolyDalitz,0) // 2D polynomial
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

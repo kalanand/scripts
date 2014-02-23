@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# Kills root sessions on this machine
+#
+
+line=`ps -wwfu $USER | grep root.exe | grep -v grep | tail -1 |awk '{print $2}'`
+if [ "$line" = "" ] ; then
+   echo "No ROOT session running"
+   exit 1
+fi
+
+kill -9 $line

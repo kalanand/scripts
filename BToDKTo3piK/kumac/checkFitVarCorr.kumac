@@ -1,0 +1,94 @@
+* $Id: checkFitVarCorr.kumac,v 1.7 2006/03/02 00:54:14 fwinkl Exp $
+* Script to plot/calculate the KS probabilities of the various event types.
+* Needs to be run over the "small" ntuples which get chained in chainhbk.kumac.
+* Those currently reside at /nfs/farm/babar/AWG17/BCK/SmallN
+
+macro checkFitVarCorr finalcut=0 d=good bdecmode=DK dir=sig GenBB=both 
+
+h/del *
+
+exe ../BToDKTo3piK/kumac/chainhbk
+exe ../BToDKTo3piK/kumac/cuts [finalcut] [d] [bdecmode] [GenBB]
+
+cd //[dir]
+opt stat
+opt nbox
+for/file 66 [dir]_[bdecmode]_[d]_cut_[finalcut].ps
+meta 66 -111
+
+r1 = -0.025
+r2 = 0.0
+r3 = 0.025
+exe ../BToDKTo3piK/kumac/ksCorr [dir] deltae mes       [r1] [r2] [r3] 5.2 5.3  $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] deltae d0mass    [r1] [r2] [r3] 1.8 1.9  $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] deltae nnout     [r1] [r2] [r3] 0 1      $91&&$92&&$93
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] deltae bknnout   [r1] [r2] [r3] 0 1      $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] deltae d0pPmupMass [r1] [r2] [r3] 0 2      $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] deltae d0pPpupMass [r1] [r2] [r3] 0 2      $91&&$92&&$93
+
+r1 = 0.5
+r2 = 1.0
+r3 = 1.5
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pPmupMass deltae    [r1] [r2] [r3] -0.1 0.1 $91&&$92&&$93
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pPmupMass mes       [r1] [r2] [r3] 5.2 5.3  $91&&$92&&$93
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pPmupMass d0mass    [r1] [r2] [r3] 1.8 1.9  $91&&$92&&$93
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pPmupMass nnout     [r1] [r2] [r3] 0 1      $91&&$92&&$93
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pPmupMass bknnout   [r1] [r2] [r3] 0 1      $91&&$92&&$93
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pPmupMass d0pPpupMass [r1] [r2] [r3] 0 2      $91&&$92&&$93
+
+r1 = 0.5
+r2 = 1.0
+r3 = 1.5
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pPpupMass deltae    [r1] [r2] [r3] -0.1 0.1 $91&&$92&&$93
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pPpupMass mes       [r1] [r2] [r3] 5.2 5.3  $91&&$92&&$93
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pPpupMass d0mass    [r1] [r2] [r3] 1.8 1.9  $91&&$92&&$93
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pPpupMass nnout     [r1] [r2] [r3] 0 1      $91&&$92&&$93
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pPpupMass d0pPmupMass [r1] [r2] [r3] 0 2      $91&&$92&&$93
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] d0pPpupMass bknnout   [r1] [r2] [r3] 0 1      $91&&$92&&$93
+
+r1 = 0.2
+r2 = 0.4
+r3 = 0.7
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] nnout deltae    [r1] [r2] [r3] -0.1 0.1 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] nnout mes       [r1] [r2] [r3] 5.2 5.3  $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] nnout d0mass    [r1] [r2] [r3] 1.8 1.9  $91&&$92&&$93
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] nnout bknnout   [r1] [r2] [r3] 0 1      $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] nnout d0pPmupMass [r1] [r2] [r3] 0 2      $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] nnout d0pPpupMass [r1] [r2] [r3] 0 2      $91&&$92&&$93
+
+r1 = 5.24
+r2 = 5.26
+r3 = 5.28
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] mes deltae [r1] [r2] [r3] -0.1 0.1 $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] mes d0mass [r1] [r2] [r3] 1.8 1.9  $91&&$92&&$93
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] mes nnout  [r1] [r2] [r3] 0 1      $91&&$92&&$93
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] mes bknnout  [r1] [r2] [r3] 0 1    $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] mes d0pPmupMass [r1] [r2] [r3] 0 2  $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] mes d0pPpupMass  [r1] [r2] [r3] 0 2  $91&&$92&&$93
+
+r1 = 1.84
+r2 = 1.86
+r3 = 1.88
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] d0mass deltae    [r1] [r2] [r3] -0.1 0.1 $91&&$92&&$93
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] d0mass mes       [r1] [r2] [r3] 5.2 5.3  $91&&$92&&$93
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] d0mass nnout     [r1] [r2] [r3] 0 1      $91&&$92&&$93
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] d0mass bknnout   [r1] [r2] [r3] 0 1      $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0mass d0pPmupMass [r1] [r2] [r3] 0 2      $91&&$92&&$93
+exe ../BToDKTo3piK/kumac/ksCorr [dir] d0mass d0pPpupMass [r1] [r2] [r3] 0 2      $91&&$92&&$93
+
+r1 = 0.2
+r2 = 0.4
+r3 = 0.7
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] bknnout deltae    [r1] [r2] [r3] -0.1 0.1 $91&&$92&&$93
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] bknnout mes       [r1] [r2] [r3] 5.2 5.3  $91&&$92&&$93
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] bknnout d0mass    [r1] [r2] [r3] 1.8 1.9  $91&&$92&&$93
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] bknnout nnout     [r1] [r2] [r3] 0 1      $91&&$92&&$93
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] bknnout d0pPmupMass [r1] [r2] [r3] 0 2      $91&&$92&&$93
+*exe ../BToDKTo3piK/kumac/ksCorr [dir] bknnout d0pPpupMass [r1] [r2] [r3] 0 2      $91&&$92&&$93
+
+
+
+
+close 66
+
+she mv prob.txt [dir]_[bdecmode]_[d]_cut_[finalcut].txt

@@ -1,0 +1,41 @@
+/***********************************************************
+* pdf Holder for Bdk
+***********************************************************/
+
+#ifndef BDKPDFHOLDER
+#define BDKPDFHOLDER
+
+#include "TObject.h"
+
+class BdkPdfAbsBase;
+
+class BdkPdfHolder 
+{
+public:
+  BdkPdfHolder();
+  virtual ~BdkPdfHolder();
+    
+  // Non-const accessor:
+  virtual BdkPdfAbsBase * sigBadD0() = 0;
+  virtual BdkPdfAbsBase * sigGoodD0() = 0;
+  virtual BdkPdfAbsBase * DpiBadD0() = 0;
+  virtual BdkPdfAbsBase * DpiGoodD0() = 0;
+  virtual BdkPdfAbsBase * DPiX() = 0;
+  virtual BdkPdfAbsBase * DKX() = 0;
+  virtual BdkPdfAbsBase * BBBadD0() = 0;
+  virtual BdkPdfAbsBase * BBGoodD0() = 0;
+  virtual BdkPdfAbsBase * qqBadD0() = 0;
+  virtual BdkPdfAbsBase * qqGoodD0() = 0;
+
+  // Access using BdkEvtType enums:
+  virtual BdkPdfAbsBase * pdf(int typeIndex);
+  virtual BdkPdfAbsBase * pdf(const char * typeName); 
+
+
+#if !defined(__INTERACTIVE__)
+    ClassDef(BdkPdfHolder,0)
+#endif
+
+};
+
+#endif	     

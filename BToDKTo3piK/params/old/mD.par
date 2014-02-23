@@ -1,0 +1,137 @@
+pdfOnResDK.DPiPi.mDPdf.cbShape.alpha =  0.99133 +/- 0.062839 C L(0 - 10) 
+pdfOnResDK.DPiPi.mDPdf.cbShape.enne =  3.7588 +/- 1.1028 C L(0 - 100) 
+pdfOnResDK.DPiPi.mDPdf.cbShape.m0 =  1.8622 +/- 0.00022357 C L(1.8 - 1.9) // [GeV]
+pdfOnResDK.DPiPi.mDPdf.cbShape.sigma =  0.012403 +/- 0.00024451 C L(0.01 - 0.4) // [GeV]
+pdfOnResDK.DPiPi.mDPdf.fracCBShape =  0 C L(0 - 1) 
+pdfOnResDK.DPiPi.mDPdf.polyn.coef0 =  0 C L(-200 - 200) 
+pdfOnResDK.DPiPi.mDPdf.polyn.coef1 =  0.071918 +/- 1.5220 L(-100 - 100) 
+pdfOnResDK.DPiPi.mDPdf.polyn.coef2 =  165.03 +/- 93.322 L(-700 - 900) 
+pdfOnResDK.DPiPi.mDPdf.polyn.offset =  1.8645 +/- 0.10000 C L(-100 - 100) 
+//$
+//       2.3163834      31.121836
+//       31.121836      8708.9619
+//$
+pdfOnResDK.BBbadD0.mDPdf.cbShape.alpha =  0 +/- 0 C L(0 - 6) 
+pdfOnResDK.BBbadD0.mDPdf.cbShape.enne =  0 +/- 0 C L(0 - 100) 
+pdfOnResDK.BBbadD0.mDPdf.cbShape.m0 =  1.8622 +/- 0.0032003 C L(1 - 2) // [GeV]
+pdfOnResDK.BBbadD0.mDPdf.cbShape.sigma =  0.012430 +/- 0.0056775 C L(0.01 - 0.6) // [GeV]
+pdfOnResDK.BBbadD0.mDPdf.fracCBShape =  0 C L(0 - 1) 
+pdfOnResDK.BBbadD0.mDPdf.polyn.coef0 =  0 C L(-200 - 300) 
+pdfOnResDK.BBbadD0.mDPdf.polyn.coef1 = -1.72710 +/- 2.3651 L(-100 - 100) 
+pdfOnResDK.BBbadD0.mDPdf.polyn.coef2 =  119.27 +/- 144.76 L(-600 - 900) 
+pdfOnResDK.BBbadD0.mDPdf.polyn.offset =  1.8645 +/- 0.10000 C L(-100 - 100) 
+//$
+//       5.5935907      58.800362
+//       58.800362      20955.797
+//$
+pdfOnResDK.qqBadD0mDPdf.cbShape.alpha =  0 C L(0 - 2) 
+pdfOnResDK.qqBadD0mDPdf.cbShape.enne =  0 C L(0 - 1000) 
+pdfOnResDK.qqBadD0mDPdf.cbShape.m0 =  1.8646 +/- 0.00024739 C L(1.7 - 1.95) // [GeV]
+pdfOnResDK.qqBadD0mDPdf.cbShape.sigma =  0 +/- 0 C L(0 - 0.5) // [GeV]
+pdfOnResDK.qqBadD0mDPdf.fracCBShape =  0 C L(0 - 1) 
+pdfOnResDK.qqBadD0mDPdf.polyn.coef0 =  0 C L(-300 - 300) 
+pdfOnResDK.qqBadD0mDPdf.polyn.coef1 = -3.46473 +/- 1.4929 L(-100 - 100) 
+pdfOnResDK.qqBadD0mDPdf.polyn.coef2 =  276.23 +/- 95.094 L(-300 - 900) 
+pdfOnResDK.qqBadD0mDPdf.polyn.coef3 =  0 C L(-300 - 300) 
+pdfOnResDK.qqBadD0mDPdf.polyn.coef4 =  0 C L(-300 - 300) 
+pdfOnResDK.qqBadD0mDPdf.polyn.coef5 =  0 C L(-300 - 300) 
+pdfOnResDK.qqBadD0mDPdf.polyn.coef6 =  0 C L(-300 - 300) 
+pdfOnResDK.qqBadD0mDPdf.polyn.offset =  1.8645 +/- 0.10000 C L(-100 - 100) 
+//$
+//       2.2288351      13.885156
+//       13.885156      9042.8457
+//$
+pdfOnResDK.sigBadD0.mDPdf.cbShape.alpha =  0.62473 +/- 0.054674 C L(0 - 20) 
+pdfOnResDK.sigBadD0.mDPdf.cbShape.enne =  2.4304 +/- 0.33864 C L(0 - 100) 
+pdfOnResDK.sigBadD0.mDPdf.cbShape.m0 =  1.8627 +/- 0.000034840 C L(1.7 - 1.98) // [GeV]
+pdfOnResDK.sigBadD0.mDPdf.cbShape.sigma =  0.018852 +/- 0.00072855 C L(0.01 - 0.6) // [GeV]
+pdfOnResDK.sigBadD0.mDPdf.fracCBShape =  0 C L(0 - 1) 
+pdfOnResDK.sigBadD0.mDPdf.polyn.coef0 = -0.614012 +/- 0.27382 L(-190 - 200) 
+pdfOnResDK.sigBadD0.mDPdf.polyn.coef1 = -2.62636 +/- 1.8827 L(-100 - 150) 
+pdfOnResDK.sigBadD0.mDPdf.polyn.coef2 = -74.0428 +/- 56.503 L(-200 - 150) 
+pdfOnResDK.sigBadD0.mDPdf.polyn.offset =  1.8645 +/- 0.10000 C L(-100 - 100) 
+//$
+//     0.074979186    -0.49748406     -13.602668
+//     -0.49748406      3.5446718      90.129219
+//      -13.602668      90.129219      3192.5476
+//$
+pdfOnResDK.sigGoodD0.mDPdf.cbShape.alpha =  1.1863 +/- 0.11645 L(0 - 10) 
+pdfOnResDK.sigGoodD0.mDPdf.cbShape.enne =  0.85317 +/- 0.57924 L(0 - 150) 
+pdfOnResDK.sigGoodD0.mDPdf.cbShape.m0 =  1.8620 +/- 0.00022454 L(1.8 - 1.9) // [GeV]
+pdfOnResDK.sigGoodD0.mDPdf.cbShape.sigma =  0.010875 +/- 0.00067563 L(0 - 0.4) // [GeV]
+pdfOnResDK.sigGoodD0.mDPdf.fracCBShape =  0.72089 +/- 0.081544 L(0 - 1) 
+pdfOnResDK.sigGoodD0.mDPdf.polyn.coef0 =  0 +/- 0 C L(-200 - 200) 
+pdfOnResDK.sigGoodD0.mDPdf.polyn.coef1 =  0 +/- 0 C L(-100 - 100) 
+pdfOnResDK.sigGoodD0.mDPdf.polyn.coef2 = -750.177 +/- 105.72 L(-1500 - 100) 
+pdfOnResDK.sigGoodD0.mDPdf.polyn.offset =  1.8635 +/- 0.10000 C L(-100 - 100) 
+//$
+//     0.013561191   -0.062374804  -1.736387e-06 -5.9133079e-05  -0.0072751637     -8.2353296
+//    -0.062374804     0.33551571   1.536812e-06  0.00031368394    0.039206024      50.477005
+//   -1.736387e-06   1.536812e-06  5.0420319e-08  7.0564532e-09  2.8806687e-06   0.0025104363
+//  -5.9133079e-05  0.00031368394  7.0564532e-09  4.5648005e-07  5.2096526e-05    0.053560846
+//   -0.0072751637    0.039206024  2.8806687e-06  5.2096526e-05   0.0066494355      7.3370333
+//      -8.2353296      50.477005   0.0025104363    0.053560846      7.3370333      11176.886
+//$
+pdfOnResDK.DpiBadD0.mDPdf.cbShape.alpha =  10.000 C L(0 - 20) 
+pdfOnResDK.DpiBadD0.mDPdf.cbShape.enne =  0 C L(0 - 100) 
+pdfOnResDK.DpiBadD0.mDPdf.cbShape.m0 =  1.8630 +/- 0.00086713 C L(1.7 - 1.98) // [GeV]
+pdfOnResDK.DpiBadD0.mDPdf.cbShape.sigma =  0.017112 +/- 0.0011436 C L(0.01 - 0.6) // [GeV]
+pdfOnResDK.DpiBadD0.mDPdf.fracCBShape =  0 C L(0 - 1) 
+pdfOnResDK.DpiBadD0.mDPdf.polyn.coef0 =  0 C L(-190 - 200) 
+pdfOnResDK.DpiBadD0.mDPdf.polyn.coef1 = -13.3385 +/- 1.6796 L(-400 - 450) 
+pdfOnResDK.DpiBadD0.mDPdf.polyn.coef2 = -1447.49 +/- 81.904 L(-1500 - 1500) 
+pdfOnResDK.DpiBadD0.mDPdf.polyn.offset =  1.8645 +/- 0.10000 C L(-100 - 100) 
+//$
+//        2.820889      137.54932
+//       137.54932      6708.2568
+//$
+pdfOnResDK.DpiGoodD0.mDPdf.cbShape.alpha =  1.2593 +/- 0.22459 L(0 - 2) 
+pdfOnResDK.DpiGoodD0.mDPdf.cbShape.enne =  0.29624 +/- 0.45533 L(0 - 100) 
+pdfOnResDK.DpiGoodD0.mDPdf.cbShape.m0 =  1.8629 +/- 0.0013379 L(1.86 - 1.87) // [GeV]
+pdfOnResDK.DpiGoodD0.mDPdf.cbShape.sigma =  0.011566 +/- 0.0010359 L(0.01 - 0.015) // [GeV]
+pdfOnResDK.DpiGoodD0.mDPdf.fracCBShape =  1.0000 +/- 0 C L(0 - 1) 
+pdfOnResDK.DpiGoodD0.mDPdf.polyn.coef0 =  0 C L(-100 - 100) 
+pdfOnResDK.DpiGoodD0.mDPdf.polyn.coef1 =  0 +/- 0 C L(-100 - 100) 
+pdfOnResDK.DpiGoodD0.mDPdf.polyn.coef2 =  0 +/- 0 C L(-100 - 100) 
+pdfOnResDK.DpiGoodD0.mDPdf.polyn.offset =  1.8645 +/- 0.10000 C L(-100 - 100) 
+//$
+//      0.05044071   -0.069743797  0.00014353477 -8.9311332e-05
+//    -0.069743797     0.20732167 -0.00025938498  0.00011867379
+//   0.00014353477 -0.00025938498  1.7900359e-06  -3.990954e-07
+//  -8.9311332e-05  0.00011867379  -3.990954e-07  1.0731893e-06
+//$
+pdfOnResDK.charmless.mDPdf.cbShape.alpha =  0 C L(0 - 2) 
+pdfOnResDK.charmless.mDPdf.cbShape.enne =  0 C L(0 - 1000) 
+pdfOnResDK.charmless.mDPdf.cbShape.m0 =  1.8700 +/- 0.00056570 C L(1.86 - 1.87) // [GeV]
+pdfOnResDK.charmless.mDPdf.cbShape.sigma =  0 +/- 0.00031477 C L(0 - 0.02) // [GeV]
+pdfOnResDK.charmless.mDPdf.fracCBShape =  0 C L(0 - 1) 
+pdfOnResDK.charmless.mDPdf.polyn.coef0 =  0 C L(-100 - 100) 
+pdfOnResDK.charmless.mDPdf.polyn.coef1 = -3.48648 +/- 3.0325 L(-200 - 200) 
+pdfOnResDK.charmless.mDPdf.polyn.coef2 = -39.0486 +/- 180.85 L(-500 - 900) 
+pdfOnResDK.charmless.mDPdf.polyn.offset =  1.8645 +/- 0.10000 C L(-100 - 100) 
+//$
+//       9.1958008        66.7145
+//         66.7145      32705.465
+//$
+pdfOnResDK.ContGoodD0.mDPdf.cbShape.alpha =  1.1865 +/- 0.11626 C L(0 - 10) 
+pdfOnResDK.ContGoodD0.mDPdf.cbShape.enne =  0.85246 +/- 0.57846 C L(0 - 150) 
+pdfOnResDK.ContGoodD0.mDPdf.cbShape.m0 =  1.8620 +/- 0.00022446 C L(1.8 - 1.9) // [GeV]
+pdfOnResDK.ContGoodD0.mDPdf.cbShape.sigma =  0.010875 +/- 0.00067639 C L(0 - 0.4) // [GeV]
+pdfOnResDK.ContGoodD0.mDPdf.fracCBShape =  0.72101 +/- 0.081687 C L(0 - 1) 
+pdfOnResDK.ContGoodD0.mDPdf.polyn.coef0 =  0 +/- 0 C L(-200 - 200) 
+pdfOnResDK.ContGoodD0.mDPdf.polyn.coef1 =  0 +/- 0 C L(-100 - 100) 
+pdfOnResDK.ContGoodD0.mDPdf.polyn.coef2 = -749.892 +/- 106.08 C L(-1500 - 100) 
+pdfOnResDK.ContGoodD0.mDPdf.polyn.offset =  1.8635 +/- 0.10000 C L(-100 - 100) 
+//$
+//$
+pdfOnResDK.BBgoodD0.mDPdf.cbShape.alpha =  1.1865 +/- 0.11626 C L(0 - 10) 
+pdfOnResDK.BBgoodD0.mDPdf.cbShape.enne =  0.85246 +/- 0.57846 C L(0 - 150) 
+pdfOnResDK.BBgoodD0.mDPdf.cbShape.m0 =  1.8620 +/- 0.00022446 C L(1.8 - 1.9) // [GeV]
+pdfOnResDK.BBgoodD0.mDPdf.cbShape.sigma =  0.010875 +/- 0.00067639 C L(0 - 0.4) // [GeV]
+pdfOnResDK.BBgoodD0.mDPdf.fracCBShape =  0.72101 +/- 0.081687 C L(0 - 1) 
+pdfOnResDK.BBgoodD0.mDPdf.polyn.coef0 =  0 +/- 0 C L(-200 - 200) 
+pdfOnResDK.BBgoodD0.mDPdf.polyn.coef1 =  0 +/- 0 C L(-100 - 100) 
+pdfOnResDK.BBgoodD0.mDPdf.polyn.coef2 = -749.892 +/- 106.08 C L(-1500 - 100) 
+pdfOnResDK.BBgoodD0.mDPdf.polyn.offset =  1.8635 +/- 0.10000 C L(-100 - 100) 
+//$
+//$

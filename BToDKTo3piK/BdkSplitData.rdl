@@ -1,0 +1,56 @@
+/*****************************************************************************
+ * Project: RooFit                                                           
+ * Package: BToDKTo3piK                                                     
+ *    File: $Id: BdkSplitData.rdl,v 1.1 2006/04/14 21:17:16 fwinkl Exp $
+ * Authors:                                                                  
+ *   Frank Winklmeier, Colorado State University                             
+ * Description:                                                              
+ *   Class to split a RooAbsData into several chunks.
+ *                                                                           
+ * Copyright (c) 2006, Colorado State University                             
+ *****************************************************************************/
+#ifndef BDKSPLITDATA
+#define BDKSPLITDATA
+
+#include "TNamed.h"
+#include "RooFitCore/RooAbsData.hh"
+
+class BdkSplitData : public TNamed {
+public:
+  BdkSplitData(const char *name, const char *title,
+               RooAbsData& data);
+
+  BdkSplitData(const BdkSplitData& other, const char* name=0);
+
+  virtual TObject* Clone(const char* newname = "") const {
+    return new BdkSplitData(*this, newname);
+  }
+
+  virtual ~BdkSplitData() {}
+
+  Bool_t setChunkSize(Int_t entries);
+  Bool_t setNumChunks(Int_t numChunks);
+
+  RooAbsData* chunk(Int_t n);
+  RooAbsData* nextChunk();
+  RooAbsData* randomChunk();
+  void resetChunks();
+
+  // accessors:
+  Int_t chunkSize() const {return _chunkSize;}
+  Double_t chunkFraction() const {return (Double_t)_chunkSize/_data->numEntries();}
+  Int_t numChunks() const {return _nChunks;}
+  RooAbsData* data() const {return _data;}
+
+protected:
+  
+private:
+  Int_t _chunkSize;
+  Int_t _nChunks;
+  Int_t _thisChunk;
+  RooAbsData* _data;
+  
+  ClassDef(BdkSplitData,0) // BdkSplitData
+};
+
+#endif
