@@ -1,0 +1,59 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdfDalitzHist.rdl,v 1.3 2006/05/22 21:53:06 fwinkl Exp $
+ * Description:
+ *   Wrapper class for BdkDalitzHist
+ * History:
+ *   Mar 22, 2006     Frank Winklmeier, created
+ *
+ * Copyright (C) 2006 Colorado State University and SLAC
+ *****************************************************************************/
+
+#ifndef BDKPDFDALITZHIST
+#define BDKPDFDALITZHIST
+
+#include "BToDKTo3piK/BdkPdfDalitzBase.hh"
+
+class TH2;
+class RooAbsReal;
+class BdkDalitzBase;
+
+class BdkPdfDalitzHist : public BdkPdfDalitzBase {
+public:
+  BdkPdfDalitzHist();
+  BdkPdfDalitzHist(const char * theName,
+                   const char * theDesc,
+                   RooAbsReal& m12, RooAbsReal& m13,
+                   BdkDalitzBase::Flavor flavor,
+		   const TH2& hist);
+
+  void init(const char * theName,
+            const char * theDesc,
+            RooAbsReal& m12, RooAbsReal& m13,
+            BdkDalitzBase::Flavor flavor,
+	    const TH2& hist);
+  
+  ~BdkPdfDalitzHist(); 
+  
+  void setDataHist(const TH2& hist);
+  
+  TH2& dataHist() {return *_hist;}
+  const TH2& dataHist() const {return *_hist;}
+  
+  
+protected:
+  virtual void createPdf();    
+  
+private :
+  // data:
+  
+  TH2* _hist;
+  
+private :
+  // private members
+  
+  ClassDef(BdkPdfDalitzHist,0)
+};
+
+#endif

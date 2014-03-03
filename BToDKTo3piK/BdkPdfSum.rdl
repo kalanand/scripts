@@ -1,0 +1,122 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdfSum.rdl,v 1.1 2005/10/09 22:50:37 abi Exp $
+ * Authors:
+ *   Abi Soffer, Colorado State University, abi@slac.stanford.edu
+ * Description:
+ *   The sum of BdkPdfAbsBase objects
+ * History:
+ *   17-Apr-2002 abi Created initial version
+ *   18-Sep-2002 WW Adjusted syntax to work with SunOS 5.8 compiler.
+ *
+ * Copyright (C) 2002 Colorado State University and SLAC
+ *****************************************************************************/
+#ifndef BDKADDPDF
+#define BDKADDPDF
+
+#include "TList.h"
+#include "RooFitCore/RooArgList.hh"
+#include "BToDKTo3piK/BdkPdfComposite.hh"
+
+class RooRealVar;
+class RooAddPdf;
+
+class BdkPdfSum : public BdkPdfComposite {
+public:
+  // The NameScheme determines how to name the fractions: 
+  // LAST: fraction name = last + "Frac", where last is the part of the name
+  //       of the fractions' PDF which follows the last instance of '.' 
+  //       in the name. So if the PDF's name is "combB0.delta", then the 
+  //       fractions' name will be "deltaFrac".
+  // FULL: Same as LAST, but the full name of the PDF is used. In the 
+  //       example above, this would give "combB0.deltaFrac".
+  // NUMBER: fraction name = "frac#", where # is the sequential number 
+  //       of the corresponding PDF, starting at 0.
+  enum NameScheme {LAST, FULL, NUMBER};
+
+  // Constructors:
+  BdkPdfSum();
+
+  BdkPdfSum(const char * theName,
+	    const char * theDesc,
+	    BdkPdfAbsBase & pdf1,
+	    BdkPdfAbsBase & pdf2,
+	    NameScheme scheme = LAST,
+	    BdkPdfSum * linkFracs = 0);
+  
+  BdkPdfSum(const char * theName,
+	    const char * theDesc,
+	    TList & pdfList,
+	    NameScheme scheme = LAST,
+	    BdkPdfSum * linkFracs = 0);
+  
+  virtual ~BdkPdfSum();
+  
+  
+  // Initializers:
+  void init(const char * theName,
+	    const char * theDesc,
+	    BdkPdfAbsBase & pdf1,
+	    BdkPdfAbsBase & pdf2,
+	    NameScheme scheme = LAST,
+	    BdkPdfSum * linkFracs = 0);
+  
+  void init(const char * theName,
+	    const char * theDesc,
+	    TList & pdfList,
+	    NameScheme scheme = LAST,
+	    BdkPdfSum * linkFracs = 0);
+  
+
+  // Modifiers:
+  void fixFractions(Bool_t fix = kTRUE);
+
+  // Use the fractions of link. If link==0, makes its own fractions:
+  void setLinkFracs(BdkPdfSum * link);  
+
+  // Non-const accessors (see also PDF accessors in BdkPdfComposite)
+  TIterator * fracIter() {return _fractions.createIterator();}
+  RooRealVar * fraction(int i) {return (RooRealVar *)(_fractions.at(i));}
+
+  RooAddPdf * getAddPdf() {return (RooAddPdf *)getPdf();}
+
+  // Accessors:
+  int numFractions() const {return numComponents() - 1;}
+   
+
+protected:
+  virtual void createPdf();  
+  virtual void initParameters();
+  virtual void makeFracs(BdkPdfSum * linkFracs = 0);
+  inline RooArgList & fractions() {return _fractions;}
+
+
+private:
+  BdkPdfSum(const BdkPdfSum &);
+  BdkPdfSum & operator=(const BdkPdfSum &);
+
+  // Data:
+  RooArgList _fractions;
+  BdkPdfSum * _linkFracs;
+  NameScheme _nameScheme;
+
+  ClassDef (BdkPdfSum,0) // Sum of pdfs wrapper 
+
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,142 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdfDKDalitz.rdl,v 1.25 2007/08/22 07:59:05 fwinkl Exp $
+ * Description:
+ *   Signal Dalitz PDF wrapper
+ * History:
+ *   18 Oct 2005, created, Abi soffer
+ *
+ * Copyright (C) 2005 Colorado State University and SLAC
+ *****************************************************************************/
+#ifndef BDKPDFDKDALITZ
+#define BDKPDFDKDALITZ
+
+#include "RooFitCore/RooCategory.hh"
+
+#include "BToDKTo3piK/BdkDKDalitz.hh"
+#include "BToDKTo3piK/BdkPdfDalitzBase.hh"
+
+class RooRealVar;
+class BdkPdfAbsBase;
+class BdkAbsDDalitzAmp;
+class RooUnblindPrecision;
+
+class BdkPdfDKDalitz : public BdkPdfDalitzBase {
+public:
+
+  enum COORD {CART, POLAR};
+    
+  BdkPdfDKDalitz();
+
+  BdkPdfDKDalitz(const char * theName, const char * theDesc,
+                 RooAbsReal & m12, RooAbsReal & m13,
+                 BdkDalitzBase::Flavor flavor = BdkDalitzBase::D0,
+                 BdkPdfDKDalitz::COORD coord = BdkPdfDKDalitz::POLAR,
+                 RooCategory* blindMode = 0,
+                 BdkAbsDDalitzAmp * externalAmp = 0,
+                 BdkDalitz::Mode DdecMode = BdkDalitz::PPP0,
+                 BdkAbsDDalitzAmp * externalAmpBar = 0);
+
+  virtual ~BdkPdfDKDalitz();
+  
+  virtual void init(const char * theName, const char * theDesc,
+                    RooAbsReal & m12, RooAbsReal & m13,
+                    BdkDalitzBase::Flavor flavor = BdkDalitzBase::D0) {
+    init(theName, theDesc, m12, m13, flavor, BdkPdfDKDalitz::POLAR, 0, 0, BdkDalitz::PPP0, 0);
+  }
+
+  void init(const char * theName, const char * theDesc,
+            RooAbsReal & m12, RooAbsReal & m13,
+            BdkDalitzBase::Flavor flavor,
+            BdkPdfDKDalitz::COORD coord,
+            RooCategory* blindMode,
+            BdkAbsDDalitzAmp * externalAmp = 0,
+            BdkDalitz::Mode DdecMode = BdkDalitz::PPP0,
+            BdkAbsDDalitzAmp * externalAmpBar = 0);
+
+  // const accessors:
+  const RooAbsReal* x() const {return _x;}
+  const RooAbsReal* y() const {return _y;}
+
+  const RooRealVar* rho() const {return _rho;}
+  const RooRealVar* theta() const {return _theta;}
+  const RooRealVar* x0() const {return _x0;}
+  const RooRealVar* y0() const {return _y0;}
+
+  COORD coord() const {return _coord;}
+
+  // modifiers: 
+  RooAbsReal* x() {return _x;}
+  RooAbsReal* y() {return _y;}
+
+  RooRealVar* rho() {return _rho;}
+  RooRealVar* theta() {return _theta;}
+  RooRealVar* x0() {return _x0;}
+  RooRealVar* y0() {return _y0;}
+  RooRealVar* deltaD() {return _deltaD;}
+  
+  BdkAbsDDalitzAmp * dalitzAmp();
+  BdkAbsDDalitzAmp * dalitzAmpBar();
+  BdkDKDalitz * pdfType() {return (BdkDKDalitz *)getPdf();}
+  
+  void setVerbose(const char * val);
+  void recalcX0();
+  void setPolarCoords(double x, double y);
+  void setCPparams(Double_t rB, Double_t gamma, Double_t delta);
+
+protected:
+  // Helpers:
+  virtual void createPdf();    
+  void setupBlinding();
+
+private:
+  void useCartesian();
+  void usePolar();
+  void usePolar(Double_t x0, Double_t y0);
+
+  // Data:
+
+  // The cartesian coordinates of rB*exp(i phase)
+  RooAbsReal * _x;
+  RooAbsReal * _y;
+
+  // Polar coordinates
+  RooRealVar * _rho;
+  RooRealVar * _theta;  
+  RooRealVar * _x0;
+  RooRealVar * _y0;
+
+  // The optional phase when using non-C eigenstate dalitz amplitudes
+  RooRealVar * _deltaD;
+  
+  COORD _coord;
+
+  // Pointer to dalitzAmp (needed for coordinate change)
+  BdkAbsDDalitzAmp* _amp;
+  BdkAbsDDalitzAmp* _ampBar;   // only used for non-C eigenstates
+
+  // Blinding
+  RooCategory* _blindMode;
+  RooUnblindPrecision* _xUnblind;
+  RooUnblindPrecision* _yUnblind;
+
+  ClassDef (BdkPdfDKDalitz,0)
+    
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

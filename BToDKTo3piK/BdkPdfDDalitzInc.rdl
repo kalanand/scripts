@@ -1,0 +1,111 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdfDDalitzInc.rdl,v 1.13 2006/06/30 02:05:45 fwinkl Exp $
+ * Description:
+ *  Wrapper for an incoherent sum of BW's
+ *  The PDF is defined as
+ *  ((pdfRhoM + _fracRhoP*pdfRhoP) + _fracRho0*pdfRho0) + _fracNonres*pdf2Dpoly
+ *
+ * History:
+ *   18 Oct 2005, created, Abi soffer
+ *
+ * Copyright (C) 2005 Colorado State University and SLAC
+ *****************************************************************************/
+
+#ifndef BDKPDFDDALITZINC
+#define BDKPDFDDALITZINC
+
+#include "RooFitCore/RooArgList.hh"
+#include "BToDKTo3piK/BdkPdfDDalitz.hh"
+#include "BToDKTo3piK/BdkPdfDalitzBase.hh"
+#include "BToDKTo3piK/BdkPdf2DpolyDalitz.hh"
+
+class RooRealVar;
+
+
+class BdkPdfDDalitzInc : public BdkPdfDalitzBase {
+public:
+  BdkPdfDDalitzInc();
+
+  BdkPdfDDalitzInc(const char * theName, const char * theDesc,
+		   RooAbsReal & m12, RooAbsReal & m13,
+		   BdkDalitzBase::Flavor flavor = BdkDalitzBase::D0,
+                   Int_t spinResComp = 1, BdkPdfDDalitzInc* externalAmps = 0); 
+  
+  virtual ~BdkPdfDDalitzInc();
+  
+  virtual void init(const char * theName, const char * theDesc,
+		    RooAbsReal & m12, RooAbsReal & m13, 
+		    BdkDalitzBase::Flavor flavor = BdkDalitzBase::D0,
+                    Int_t spinResComp = 1, BdkPdfDDalitzInc* externalAmps = 0); 
+
+  virtual void init(const char * theName, const char * theDesc,
+		    BdkPdfDDalitzInc & resonanceSource);
+
+  void calNorm (int events=1000000, Bool_t enforceNormalizeAll=kTRUE);
+
+  // const accessors:
+  const RooRealVar * fracRhoP() const {return _fracRhoP;}
+  const RooRealVar * fracRho0() const {return _fracRho0;}
+  const RooRealVar * fracNonres() const {return _fracNonres;}
+  
+  const BdkPdfDDalitz * rhoP() const {return _rhoP;}
+  const BdkPdfDDalitz * rhoM() const {return _rhoM;}
+  const BdkPdfDDalitz * rho0() const {return _rho0;}
+  const BdkPdf2DpolyDalitz * nonres() const {return &_nonres;}
+
+  // modifiers:
+  RooRealVar * fracRhoP() {return _fracRhoP;}
+  RooRealVar * fracRho0() {return _fracRho0;}
+  RooRealVar * fracNonres() {return _fracNonres;}
+  
+  BdkPdfDDalitz * rhoP() {return _rhoP;}
+  BdkPdfDDalitz * rhoM() {return _rhoM;}
+  BdkPdfDDalitz * rho0() {return _rho0;}
+  BdkPdf2DpolyDalitz * nonres() {return &_nonres;}
+
+
+protected:
+  // Helpers:
+  virtual void createPdf();    
+  virtual void initParameters();
+
+private:
+  // Data:
+  RooRealVar * _fracRhoP;
+  RooRealVar * _fracRho0;
+  RooRealVar * _fracNonres;
+
+  BdkPdfDDalitz _ownedRhoP; 
+  BdkPdfDDalitz _ownedRhoM;
+  BdkPdfDDalitz _ownedRho0;
+
+  // not owned:
+  BdkPdfDDalitz * _rhoP; 
+  BdkPdfDDalitz * _rhoM;
+  BdkPdfDDalitz * _rho0;
+
+  BdkPdf2DpolyDalitz _nonres;
+  Bool_t _externalResPdfs;
+  Int_t _spinResComp;
+
+  ClassDef (BdkPdfDDalitzInc,0)
+    
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,33 @@
+#!/bin/tcsh -f
+
+# Script to convert a list of hbook files into root files
+# and merge the single root files into one big file
+
+if ("$#"<3) then
+	echo "Syntax: Bdkh2root RECSIZE output-file hbook-files"
+        echo Example: "Bdkh2root 8192 sig5712.root sig5712_wt2*.hbk" will create sig5712_wt2.root
+	exit 1
+endif
+
+set RECSIZE = "$1"
+shift
+set merge = "$1"
+shift
+set files = "$*"
+
+# Figure out what the merged file name will be
+# set merge = `echo $1 | sed "s/-.*//"`.root
+
+set script = "merge.C"
+echo "{" >! $script
+echo 'TChain c("h1");' >> $script
+foreach f ($files)
+		set rootname = `basename $f hbk`root
+		bbrh2root $f $rootname 1 1 $RECSIZE 8000 >& `basename $f hbk`h2root.log
+		echo c.Add'("'$rootname'");' >> $script
+end
+echo 'c.Merge("'$merge'");' >> $script
+echo 'gROOT.ProcessLine(".q");' >> $script
+echo '}' >> $script
+cat $script >& $merge.log
+bbrroot -b $script >>& $merge.log

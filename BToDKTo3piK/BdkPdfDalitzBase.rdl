@@ -1,0 +1,79 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdfDalitzBase.rdl,v 1.7 2007/04/18 11:57:06 fwinkl Exp $
+ * Description:
+ *   Base class for Dalitz PDF wrappers
+ * History:
+ *   18 Oct 2005, created, Abi soffer
+ *
+ * Copyright (C) 2005 Colorado State University and SLAC
+ *****************************************************************************/
+#ifndef BDKPDFDALITZBASE
+#define BDKPDFDALITZBASE
+
+#include "BToDKTo3piK/BdkPdfAbsBase.hh"
+#include "BToDKTo3piK/BdkDalitzBase.hh"
+
+
+class RooAbsReal;
+class BdkDalitzEff;
+
+
+class BdkPdfDalitzBase : public BdkPdfAbsBase {
+public:
+  BdkPdfDalitzBase();
+  BdkPdfDalitzBase(const char * theName, const char * theDesc,
+                   RooAbsReal &m12, RooAbsReal &m13,
+                   BdkDalitzBase::Flavor flavor = BdkDalitzBase::D0,
+                   BdkDalitz::Mode DdecMode = BdkDalitz::PPP0); 
+  
+  virtual ~BdkPdfDalitzBase();
+  
+  virtual void init(const char * theName, const char * theDesc,
+                    RooAbsReal &m12, RooAbsReal &m13, 
+                    BdkDalitzBase::Flavor flavor = BdkDalitzBase::D0,
+                    BdkDalitz::Mode DdecMode = BdkDalitz::PPP0); 
+    
+  virtual RooArgSet dependents();
+  RooAbsReal *m12() {return _m12;}
+  RooAbsReal *m13() {return _m13;}
+  BdkDalitzBase::Flavor flavor() const {return _flavor;}
+  BdkDalitz::Mode getDdecMode() const {return _DdecMode;}
+  
+  // Efficiency function
+  virtual const BdkDalitzEff* efficiencyFunc() const;
+  virtual void setEfficiencyFunc(const BdkDalitzEff * f);
+  virtual void linkEfficiency(const BdkPdfDalitzBase& other);
+
+
+protected:
+  // protected members
+  RooAbsReal *_m12;
+  RooAbsReal *_m13;
+  BdkDalitzBase::Flavor _flavor;
+  BdkDalitz::Mode _DdecMode;
+  BdkDalitzEff* _effFunc;
+    
+private:
+  // private members
+    
+    ClassDef (BdkPdfDalitzBase,0)
+
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

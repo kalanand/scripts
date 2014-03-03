@@ -1,0 +1,40 @@
+pdfOnResDK.BBbadD0MesPdf_0.argus.endPoint =  5.2891 +/- 0.00012607 L(5.285 - 5.295) // [GeV]
+pdfOnResDK.BBbadD0MesPdf_0.argus.exp = -45.4002 +/- 7.0812 L(-200 - 0)
+pdfOnResDK.BBbadD0MesPdf_0.cbShape.alpha =  0.54615 +/- 0.11670 L(0 - 5)
+pdfOnResDK.BBbadD0MesPdf_0.cbShape.enne =  100.00 C L(0 - 200)
+pdfOnResDK.BBbadD0MesPdf_0.cbShape.m0 =  5.2790 +/- 0.0020000 C L(5.27 - 5.285) // [GeV]
+pdfOnResDK.BBbadD0MesPdf_0.cbShape.sigma =  0.0036447 +/- 0.00029704 L(0.001 - 0.008) // [GeV]
+pdfOnResDK.BBbadD0MesPdf_0.fracCBShape =  0.17479 +/- 0.037127 L(0 - 1)
+
+pdfOnResDK.BBbadD0MesPdf_1.argus.endPoint =  5.2891 +/- 0.000049166 L(5.285 - 5.295) // [GeV]
+pdfOnResDK.BBbadD0MesPdf_1.argus.exp = -73.1320 +/- 4.8429 L(-200 - 0)
+pdfOnResDK.BBbadD0MesPdf_1.cbShape.alpha =  0.73323 +/- 0.12251 L(0 - 5)
+pdfOnResDK.BBbadD0MesPdf_1.cbShape.enne =  100.00 C L(0 - 200)
+pdfOnResDK.BBbadD0MesPdf_1.cbShape.m0 =  5.2790 +/- 0.0020000 C L(5.27 - 5.285) // [GeV]
+pdfOnResDK.BBbadD0MesPdf_1.cbShape.sigma =  0.0033989 +/- 0.00027909 L(0.001 - 0.008) // [GeV]
+pdfOnResDK.BBbadD0MesPdf_1.fracCBShape =  0.15121 +/- 0.023454 L(0 - 1)
+
+pdfOnResDK.BBbadD0MesPdf_2.argus.endPoint =  5.2890 +/- 0.000096043 L(5.285 - 5.295) // [GeV]
+pdfOnResDK.BBbadD0MesPdf_2.argus.exp = -72.9957 +/- 5.8921 L(-200 - 0)
+pdfOnResDK.BBbadD0MesPdf_2.cbShape.alpha =  0.80105 +/- 0.13071 L(0 - 5)
+pdfOnResDK.BBbadD0MesPdf_2.cbShape.enne =  100.00 C L(0 - 200)
+pdfOnResDK.BBbadD0MesPdf_2.cbShape.m0 =  5.2790 +/- 0.0020000 C L(5.27 - 5.285) // [GeV]
+pdfOnResDK.BBbadD0MesPdf_2.cbShape.sigma =  0.0034704 +/- 0.00019731 L(0.001 - 0.008) // [GeV]
+pdfOnResDK.BBbadD0MesPdf_2.fracCBShape =  0.24052 +/- 0.026926 L(0 - 1)
+
+pdfOnResDK.BBbadD0MesPdf_3.argus.endPoint =  5.2891 +/- 0.000041776 L(5.285 - 5.295) // [GeV]
+pdfOnResDK.BBbadD0MesPdf_3.argus.exp = -68.7841 +/- 6.1802 L(-200 - 0)
+pdfOnResDK.BBbadD0MesPdf_3.cbShape.alpha =  0.62495 +/- 0.10026 L(0 - 5)
+pdfOnResDK.BBbadD0MesPdf_3.cbShape.enne =  100.00 C L(0 - 200)
+pdfOnResDK.BBbadD0MesPdf_3.cbShape.m0 =  5.2790 +/- 0.0020000 C L(5.27 - 5.285) // [GeV]
+pdfOnResDK.BBbadD0MesPdf_3.cbShape.sigma =  0.0034762 +/- 0.00023486 L(0.001 - 0.008) // [GeV]
+pdfOnResDK.BBbadD0MesPdf_3.fracCBShape =  0.21151 +/- 0.032357 L(0 - 1)
+
+pdfOnResDK.BBbadD0MesPdf_4.argus.endPoint =  5.2890 +/- 0.00012662 L(5.285 - 5.295) // [GeV]
+pdfOnResDK.BBbadD0MesPdf_4.argus.exp = -62.2470 +/- 6.6727 L(-200 - 0)
+pdfOnResDK.BBbadD0MesPdf_4.cbShape.alpha =  0.62991 +/- 0.13810 L(0 - 5)
+pdfOnResDK.BBbadD0MesPdf_4.cbShape.enne =  100.00 C L(0 - 200)
+pdfOnResDK.BBbadD0MesPdf_4.cbShape.m0 =  5.2790 +/- 0.0020000 C L(5.27 - 5.285) // [GeV]
+pdfOnResDK.BBbadD0MesPdf_4.cbShape.sigma =  0.0035216 +/- 0.00034749 L(0.001 - 0.008) // [GeV]
+pdfOnResDK.BBbadD0MesPdf_4.fracCBShape =  0.15673 +/- 0.033496 L(0 - 1)
+

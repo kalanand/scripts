@@ -1,0 +1,70 @@
+// Statistical error matrix calculator assuming Gaussian pull distributions
+// for rho and theta, using the output of getPdfInfo.cc
+
+#ifndef ERRMATSTATGAUSS
+#define ERRMATSTATGAUSS
+
+#include "BToDKTo3piK/Poly3.hh"
+#include "BToDKTo3piK/ErrMat.hh"
+
+class ErrMatStatGauss : public ErrMat {
+public:	
+  enum Charge {MINUS=0, PLUS=1, NCHARGES = 2};
+  
+  ErrMatStatGauss();
+
+  ErrMatStatGauss(const Poly3 & rhoErr,
+		  const Poly3 & thetaErr,
+		  const Poly3 & rhoErrSpread,
+		  const Poly3 & thetaErrSpread,
+		  const Poly3 & rhoPullSigma,
+		  const Poly3 & thetaPullSigma,
+		  double rhoErrNSpreads[NCHARGES],
+		  double thetaErrNSpread[NCHARGES]);
+  
+  virtual ~ErrMatStatGauss();
+
+  void init(const Poly3 & rhoErr,
+	    const Poly3 & thetaErr,
+	    const Poly3 & rhoErrSpread,
+	    const Poly3 & thetaErrSpread,
+	    const Poly3 & rhoPullSigma,
+	    const Poly3 & thetaPullSigma,
+	    double rhoErrNSpreads[NCHARGES],
+	    double thetaErrNSpread[NCHARGES]);
+  
+  
+  double measuredErrRho(double rho, Charge c) const;
+  double measuredErrTheta(double rho, Charge c) const;
+
+  TMatrixD matrix(double rM, double tM, double rP, double tP) const;
+
+
+private:
+  // 4th-order polynomial parameters for rho and theta error vs. true rho,
+  // one for theta- and rho- and one for theta+ and rho+:
+  Poly3 _rhoErr;
+  Poly3 _thetaErr;
+  
+  // Parameters for the spread of the rho and theta error vs. true rho:
+  Poly3 _rhoErrSpread;
+  Poly3 _thetaErrSpread;
+  
+  // Parameters for the spread of the rho and theta pulls vs. true rho:
+  Poly3 _rhoPullSigma;
+  Poly3 _thetaPullSigma;
+  
+  // The number of spreads away from the average error we want to be.
+  // This is generally chosen so as to match the data fluctuation
+  // wrt. the average error for a given true rho:
+  double _rhoErrNSpreads[NCHARGES];
+  double _thetaErrNSpreads[NCHARGES];
+
+#if !defined(__INTERACTIVE__)
+  ClassDef(ErrMatStatGauss,0)
+#endif  
+
+};
+
+    
+#endif

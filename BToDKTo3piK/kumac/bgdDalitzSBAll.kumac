@@ -1,0 +1,24 @@
+she rm bgdDalitzSB.txt
+she echo SBs= upperDE lowerDE mES upperMD lowerMD  >>&bgdDalitzSB.txt
+
+she echo "  " >>& bgdDalitzSB.txt
+exec ../BToDKTo3piK/kumac/bgdDalitzSB bad  DKX bchdk
+
+she echo "  " >>& bgdDalitzSB.txt
+
+exec ../BToDKTo3piK/kumac/bgdDalitzSB bad  DPiX bchdk
+
+she echo "  " >>& bgdDalitzSB.txt
+
+exec ../BToDKTo3piK/kumac/bgdDalitzSB bad  BBCD bchdk
+
+she echo "  " >>& bgdDalitzSB.txt
+
+exec ../BToDKTo3piK/kumac/bgdDalitzSB bad  QQ qq
+
+she echo "  " >>& bgdDalitzSB.txt
+exec ../BToDKTo3piK/kumac/bgdDalitzSB good QQ qq
+
+
+
+

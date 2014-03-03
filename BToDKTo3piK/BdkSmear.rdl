@@ -1,0 +1,79 @@
+/*****************************************************************************
+ * Project: RooFit                                                           
+ * Package: BToDKTo3piK                                                     
+ *    File: $Id: BdkSmear.rdl,v 1.2 2006/03/17 01:13:57 fwinkl Exp $
+ * Authors:                                                                  
+ *   Frank Winklmeier, Colorado State University                             
+ * Description:                                                              
+ *   Class to smear a N-dim RooAbsPdf with M (M<=N) resolution PDFs          
+ *   BdkSmear is not a fully functional RooAbsPdf itself.                    
+ *   Only generate() can be used on it. I.e. does not support fitting.       
+ *                                                                           
+ * Copyright (c) 2006, Colorado State University                             
+ *****************************************************************************/
+#ifndef BDKSMEAR
+#define BDKSMEAR
+
+#include <vector>
+
+#include "RooFitCore/RooAbsPdf.hh"
+#include "RooFitCore/RooSetProxy.hh"
+#include "RooFitCore/RooListProxy.hh"
+#include "RooFitCore/RooArgSet.hh"
+#include "RooFitCore/RooArgList.hh"
+#include "RooFitCore/RooAbsGenContext.hh"
+
+class RooRealVar;
+class RooDataSet;
+
+class BdkSmear : public RooAbsPdf {
+public:
+  BdkSmear(const char *name, const char *title,
+           RooAbsPdf& pdf, const RooArgSet& pdfVars,
+           const RooArgList& resModels, const RooArgList& resVars);
+
+  BdkSmear(const BdkSmear& other, const char* name=0) ;
+
+  virtual TObject* clone(const char* newname) const {
+    return new BdkSmear(*this,newname);
+  }
+
+  virtual ~BdkSmear();
+
+ 
+  virtual Int_t getGenerator(const RooArgSet& directVars, RooArgSet &generateVars, Bool_t staticInitOK=kTRUE) const;
+  virtual void initGenerator(Int_t code);
+  virtual void generateEvent(Int_t code);
+
+  /// Set the size of the internal event buffer
+  void setEventBuffer(Int_t events = 1000) {_events = (events>0 ? events : 1);}
+  void clearEventBuffer();
+  
+protected:
+
+  RooRealProxy _pdf;
+  RooSetProxy  _pdfVars;
+  
+  RooListProxy _resModels;
+  RooListProxy _resVars;
+
+
+  Double_t evaluate() const ;
+  virtual RooAbsGenContext* genContext(const RooArgSet &vars, const RooDataSet *prototype, 
+				       const RooArgSet* auxProto, Bool_t verbose) const;
+  void init();
+  
+private:
+
+  Int_t _events;
+
+  RooDataSet*        _pdfData;
+  Int_t              _pdfEventsUsed;
+  
+  std::vector<RooDataSet*> _resData;
+  std::vector<Int_t>       _resEventsUsed;
+  
+  ClassDef(BdkSmear,0) // BdkSmear PDF
+};
+
+#endif

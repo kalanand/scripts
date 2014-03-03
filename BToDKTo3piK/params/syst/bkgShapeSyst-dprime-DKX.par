@@ -1,0 +1,6 @@
+pdfOnResDK.DKXN.nnCombPdf.bifur.mean = -0.83185 +/- 5.5179 C 
+pdfOnResDK.DKXN.nnCombPdf.bifur.sigl =  0.75620 +/- 5.4735 C 
+pdfOnResDK.DKXN.nnCombPdf.bifur.sigr =  0.40000 +/- 8.6273 C L(0.4 - +INF) 
+pdfOnResDK.DKXN.nnCombPdf.fracGauss =  0.84270 +/- 0.59475 C L(0 - 1) 
+pdfOnResDK.DKXN.nnCombPdf.gauss.b = -0.74955 +/- 0.20510 C 
+pdfOnResDK.DKXN.nnCombPdf.gauss.s =  0.17844 +/- 0.11109 C 

@@ -1,0 +1,90 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdf2GPolyn.rdl,v 1.1 2005/10/09 22:50:36 abi Exp $
+ * Authors:
+ *   R. de Sangro INFN - Frascati riccardo.desangro@slac.stanford.edu
+ * Description:
+ *   Class for a Crystall Bass + ARGUS pdf with it's own 
+ *   variable definition to be used in conjunction with RooFitCore/Models.
+ * History:
+ *   17-Mar-2003 rid Created initial version from BdkPdfBifurArgus by Abi Soffer
+ *
+ * Copyright (C) 2003 INFN - LNF 
+ *****************************************************************************/
+#ifndef BDKPDF2GPOLYN
+#define BDKPDF2GPOLYN
+
+#include "BToDKTo3piK/BdkPdfComposite.hh"
+#include "BToDKTo3piK/BdkPdfGaussPolyn.hh"
+#include "BToDKTo3piK/BdkPdfGauss.hh"
+
+class RooAbsReal;
+class RooRealVar;
+
+class BdkPdf2GPolyn : public BdkPdfComposite 
+{
+  
+public:
+  BdkPdf2GPolyn();
+  BdkPdf2GPolyn(const char * theName,
+		const char * theDesc,
+		RooRealVar & dependent);
+  
+  virtual ~BdkPdf2GPolyn();
+  
+  void init(const char * theName,
+	    const char * theDesc,
+	    RooRealVar & dependent);
+  
+  // Modifiers:
+  virtual void setDependent(RooRealVar & dependent);
+  
+  void linkParameters( BdkPdf2GPolyn & pdf2 );
+
+  void linkMeanVal(Bool_t lk=kFALSE);
+
+  // Non-const accessors:
+  BdkPdfGaussPolyn & gaussPolyn() {return _gaussPolyn;}
+  BdkPdfGauss & gauss() {return _gauss;}
+ 
+  RooRealVar * fracGP() { return _fracGP; }
+ 
+  RooRealVar * dependent() {return _dependent;}
+  
+protected:
+  virtual void createPdf();  
+  virtual void initParameters();
+  
+  virtual void addComponents();
+  
+  // Data:
+  RooRealVar * _dependent;
+  RooRealVar * _fracGP; 
+ 
+private:
+  BdkPdf2GPolyn(const BdkPdf2GPolyn & pdf);
+  
+  // Data:
+  BdkPdfGaussPolyn _gaussPolyn;
+  BdkPdfGauss _gauss;
+  
+  ClassDef (BdkPdf2GPolyn,0) //  GaussPolyn + Gauss pdf wrapper 
+    
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

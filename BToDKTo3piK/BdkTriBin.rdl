@@ -1,0 +1,151 @@
+
+#ifndef BDKTRIBIN_HH
+#define BDKTRIBIN_HH
+
+class RooRealVar;
+class Bdk2DpolyDalitz;
+
+
+#include <iostream>
+
+#include <vector>
+#include "TString.h"
+#include "Gtypes.h" // for kBlack
+
+#include "BToDKTo3piK/BdkIsoOp.hh"
+#include "BToDKTo3piK/BdkP2.hh"
+#include "BToDKTo3piK/BdkBinWgtList.hh"
+
+
+class BdkTriBin {
+public:
+  // STATIC MEMBERS:
+  enum InDalitzCode {NONE = 0, SOME = 1, ALL = 2};
+  static int calcAreaNSteps();
+
+  static int setCalcAreaNSteps(int n,  // holds the "singleton"
+			       Bool_t change = kTRUE);
+
+  // The accessor, modifier, and error accessor for the efficiency
+  // coefficients c0 and s1 through s4. The value of "index" is from 0-5:
+  static double effCoeffS(int index); 
+  static double setEffCoeffS(int index, double val=0, Bool_t change=kFALSE);
+  static double effCoeffSErr(int index); 
+
+
+  // INSTANCE MEMBERS:
+  BdkTriBin();
+
+  BdkTriBin(const BdkP2 & p, double space, Bool_t mirror = kFALSE, 
+	    const char * name = 0);
+
+  BdkTriBin(const BdkP2 & p1, const BdkP2 & p2, const BdkP2 & p3, 
+	    const char * name = 0);
+
+
+  virtual ~BdkTriBin();
+  
+  // MODIFIERS:
+  void setName(const char * name) {_name = name;}
+  void setPoints(const BdkP2 & p1, const BdkP2 & p2, const BdkP2 & p3);
+
+  void setNEventsSR(int n) {_nEventsSR = n;}
+  void setNEventsSB(int n) {_nEventsSB = n;}
+
+  void accumNEventsSR(int n = 1) {_nEventsSR += n;}
+  void accumNEventsSB(int n = 1) {_nEventsSB += n;}
+
+  // Calculates wave function and error using the previously set or
+  // accumulated _nEventsSR and _nEventsSB:
+  void calcWaveFunc(double mDRatioSRtoSB); // takes binAreaSB == area()
+
+  // calcMinMax and calcArea are automatically called by constructors
+  // and by setPoints():
+  void calcMinMax();
+  void calcArea(Bool_t verbose = kFALSE, Bool_t drawPoints = kFALSE);
+
+
+  // ACCESSORS:
+  // Accessors to data members:
+  const BdkP2 & p1() const {return _p1;}
+  const BdkP2 & p2() const {return _p2;}
+  const BdkP2 & p3() const {return _p3;}
+  const TString & name() const {return _name;}
+
+  double waveFunc() const {return _waveFunc;}
+  double waveFuncErr() const {return _waveFuncErr;}
+  int nEventsSR() const {return _nEventsSR;}
+  int nEventsSB() const {return _nEventsSB;}
+
+  const BdkBinWgtList & wgtList(int op) const {return _wgtList[op];}
+
+  const BdkP2 & min() const {return _min;}
+  const BdkP2 & max() const {return _max;}
+  Bool_t isMirror() const {return _isMirror;}
+  double area() const {return _area;}
+  double inDalitzFrac() const {return _inDalitzFrac;}
+
+  // Calculated accessors 
+  const BdkP2 center() const;
+
+  BdkTriBin R(Bool_t createName = kFALSE)   const;
+  BdkTriBin RR(Bool_t createName = kFALSE)  const;
+  BdkTriBin E(Bool_t createName = kFALSE)   const;
+  BdkTriBin ER(Bool_t createName = kFALSE)  const;
+  BdkTriBin ERR(Bool_t createName = kFALSE) const;
+
+  bool operator==(const BdkTriBin & bin) const;
+  bool operator!=(const BdkTriBin & bin) const {return !(*this == bin);}
+
+  double efficiency() const;
+
+  InDalitzCode inDalitzStat() const;
+
+  Bool_t contains(const BdkP2 & point) const;
+
+  // Returns a vector of 4 bins into which this bin is divided:
+  std::vector<BdkTriBin> divide(Bool_t createName = kFALSE) const;
+
+  BdkP2 generatePoint() const; // a random point inside the triange
+
+  void writeName(double relSize = 0.15) const;
+
+  void Draw(int color = kBlack,
+	    int width = 1, 
+	    Bool_t tagLines = kFALSE,
+	    Bool_t writeNameSize = kFALSE) const ;
+
+  void Print(std::ostream & str = std::cout) const;
+  friend std::ostream & operator<<(std::ostream & ostr, const BdkTriBin & bin);
+
+
+protected:
+  void initWgtLists();
+
+
+private:
+  BdkP2 _p1;
+  BdkP2 _p2;
+  BdkP2 _p3;
+  TString _name;
+
+  double _waveFunc;
+  double _waveFuncErr;
+  int _nEventsSR;
+  int _nEventsSB;
+
+  BdkBinWgtList _wgtList [BdkIsoOp::NOPS];
+
+  BdkP2 _min;
+  BdkP2 _max;
+  Bool_t _isMirror;
+  double _area;
+  double _inDalitzFrac;
+
+  friend class BdkBinning;  // so it can access the _wgtList
+
+  ClassDef(BdkTriBin, 0);
+};
+  
+
+#endif

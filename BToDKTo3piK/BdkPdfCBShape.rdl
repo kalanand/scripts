@@ -1,0 +1,101 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ *
+ * Package: 
+ *
+ *    File: $Id: BdkPdfCBShape.rdl,v 1.1 2005/10/09 22:50:36 abi Exp $
+ *
+ * Authors:
+ *
+ *   R. de Sangro, Laboratori Nazionali di Frascati INFN - riccardo.desangro@slac.stanford.edu
+ *
+ * Description:
+ *   Class for a Crystall Ball shaped pdf with it's own variable definition
+ *   To be used in conjunction with RooFitCore/Models.
+ * History:
+ *   04-Mar-2003 rid Created initial version from BdkPdfArgus from Abi Soffer
+ *
+ * Copyright (C) 2002 INFN - LNF 
+ *****************************************************************************/
+#ifndef BDKPDFCBSHAPE
+#define BDKPDFCBSHAPE
+
+#include "BToDKTo3piK/BdkPdfAbsBase.hh"
+
+class RooAbsReal;
+class RooRealVar;
+class RooArgSet;
+
+class BdkPdfCBShape : public BdkPdfAbsBase {
+public:
+  BdkPdfCBShape();
+  BdkPdfCBShape(const char * theName,
+	      const char * theDesc,
+	      RooRealVar & dependent);
+  
+  virtual ~BdkPdfCBShape();
+
+  void init(const char * theName,
+	    const char * theDesc,
+	    RooRealVar & dependent);
+  
+  // Modifiers:
+  void setDependent(RooRealVar & dependent);
+
+  void linkParameters(const BdkPdfCBShape & pdf2);
+
+  void linkParameters(RooAbsReal * M0=0, 
+		      RooAbsReal * Sigma=0,
+		      RooAbsReal * Alpha=0,
+		      RooAbsReal * Enne=0);
+
+  virtual RooArgSet dependents();
+
+  RooAbsReal * m0() {return _m0;}
+  RooAbsReal * sigma() {return _sigma;}  
+  RooAbsReal * alpha() {return _alpha;}  
+  RooAbsReal * enne() {return _enne;}  
+  RooRealVar * dependent() { return _dependent;}
+
+  // Accessors:
+  const RooAbsReal * getM0() const {return _m0;}
+  const RooAbsReal * getSigma() const {return _sigma;}  
+  const RooAbsReal * getAlpha() const {return _alpha;}  
+  const RooAbsReal * getEnne() const {return _enne;}  
+
+   
+protected:
+  BdkPdfCBShape(BdkPdfCBShape & pdf);
+
+  // Helpers:
+  virtual void createPdf();  
+  virtual void initParameters();
+
+
+private: 
+  // Helpers:
+  void deleteAll();
+
+  // Data:
+  RooRealVar  *_dependent;
+  RooAbsReal *_m0, *_sigma, *_alpha, *_enne;
+
+  ClassDef (BdkPdfCBShape,0) // CBShape pdf wrapper on top of RooFitCore
+      
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

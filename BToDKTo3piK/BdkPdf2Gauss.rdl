@@ -1,0 +1,98 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdf2Gauss.rdl,v 1.3 2006/03/04 02:03:11 fwinkl Exp $
+ * Authors:
+ *   WW, Wolfgang Walkowiak, UC Santa Cruz, walkowia@scipp.ucsc.edu
+ * Description:
+ *   Class for a double gaussian pdf with it's own variable definitions
+ *   To be used in conjunction with RooFitTools.
+ * History:
+ *   20-Mar-2002 WW Created initial version
+ *
+ * Copyright (C) 2002 University of California and SLAC
+ *****************************************************************************/
+#ifndef BDKPDF2GAUSS
+#define BDKPDF2GAUSS
+
+#include "BToDKTo3piK/BdkPdfAbsBase.hh"
+
+class RooRealVar;
+class RooAbsPdf;
+class RooDataSet;
+class RooArgSet;
+class RooGaussian;
+
+class BdkPdf2Gauss : public BdkPdfAbsBase {
+public:
+  BdkPdf2Gauss();
+  BdkPdf2Gauss(const char * theName,
+               const char * theDesc,
+               RooRealVar & dt); 
+  
+  ~BdkPdf2Gauss();
+  
+  void init(const char * theName,
+            const char * theDesc,
+            RooRealVar & dt); 
+  
+  void setDependent(RooRealVar & dt);
+  
+  void linkResolution(const BdkPdf2Gauss & pdf2);
+  
+  void linkResolution(RooRealVar *f1=0,
+                      RooRealVar *b1=0, RooRealVar *s1=0,
+                      RooRealVar *b2=0, RooRealVar *s2=0);
+  
+  virtual RooArgSet dependents();
+  
+  // Non-const accessors:
+  RooRealVar* f1() {return _f1;}
+  RooRealVar* b1() {return _b1;}
+  RooRealVar* s1() {return _s1;}
+  RooRealVar* b2() {return _b2;}
+  RooRealVar* s2() {return _s2;}
+
+  RooGaussian* g1() {return _g1;}
+  RooGaussian* g2() {return _g2;}
+  
+protected:
+    virtual void createPdf();
+    
+    virtual void initParameters();
+    
+private: 
+    
+    //
+    // data members
+    //
+protected:
+  // protected members
+  RooRealVar *_b1,*_s1,*_b2,*_s2,*_f1;//! this member is not persist     
+  RooRealVar *_dt; //! this member is not persist
+
+  RooGaussian *_g1, *_g2;
+    
+private:
+  // private members
+    
+    ClassDef (BdkPdf2Gauss,0) // Double gaussian pdf wrapper on top of RooFitCore
+
+};
+
+ 
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

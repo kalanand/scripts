@@ -1,0 +1,59 @@
+* $Id: dalitz.kumac,v 1.2 2005/11/01 21:44:26 fwinkl Exp $
+* Dalitz plots for different event types
+
+macro dalitz
+
+h/del *
+
+exe ../BToDKTo3piK/kumac/chainhbk
+
+
+
+opt stat
+for/file 66 dalitz.ps
+meta 66 -111
+
+zone 2 2
+
+exe ../BToDKTo3piK/kumac/cuts 1 good DK
+cd //sig
+nt/pl 1.d0pPmMass^2%d0pPpMass^2 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/cuts 1 bad DK
+cd //sig
+nt/pl 1.d0pPmMass^2%d0pPpMass^2 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/cuts 1 good DPi
+cd //Bchdpi
+nt/pl 1.d0pPmMass^2%d0pPpMass^2 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/cuts 1 bad  DPi
+cd //Bchdpi
+nt/pl 1.d0pPmMass^2%d0pPpMass^2 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/cuts 1 bad  DKX
+cd //Bchdk
+nt/pl 1.d0pPmMass^2%d0pPpMass^2 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/cuts 1 bad DPiX
+cd //Bchdk
+nt/pl 1.d0pPmMass^2%d0pPpMass^2 $91&&$92&&$93
+
+wait 
+exe ../BToDKTo3piK/kumac/cuts 1 bad  BBCD
+cd //Bchdk
+nt/pl 1.d0pPmMass^2%d0pPpMass^2 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/cuts 1 good BBCD
+cd //Bchdk
+nt/pl 1.d0pPmMass^2%d0pPpMass^2 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/cuts 1 bad  QQ
+cd //qq
+nt/pl 1.d0pPmMass^2%d0pPpMass^2 $91&&$92&&$93
+
+exe ../BToDKTo3piK/kumac/cuts 1 good  QQ
+cd //qq
+nt/pl 1.d0pPmMass^2%d0pPpMass^2 $91&&$92&&$93
+
+close 66

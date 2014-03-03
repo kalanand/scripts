@@ -1,0 +1,90 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdfArgus.rdl,v 1.1 2005/10/09 22:50:36 abi Exp $
+ * Authors:
+ *   Abi Soffer, Colorado State University, abi@slac.stanford.edu
+ * Description:
+ *   Class for an ARGUS pdf with it's own variable definition
+ *   To be used in conjunction with RooFitCore/Models.
+ * History:
+ *   21-Mar-2002 abi Created initial version
+ *   28-Mar-2002 ww  add dependents(), delete generate()
+ *   17-Sep-2002 WW Bug fixes for SunOS 5.8 compilation.
+ *
+ * Copyright (C) 2002 Colorado State University and SLAC
+ *****************************************************************************/
+#ifndef IHFPDFARGUS
+#define IHFPDFARGUS
+
+#include "BToDKTo3piK/BdkPdfAbsBase.hh"
+
+class RooRealVar;
+class RooAbsReal;
+class RooArgSet;
+
+class BdkPdfArgus : public BdkPdfAbsBase {
+public:
+  BdkPdfArgus();
+  BdkPdfArgus(const char * theName,
+	      const char * theDesc,
+	      RooRealVar & dependent);
+  
+  virtual ~BdkPdfArgus();
+
+  void init(const char * theName,
+	    const char * theDesc,
+	    RooRealVar & dependent);
+  
+  // Modifiers:
+  void setDependent(RooRealVar & dependent);
+
+  void linkParameters(const BdkPdfArgus & pdf2);
+
+  void linkParameters(RooAbsReal * endPoint=0, 
+		      RooAbsReal * exp=0);
+
+  virtual RooArgSet dependents();
+
+  RooAbsReal * endPoint() {return _endPoint;}
+  RooAbsReal * exp() {return _exp;}
+
+  // Accessors:
+  const RooAbsReal * getEndPoint() const {return _endPoint;}
+  const RooAbsReal * getExp() const {return _exp;}  
+   
+protected:
+  BdkPdfArgus(BdkPdfArgus & pdf);
+
+  // Helpers:
+  virtual void createPdf();  
+  virtual void initParameters();
+
+
+private: 
+  // Helpers:
+  void deleteAll();
+
+  // Data:
+  RooAbsReal  *_dependent;
+  RooAbsReal *_exp, *_endPoint;
+
+  ClassDef (BdkPdfArgus,0) // Argus pdf wrapper on top of RooFitCore
+      
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

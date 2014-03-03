@@ -1,0 +1,90 @@
+/*****************************************************************************
+ * Project: BTodKTo3piK
+ *    File: $Id: BdkDDalitz.rdl,v 1.13 2007/08/07 18:42:06 kalanand Exp $
+ *
+ * RooAbsPdf subclass that fits the Dalitz distribution of D decays.
+ *
+ * History: Abi Soffer, Oct 31, 2005, adapted from code by Ben Lau and 
+ *    Kalanand Mishra
+ *                                                                           *
+ *****************************************************************************/
+#ifndef BDKDDALITZ
+#define BDKDDALITZ
+
+#include "RooFitCore/RooRealProxy.hh"
+#include "BToDKTo3piK/BdkDalitzBase.hh"
+#include "BToDKTo3piK/BdkAbsDDalitzAmp.hh"
+#include "BToDKTo3piK/BdkDDalitzAmp.hh"
+
+
+class RooRealVar;
+
+class BdkDDalitz : public BdkDalitzBase {
+public:
+
+  BdkDDalitz(const char *name, const char *title,
+             RooAbsReal& m12, RooAbsReal& m13,
+	      BdkDalitzBase::Flavor flavor, 
+             BdkAbsDDalitzAmp * amp = 0, // if 0, makes its own BdkDDalitzAmp
+             Int_t componentsBit = 
+             BdkDDalitzAmp::allComponents(),
+             BdkDalitzBase::Mode DdecMode = BdkDalitzBase::PPP0,
+             Int_t spinResComp = 1);
+
+  BdkDDalitz(const BdkDDalitz& other, const char* name=0) ;
+
+  virtual ~BdkDDalitz();
+
+  // modifiers:
+  BdkAbsDDalitzAmp * dalitzAmp() {return _dalitzAmp;}  
+
+  void setComponents(Int_t comps, 
+                     Int_t spinResComp = 1,
+                     BdkAbsDDalitzAmp * amp = 0);
+
+  // accessors:
+  virtual TObject* clone(const char* newname) const 
+  {return new BdkDDalitz(*this,newname); }
+  
+  Int_t getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analVars, const char* rangeName=0) const ;
+
+  Double_t analyticalIntegral(Int_t code,const char* rangeName=0) const ;
+  
+  Double_t evaluate() const ;  
+
+  virtual RooArgSet fitFractions() const {return _dalitzAmp->fitFractions();}
+  virtual RooArgSet BreitWignerNormalizationCoefficients() const {
+	return _dalitzAmp->BreitWignerNormalizationCoefficients();}
+  virtual RooArgSet IntegralOverIsospin() const {return _dalitzAmp->IntegralOverIsospin();}
+
+protected:
+
+  RooRealProxy _m12 ;
+  RooRealProxy _m13 ;
+
+  // the BdkDDalitzAmp needs to be a pointer to allow for PDF cloning.
+  // otherwise, we need to make a viable copy constructor for it, and
+  // with all the pointer data that's a mess:
+  BdkAbsDDalitzAmp * _dalitzAmp;  
+
+
+private:
+
+  ClassDef(BdkDDalitz,0) // BenDalitz PDF
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

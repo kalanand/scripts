@@ -1,0 +1,25 @@
+// An enum of basic symmetry operators 
+#ifndef BDKSYMOP_HH
+#define BDKSYMOP_HH
+
+#include "TObject.h" // for ClassDef
+
+class BdkSymOp {
+public:
+  enum {NOPS = 6}; // number of operators
+
+  enum SymOp {I = 0, 
+	      R = 1, 
+	      RR = 2, 
+	      E = 3, 
+	      ER = 4, 
+	      ERR = 5};
+  
+
+private:
+  ClassDef(BdkSymOp, 0);
+};
+
+
+
+#endif

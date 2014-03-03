@@ -1,0 +1,5 @@
+isospin-norm-NR   :  0.088500 
+isospin-norm-rhoP :  1.0001 
+isospin-norm-rho0 :  0.74043 
+isospin-norm-rhoM :  0.84136 
+isospin-norm-F    :  0.058538 

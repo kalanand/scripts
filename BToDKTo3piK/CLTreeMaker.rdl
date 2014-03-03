@@ -1,0 +1,174 @@
+// produces a TTree with the CL for each point in physical coordinate space.
+
+#ifndef CLTREEMAKER
+#define CLTREEMAKER
+
+class TTree;
+class TH3F;
+
+#include "BToDKTo3piK/ErrMatStatGauss.hh"
+#include "BToDKTo3piK/ErrMatSyst.hh"
+
+
+class CLTreeMaker {
+  // STATIC MEMBERS:
+public:
+
+  static void 
+  coordTrans(double rB, double gamma, double delta, 
+	     double * rM=0, double * tM=0, double * rP=0, double * tP=0,
+	     double * xM=0, double * yM=0, double * xP=0, double * yP=0); 
+
+  static inline double pi() {
+    static const double result = atan(1.0) * 4.0;
+    return result;  
+  }
+  
+  static double gammaHalf(int ndof);
+
+  static double chi2dist(double chi2, int ndof);
+  
+  static double pValue(double chi2,
+		       int ndof,
+		       double stepNdof = 0.002,
+		       double maxNdof = 30.);
+  
+  static double cl(double chi2,
+		   int ndof,
+		   double stepNdof = 0.002,
+		   double maxNdof = 30);
+  
+    
+    
+
+  // INSTANCE MEMBERS:
+public:
+  CLTreeMaker(bool bigTree = false,
+	      int resolution = 1000000,
+	      double maxNDof = 200,
+	      double dataRhoN = 0.715,
+	      double dataThetaN = 172.7,
+	      double dataRhoP = 0.748,
+	      double dataThetaP = 146.9,
+	      double dataRhoErrN = 0.11,
+	      double dataRhoErrP = 0.11,
+	      double dataThetaErrN = 42,
+	      double dataThetaErrP = 23);
+
+  virtual ~CLTreeMaker();
+
+  void setupErrMatStatGauss(Bool_t plotPoly3 = kFALSE);
+  void setVerbose(Bool_t val = kTRUE) {_verbose = val;}
+  void makeTable();
+
+  void makeCLTree(int nBinsR = 100,
+		  int nBinsGD = 1000,
+		  const char * writeFilename = "makeCLTree",
+		  double rBMin = 0,
+		  double rBMax = 0.4,
+		  double gammaMin = -180,
+		  double gammaMax =  180,
+		  double deltaMin = -180,
+		  double deltaMax =  180) ;
+  
+  // Below, rBMin and rBMax are the rB max and min of the histogram.
+  // rBFullrange is the full range for all histograms created in
+  // several jobs, combined using CLHistProjector::combine().  The
+  // default parameters given are for running one job.  For n jobs,
+  // set nBinsR=500/n, rBMax-rBMin=0.4/n, and rBMin to be the starting
+  // point for the particular job:
+  void makeCLHist3(int nBinsR = 500,
+		   int nBinsGD = 500,
+		   const char * writeFilename = "makeCLHist3",
+		   double rBMin = 0,
+		   double rBMax = 0.4,
+		   double rBFullRange = 0.4,
+		   double gammaMin = -180,
+		   double gammaMax =  180,
+		   double deltaMin = -180,
+		   double deltaMax =  180) ;
+  
+  Bool_t verbose() const {return _verbose;}
+  const TTree * tree() const {return _tree;}
+  const TH3F * hCLStat() const {return _hCLStat;}
+  const TH3F * hCLStatSyst() const {return _hCLStatSyst;}
+  const TH3F * hCLAll() const {return _hCLAll;}
+  const TH3F * hChi2All() const {return _hChi2All;}
+
+  void calcChi2Cl(const TMatrixD & diff, 
+		  const TMatrixD & diffT, 
+		  const TMatrixD & errMat,
+		  int nDOF,
+		  double & chi2, 
+		  double & clevel) const ;
+  
+  double lookupCL_4(double chi2) const;
+
+  
+  private:
+  // Data:
+  bool _bigTree;  // if true, gives more info in tree
+
+  // chi^2 integration:
+  int _resolution;
+  double _maxNDof; // Up to how many DOF to calculate chi^2 integral
+  double _chi2Step_4; // integration step
+  double * _chi2Int_4;  // chi^2 distribution integral
+
+  // the results in the data fit:
+  const double _dataRhoN;
+  const double _dataThetaN;
+  const double _dataRhoP;
+  const double _dataThetaP;
+
+  // The errors in the data fit:
+  const double _dataRhoErrN;
+  const double _dataRhoErrP;
+  const double _dataThetaErrN;
+  const double _dataThetaErrP;
+  
+  // Objects describing the variations of stat errors, etc., with true rho:
+  const Poly3 _rhoErr;
+  const Poly3 _thetaErr;
+
+  const Poly3 _rhoErrSpread;
+  const Poly3 _thetaErrSpread;
+
+  const Poly3 _rhoPullSigma;
+  const Poly3 _thetaPullSigma;
+
+  const Poly3 _biasPullRho;
+  const Poly3 _biasPullTheta;
+
+  // The statistical error:
+  ErrMatStatGauss _errMatStat;
+
+  // The systematic errors:
+  ErrMatSyst _errMatSyst;    // without model
+  ErrMatSyst _errMatModel;   // model only
+
+  // The resulting tree:
+  TTree * _tree;
+
+  // Or resulting TH3Fs:
+  TH3F * _hCLStat;
+  TH3F * _hCLStatSyst;
+  TH3F * _hCLAll;
+  TH3F * _hChi2All;
+  TH3F * _hCLAllBias;
+
+  // verbosity:
+  Bool_t _verbose;
+
+
+
+
+#if !defined(__INTERACTIVE__)
+  ClassDef(CLTreeMaker,0)
+#endif  
+
+};
+
+#endif
+
+

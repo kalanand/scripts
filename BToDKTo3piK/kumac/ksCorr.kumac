@@ -1,0 +1,136 @@
+*$Id: ksCorr.kumac,v 1.5 2006/03/02 00:54:15 fwinkl Exp $
+
+macro ksCorr cn=sig var1=mes var2=deltae rang1=5.265 rang2=5.28 rang3=5.29 min=-0.07 max=0.14 acut=1
+h/del *
+set hcol 0
+set dmod 0
+cd //[cn]  
+
+1d 100 [var2]([var1]) 60 [min] [max]
+1d 101 [var2]([var1]) 60 [min] [max]
+1d 102 [var2]([var1]) 60 [min] [max]
+1d 103 [var2]([var1]) 60 [min] [max]
+
+if [acut].ne.1 then 
+	mess use cut [acut] 
+endif
+
+if [var1].eq.d0pPmupMass.or.[var1].eq.d0pPpupMass then
+	mess Dalitz variables used in binning. 
+
+        if [var1].eq.d0pPmupMass then
+                cut 1 ((d0pPmupMass<[rang1].and.hdtrkchge<0).or.(d0pPpupMass<[rang1].and.hdtrkchge>0))
+	        cut 2 (([rang1]<d0pPmupMass<[rang2].and.hdtrkchge<0).or.([rang1]<d0pPpupMass<[rang2].and.hdtrkchge>0))
+        	cut 3 (([rang2]<d0pPmupMass<[rang3].and.hdtrkchge<0).or.([rang2]<d0pPpupMass<[rang3].and.hdtrkchge>0))
+	        cut 4 ((d0pPmupMass>[rang3].and.hdtrkchge<0).or.(d0pPpupMass>[rang3].and.hdtrkchge>0))
+        else
+                cut 1 ((d0pPmupMass<[rang1].and.hdtrkchge>0).or.(d0pPpupMass<[rang1].and.hdtrkchge<0))
+	        cut 2 (([rang1]<d0pPmupMass<[rang2].and.hdtrkchge>0).or.([rang1]<d0pPpupMass<[rang2].and.hdtrkchge<0))
+        	cut 3 (([rang2]<d0pPmupMass<[rang3].and.hdtrkchge>0).or.([rang2]<d0pPpupMass<[rang3].and.hdtrkchge<0))
+	        cut 4 ((d0pPmupMass>[rang3].and.hdtrkchge>0).or.(d0pPpupMass>[rang3].and.hdtrkchge<0))
+        endif
+else
+	cut 1 [var1]<[rang1]
+	cut 2 [rang1]<[var1]<[rang2]
+	cut 3 [rang2]<[var1]<[rang3]
+	cut 4 [var1]>[rang3]
+endif
+
+opt stat
+size 20 20
+zone 2 2
+
+if [var2].eq.d0pPmupMass.or.[var2].eq.d0pPpupMass then
+	mess Dalitz variable being plotted.
+
+        if [var2].eq.d0pPmupMass then
+                cut 10 hdtrkchge<0
+                cut 11 hdtrkchge>0                
+        else
+                cut 10 hdtrkchge>0
+                cut 11 hdtrkchge<0
+        endif
+
+	1d 110 d0pPmupMass([var1]) 60 [min] [max]
+	1d 111 d0pPmupMass([var1]) 60 [min] [max]
+	1d 112 d0pPmupMass([var1]) 60 [min] [max]
+	1d 113 d0pPmupMass([var1]) 60 [min] [max]
+
+	nt/pl 1.d0pPmupMass $1&&[acut]&&$10 idh=110
+	nt/pl 1.d0pPmupMass $2&&[acut]&&$10 idh=111
+	nt/pl 1.d0pPmupMass $3&&[acut]&&$10 idh=112
+	nt/pl 1.d0pPmupMass $4&&[acut]&&$10 idh=113
+
+	1d 120 d0pPpupMass([var1]) 60 [min] [max]	
+	1d 121 d0pPpupMass([var1]) 60 [min] [max]
+	1d 122 d0pPpupMass([var1]) 60 [min] [max]
+	1d 123 d0pPpupMass([var1]) 60 [min] [max]
+
+	nt/pl 1.d0pPpupMass $1&&[acut]&&$11 idh=120
+	nt/pl 1.d0pPpupMass $2&&[acut]&&$11 idh=121
+	nt/pl 1.d0pPpupMass $3&&[acut]&&$11 idh=122
+	nt/pl 1.d0pPpupMass $4&&[acut]&&$11 idh=123
+
+	hi/op/add 110 120 100
+	hi/op/add 111 121 101
+	hi/op/add 112 122 102
+	hi/op/add 113 123 103
+else
+	nt/pl 1.[var2] $1&&[acut] idh=100
+	nt/pl 1.[var2] $2&&[acut] idh=101
+	nt/pl 1.[var2] $3&&[acut] idh=102
+	nt/pl 1.[var2] $4&&[acut] idh=103
+endif
+
+size 30 20
+zone 3 2
+norm 100
+norm 101
+norm 102
+norm 103
+
+opt nstat
+h/pl 100
+h/pl 101 es
+
+h/pl 100
+h/pl 102 es
+
+h/pl 100
+h/pl 103 es
+
+h/pl 101
+h/pl 102 es
+
+h/pl 101
+h/pl 103 es
+
+h/pl 102
+h/pl 103 es
+
+*diff 100 101
+*diff 100 102
+*diff 100 103
+*diff 101 102
+*diff 101 103
+*diff 102 103
+
+v/cre x(6) r
+np=0;
+do i=0,3
+  do j=[i]+1, 3
+    h1=100+[i]
+    h2=100+[j]
+    call ../BToDKTo3piK/kumac/getinfo.for([h1], [h2])
+
+    np=[np]+1
+    v/in x([np]) getprob(1)
+    mess this is [h1] [h2] [np]
+  enddo
+enddo
+
+she echo [var2]_[var1] >>&prob.txt
+v/write x(1),x(2),x(3),x(4),x(5),x(6) tmpprob.txt format='1x,f10.8,4x,f10.8,4x,f10.8,4x,f10.8,4x,f10.8,4x,f10.8'
+she cat tmpprob.txt>>&prob.txt
+she rm tmpprob.txt
+v/del *

@@ -1,0 +1,132 @@
+pdfOnResDK.DPiPi.mESPdf.argus.endPoint =  5.2891 +/- 0.000045722 L(5.28 - 5.3) // [GeV]
+pdfOnResDK.DPiPi.mESPdf.argus.exp = -100.0000 +/- 12.541 L(-100 - 0) 
+pdfOnResDK.DPiPi.mESPdf.cbShape.alpha =  0.64316 +/- 0.10886 L(0 - 5) 
+pdfOnResDK.DPiPi.mESPdf.cbShape.enne =  100.000 +/- 85.984 L(0 - 100) 
+pdfOnResDK.DPiPi.mESPdf.cbShape.m0 =  5.2798 +/- 0.00020027 L(5.2 - 5.3) // [GeV]
+pdfOnResDK.DPiPi.mESPdf.cbShape.sigma =  0.0023892 +/- 0.00030898 L(0.0002 - 0.5) // [GeV]
+pdfOnResDK.DPiPi.mESPdf.fracCBShape =  0.39096 +/- 0.063134 L(0 - 1) 
+//$
+//   2.0905382e-09  1.2126276e-06 -3.9395954e-07  1.9308261e-06 -1.2929059e-10  1.3882476e-09  4.4015829e-07
+//   1.2126276e-06      157.27621     0.02473384    -0.19773078  3.3344269e-05 -1.3334543e-05  -0.0090809884
+//  -3.9395954e-07     0.02473384     0.01185082     0.13760895 -2.7627939e-06 -3.9454894e-06   -0.002619213
+//   1.9308261e-06    -0.19773078     0.13760895      7393.3062  0.00015707259 -0.00010062915    0.008765283
+//  -1.2929059e-10  3.3344269e-05 -2.7627939e-06  0.00015707259  4.0109349e-08 -5.7407981e-09   3.244177e-07
+//   1.3882476e-09 -1.3334543e-05 -3.9454894e-06 -0.00010062915 -5.7407981e-09  9.5465985e-08  1.4705895e-05
+//   4.4015829e-07  -0.0090809884   -0.002619213    0.008765283   3.244177e-07  1.4705895e-05   0.0039859554
+//$
+pdfOnResDK.bbBadMesPdf.CBAfrac =  1.0000 C L(0 - 1) 
+pdfOnResDK.bbBadMesPdf.argus.exp = -5.00000 +/- 0.050000 C L(-100 - 0) 
+pdfOnResDK.bbBadMesPdf.cbargusPdf.argus.endPoint =  5.2890 +/- 0.00011424 L(5.28 - 5.3) // [GeV]
+pdfOnResDK.bbBadMesPdf.cbargusPdf.argus.exp = -118.293 +/- 39.858 L(-150 - 0) 
+pdfOnResDK.bbBadMesPdf.cbargusPdf.cbShape.alpha =  1.9257 +/- 0.42554 L(0 - 2) 
+pdfOnResDK.bbBadMesPdf.cbargusPdf.cbShape.enne =  19.084 +/- 32.189 L(1 - 100) 
+pdfOnResDK.bbBadMesPdf.cbargusPdf.cbShape.m0 =  5.2769 +/- 0.00097639 L(5.26 - 5.299) // [GeV]
+pdfOnResDK.bbBadMesPdf.cbargusPdf.cbShape.sigma =  0.0035225 +/- 0.00080977 L(0.0003 - 0.5) // [GeV]
+pdfOnResDK.bbBadMesPdf.cbargusPdf.fracCBShape =  0.24397 +/- 0.060424 L(0 - 1) 
+//$
+//   1.3051561e-08  0.00034840952              0              0  3.3734122e-09  2.7529751e-08  3.0417405e-06
+//   0.00034840952      1588.6425              0              0    0.022579804    0.011235876    -0.23186675
+//               0              0     0.18108612              0              0              0              0
+//               0              0              0      1036.1132              0              0              0
+//   3.3734122e-09    0.022579804              0              0  9.5333939e-07  1.0465605e-07  8.0655373e-06
+//   2.7529751e-08    0.011235876              0              0  1.0465605e-07  6.5572937e-07  2.0514035e-05
+//   3.0417405e-06    -0.23186675              0              0  8.0655373e-06  2.0514035e-05   0.0036510313
+//$
+pdfOnResDK.BBgoodD0.mESPdf.argus.endPoint =  5.2900 +/- 0.0013954 C L(5.285 - 5.295) // [GeV]
+pdfOnResDK.BBgoodD0.mESPdf.argus.exp = -23.0000 +/- 2.5000 C L(-100 - 0)
+pdfOnResDK.BBgoodD0.mESPdf.cbShape.alpha =  1.3708 +/- 0.048549 C L(0 - 5)
+pdfOnResDK.BBgoodD0.mESPdf.cbShape.enne =  100.00 C L(0 - 200)
+pdfOnResDK.BBgoodD0.mESPdf.cbShape.m0 =  5.2794 +/- 0.000029604 C L(5.27 - 5.285) // [GeV]
+pdfOnResDK.BBgoodD0.mESPdf.cbShape.sigma =  0.0024580 +/- 0.000023106 C L(0.001 - 0.008) // [GeV]
+pdfOnResDK.BBgoodD0.mESPdf.fracCBShape =  1.0000 C L(0 - 1)
+//$
+//$
+pdfOnResDK.qqBadD0MesPdf.CBAfrac =  1.0000 C L(0 - 1) 
+pdfOnResDK.qqBadD0MesPdf.argus.exp =  0 C L(-60 - 0) 
+pdfOnResDK.qqBadD0MesPdf.cbargusPdf.argus.endPoint =  5.2891 +/- 0.000065811 L(5.28 - 5.3) // [GeV]
+pdfOnResDK.qqBadD0MesPdf.cbargusPdf.argus.exp = -24.9990 +/- 23.557 L(-25 - 0) 
+pdfOnResDK.qqBadD0MesPdf.cbargusPdf.cbShape.alpha =  100.00 +/- 0.010000 C L(0 - 200) 
+pdfOnResDK.qqBadD0MesPdf.cbargusPdf.cbShape.enne =  10.000 +/- 10.000 C L(1 - 150) 
+pdfOnResDK.qqBadD0MesPdf.cbargusPdf.cbShape.m0 =  5.2200 +/- 0.076705 C L(5.22 - 5.299) // [GeV]
+pdfOnResDK.qqBadD0MesPdf.cbargusPdf.cbShape.sigma =  0.010000 +/- 0.00054847 C L(0.001 - 0.5) // [GeV]
+pdfOnResDK.qqBadD0MesPdf.cbargusPdf.fracCBShape =  0 C L(0 - 1) 
+//$
+//   4.3310724e-09   6.874917e-05
+//    6.874917e-05      554.95074
+//$
+pdfOnResDK.ContGoodD0.mESPdf.argus.endPoint =  5.2877 +/- 0.00076108 L(5.285 - 5.295) // [GeV]
+pdfOnResDK.ContGoodD0.mESPdf.argus.exp = -100.000 +/- 91.826 L(-100 - 0) 
+pdfOnResDK.ContGoodD0.mESPdf.cbShape.alpha =  0.30000 +/- 0.10000 C L(0 - 5) 
+pdfOnResDK.ContGoodD0.mESPdf.cbShape.enne =  3.0000 +/- 1.0000 C L(0 - 1000) 
+pdfOnResDK.ContGoodD0.mESPdf.cbShape.m0 =  5.2790 +/- 0.0010000 C L(5.27 - 5.285) // [GeV]
+pdfOnResDK.ContGoodD0.mESPdf.cbShape.sigma =  0.0040000 +/- 0.0010000 C L(0.001 - 0.008) // [GeV]
+pdfOnResDK.ContGoodD0.mESPdf.fracCBShape =  0 C L(0 - 1) 
+//$
+//   5.7923961e-07  0.00020251477
+//   0.00020251477      8432.0596
+//$
+pdfOnResDK.sigBadD0.mESPdf.argus.endPoint =  5.2891 +/- 0.00019898 L(5.285 - 5.295) // [GeV]
+pdfOnResDK.sigBadD0.mESPdf.argus.exp = -31.6919 +/- 148.48 L(-200 - 0) 
+pdfOnResDK.sigBadD0.mESPdf.cbShape.alpha =  0.99666 +/- 0.22831 L(0 - 4) 
+pdfOnResDK.sigBadD0.mESPdf.cbShape.enne =  100.00 C L(0 - 150) 
+pdfOnResDK.sigBadD0.mESPdf.cbShape.m0 =  5.2797 +/- 0.00021530 L(5.27 - 5.285) // [GeV]
+pdfOnResDK.sigBadD0.mESPdf.cbShape.sigma =  0.0030137 +/- 0.00021366 L(0.001 - 0.015) // [GeV]
+pdfOnResDK.sigBadD0.mESPdf.fracCBShape =  0.71399 +/- 0.091711 L(0 - 1) 
+//$
+//   3.9593495e-08   0.0081839981 -6.7747658e-07  3.5983085e-09  5.0467057e-09  3.2500441e-06
+//    0.0081839981      22046.479      21.440203    0.022639427  -0.0056801466     -4.6034155
+//  -6.7747658e-07      21.440203    0.052125271  2.4238898e-05  -2.342681e-05   -0.015162352
+//   3.5983085e-09    0.022639427  2.4238898e-05  4.6354916e-08 -2.0492982e-08 -9.3297658e-06
+//   5.0467057e-09  -0.0056801466  -2.342681e-05 -2.0492982e-08  4.5649145e-08  1.6190024e-05
+//   3.2500441e-06     -4.6034155   -0.015162352 -9.3297658e-06  1.6190024e-05   0.0084109046
+//$
+pdfOnResDK.sigGoodD0.mESPdf.argus.endPoint =  5.2900 +/- 0.0013954 C L(5.285 - 5.295) // [GeV]
+pdfOnResDK.sigGoodD0.mESPdf.argus.exp = -23.0000 +/- 2.5000 C L(-100 - 0) 
+pdfOnResDK.sigGoodD0.mESPdf.cbShape.alpha =  1.3708 +/- 0.048549 L(0 - 5) 
+pdfOnResDK.sigGoodD0.mESPdf.cbShape.enne =  100.00 C L(0 - 200) 
+pdfOnResDK.sigGoodD0.mESPdf.cbShape.m0 =  5.2794 +/- 0.000029604 L(5.27 - 5.285) // [GeV]
+pdfOnResDK.sigGoodD0.mESPdf.cbShape.sigma =  0.0024580 +/- 0.000023106 L(0.001 - 0.008) // [GeV]
+pdfOnResDK.sigGoodD0.mESPdf.fracCBShape =  1.0000 C L(0 - 1) 
+//$
+//    0.0023569588 -4.7543168e-07   4.125277e-07
+//  -4.7543168e-07   8.763823e-10 -1.8813094e-10
+//    4.125277e-07 -1.8813094e-10  5.3388927e-10
+//$
+pdfOnResDK.DpiBadD0.mESPdf.argus.endPoint =  5.2900 C L(5.285 - 5.295) // [GeV]
+pdfOnResDK.DpiBadD0.mESPdf.argus.exp = -0.0000117415 +/- 144.44 L(-200 - 0) 
+pdfOnResDK.DpiBadD0.mESPdf.cbShape.alpha =  10.000 C L(0 - 15) 
+pdfOnResDK.DpiBadD0.mESPdf.cbShape.enne =  10.000 C L(0 - 100) 
+pdfOnResDK.DpiBadD0.mESPdf.cbShape.m0 =  5.2760 +/- 0.0022372 L(5.27 - 5.285) // [GeV]
+pdfOnResDK.DpiBadD0.mESPdf.cbShape.sigma =  0.0045864 +/- 0.0021991 L(0.001 - 0.015) // [GeV]
+pdfOnResDK.DpiBadD0.mESPdf.fracCBShape =  0.78481 +/- 0.84661 L(0 - 1) 
+//$
+//       20861.672   -0.024502503   0.0075101508      11.988862
+//    -0.024502503  5.0050689e-06 -2.2514216e-06  5.8227364e-05
+//    0.0075101508 -2.2514216e-06  4.8359602e-06   0.0013467621
+//       11.988862  5.8227364e-05   0.0013467621     0.71674204
+//$
+pdfOnResDK.DpiGoodD0.mESPdf.argus.endPoint =  5.2900 +/- 0.0013954 C L(5.285 - 5.295) // [GeV]
+pdfOnResDK.DpiGoodD0.mESPdf.argus.exp = -23.0000 +/- 2.5000 C L(-100 - 0)
+pdfOnResDK.DpiGoodD0.mESPdf.cbShape.alpha =  1.3708 +/- 0.048549 C L(0 - 5)
+pdfOnResDK.DpiGoodD0.mESPdf.cbShape.enne =  100.00 C L(0 - 200)
+pdfOnResDK.DpiGoodD0.mESPdf.cbShape.m0 =  5.2794 +/- 0.000029604 C L(5.27 - 5.285) // [GeV]
+pdfOnResDK.DpiGoodD0.mESPdf.cbShape.sigma =  0.0024580 +/- 0.000023106 C L(0.001 - 0.008) // [GeV]
+pdfOnResDK.DpiGoodD0.mESPdf.fracCBShape =  1.0000 C L(0 - 1)
+//$
+//$
+pdfOnResDK.charmless.mESPdf.argus.endPoint =  5.2890 +/- 0.00021588 L(5.285 - 5.295) // [GeV]
+pdfOnResDK.charmless.mESPdf.argus.exp = -89.9084 +/- 73.551 L(-100 - 0) 
+pdfOnResDK.charmless.mESPdf.cbShape.alpha =  0.15734 +/- 2.7081 L(0 - 5) 
+pdfOnResDK.charmless.mESPdf.cbShape.enne =  71.959 +/- 68.459 L(0 - 100) 
+pdfOnResDK.charmless.mESPdf.cbShape.m0 =  5.2816 +/- 0.00081405 L(5.27 - 5.285) // [GeV]
+pdfOnResDK.charmless.mESPdf.cbShape.sigma =  0.0011784 +/- 0.0053038 L(0.001 - 0.008) // [GeV]
+pdfOnResDK.charmless.mESPdf.fracCBShape =  0.33010 +/- 0.55461 L(0 - 1) 
+//$
+//   4.6606161e-08   0.0063655153  0.00022860173    0.001866897  5.1754846e-08 -3.6293412e-07 -4.3845983e-05
+//    0.0063655153      5409.8135      197.96133      1551.0558    0.048423193    -0.36821142     -40.568119
+//   0.00022860173      197.96133      7.3339629      50.832058   0.0017031495   -0.013266858      -1.486232
+//     0.001866897      1551.0558      50.832058      4686.6201    0.013486013    -0.10116053     -11.584011
+//   5.1754846e-08    0.048423193   0.0017031495    0.013486013  6.6268274e-07 -3.7449468e-06 -0.00036770978
+//  -3.6293412e-07    -0.36821142   -0.013266858    -0.10116053 -3.7449468e-06   2.813074e-05   0.0028272474
+//  -4.3845983e-05     -40.568119      -1.486232     -11.584011 -0.00036770978   0.0028272474     0.30758873
+//$

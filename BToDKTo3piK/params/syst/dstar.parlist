@@ -1,0 +1,13 @@
+../BToDKTo3piK/params/syst/dstar_PPP_Group7.Bdk.par Group7       0
+../BToDKTo3piK/params/syst/dstar_PPP_Group6.Bdk.par Group6       0
+../BToDKTo3piK/params/syst/dstar_PPP_Group5.Bdk.par Group5       0
+../BToDKTo3piK/params/syst/dstar_PPP_Group4.Bdk.par Group4       0
+../BToDKTo3piK/params/syst/dstar_PPP_Group3.Bdk.par Group3       0
+../BToDKTo3piK/params/syst/dstar_PPP_Group2.Bdk.par Group2       0
+../BToDKTo3piK/params/syst/dstar_PPP_Group1.Bdk.par Group1       0
+../BToDKTo3piK/params/syst/dstar_PPP_Group0.Bdk.par Group0       0
+../BToDKTo3piK/params/syst/dstar_PPP_removeOmegaF2NRPW.Bdk.par Group3p    0
+../BToDKTo3piK/params/syst/dstar_bkgFromMC.Bdk.par         bkgFromMC      0
+../BToDKTo3piK/params/syst/dstar_PPP_resRadius0.Bdk.par    resRadius0     0
+../BToDKTo3piK/params/syst/dstar_nominalFit_noPID.Bdk.par  noPID          0
+../BToDKTo3piK/params/syst/dstar_nominalFit_noEff.Bdk.par  noEff          0

@@ -1,0 +1,232 @@
+* $Id: bgdDalitzSB.kumac,v 1.4 2006/01/19 19:44:51 abi Exp $
+* Script to plot/calculate the KS probabilities of the Dalitz distributions
+* of the various background types, comparing the sidebands to the signal region.
+* Needs to be run over the "small" ntuples which get chained in chainhbk.kumac.
+* Those currently reside at /nfs/farm/babar/AWG17/BCK/SmallN
+
+macro bgdDalitzSB d=good bdecmode=DK dir=sig 
+
+opt nbox
+set mtyp 20
+h/del *
+
+exe ../BToDKTo3piK/kumac/chainhbk
+exe ../BToDKTo3piK/kumac/cuts 0 [d] [bdecmode] 
+
+
+* SR cut:
+cut 80 (-0.07<deltae<0.06.and.1.83<d0mass<1.895.and.nnout>0.1.and.bknnout>0.25.and.mes>5.272).and.(1.84>mixneumass.or.mixneumass>1.89)
+
+* upper DE cut:
+cut 81 (0.06<deltae<0.140.and.1.83<d0mass<1.895.and.nnout>0.1.and.bknnout>0.25.and.mes>5.272).and.(1.84>mixneumass.or.mixneumass>1.89)
+
+* lower DE cut:
+cut 82 (-0.140<deltae<-0.07.and.1.83<d0mass<1.895.and.nnout>0.1.and.bknnout>0.25.and.mes>5.272).and.(1.84>mixneumass.or.mixneumass>1.89)
+
+* mES cut:
+cut 83 (-0.07<deltae<0.06.and.1.83<d0mass<1.895.and.nnout>0.1.and.bknnout>0.25.and.5.2<mes<5.272).and.(1.84>mixneumass.or.mixneumass>1.89)
+
+* upper mD cut:
+cut 84 (-0.07<deltae<0.06.and.1.9<d0mass.and.nnout>0.1.and.bknnout>0.25.and.mes>5.272).and.(1.84>mixneumass.or.mixneumass>1.89)
+
+* lower mD cut:
+cut 85 (-0.07<deltae<0.06.and.d0mass<1.82.and.nnout>0.1.and.bknnout>0.25.and.mes>5.272).and.(1.84>mixneumass.or.mixneumass>1.89)
+
+cut 88 hdtrkchge<0
+cut 89 hdtrkchge>0
+
+* dummy cut. See how it changes below:
+cut 24 (d0truekspp!=1.or.d0truekspp==1)
+
+* set the hist id group based on the type
+if ([bdecmode].eq.DKX) then
+* For DKX, add a requirement that there be no Ks, since that currently includes
+* signal with Kspi0:
+  cut 24 d0truekspp!=1
+  typeid=1
+endif
+if ([bdecmode].eq.DPiX) then
+  typeid=2
+endif
+if ([bdecmode].eq.BBCD) then
+  typeid=3
+endif
+if ([bdecmode].eq.QQ) then
+  if ([d].eq.bad) then 
+    typeid=4
+  else
+    typeid=5
+  endif
+endif
+
+
+
+cd //[dir]
+opt nstat
+for/file 66 DalitzSB-[bdecmode]_[d].ps
+meta 66 -111
+
+hi/cr/2d 100 'dummy' 20 0 3 20 0 3
+hi/cr/2d 1[typeid]0 'signal region' 20 0 3 20 0 3
+hi/cr/2d 1[typeid]1 'upper DE SB'   20 0 3 20 0 3
+hi/cr/2d 1[typeid]2 'lower DE SB'   20 0 3 20 0 3
+hi/cr/2d 1[typeid]3 'mES SB'        20 0 3 20 0 3
+hi/cr/2d 1[typeid]4 'upper mD SB'   20 0 3 20 0 3
+hi/cr/2d 1[typeid]5 'lower mD SB'   20 0 3 20 0 3
+
+zone 1 1
+nt/proj 1[typeid]0 1.d0pppupmass**2%d0ppmupmass**2  $80&&$92&&$93&&$24&&$89 
+nt/proj 100 1.d0ppmupmass**2%d0pppupmass**2  $80&&$92&&$93&&$24&&$88 
+hi/op/add 1[typeid]0 100 1[typeid]0
+hi/pl 1[typeid]0
+
+nt/proj 1[typeid]1 1.d0pppupmass**2%d0ppmupmass**2  $81&&$92&&$93&&$24&&$89 
+nt/proj 100 1.d0ppmupmass**2%d0pppupmass**2  $81&&$92&&$93&&$24&&$88 
+hi/op/add 1[typeid]1 100 1[typeid]1
+hi/pl 1[typeid]1
+
+nt/proj 1[typeid]2 1.d0pppupmass**2%d0ppmupmass**2  $82&&$92&&$93&&$24&&$89 
+nt/proj 100 1.d0ppmupmass**2%d0pppupmass**2  $82&&$92&&$93&&$24&&$88 
+hi/op/add 1[typeid]2 100 1[typeid]2
+hi/pl 1[typeid]2
+
+nt/proj 1[typeid]3 1.d0pppupmass**2%d0ppmupmass**2  $83&&$92&&$93&&$24&&$89 
+nt/proj 100 1.d0ppmupmass**2%d0pppupmass**2  $83&&$92&&$93&&$24&&$88 
+hi/op/add 1[typeid]3 100 1[typeid]3
+hi/pl 1[typeid]3
+
+nt/proj 1[typeid]4 1.d0pppupmass**2%d0ppmupmass**2  $84&&$92&&$93&&$24&&$89 
+nt/proj 100 1.d0ppmupmass**2%d0pppupmass**2  $84&&$92&&$93&&$24&&$88 
+hi/op/add 1[typeid]4 100 1[typeid]4
+hi/pl 1[typeid]4
+
+nt/proj 1[typeid]5 1.d0pppupmass**2%d0ppmupmass**2  $85&&$92&&$93&&$24&&$89 
+nt/proj 100 1.d0ppmupmass**2%d0pppupmass**2  $85&&$92&&$93&&$24&&$88 
+hi/op/add 1[typeid]5 100 1[typeid]5
+hi/pl 1[typeid]5
+
+zone 2 3
+hi/pl 1[typeid]0 lego 
+hi/pl 1[typeid]1 lego 
+hi/pl 1[typeid]2 lego 
+hi/pl 1[typeid]3 lego 
+hi/pl 1[typeid]4 lego 
+hi/pl 1[typeid]5 lego 
+
+
+
+she echo [bdecmode]_[d], SR nevts=$HINFO(1[typeid]0,'ENTRIES'): >>&bgdDalitzSB.txt
+she echo -n SB nevs= >>&bgdDalitzSB.txt
+
+v/cre x(5) r
+do i=1,5
+    h1=1[typeid][i]
+    call ../BToDKTo3piK/kumac/getinfo.for(1[typeid]0, [h1])
+
+    she echo -n $HINFO([h1],'ENTRIES') >>& bgdDalitzSB.txt
+    she echo -n "  " >>& bgdDalitzSB.txt
+
+    v/in x([i]) getprob(1)
+enddo
+
+she echo "  " >>& bgdDalitzSB.txt
+she echo -n "KSprobs=  " >>& bgdDalitzSB.txt
+
+v/write x(1),x(2),x(3),x(4),x(5) tmpbgdDalitzSB.txt format='1x,f10.8,4x,f10.8,4x,f10.8,4x,f10.8,4x,f10.8'
+she cat tmpbgdDalitzSB.txt>>&bgdDalitzSB.txt
+she rm tmpbgdDalitzSB.txt
+v/del *
+
+
+hi/cr/1d 2[typeid]0 'm+-2, signal region' 60 0 3 
+hi/cr/1d 2[typeid]1 'm+-2, upper DE SB'   60 0 3 
+hi/cr/1d 2[typeid]2 'm+-2, lower DE SB'   60 0 3 
+hi/cr/1d 2[typeid]3 'm+-2, mES SB'        60 0 3 
+hi/cr/1d 2[typeid]4 'm+-2, upper mD SB'   60 0 3 
+hi/cr/1d 2[typeid]5 'm+-2, lower mD SB'   60 0 3 
+
+hi/cr/1d 4[typeid]0 'm+02, signal region' 60 0 3 
+hi/cr/1d 4[typeid]1 'm+02, upper DE SB'   60 0 3 
+hi/cr/1d 4[typeid]2 'm+02, lower DE SB'   60 0 3 
+hi/cr/1d 4[typeid]3 'm+02, mES SB'        60 0 3 
+hi/cr/1d 4[typeid]4 'm+02, upper mD SB'   60 0 3 
+hi/cr/1d 4[typeid]5 'm+02, lower mD SB'   60 0 3 
+
+hi/cr/1d 5[typeid]0 'm-02, signal region' 60 0 3 
+hi/cr/1d 5[typeid]1 'm-02, upper DE SB'   60 0 3 
+hi/cr/1d 5[typeid]2 'm-02, lower DE SB'   60 0 3 
+hi/cr/1d 5[typeid]3 'm-02, mES SB'        60 0 3 
+hi/cr/1d 5[typeid]4 'm-02, upper mD SB'   60 0 3 
+hi/cr/1d 5[typeid]5 'm-02, lower mD SB'   60 0 3 
+
+nt/pl 1.d0ppupmass**2  $80&&$92&&$93&&$24 idh=2[typeid]0
+nt/pl 1.d0ppupmass**2  $81&&$92&&$93&&$24 idh=2[typeid]1
+nt/pl 1.d0ppupmass**2  $82&&$92&&$93&&$24 idh=2[typeid]2
+nt/pl 1.d0ppupmass**2  $83&&$92&&$93&&$24 idh=2[typeid]3
+nt/pl 1.d0ppupmass**2  $84&&$92&&$93&&$24 idh=2[typeid]4
+nt/pl 1.d0ppupmass**2  $85&&$92&&$93&&$24 idh=2[typeid]5
+
+nt/pl 1.d0pppupmass**2  $80&&$92&&$93&&$24 idh=4[typeid]0
+nt/pl 1.d0pppupmass**2  $81&&$92&&$93&&$24 idh=4[typeid]1
+nt/pl 1.d0pppupmass**2  $82&&$92&&$93&&$24 idh=4[typeid]2
+nt/pl 1.d0pppupmass**2  $83&&$92&&$93&&$24 idh=4[typeid]3
+nt/pl 1.d0pppupmass**2  $84&&$92&&$93&&$24 idh=4[typeid]4
+nt/pl 1.d0pppupmass**2  $85&&$92&&$93&&$24 idh=4[typeid]5
+
+nt/pl 1.d0ppmupmass**2  $80&&$92&&$93&&$24 idh=5[typeid]0
+nt/pl 1.d0ppmupmass**2  $81&&$92&&$93&&$24 idh=5[typeid]1
+nt/pl 1.d0ppmupmass**2  $82&&$92&&$93&&$24 idh=5[typeid]2
+nt/pl 1.d0ppmupmass**2  $83&&$92&&$93&&$24 idh=5[typeid]3
+nt/pl 1.d0ppmupmass**2  $84&&$92&&$93&&$24 idh=5[typeid]4
+nt/pl 1.d0ppmupmass**2  $85&&$92&&$93&&$24 idh=5[typeid]5
+
+v/cre x(5) r
+do i=1,5
+    h1=2[typeid][i]
+    call ../BToDKTo3piK/kumac/getinfo.for(2[typeid]0, [h1])
+    v/in x([i]) getprob(1)
+enddo
+
+v/cre xp(5) r
+do i=1,5
+    h1=4[typeid][i]
+    call ../BToDKTo3piK/kumac/getinfo.for(4[typeid]0, [h1])
+    v/in xp([i]) getprob(1)
+enddo
+
+v/cre xm(5) r
+do i=1,5
+    h1=5[typeid][i]
+    call ../BToDKTo3piK/kumac/getinfo.for(5[typeid]0, [h1])
+    v/in xm([i]) getprob(1)
+enddo
+
+she echo -n "m(+-)2 KSprobs=  " >>& bgdDalitzSB.txt
+v/write x(1),x(2),x(3),x(4),x(5) tmpbgdDalitzSB.txt format='1x,f10.8,4x,f10.8,4x,f10.8,4x,f10.8,4x,f10.8'
+she cat tmpbgdDalitzSB.txt>>&bgdDalitzSB.txt
+she rm tmpbgdDalitzSB.txt
+
+she echo -n "m(+0)2 KSprobs=  " >>& bgdDalitzSB.txt
+v/write xp(1),xp(2),xp(3),xp(4),xp(5) tmpbgdDalitzSB.txt format='1x,f10.8,4x,f10.8,4x,f10.8,4x,f10.8,4x,f10.8'
+she cat tmpbgdDalitzSB.txt>>&bgdDalitzSB.txt
+she rm tmpbgdDalitzSB.txt
+
+she echo -n "m(-0)2 KSprobs=  " >>& bgdDalitzSB.txt
+v/write xm(1),xm(2),xm(3),xm(4),xm(5) tmpbgdDalitzSB.txt format='1x,f10.8,4x,f10.8,4x,f10.8,4x,f10.8,4x,f10.8'
+she cat tmpbgdDalitzSB.txt>>&bgdDalitzSB.txt
+she rm tmpbgdDalitzSB.txt
+
+
+v/del *
+
+hi/cr/1d 3[typeid]0 'mES non-Ks' 50 5.2 5.3
+hi/cr/1d 3[typeid]1 'mES Ks' 50 5.2 5.3
+hi/cr/1d 3[typeid]2 'mES Ks frac' 50 5.2 5.3
+
+cut 87 -0.07<deltae<0.06.and.1.83<d0mass<1.895.and.nnout>0.1.and.bknnout>0.25
+zone 1 3
+nt/pl 1.mes $87&&$92&&$93&&$24&&d0trueKsPP<1 idh=3[typeid]0
+nt/pl 1.mes $87&&$92&&$93&&$24&&d0trueKsPP=1 idh=3[typeid]1
+hi/op/div 3[typeid]1 3[typeid]0 3[typeid]2
+
+close 66

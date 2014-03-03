@@ -1,0 +1,109 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdfPolyn.rdl,v 1.1 2005/10/09 22:50:37 abi Exp $
+ * Authors:
+ *   Abi Soffer, Colorado State University, abi@slac.stanford.edu
+ * Description:
+ *   Class for an ARGUS pdf with it's own variable definition
+ *   To be used in conjunction with RooFitCore/Models.
+ * History:
+ *   21-Mar-2002 abi Created initial version
+ *   28-Mar-2002 ww  add dependents(), delete generate()
+ *   17-Sep-2002 WW Bug fixes for SunOS 5.8 compilation.
+ *
+ * Copyright (C) 2002 Colorado State University and SLAC
+ *****************************************************************************/
+#ifndef BDKPDFPOLYN
+#define BDKPDFPOLYN
+
+#include "BToDKTo3piK/BdkPdfAbsBase.hh"
+#include "RooFitCore/RooListProxy.hh"
+#include "RooFitCore/RooRealProxy.hh"
+
+class RooRealVar;
+class RooDataSet;
+class RooArgSet;
+class RooArgList;
+class RooFormulaVar;
+
+class BdkPdfPolyn : public BdkPdfAbsBase {
+public:
+  BdkPdfPolyn();
+  BdkPdfPolyn(const char * theName,
+	      const char * theDesc,
+	      RooRealVar & dependent,
+	      Int_t lowestOrder,
+              Int_t highestOrder);
+  
+  virtual ~BdkPdfPolyn();
+
+  void init(const char * theName,
+	    const char * theDesc,
+	    RooRealVar& dependent,
+	    Int_t lowestOrder,
+            Int_t highestOrder);
+  
+  // Modifiers:
+  void setDependent(RooRealVar & dependent);
+  
+  void setlowestOrder( Int_t lowestOrder );
+  void sethighestOrder( Int_t highestOrder );
+  void setcoefConst(Int_t n, Double_t val, Bool_t trfk);
+  void useOffset(Bool_t use = kTRUE);
+
+  RooRealVar* getCoef(Int_t n);
+ 
+  void linkParameters(const BdkPdfPolyn & pdf2);
+
+  void linkParameters(Int_t lowestOrder, Int_t highestOrder);
+
+  void setParameters(const RooArgList& coefList, Int_t lowestOrder);
+  
+  RooRealVar * Offset() { return _offset; }
+
+  virtual RooArgSet dependents();
+
+  // Accessors:
+
+  Double_t analyticalIntegral(Int_t code);//check pdf is not empty
+
+   
+protected:
+  BdkPdfPolyn(BdkPdfPolyn & pdf);
+  virtual void createPdf();  
+  virtual void initParameters();
+
+private: 
+  // Helpers:
+  void deleteAll();
+
+  // Data:
+  RooRealVar * _dependent;
+  RooArgList _coefList; //! do not persist
+  RooRealVar * _offset;
+  RooFormulaVar * _diff;
+  Int_t _lowestOrder; 
+  Int_t _highestOrder; 
+  Bool_t _useOffset;
+
+#if !defined(__INTERACTIVE__)
+  ClassDef (BdkPdfPolyn,0) // Polyn pdf wrapper on top of RooFitCore
+#endif      
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

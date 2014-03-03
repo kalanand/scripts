@@ -1,0 +1,94 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdfBifurGaussGauss.rdl,v 1.1 2006/03/01 21:39:56 fwinkl Exp $
+ * Authors:
+ *   Abi Soffer, Colorado State University, abi@slac.stanford.edu
+ * Description:
+ *   Class for a Gaussian + Bifurcated Gaussian pdf with it's own 
+ *   variable definition to be used in conjunction with RooFitCore/Models.
+ * History:
+ *   1-Mar-2006 fwinkl Created initial version
+ *
+ * Copyright (C) 2006 Colorado State University and SLAC
+ *****************************************************************************/
+#ifndef BDKPDFBIFURGAUSSGAUSS
+#define BDKPDFBIFURGAUSSGAUSS
+
+#include "BToDKTo3piK/BdkPdfComposite.hh"
+#include "BToDKTo3piK/BdkPdfGauss.hh"
+#include "BToDKTo3piK/BdkPdfBifurGauss.hh"
+
+class RooRealVar;
+
+class BdkPdfBifurGaussGauss : public BdkPdfComposite {
+public:
+  BdkPdfBifurGaussGauss();
+  BdkPdfBifurGaussGauss(const char * theName,
+                        const char * theDesc,
+                        RooRealVar & dependent);
+  
+  virtual ~BdkPdfBifurGaussGauss();
+  
+  void init(const char * theName,
+	    const char * theDesc,
+	    RooRealVar & dependent);
+  
+  // Modifiers:
+  virtual void setDependent(RooRealVar & dependent);
+
+  void linkParameters(RooRealVar * b1,
+                      RooRealVar * s1,
+                      RooRealVar * b2, 
+                      RooRealVar * s2l,
+                      RooRealVar * s2r,
+                      RooRealVar * fracGauss);
+
+  // Non-const accessors:
+  BdkPdfGauss & gauss() {return _gauss;}
+  BdkPdfBifurGauss & bifur() {return _bifur;}
+  RooRealVar * fracGauss() {return _fracGauss;}
+
+  RooRealVar * dependent() {return _dependent;}
+
+   
+protected:
+  virtual void createPdf();  
+  virtual void initParameters();
+
+  virtual void addComponents();
+
+  // Data:
+  RooRealVar * _dependent;
+
+private:
+  BdkPdfBifurGaussGauss(const BdkPdfBifurGaussGauss & pdf);
+
+  // Helpers:
+  void deleteFrac();
+
+  // Data:
+  BdkPdfGauss      _gauss;
+  BdkPdfBifurGauss _bifur;
+  RooRealVar * _fracGauss;
+  
+
+  ClassDef (BdkPdfBifurGaussGauss,0) // Gauss + Argus pdf wrapper 
+
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

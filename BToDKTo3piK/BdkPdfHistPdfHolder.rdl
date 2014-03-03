@@ -1,0 +1,106 @@
+/*******
+* BdkPdfHistPdfHolder.rdl
+*******/
+#ifndef BDKPDFHISTPDFHOLDER
+#define BDKPDFHISTPDFHOLDER
+
+#include "TNamed.h"
+#include "RooFitCore/RooArgSet.hh"
+#include "BToDKTo3piK/BdkEvtTypes.hh"
+#include "BToDKTo3piK/BdkPdfHolder.hh"
+#include "BToDKTo3piK/BdkPdfHist.hh"
+
+class BdkPdfAbsBase;
+class TFile;
+class RooDataHist;
+class rooRealVar;
+
+//class definition:
+
+//class BdkPdfHistPdfHolder :public TNamed, public BdkPdfHolder {
+class BdkPdfHistPdfHolder : public BdkPdfHolder, public TNamed {
+public:
+  BdkPdfHistPdfHolder();
+  BdkPdfHistPdfHolder(const char * theName, 
+ 		      const char * theDesc,
+		      RooRealVar * var = 0, 
+	              const char * filename = 0);
+  
+  ~BdkPdfHistPdfHolder();
+
+  void init(const char * theName,
+            const char * theDesc,
+	    RooRealVar * var = 0, 
+	    const char * filename = 0);
+  
+  void setPdfHist(const char * filename = 0, RooRealVar * var = 0);
+
+
+  // base class implementation:
+  virtual BdkPdfAbsBase * sigBadD0() {return &_sigBadD0;};
+  virtual BdkPdfAbsBase * sigGoodD0() {return &_sigGoodD0;};
+  virtual BdkPdfAbsBase * DpiBadD0() {return &_DpiBadD0;};
+  virtual BdkPdfAbsBase * DpiGoodD0() {return &_DpiGoodD0;};
+  virtual BdkPdfAbsBase * DPiX() {return &_DPiX;};
+  virtual BdkPdfAbsBase * DKX() {return &_DKX;};
+  virtual BdkPdfAbsBase * BBBadD0() {return &_BBbadD0;};
+  virtual BdkPdfAbsBase * BBGoodD0() {return &_BBgoodD0;};
+  virtual BdkPdfAbsBase * qqBadD0() {return &_qqBadD0;};
+  virtual BdkPdfAbsBase * qqGoodD0() {return &_qqGoodD0;};
+
+
+  const char * histName(BdkEvtTypes::Type type) {return _histNames[type];}
+
+  void setHistName(BdkEvtTypes::Type type, const char * name) {
+    _histNames[type] = name;
+  }
+
+
+protected:
+  void initHistNames();
+
+private:
+  // Forbidden:
+  BdkPdfHistPdfHolder(const BdkPdfHistPdfHolder & source);
+
+  //data member:
+  BdkPdfHist _sigBadD0;
+  BdkPdfHist _sigGoodD0;
+  BdkPdfHist _DpiBadD0;
+  BdkPdfHist _DpiGoodD0;
+  BdkPdfHist _DPiX;
+  BdkPdfHist _DKX;
+  BdkPdfHist _BBbadD0;
+  BdkPdfHist _BBgoodD0;
+  BdkPdfHist _qqBadD0;
+  BdkPdfHist _qqGoodD0;
+    
+  TString  _histNames[BdkEvtTypes::NTYPES];
+
+  RooDataHist * _sigBadD0Hist;
+  RooDataHist * _sigGoodD0Hist;
+  RooDataHist * _DpiBadD0Hist;
+  RooDataHist * _DpiGoodD0Hist;
+  RooDataHist * _DPiXHist;
+  RooDataHist * _DKXHist;
+  RooDataHist * _BBbadD0Hist;
+  RooDataHist * _BBgoodD0Hist;
+  RooDataHist * _qqBadD0Hist;
+  RooDataHist * _qqGoodD0Hist;
+
+private:
+#if !defined(__INERACTIVE__)
+  ClassDef(BdkPdfHistPdfHolder,0) // PdfHist holder
+#endif
+};
+
+#endif 
+ 
+
+
+
+
+
+
+
+

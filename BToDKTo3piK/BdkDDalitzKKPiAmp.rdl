@@ -1,0 +1,82 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkDDalitzKKPiAmp.rdl,v 1.3 2008/01/02 20:30:09 fwinkl Exp $
+ * Description:
+ *   Implementation of D0 -> K+K-pi0 Dalitz amplitude
+ * History:
+ *   04 Apr 2007, created, Frank Winklmeier
+ *                code by Kalanand Mishra
+ *
+ * Copyright (C) 2007 Colorado State University and SLAC
+ *****************************************************************************/
+#ifndef BDKDDALITZKKPIAMP
+#define BDKDDALITZKKPIAMP
+
+#include "BToDKTo3piK/BdkAbsDDalitzAmp.hh"
+
+class BdkDDalitzKKPiAmp : public BdkAbsDDalitzAmp {
+  // Static members: -------------------------------------------
+public:
+  enum Component {KSTARP     = 1,
+                  PHI        = 2,
+                  KSTARM     = 4,
+                  KSTAR1410P = 8,
+                  KSTAR1410M = 16,
+                  NONRESP    = 32,
+                  NONRESM    = 64,
+                  F2P1525    = 128,
+                  F0         = 256,
+                  A0         = 512};
+
+  enum ResType {BWRES = 0,
+                A0RES = 1,
+                F0RES = 2,
+                KPI_SW = 3};
+  
+  static int allComponents() {return KSTARP + PHI + KSTARM + KSTAR1410P + 
+      KSTAR1410M + NONRESP + NONRESM + F2P1525 + F0 + A0;}
+
+  // Instance members: -------------------------------------------
+public:
+  /// constructors:
+  BdkDDalitzKKPiAmp(const char * name, const char * title, 
+                    BdkDalitzBase * pdf,
+                    Int_t componentsBit = allComponents(),
+                    Int_t defaultKstarSpin = SPIN1);
+  
+  virtual  ~BdkDDalitzKKPiAmp();
+   
+  virtual Double_t efficiency(Double_t m12, Double_t m13) const;
+  virtual Double_t m12NormRange() const {return 2.0;}
+  virtual Double_t m13NormRange() const {return 2.0;}
+  
+  virtual RooComplex matrixElement(Double_t m12, Double_t m13, Int_t i) const;
+    
+protected:
+  
+  // helpers:
+  virtual void initResonance();
+
+  RooComplex LASS(Double_t s, Int_t i) const; 
+  RooComplex E791Table(Double_t s) const;
+  
+private:
+  Int_t _defaultKstarSpin; // default spin of the K*, if want to set to 0
+
+  RooRealVar* _a;           // scattering length
+  RooRealVar* _r;           // Effective Range
+  RooRealVar* _B;           // fraction of the background amplitude
+  RooRealVar* _R;           // resonant amplitude
+  RooRealVar* _phiB;        // overall background phase
+  RooRealVar* _phiR;        // overall resonant phase
+  RooRealVar* _E791;        // to use E791 Table III
+  
+  BdkDDalitzKKPiAmp(const BdkDDalitzKKPiAmp & other);
+
+  ClassDef(BdkDDalitzKKPiAmp,1)
+
+};
+
+#endif
+

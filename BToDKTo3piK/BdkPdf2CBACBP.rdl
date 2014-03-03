@@ -1,0 +1,118 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkPdf2CBACBP.rdl,v 1.1 2005/10/09 22:50:36 abi Exp $
+ * Authors:
+ *   R. de Sangro INFN - Frascati riccardo.desangro@slac.stanford.edu
+ * Description:
+ *   Class for a Crystall Bass + ARGUS pdf with it's own 
+ *   variable definition to be used in conjunction with RooFitCore/Models.
+ * History:
+ *   17-Mar-2003 rid Created initial version from BdkPdfBifurArgus by Abi Soffer
+ *
+ * Copyright (C) 2003 INFN - LNF 
+ *****************************************************************************/
+#ifndef BDKPDF2CBACBP
+#define BDKPDF2CBACBP
+
+#include "BToDKTo3piK/BdkPdfComposite.hh"
+#include "BToDKTo3piK/BdkPdfCBArgus.hh"
+#include "BToDKTo3piK/BdkPdfCBPolyn.hh"
+
+class RooAbsReal;
+class RooRealVar;
+class RooProdPdf;
+
+class BdkPdf2CBACBP : public BdkPdfComposite
+{  
+public:
+  BdkPdf2CBACBP();
+  BdkPdf2CBACBP(const char * theName,
+	       const char * theDesc,
+	       RooRealVar & depCBA,
+	       RooRealVar & depCBP,
+	       int loOrder1 = 0, int hiOrder1 = 2, // for polynomial
+	       int loOrder2 = 0, int hiOrder2 = 2);
+  
+  virtual ~BdkPdf2CBACBP();
+  
+  void init(const char * theName,
+	    const char * theDesc,
+	    RooRealVar & depCBA,
+	    RooRealVar & depCBP,
+	    int loOrder1 = 0, int hiOrder1 = 2,
+	    int loOrder2 = 0, int hiOrder2 = 2);
+  
+  // Modifiers:
+  void setDependents(RooRealVar & depCBA, RooRealVar & depCBP);
+
+  // parameter linking for CBA:
+  void linkCBAEndPoint();
+  void linkCBAExp();
+  void linkCBAAlpha();
+  void linkCBAEnne();
+  void linkCBAM0();
+  void linkCBASigma();
+  void linkCBAFracCBShape();
+  
+  // parameter linking for CBP:
+  void linkCBPAlpha();
+  void linkCBPEnne();
+  void linkCBPM0();
+  void linkCBPSigma();
+  void linkCBPFracCBShape();
+  //  void linkCBPCoef(int i); // not implemented in BdkPdfPolyn yet
+
+  // defaults:
+  void defaultLinksCBA();
+  void defaultLinksCBP();
+  void defaultLinks();
+
+  // Non-const accessors:
+  RooRealVar * depCBA() {return _depCBA;}
+  RooRealVar * depCBP() {return _depCBP;}
+
+  RooAbsReal * frac1() {return _frac1;}
+  RooProdPdf * prod1() {return _prod1;}
+  RooProdPdf * prod2() {return _prod2;}
+
+  BdkPdfCBArgus & CBA1() {return _CBA1;}
+  BdkPdfCBArgus & CBA2() {return _CBA2;}
+  BdkPdfCBPolyn & CBP1() {return _CBP1;}
+  BdkPdfCBPolyn & CBP2() {return _CBP2;}
+
+  
+protected:
+  virtual void initParameters();
+  virtual void createPdf();
+  void deleteAll();
+
+ 
+private:
+  BdkPdf2CBACBP(const BdkPdf2CBACBP & pdf);
+  
+  // Data:
+  RooRealVar * _depCBA; // not owned
+  RooRealVar * _depCBP; // not owned
+
+  // below all pointers are allowned:
+  RooAbsReal * _frac1;
+  RooProdPdf * _prod1;
+  RooProdPdf * _prod2;
+
+  BdkPdfCBArgus _CBA1;
+  BdkPdfCBArgus _CBA2;
+  BdkPdfCBPolyn _CBP1;
+  BdkPdfCBPolyn _CBP2;
+
+  int _loOrder1;
+  int _hiOrder1;
+  int _loOrder2;
+  int _hiOrder2;
+  
+  ClassDef (BdkPdf2CBACBP,0) // sum of 2 (CB + Argus) * (CB + poly))
+};
+
+#endif
+
+

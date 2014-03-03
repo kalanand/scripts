@@ -1,0 +1,84 @@
+// Makes "projections" of the 3D hists only 1D and 2D hists. A projection
+// is really finding the minimum value along the "integrated" dimension,
+// the dimension that is not presented.
+
+
+#ifndef CLHISTPROJECTOR
+#define CLHISTPROJECTOR
+
+class TH2F;
+class TH1F;
+class TAxis;
+
+#include "TH3F.h"
+
+
+class CLHistProjector {
+public:
+  // Constructor. h3 must be a cl histogram, not a chi2 or other histogram:
+  CLHistProjector(const TH3F * h3 = 0);
+  virtual ~CLHistProjector();
+
+  // Takes h3 from a combination of the files, submitted with
+  // confInt/makeCLHistSub.csh:
+  void combine(const char * files[], 
+	       int nFiles,
+	       const char * histName = "hCLAll");
+
+  // Makes all "projections":
+  void makeAllProj();
+
+  // Makes 1d and 2d "projections" of h3:
+  // dim = 0, 1, or 2, is the returned dimension:
+  TH1F * projOnto(const TAxis * axis) const;
+  TH2F * projOnto(const TAxis * axis1, const TAxis * axis2) const;
+
+  // Accessors:
+  const TH3F * h3() const {return _h3;}
+
+  TAxis * axisR() const {return _h3->GetXaxis();}
+  TAxis * axisG() const {return _h3->GetYaxis();}
+  TAxis * axisD() const {return _h3->GetZaxis();}
+
+  const char * axisName(const TAxis * axis) const;
+
+  const char * nameR() const {return "rB";}
+  const char * nameG() const {return "gamma";}
+  const char * nameD() const {return "delta";}
+
+  void translate(const TAxis * axes[3], int indices[3], 
+		 int & iR, int & iG, int & iD) const;
+
+  const TH2F * hRG() const {return _hRG;}
+  const TH2F * hRD() const {return _hRD;}
+  const TH2F * hGD() const {return _hGD;}
+  const TH1F * hR() const {return _hR;}
+  const TH1F * hG() const {return _hG;}
+  const TH1F * hD() const {return _hD;}
+
+  void saveHists(const char * fileName, bool saveH3 = false) const;
+
+
+private:
+  void deleteH3();
+
+  // Data:
+  const TH3F * _h3;
+  bool _ownH3;
+
+  TH2F * _hRG;
+  TH2F * _hRD;
+  TH2F * _hGD;
+
+  TH1F * _hR;
+  TH1F * _hG;
+  TH1F * _hD;
+
+
+#if !defined(__INTERACTIVE__)
+  ClassDef(CLHistProjector,0)
+#endif  
+
+};
+
+#endif

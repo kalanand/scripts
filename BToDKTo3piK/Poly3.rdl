@@ -1,0 +1,41 @@
+// a convenient 3-rd order polynomial
+
+#ifndef POLY3
+#define POLY3
+
+class TF1;
+
+#include "TObject.h"  // for ClassDef
+
+class Poly3 {
+public:
+  Poly3(double p0=0, double p1=0, double p2=0, double p3=0) :
+    _p0(p0),
+    _p1(p1),
+    _p2(p2),
+    _p3(p3) {
+  }
+
+  virtual ~Poly3() {}
+
+  double getVal(double x) const { return _p0 + _p1*x + _p2*x*x + _p3*x*x*x;}
+
+  TF1 * tf1() const;
+
+  void draw() const;
+
+  
+private:
+  double _p0;
+  double _p1;
+  double _p2;
+  double _p3;
+
+#if !defined(__INTERACTIVE__)
+  ClassDef(Poly3,0)
+#endif  
+
+};  
+
+
+#endif

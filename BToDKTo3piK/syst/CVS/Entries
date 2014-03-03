@@ -1,0 +1,21 @@
+/asymEffSyst.cc/1.1/Tue Jul 11 21:48:51 2006//
+/badSigShape.cc/1.2/Tue Jul 11 21:44:01 2006//
+/bkgHistSyst.cc/1.5/Tue Jul 11 21:44:03 2006//
+/bkgShapeSyst.cc/1.6/Tue Jul 11 21:44:03 2006//
+/diffDataMC.cc/1.2/Wed Jun 14 17:04:39 2006//
+/diffParFiles.cc/1.1/Tue Jul 11 21:48:52 2006//
+/fitDataMCDiff.cc/1.1/Tue Jul 11 21:48:52 2006//
+/fixedFracSyst.cc/1.6/Mon Jul  3 17:36:06 2006//
+/genShapeSystAll.csh/1.1/Sun Nov 20 21:03:03 2005//
+/mcStatSyst.cc/1.9/Mon Apr  2 14:15:34 2007//
+/mcStatSyst.csh/1.7/Fri Mar  2 09:49:21 2007//
+/printMcStatSyst.cc/1.2/Fri Aug  4 22:27:54 2006//
+/runAllSyst.readme/1.6/Mon Apr  2 14:14:52 2007//
+/sigBadResSyst.cc/1.3/Mon Sep 25 23:31:13 2006//
+/sigBadWrongK.cc/1.1/Mon Sep 25 23:31:13 2006//
+/sigDalitzSyst.cc/1.3/Mon Jun 19 17:58:29 2006//
+/systAnyParFile.cc/1.3/Fri Mar  2 09:49:21 2007//
+/systToyAnyParFile.cc/1.1/Mon Apr 16 09:27:56 2007//
+/systToyAnyParFile.csh/1.1/Mon Apr 16 09:27:56 2007//
+/yieldsNllSyst.cc/1.4/Tue Jul 11 21:44:04 2006//
+D

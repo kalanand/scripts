@@ -1,0 +1,93 @@
+macro summarize 1=summarize.dat
+
+message summarize.kumac reads summarize.dat (made by summarize.csh) and 
+message makes plots. Need to edit to get the correct variables for nt/cr
+
+nt/cr 1 'toy mc results' 27 ! ! fitStat nll nVars nBBBadDI nBBBadDF nBBBadDE nDpipiI nDpipiF nDpipiE nDpiI nDpiF nDpiE asymI asymF asymE nChrmlsI nChrmlsF nChrmlsE gAsymI gAsymF gAsymE nQQBadDI nQQBadDF nQQBadDE nSigI nsigF nsigE
+
+nt/read 1 [1] 
+
+opt stat
+opt fit 1111
+opt nbox
+for/file 33 summarize.ps
+meta 33 -111
+
+opt linx
+zone 3 2
+* output vars of bgd:
+nt/pl 1.nBBBadDF  fitstat==0&&nsige<1000
+nt/pl 1.nDpipiF  fitstat==0&&nsige<1000
+nt/pl 1.nDpiF  fitstat==0&&nsige<1000
+nt/pl 1.nChrmlsF  fitstat==0&&nsige<1000
+nt/pl 1.nQQBadDF  fitstat==0&&nsige<1000
+wait
+
+zone 3 2
+* errors:
+*opt logx
+nt/pl 1.nBBBadDE  fitstat==0&&nsige<1000
+nt/pl 1.nDpipiE  fitstat==0&&nsige<1000
+nt/pl 1.nDpiE  fitstat==0&&nsige<1000
+nt/pl 1.nChrmlsE  fitstat==0&&nsige<1000
+nt/pl 1.nQQBadDE  fitstat==0&&nsige<1000
+wait
+opt linx
+
+zone 3 2
+* pulls:
+nt/pl 1.(nBBBadDF-nBBBadDI)/nBBBadDE  fitstat==0&&nsige<1000
+nt/pl 1.(nDpipiF-nDpipiI)/nDpipiE  fitstat==0&&nsige<1000
+nt/pl 1.(nDpiF-nDpiI)/nDpiE  fitstat==0&&nsige<1000
+nt/pl 1.(nChrmlsF-nChrmlsI)/nChrmlsE  fitstat==0&&nsige<1000
+nt/pl 1.(nQQBadDF-nQQBadDI)/nQQBadDE  fitstat==0&&nsige<1000
+wait
+
+zone 1 2
+* of signal:
+nt/pl 1.nsigF fitstat==0&&nsige<1000
+nt/pl 1.asymF  fitstat==0&&nsige<1000
+wait
+
+*opt logx
+nt/pl 1.nsigE fitstat==0&&nsige<1000
+nt/pl 1.asymE fitstat==0&&nsige<1000
+wait
+opt linx
+
+opt nstat
+opt fit 1111
+
+1d 101 'nSigPull' 50 -5 5 
+nt/proj 101 1.(nsigF-nsigI)/nsigE fitstat==0&&nsige<1000
+hi/fit 101 g
+
+1d 102 'asymPull' 50 -5 5 
+nt/proj 102 1.(asymF-asymI)/asymE  fitstat==0&&nsige<1000
+hi/fit 102 g
+wait
+
+1d 103 'gAsymPull' 50 -5 5 
+nt/proj 103 1.(gasymF-gasymI)/gasymE  fitstat==0&&nsige<1000
+hi/fit 103 g
+
+1d 104 'nBBPull' 50 -5 5 
+nt/proj 104 1.(nBBBadDF-nBBBadDI)/nBBBadDE fitstat==0&&nsige<1000
+hi/fit 104 g
+wait
+
+1d 105 'nQQPull' 50 -5 5 
+nt/proj 105 1.(nQQBadDF-nQQBadDI)/nQQBadDE fitstat==0&&nsige<1000
+hi/fit 105 g
+
+1d 106 'nCharmlessPull' 50 -5 5 
+nt/proj 106 1.(nChrmlsF-nChrmlsI)/nChrmlsE fitstat==0&&nsige<1000
+hi/fit 106 g
+wait
+
+1d 107 'nDpiPull' 50 -5 5 
+nt/proj 107 1.(nDpiF-nDpiI)/nDpiE fitstat==0&&nsige<1000
+hi/fit 107 g
+
+close 33
+  

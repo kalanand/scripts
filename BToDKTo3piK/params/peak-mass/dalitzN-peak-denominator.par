@@ -1,0 +1,214 @@
+//
+// Dalitz parameters for dalitzHolderN
+// 
+
+//----------------------------------------------------------------------------
+// The D0 Dalitz parameters:
+//
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F0_1370_amp =  0.11392 +/- 0.022982 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F0_1370_mass =  1.4340 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F0_1370_phase =  46.152 +/- 8.1393 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F0_1370_width =  0.17300 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F0_1710_amp =  0.0000 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F0_1710_mass =  1.7140 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F0_1710_phase =  0.0000 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F0_1710_width =  0.14000 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F0_amp =  0.052519 +/- 0.0038732 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F0_mass =  0.98000 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F0_phase =  123.42 +/- 5.0986 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F0_width =  0.044000 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F2_amp =  0.29872 +/- 0.0089599 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F2_mass =  1.2754 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F2_phase =  52.451 +/- 1.8417 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F2_width =  0.18510 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Nonres_amp =  1.0300 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Nonres_mass =  0.0000 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Nonres_phase =  77.000 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Nonres_width =  0.0000 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Omega_amp =  0.0024866 +/- 0.0010098 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Omega_mass =  0.78268 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Omega_phase = -57.7252 +/- 23.284 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Omega_width =  0.0084900 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho+_amp =  1.0000 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho+_mass =  0.77580 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho+_phase =  0.0000 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho+_width =  0.15030 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho-_amp =  0.70197 +/- 0.0058804 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho-_phase = -1.18495 +/- 0.62318 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho0_amp =  0.59407 +/- 0.0054200 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho0_phase =  17.295 +/- 0.68648 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho1700+_amp =  1.7068 +/- 0.14385 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho1700+_mass =  1.7200 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho1700+_phase = -22.2512 +/- 4.5081 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho1700+_width =  0.25000 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho1700-_amp =  2.3531 +/- 0.11227 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho1700-_phase = -44.3482 +/- 3.4512 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho17000_amp =  2.8266 +/- 0.15579 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho17000_phase = -23.9640 +/- 2.8404 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho2s+_amp =  0.32050 +/- 0.033468 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho2s+_mass =  1.4650 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho2s+_phase =  329.41 +/- 13.397 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho2s+_width =  0.40000 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho2s-_amp =  0.77753 +/- 0.036434 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho2s-_phase =  371.98 +/- 3.9247 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho2s0_amp =  0.25845 +/- 0.047849 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho2s0_phase =  370.43 +/- 14.983 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Sigma_amp =  0.24856 +/- 0.010884 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Sigma_mass =  0.50000 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Sigma_phase =  212.01 +/- 3.7211 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Sigma_width =  0.40000 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F0_1500_amp =  0.0 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F0_1500_phase = 0.0 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F0_1500_mass =  1.507 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F0_1500_width =  0.109 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F2P1525_amp =  0.0 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F2P1525_phase =  0.0 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F2P1525_mass =  1.525 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F2P1525_width = 0.073 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.NRPW_PM_amp =   	0.0 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.NRPW_PM_phase = 	0.0 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.NRPW_M0_amp =  	0.0 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.NRPW_M0_phase =  	0.0 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.NRPW_0P_amp =  	0.0 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.NRPW_0P_phase =  	0.0 C
+
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.resRadius      =  1.5 C
+
+
+//----------------------------------------------------------------------------
+// All BadD event types use these incoherent rho's:
+//
+dalitzHolderN.DpiBadD0.rho+.pdf.dalitzAmp.Rho+_amp   =  1.0000 C
+dalitzHolderN.DpiBadD0.rho+.pdf.dalitzAmp.Rho+_phase =  0.0000 C
+dalitzHolderN.DpiBadD0.rho+.pdf.dalitzAmp.resRadius  =  0.0000 C
+dalitzHolderN.DpiBadD0.rho-.pdf.dalitzAmp.Rho-_amp   =  1.0000 C
+dalitzHolderN.DpiBadD0.rho-.pdf.dalitzAmp.Rho-_phase =  0.0000 C
+dalitzHolderN.DpiBadD0.rho-.pdf.dalitzAmp.resRadius  =  0.0000 C
+dalitzHolderN.DpiBadD0.rho0.pdf.dalitzAmp.Rho0_amp   =  1.0000 C
+dalitzHolderN.DpiBadD0.rho0.pdf.dalitzAmp.Rho0_phase =  0.0000 C
+dalitzHolderN.DpiBadD0.rho+.pdf.dalitzAmp.Rho+_mass =  0.77580 C
+dalitzHolderN.DpiBadD0.rho+.pdf.dalitzAmp.Rho+_width =  0.15030 C
+dalitzHolderN.DpiBadD0.rho-.pdf.dalitzAmp.Rho-_mass =  0.77580 C
+dalitzHolderN.DpiBadD0.rho-.pdf.dalitzAmp.Rho-_width =  0.15030 C
+dalitzHolderN.DpiBadD0.rho0.pdf.dalitzAmp.Rho0_mass =  0.77580 C
+dalitzHolderN.DpiBadD0.rho0.pdf.dalitzAmp.Rho0_width =  0.15030 C
+
+dalitzHolderN.DpiBadD0.rho0.pdf.dalitzAmp.resRadius  =  0.0000 C
+
+
+//----------------------------------------------------------------------------
+// The fractions and non-resonant paramters for all types:
+
+dalitzHolderN.BBBadD0.fracNonres =  0.74182 +/- 0.033956 L(0 - 1) 
+dalitzHolderN.BBBadD0.fracRho+ =  0.67251 +/- 0.070677 L(0 - 1) 
+dalitzHolderN.BBBadD0.fracRho0 =  0.15198 +/- 0.059204 L(0 - 1) 
+dalitzHolderN.BBBadD0.nonres_pdf.a1 = -0.12768 +/- 0.086112 L(-100 - 100) 
+dalitzHolderN.BBBadD0.nonres_pdf.a2 =  0.020093 +/- 0.070863 L(-100 - 100) 
+dalitzHolderN.BBBadD0.nonres_pdf.a3 =  0.0067377 +/- 0.015383 L(-100 - 100) 
+dalitzHolderN.BBBadD0.nonres_pdf.a4 =  0.0059510 +/- 0.017748 L(-100 - 100) 
+dalitzHolderN.BBBadD0.nonres_pdf.c0 =  1.0000 +/- 0.050000 C L(-100 - 100) 
+dalitzHolderN.BBBadD0.nonres_pdf.s1 = -0.75084 +/- 0.031565 L(-100 - 100) 
+dalitzHolderN.BBBadD0.nonres_pdf.s2 =  0.23625 +/- 0.024047 L(-100 - 100) 
+dalitzHolderN.BBBadD0.nonres_pdf.s3 = -0.014986 +/- 0.0066525 L(-100 - 100) 
+dalitzHolderN.BBBadD0.nonres_pdf.s4 = -0.079641 +/- 0.013352 L(-100 - 100) 
+dalitzHolderN.BBBadD0.nonres_pdf.s5 =  0.43744 +/- 0.052333 L(-100 - 100) 
+//$
+//    0.0011529829  0.00027350913 -0.00044836683  8.3556813e-05 -5.8093356e-05  1.0738201e-05  -5.849347e-08  5.3944041e-05 -9.1729111e-05  3.0864812e-05 -8.6185704e-05  0.00031794567
+//   0.00027350913   0.0049952855  0.00019914689  -0.0003156997  0.00069795112 -0.00021305111  0.00016089574  6.4725711e-05 -9.1785871e-05  2.3788578e-05 -4.5195913e-05  0.00017471977
+//  -0.00044836683  0.00019914689   0.0035051103  5.7277288e-05  9.8784883e-05 -4.3031116e-05 -1.8382661e-05  4.3836785e-06 -0.00010616956 -1.3762378e-05   7.527291e-05 -0.00024208783
+//   8.3556813e-05  -0.0003156997  5.7277288e-05    0.007415195  -0.0058471533   0.0011350835   0.0009755409 -0.00015811354  3.2865082e-05  2.7935623e-06 -2.1616219e-05  0.00017332337
+//  -5.8093356e-05  0.00069795112  9.8784883e-05  -0.0058471533   0.0050215363  -0.0010482658 -0.00080536038  -4.699382e-05 -3.0629115e-05  3.7400239e-06  2.1027059e-05  7.8868825e-06
+//   1.0738201e-05 -0.00021305111 -4.3031116e-05   0.0011350835  -0.0010482658  0.00023662442   0.0001350473  3.1983229e-05  4.7014669e-06 -1.1154893e-06 -5.4130064e-06 -1.5249082e-05
+//   -5.849347e-08  0.00016089574 -1.8382661e-05   0.0009755409 -0.00080536038   0.0001350473  0.00031497504  2.7649941e-05  1.2764587e-05 -2.6394841e-06  7.5341467e-07 -4.5095021e-05
+//   5.3944041e-05  6.4725711e-05  4.3836785e-06 -0.00015811354  -4.699382e-05  3.1983229e-05  2.7649941e-05  0.00099635869 -0.00048344437  8.0942213e-05  0.00012624885 -0.00084455655
+//  -9.1729111e-05 -9.1785871e-05 -0.00010616956  3.2865082e-05 -3.0629115e-05  4.7014669e-06  1.2764587e-05 -0.00048344437  0.00057827291 -0.00014631083 -2.5694939e-05  3.2585697e-06
+//   3.0864812e-05  2.3788578e-05 -1.3762378e-05  2.7935623e-06  3.7400239e-06 -1.1154893e-06 -2.6394841e-06  8.0942213e-05 -0.00014631083  4.4255532e-05 -1.1220552e-05   8.132519e-05
+//  -8.6185704e-05 -4.5195913e-05   7.527291e-05 -2.1616219e-05  2.1027059e-05 -5.4130064e-06  7.5341467e-07  0.00012624885 -2.5694939e-05 -1.1220552e-05  0.00017827492 -0.00063012826
+//   0.00031794567  0.00017471977 -0.00024208783  0.00017332337  7.8868825e-06 -1.5249082e-05 -4.5095021e-05 -0.00084455655  3.2585697e-06   8.132519e-05 -0.00063012826   0.0027387221
+//$
+
+dalitzHolderN.DKX.fracNonres =  0.96644 +/- 0.025694 L(0 - 1) 
+dalitzHolderN.DKX.fracRho+ =  0.99999 +/- 0.76159 L(0 - 1) 
+dalitzHolderN.DKX.fracRho0 =  0.000000085284 +/- 0.17706 L(0 - 1) 
+dalitzHolderN.DKX.nonres_pdf.a1 =  0.095725 +/- 0.025801 L(-100 - 100) 
+dalitzHolderN.DKX.nonres_pdf.a2 = -0.074135 +/- 0.020030 L(-100 - 100) 
+dalitzHolderN.DKX.nonres_pdf.a3 =  0.013286 +/- 0.0040523 L(-100 - 100) 
+dalitzHolderN.DKX.nonres_pdf.a4 =  0.017047 +/- 0.0046152 L(-100 - 100) 
+dalitzHolderN.DKX.nonres_pdf.c0 =  1.0000 +/- 0.0010000 C L(-100 - 100) 
+dalitzHolderN.DKX.nonres_pdf.s1 = -1.1207 +/- 0.0055745 L(-100 - 100) 
+dalitzHolderN.DKX.nonres_pdf.s2 =  0.42600 +/- 0.0050636 L(-100 - 100) 
+dalitzHolderN.DKX.nonres_pdf.s3 = -0.051035 +/- 0.0014309 L(-100 - 100) 
+dalitzHolderN.DKX.nonres_pdf.s4 = -0.15799 +/- 0.0025312 L(-100 - 100) 
+dalitzHolderN.DKX.nonres_pdf.s5 =  0.83642 +/- 0.010011 L(-100 - 100) 
+//$
+//    0.0006601655 -0.00022821591   1.272282e-05 -1.6427632e-05 -1.9721745e-05  9.4195366e-06 -1.4342553e-05  2.7319253e-05 -9.6397152e-06  1.4560876e-06 -9.9203035e-06  1.3148719e-05
+//  -0.00022821591     0.58002514 -1.1044202e-05 -1.4774793e-05 -3.8962666e-05  1.6775155e-05 -1.6288921e-05 -1.1090978e-05  1.8038142e-07  8.2324044e-07  1.1722458e-06  4.3438722e-06
+//    1.272282e-05 -1.1044202e-05    0.031349935 -5.0745319e-07 -1.1861295e-06  5.2186329e-07 -1.0355252e-06  1.8495396e-06 -7.8128136e-07 -1.5756081e-08 -2.1998397e-07 -6.9456604e-07
+//  -1.6427632e-05 -1.4774793e-05 -5.0745319e-07  0.00066571619 -0.00050415087  9.4141848e-05  8.6732907e-05  4.4267763e-06  8.7182303e-07 -4.6617473e-07  9.8324085e-07 -7.7628283e-06
+//  -1.9721745e-05 -3.8962666e-05 -1.1861295e-06 -0.00050415087  0.00040121083 -7.8652374e-05 -6.7791792e-05 -4.9032001e-06 -4.7768287e-07  4.2024175e-07 -2.7178993e-07  5.2538667e-06
+//   9.4195366e-06  1.6775155e-05  5.2186329e-07  9.4141848e-05 -7.8652374e-05  1.6421178e-05  1.1523191e-05  1.1705663e-06  8.3273854e-08 -1.2795756e-07 -5.7815807e-08  -7.462213e-07
+//  -1.4342553e-05 -1.6288921e-05 -1.0355252e-06  8.6732907e-05 -6.7791792e-05  1.1523191e-05  2.1299622e-05  1.8995427e-08  1.8221756e-07  6.5749681e-08  6.5185475e-07 -2.0295049e-06
+//   2.7319253e-05 -1.1090978e-05  1.8495396e-06  4.4267763e-06 -4.9032001e-06  1.1705663e-06  1.8995427e-08  3.1074513e-05 -1.9724814e-05  3.4256025e-06  5.3692629e-06 -2.7568074e-05
+//  -9.6397152e-06  1.8038142e-07 -7.8128136e-07  8.7182303e-07 -4.7768287e-07  8.3273854e-08  1.8221756e-07 -1.9724814e-05    2.56398e-05 -6.6240063e-06 -1.1032147e-06 -1.4689992e-06
+//   1.4560876e-06  8.2324044e-07 -1.5756081e-08 -4.6617473e-07  4.2024175e-07 -1.2795756e-07  6.5749681e-08  3.4256025e-06 -6.6240063e-06  2.0474765e-06 -3.9702087e-07  3.4569418e-06
+//  -9.9203035e-06  1.1722458e-06 -2.1998397e-07  9.8324085e-07 -2.7178993e-07 -5.7815807e-08  6.5185475e-07  5.3692629e-06 -1.1032147e-06 -3.9702087e-07  6.4070809e-06 -2.3159195e-05
+//   1.3148719e-05  4.3438722e-06 -6.9456604e-07 -7.7628283e-06  5.2538667e-06  -7.462213e-07 -2.0295049e-06 -2.7568074e-05 -1.4689992e-06  3.4569418e-06 -2.3159195e-05  0.00010022832
+//$
+
+dalitzHolderN.DpiBadD0.fracNonres =  0.94224 +/- 0.087218 L(0 - 1) 
+dalitzHolderN.DpiBadD0.fracRho+ =  0.27166 +/- 0.54130 L(0 - 1) 
+dalitzHolderN.DpiBadD0.fracRho0 =  0.0000037513 +/- 0.97363 L(0 - 1) 
+dalitzHolderN.DpiBadD0.nonres_pdf.a1 = -0.10645 +/- 0.071256 L(-100 - 100) 
+dalitzHolderN.DpiBadD0.nonres_pdf.a2 =  0.084137 +/- 0.059288 L(-100 - 100) 
+dalitzHolderN.DpiBadD0.nonres_pdf.a3 = -0.015518 +/- 0.012562 L(-100 - 100) 
+dalitzHolderN.DpiBadD0.nonres_pdf.a4 = -0.020468 +/- 0.015395 L(-100 - 100) 
+dalitzHolderN.DpiBadD0.nonres_pdf.c0 =  1.0289 +/- 0.029662 L(-100 - 100) 
+dalitzHolderN.DpiBadD0.nonres_pdf.s1 = -1.2376 +/- 0.017719 L(-100 - 100) 
+dalitzHolderN.DpiBadD0.nonres_pdf.s2 =  0.47734 +/- 0.011188 L(-100 - 100) 
+dalitzHolderN.DpiBadD0.nonres_pdf.s3 = -0.053424 +/- 0.0037573 L(-100 - 100) 
+dalitzHolderN.DpiBadD0.nonres_pdf.s4 = -0.20053 +/- 0.0053086 L(-100 - 100) 
+dalitzHolderN.DpiBadD0.nonres_pdf.s5 =  1.0093 +/- 0.019783 L(-100 - 100) 
+//$
+//    0.0076068961   -0.014164494 -0.00040150117   0.0010028504 -0.00084689813  0.00018014488  0.00011088156  0.00054022169  1.4154127e-05 -8.3571926e-05  3.0548952e-05 -4.5885972e-05  6.7544779e-06
+//    -0.014164494     0.29300356  2.9414425e-05   -0.004115467   0.0057403734  -0.0016044891  0.00084248796  6.6098677e-05 -0.00041024206 -0.00029792989 -8.7852613e-06  0.00025228181  0.00022501928
+//  -0.00040150117  2.9414425e-05     0.94794828  6.4556511e-06 -3.3482454e-06 -1.6464459e-06  3.5304871e-05  0.00015201521 -3.3616216e-05 -2.1115891e-05  5.0640563e-07  1.1107541e-05 -3.4456411e-05
+//    0.0010028504   -0.004115467  6.4556511e-06   0.0050774459  -0.0041462742  0.00082559919  0.00074020942 -6.8883499e-05  4.0801446e-05  2.3403543e-05   -1.60195e-05  -5.029834e-06 -8.9461582e-06
+//  -0.00084689813   0.0057403734 -3.3482454e-06  -0.0041462742   0.0035150545 -0.00072417961 -0.00061405613    4.30578e-05 -3.2429536e-05 -2.7367802e-05  1.3931197e-05  4.1422786e-06   2.556341e-05
+//   0.00018014488  -0.0016044891 -1.6464459e-06  0.00082559919 -0.00072417961  0.00015781388  0.00010328639 -5.0483272e-06  5.3743497e-06  6.3700832e-06 -2.3918551e-06 -8.2092686e-07 -8.4892963e-06
+//   0.00011088156  0.00084248796  3.5304871e-05  0.00074020942 -0.00061405613  0.00010328639  0.00023700313 -1.4303467e-05  1.1078673e-05  6.2970266e-06   -6.04355e-06  -3.544823e-07 -6.0442795e-07
+//   0.00054022169  6.6098677e-05  0.00015201521 -6.8883499e-05    4.30578e-05 -5.0483272e-06 -1.4303467e-05  0.00087984034 -0.00041188137 -7.1442963e-05    5.07972e-05  4.7419719e-05  3.3331314e-06
+//   1.4154127e-05 -0.00041024206 -3.3616216e-05  4.0801446e-05 -3.2429536e-05  5.3743497e-06  1.1078673e-05 -0.00041188137  0.00031397419 -4.7982132e-05  -8.143883e-06 -4.0626164e-06 -9.9667704e-05
+//  -8.3571926e-05 -0.00029792989 -2.1115891e-05  2.3403543e-05 -2.7367802e-05  6.3700832e-06  6.2970266e-06 -7.1442963e-05 -4.7982132e-05  0.00012516264 -3.6209691e-05 -8.5189467e-06 -1.8433098e-05
+//   3.0548952e-05 -8.7852613e-06  5.0640563e-07   -1.60195e-05  1.3931197e-05 -2.3918551e-06   -6.04355e-06    5.07972e-05  -8.143883e-06 -3.6209691e-05  1.4117678e-05  8.2537008e-07  1.4768883e-05
+//  -4.5885972e-05  0.00025228181  1.1107541e-05  -5.029834e-06  4.1422786e-06 -8.2092686e-07  -3.544823e-07  4.7419719e-05 -4.0626164e-06 -8.5189467e-06  8.2537008e-07  2.8181383e-05 -8.6696193e-05
+//   6.7544779e-06  0.00022501928 -3.4456411e-05 -8.9461582e-06   2.556341e-05 -8.4892963e-06 -6.0442795e-07  3.3331314e-06 -9.9667704e-05 -1.8433098e-05  1.4768883e-05 -8.6696193e-05  0.00039135906
+//$
+
+dalitzHolderN.qqBadD0.fracNonres =  0.88744 +/- 0.023572 L(0 - 1) 
+dalitzHolderN.qqBadD0.fracRho+ =  0.58851 +/- 0.13243 L(0 - 1) 
+dalitzHolderN.qqBadD0.fracRho0 =  0.32112 +/- 0.092193 L(0 - 1) 
+dalitzHolderN.qqBadD0.nonres_pdf.a1 =  0.24926 +/- 0.096526 L(-100 - 100) 
+dalitzHolderN.qqBadD0.nonres_pdf.a2 = -0.17882 +/- 0.081382 L(-100 - 100) 
+dalitzHolderN.qqBadD0.nonres_pdf.a3 =  0.032859 +/- 0.017133 L(-100 - 100) 
+dalitzHolderN.qqBadD0.nonres_pdf.a4 =  0.036231 +/- 0.017515 L(-100 - 100) 
+dalitzHolderN.qqBadD0.nonres_pdf.c0 =  1.0000 +/- 0.050000 C L(-100 - 100) 
+dalitzHolderN.qqBadD0.nonres_pdf.s1 = -0.43343 +/- 0.047963 L(-100 - 100) 
+dalitzHolderN.qqBadD0.nonres_pdf.s2 =  0.091030 +/- 0.041817 L(-100 - 100) 
+dalitzHolderN.qqBadD0.nonres_pdf.s3 = -0.0023414 +/- 0.011186 L(-100 - 100) 
+dalitzHolderN.qqBadD0.nonres_pdf.s4 =  0.097133 +/- 0.023562 L(-100 - 100) 
+dalitzHolderN.qqBadD0.nonres_pdf.s5 = -0.21373 +/- 0.094853 L(-100 - 100) 
+//$
+//   0.00055563706   0.0004389149  0.00023094949  5.5218716e-05 -4.9513565e-05  9.7852635e-06  7.3689275e-06  8.4755826e-05 -0.00026659312  9.0736234e-05 -0.00018141571  0.00071858865
+//    0.0004389149    0.017537622   0.0014717269  -0.0019970622   0.0023459594 -0.00058860838   7.481857e-05   0.0013903923  -0.0011362371  0.00024347585  0.00030141388  -0.0011699916
+//   0.00023094949   0.0014717269   0.0084995637  -0.0010948102  0.00089912716 -0.00017588523 -0.00019588374  0.00060412462 -0.00098476862  0.00023603787 -0.00019240454  0.00066714926
+//   5.5218716e-05  -0.0019970622  -0.0010948102    0.009317223  -0.0077180695   0.0015516175   0.0012887211  -0.0042758845   0.0028084631 -0.00051498739  -0.0015739568   0.0060755238
+//  -4.9513565e-05   0.0023459594  0.00089912716  -0.0077180695    0.006623039  -0.0013704289  -0.0010876256   0.0036838551  -0.0023917833  0.00043497447     0.00135427  -0.0052501522
+//   9.7852635e-06 -0.00058860838 -0.00017588523   0.0015516175  -0.0013704289   0.0002935243  0.00020377905 -0.00076492596  0.00049254764  -8.893534e-05 -0.00028184746   0.0010948837
+//   7.3689275e-06   7.481857e-05 -0.00019588374   0.0012887211  -0.0010876256  0.00020377905   0.0003067755   -0.000599024  0.00039798763 -7.3726405e-05  -0.0002147982  0.00083271391
+//   8.4755826e-05   0.0013903923  0.00060412462  -0.0042758845   0.0036838551 -0.00076492596   -0.000599024   0.0023004764  -0.0014899273  0.00027968883  0.00061129435  -0.0025530213
+//  -0.00026659312  -0.0011362371 -0.00098476862   0.0028084631  -0.0023917833  0.00049254764  0.00039798763  -0.0014899273   0.0017486946 -0.00044481212 -1.5565996e-05 -0.00015561347
+//   9.0736234e-05  0.00024347585  0.00023603787 -0.00051498739  0.00043497447  -8.893534e-05 -7.3726405e-05  0.00027968883 -0.00044481212  0.00012512859 -6.3568405e-05  0.00032423457
+//  -0.00018141571  0.00030141388 -0.00019240454  -0.0015739568     0.00135427 -0.00028184746  -0.0002147982  0.00061129435 -1.5565996e-05 -6.3568405e-05  0.00055515236  -0.0021874346
+//   0.00071858865  -0.0011699916  0.00066714926   0.0060755238  -0.0052501522   0.0010948837  0.00083271391  -0.0025530213 -0.00015561347  0.00032423457  -0.0021874346   0.0089971293
+//$
+

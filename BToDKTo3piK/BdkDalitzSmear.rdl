@@ -1,0 +1,84 @@
+/*****************************************************************************
+ * Project: RooFit                                                           
+ * Package: BToDKTo3piK                                                     
+ *    File: $Id: BdkDalitzSmear.rdl,v 1.1 2006/03/20 19:04:31 fwinkl Exp $
+ * Authors:                                                                  
+ *   Frank Winklmeier, Colorado State University                             
+ * Description:                                                              
+ *   Class to smear a Dalitz PDF with a resolution model for m12 and m13.
+ *   BdkDalitzSmear is not a fully functional RooAbsPdf itself.                    
+ *   Only generate() can be used on it. I.e. does not support fitting.       
+ *                                                                           
+ * Copyright (c) 2006, Colorado State University                             
+ *****************************************************************************/
+#ifndef BDKDALITZSMEAR
+#define BDKDALITZSMEAR
+
+#include <vector>
+
+#include "BToDKTo3piK/BdkDalitzBase.hh"
+
+#include "RooFitCore/RooAbsPdf.hh"
+#include "RooFitCore/RooSetProxy.hh"
+#include "RooFitCore/RooListProxy.hh"
+#include "RooFitCore/RooArgSet.hh"
+#include "RooFitCore/RooArgList.hh"
+#include "RooFitCore/RooAbsGenContext.hh"
+
+class RooRealVar;
+class RooDataSet;
+
+class BdkDalitzSmear : public BdkDalitzBase {
+public:
+  BdkDalitzSmear(const char *name, const char *title, BdkDalitzBase& pdf,
+                 RooAbsPdf& res12, RooAbsPdf& res13,
+                 RooAbsReal& m12, RooAbsReal& m13);
+
+  BdkDalitzSmear(const BdkDalitzSmear& other, const char* name=0) ;
+
+  virtual TObject* clone(const char* newname) const {
+    return new BdkDalitzSmear(*this,newname);
+  }
+
+  virtual ~BdkDalitzSmear();
+
+ 
+  virtual Int_t getGenerator(const RooArgSet& directVars, RooArgSet &generateVars,
+                             Bool_t staticInitOK=kTRUE) const;
+  virtual void initGenerator(Int_t code);
+  virtual void generateEvent(Int_t code);
+
+  /// Set the size of the internal event buffer
+  void setEventBuffer(Int_t events = 1000) {_events = (events>0 ? events : 1);}
+  void clearEventBuffer();
+  
+protected:
+
+  RooRealProxy _pdf;
+  
+  RooListProxy _resModels;
+  RooListProxy _resVars;
+
+
+  Double_t evaluate() const ;
+  virtual RooAbsGenContext* genContext(const RooArgSet &vars, const RooDataSet *prototype, 
+				       const RooArgSet* auxProto, Bool_t verbose) const;
+  void init();
+  RooArgList getResolutionData();
+  RooArgSet getPdfData();
+    
+  
+private:
+
+  Int_t _events;
+
+  RooDataSet*        _pdfData;
+  Int_t              _pdfEventsUsed;
+  
+  std::vector<RooDataSet*> _resData;
+  std::vector<Int_t>       _resEventsUsed;
+  
+  ClassDef(BdkDalitzSmear,0) // BdkDalitzSmear PDF
+};
+
+#endif

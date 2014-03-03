@@ -1,0 +1,26 @@
+#!/bin/tcsh -f
+# $Id: makeKSTable,v 1.2 2006/03/02 00:54:15 fwinkl Exp $
+# Make a LaTex table from the output of the KS kumacs
+# Example:  makeKStable sig_DK_good_cut_1.txt
+#
+cat $1 | grep _ | sed 's/_\(.*\)$/(\1)/' >! $1.tmp1
+cat $1 | grep -v _ | awk 'function pr(d)\
+    {\
+        if (d<0.01) printf " & \\em{%7.5f}",d;\
+        else printf " & %7.5f",d;\
+    }\
+    {pr($1);pr($2);pr($3);pr($4);pr($5);pr($6);print "\\\\"}'>! $1.tmp2
+
+#   printf " & %7.5f & %7.5f & %7.5f & %7.5f & %7.5f & %7.5f\\\\\n",$1,$2,$3,$4,$5,$6}' >! $1.tmp2
+
+echo '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
+echo "% Made from $1 by kumac/makeKSTable"
+echo '\\begin{tabular}{lrrrrrr}'
+echo '\hline\hline'
+echo '  & Bins 1,2 & Bins 1,3 & Bins 1,4 & Bins 2,3 & Bins 2,4 & Bins 3,4 \\\ \hline'
+paste $1.tmp1 $1.tmp2 | sed 's/deltae/\\DeltaE/' | sed 's/mes/\\mes/' | sed 's/nnout/\\NNqq/' | sed 's/d0mass/\\mD/' | sed 's/d0pPpupMass/$m_{\\piz\\pip}$/' | sed 's/d0pPmupMass/$m_{\\piz\\pim}$/'
+echo '\hline\hline'
+echo '\\end{tabular}'
+echo '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
+
+rm $1.tmp1 $1.tmp2

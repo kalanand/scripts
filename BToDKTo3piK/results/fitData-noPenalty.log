@@ -1,0 +1,566 @@
+  *******************************************
+  *                                         *
+  *        W E L C O M E  to  R O O T       *
+  *                                         *
+  *   Version  4.04/02b       3 June 2005   *
+  *                                         *
+  *  You are welcome to visit our Web site  *
+  *          http://root.cern.ch            *
+  *                                         *
+  *******************************************
+
+Compiled on 29 June 2005 for linux with thread support.
+
+CINT/ROOT C/C++ Interpreter version 5.15.169, Mar 14 2005
+Type ? for help. Commands must be C++ statements.
+Enclose multiple statements between { }.
+...using style 'Plain'
+...found RELEASE directory
+...found PARENT directory
+...running in release 16.1.5
+
+    For approved plots use: gROOT->SetStyle("BABAR");
+    To add a BABAR label use: BABARLabel();
+    To add a better-scaling BABAR label use: BABARSmartLabel();
+    Type "BABARSmartLabel(-2);" for options
+
+
+Processing setup.cc...
+--- START setup() ---
+--- START setup() ---
+RooRealVar::setRange(qprime) new range named 'plot' created with bounds [-5,5]
+RooRealVar::setRange(dprime) new range named 'plot' created with bounds [-5,5]
+RooArgSet::allVars:
+  1) RooRealVar::mes          :  5.2860 L(5.272 - 5.3) B(28) // [GeV/c^{2}]
+  2) RooRealVar::Deltae       : -0.0050000 L(-0.07 - 0.06) B(26) // [GeV]
+  3) RooRealVar::d0mass       :  1.8625 L(1.83 - 1.895) B(26) // [GeV/c^{2}]
+  4) RooRealVar::nnout        :  0.55000 L(0.1 - 1) B(18) 
+  5) RooRealVar::bknnout      :  0.62500 L(0.25 - 1) B(15) 
+  6) RooRealVar::Hdtrkkaonnn  :  0.50000 L(0 - 1) 
+  7) RooRealVar::d0ppupmass   :  1.4500 L(0 - 2.9) 
+  8) RooRealVar::B1decmode    :  100.00 L(-200 - 400) 
+  9) RooRealVar::B2decmode    :  100.00 L(-200 - 400) 
+ 10) RooRealVar::R2           :  0.25000 L(0 - 0.5) 
+ 11) RooRealVar::Trued0flg    : -50.000 L(-200 - 100) 
+ 12) RooRealVar::d0recdec     :  4.0000 L(-2 - 10) 
+ 13) RooCategory::Hdtrkchge    : +
+ 14) RooRealVar::d0pppupmass  :  1.0000 L(0 - 2) // [GeV/c^{2}]
+ 15) RooRealVar::d0ppmupmass  :  1.0000 L(0 - 2) // [GeV/c^{2}]
+ 16) RooRealVar::d0pppmcmass  :  1.0000 L(0 - 2) // [GeV/c^{2}]
+ 17) RooRealVar::d0ppmmcmass  :  1.0000 L(0 - 2) // [GeV/c^{2}]
+ 18) RooRealVar::mixneumass   :  2.5000 L(0 - 5) 
+ 19) RooRealVar::Pippidbit    :  8.0000 L(0 - 16) 
+ 20) RooRealVar::Pimpidbit    :  8.0000 L(0 - 16) 
+ 21) RooRealVar::d0flightdist :  500.00 L(0 - 1000) 
+ 22) RooRealVar::excltruth    :  50.000 L(-100 - 200) 
+--- END setup() ---
+----- START setupPdfHolder() -----
+Reading efficiency parameters from ../BToDKTo3piK/params/eff.par
+Using POLAR coordinates for signal PDF.
+BdkDDalitzAmp::Registry: registering dalitzHolderN.sigGoodD0.pdf.dalitzAmp
+BdkDDalitzAmp::Registry: registering dalitzHolderN.DpiBadD0.rho+.pdf.dalitzAmp
+BdkDDalitzAmp::Registry: registering dalitzHolderN.DpiBadD0.rho-.pdf.dalitzAmp
+BdkDDalitzAmp::Registry: registering dalitzHolderN.DpiBadD0.rho0.pdf.dalitzAmp
+------- End setupPdfHolder() ----
+--- START setupPdfs() ---
+readOnResDKPar(): The following parameters might not have been initialized correctly:
+Using the following efficiency functions:
+        dalitzHolderP.sigBadD0                none
+       dalitzHolderP.sigGoodD0             eff.pdf
+        dalitzHolderP.DpiBadD0        effOther.pdf
+       dalitzHolderP.DpiGoodD0             eff.pdf
+            dalitzHolderP.DPiX                none
+             dalitzHolderP.DKX        effOther.pdf
+         dalitzHolderP.BBBadD0        effOther.pdf
+        dalitzHolderP.BBGoodD0             eff.pdf
+         dalitzHolderP.qqBadD0        effOther.pdf
+        dalitzHolderP.qqGoodD0             eff.pdf
+Reading Daliz configuration from ../BToDKTo3piK/params/dalitzCfg.par
+RooArgSet::parameters:
+  1) RooRealVar::dalitzCfg.m23VetoMass :  0.49000 C L(0.4894 - 0.508) 
+--- END setupPdfs() ---
+--- START setupChains() ---
+Using best mES selection ntuples.
+--- END setupChains() ---
+--- START setupPlots() ---
+--- END setupPlots() ---
+--- END setup() ---
+Processing fitData.cc("-noPenalty",true,false)...
+readOnResDKPar(): The following parameters might not have been initialized correctly:
+read(): Reading dataTree from /nfs/farm/babar/AWGbreco02/BDK/GoodSmall/RUN15_F/onrun.root
+read(): applying cut (((-0.07<Deltae&&Deltae<0.06)&&(mes>5.272))&&(1.83<d0mass&&d0mass<1.895))&&((((nnout>0.1)&&(bknnout>0.25))&&((mixneumass<1.84||mixneumass>1.89)))&&(((0.489>d0ppupmass)||(d0ppupmass>0.508))&&(d0flightdist<1.5)))
+RooAbsReal::attachToTree(mes) TTree Float_t branch mes will be converted to double precision
+Error in <TTree::SetBranchAddress>: The pointer type given "Double_t" (8) does not correspond to the type needed "Float_t" (5) by the branch: mes
+RooAbsReal::attachToTree(Deltae) TTree Float_t branch Deltae will be converted to double precision
+Error in <TTree::SetBranchAddress>: The pointer type given "Double_t" (8) does not correspond to the type needed "Float_t" (5) by the branch: Deltae
+RooAbsReal::attachToTree(d0mass) TTree Float_t branch d0mass will be converted to double precision
+Error in <TTree::SetBranchAddress>: The pointer type given "Double_t" (8) does not correspond to the type needed "Float_t" (5) by the branch: d0mass
+RooAbsReal::attachToTree(nnout) TTree Float_t branch nnout will be converted to double precision
+Error in <TTree::SetBranchAddress>: The pointer type given "Double_t" (8) does not correspond to the type needed "Float_t" (5) by the branch: nnout
+RooAbsReal::attachToTree(bknnout) TTree Float_t branch bknnout will be converted to double precision
+Error in <TTree::SetBranchAddress>: The pointer type given "Double_t" (8) does not correspond to the type needed "Float_t" (5) by the branch: bknnout
+RooAbsReal::attachToTree(Hdtrkkaonnn) TTree Float_t branch Hdtrkkaonnn will be converted to double precision
+Error in <TTree::SetBranchAddress>: The pointer type given "Double_t" (8) does not correspond to the type needed "Float_t" (5) by the branch: Hdtrkkaonnn
+RooAbsReal::attachToTree(d0ppupmass) TTree Float_t branch d0ppupmass will be converted to double precision
+Error in <TTree::SetBranchAddress>: The pointer type given "Double_t" (8) does not correspond to the type needed "Float_t" (5) by the branch: d0ppupmass
+RooAbsReal::attachToTree(R2) TTree Float_t branch R2 will be converted to double precision
+Error in <TTree::SetBranchAddress>: The pointer type given "Double_t" (8) does not correspond to the type needed "Float_t" (5) by the branch: R2
+RooAbsCategory::attachToTree(Hdtrkchge) TTree branch Hdtrkchge will be interpreted as category index
+RooAbsReal::attachToTree(d0pppupmass) TTree Float_t branch d0pppupmass will be converted to double precision
+Error in <TTree::SetBranchAddress>: The pointer type given "Double_t" (8) does not correspond to the type needed "Float_t" (5) by the branch: d0pppupmass
+RooAbsReal::attachToTree(d0ppmupmass) TTree Float_t branch d0ppmupmass will be converted to double precision
+Error in <TTree::SetBranchAddress>: The pointer type given "Double_t" (8) does not correspond to the type needed "Float_t" (5) by the branch: d0ppmupmass
+RooAbsReal::attachToTree(mixneumass) TTree Float_t branch mixneumass will be converted to double precision
+Error in <TTree::SetBranchAddress>: The pointer type given "Double_t" (8) does not correspond to the type needed "Float_t" (5) by the branch: mixneumass
+RooAbsReal::attachToTree(Pippidbit) TTree Int_t branch Pippidbit will be converted to double precision
+Error in <TTree::SetBranchAddress>: The pointer type given "Double_t" (8) does not correspond to the type needed "Int_t" (3) by the branch: Pippidbit
+RooAbsReal::attachToTree(Pimpidbit) TTree Int_t branch Pimpidbit will be converted to double precision
+Error in <TTree::SetBranchAddress>: The pointer type given "Double_t" (8) does not correspond to the type needed "Int_t" (3) by the branch: Pimpidbit
+RooAbsReal::attachToTree(d0flightdist) TTree Float_t branch d0flightdist will be converted to double precision
+Error in <TTree::SetBranchAddress>: The pointer type given "Double_t" (8) does not correspond to the type needed "Float_t" (5) by the branch: d0flightdist
+read(): Read 3839 events
+===============================================================
+                Doing a unblinded fit!
+   This better be Monte Carlo or you have your eyes closed !  
+===============================================================
+----------------------------------------------------------
+pdfOnResDK.fit(): Doing yield fit:
+(DeltaE, NnCont, NnComb)
+RooArgSet:::
+  1) RooRealVar::pdfOnResDK.DPiXFrac         :  0.52679 +/- 0.15483 L(0 - 1) 
+  2) RooRealVar::pdfOnResDK.DpiGoodD0NumEvts :  57.245 +/- 19.644 
+  3) RooRealVar::pdfOnResDK.asymSigGoodD     : -0.023955 +/- 0.14872 L(-1 - 1) 
+  4) RooRealVar::pdfOnResDK.qqBadD0NumEvts   :  2383.1 +/- 70.836 
+  5) RooRealVar::pdfOnResDK.sigGoodD0NumEvts :  170.19 +/- 28.997 
+  6) RooRealVar::pdfOnResDK.totBBNumEvts     :  1138.0 +/- 76.354 
+RooMinuit::optimizeConst: activating const optimization
+RooAbsGoodnessOfFit::initSimMode: creating slave GOF calculator #0 for state + (1932 dataset entries)
+RooAbsGoodnessOfFit::initSimMode: creating slave GOF calculator #1 for state - (1907 dataset entries)
+RooAbsOptGoodnessOfFit::constOptimize(+) Action=Activate
+RooAbsReal::optimize: component pdfOnResDK.sigBadD0P.pdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.finalAsymSigBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.sigGoodD0P.pdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.DpiBadD0P.pdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.finalAsymDpiBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.DpiGoodD0P.pdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.finalAsymDpiGoodD will be cached
+RooAbsReal::optimize: component pdfOnResDK.DPiXP.pdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.finalAsymDpiX will be cached
+RooAbsReal::optimize: component pdfOnResDK.DKXP.pdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.finalAsymDKX will be cached
+RooAbsReal::optimize: component pdfOnResDK.BBbadD0P.pdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.finalAsymBbBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.BBgoodD0P.pdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.finalAsymBbGoodD will be cached
+RooAbsReal::optimize: component pdfOnResDK.ContBadD0P.pdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.finalAsymQqBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.ContGoodD0P.pdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.finalAsymQqGoodD will be cached
+RooAbsReal::optimizeConst: The following unused tree branches are deactivated: (Deltae,qprime,dprime)
+RooAbsOptGoodnessOfFit::constOptimize(-) Action=Activate
+RooAbsReal::optimize: component pdfOnResDK.sigBadD0N.pdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.finalAsymSigBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.sigGoodD0N.pdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.DpiBadD0N.pdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.finalAsymDpiBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.DpiGoodD0N.pdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.finalAsymDpiGoodD will be cached
+RooAbsReal::optimize: component pdfOnResDK.DPiXN.pdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.finalAsymDpiX will be cached
+RooAbsReal::optimize: component pdfOnResDK.DKXN.pdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.finalAsymDKX will be cached
+RooAbsReal::optimize: component pdfOnResDK.BBbadD0N.pdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.finalAsymBbBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.BBgoodD0N.pdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.finalAsymBbGoodD will be cached
+RooAbsReal::optimize: component pdfOnResDK.ContBadD0N.pdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.finalAsymQqBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.ContGoodD0N.pdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.finalAsymQqGoodD will be cached
+RooAbsReal::optimizeConst: The following unused tree branches are deactivated: (Deltae,qprime,dprime)
+ **********
+ **   13 **MIGRAD        3000           1
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-03
+ FCN=-20505.9 FROM MIGRAD    STATUS=INITIATE       16 CALLS          17 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  pdfOnResDK.DPiXFrac   5.26790e-01   1.54830e-01   3.15354e-01   1.74602e-03
+   2  pdfOnResDK.DpiGoodD0NumEvts   5.72450e+01   1.96440e+01   1.96440e+01  -1.43769e-05
+   3  pdfOnResDK.asymSigGoodD  -2.39550e-02   1.48720e-01   1.49318e-01  -3.94142e-03
+   4  pdfOnResDK.qqBadD0NumEvts   2.38310e+03   7.08360e+01   7.08360e+01   5.30630e-05
+   5  pdfOnResDK.sigGoodD0NumEvts   1.70190e+02   2.89970e+01   2.89970e+01   5.70164e-05
+   6  pdfOnResDK.totBBNumEvts   1.13800e+03   7.63540e+01   7.63540e+01  -2.26714e-05
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-20505.9 FROM MIGRAD    STATUS=CONVERGED      79 CALLS          80 TOTAL
+                     EDM=1.49172e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  pdfOnResDK.DPiXFrac   5.26694e-01   1.54871e-01   2.58550e-02   2.44079e-03
+   2  pdfOnResDK.DpiGoodD0NumEvts   5.72521e+01   1.96182e+01   1.72778e+00  -1.60341e-05
+   3  pdfOnResDK.asymSigGoodD  -2.38141e-02   1.48807e-01   1.47463e-02   2.16648e-03
+   4  pdfOnResDK.qqBadD0NumEvts   2.38282e+03   7.07358e+01   5.61466e+00  -1.81241e-05
+   5  pdfOnResDK.sigGoodD0NumEvts   1.70145e+02   2.89526e+01   2.19783e+00  -1.68769e-05
+   6  pdfOnResDK.totBBNumEvts   1.13810e+03   7.62124e+01   5.07018e+00  -5.71671e-05
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  12    NPAR=  6    ERR DEF=0.5
+  2.480e-02  6.891e-01 -1.001e-03  1.089e+00  2.179e+00 -4.675e+00 
+  6.891e-01  3.849e+02 -7.867e-02  2.542e+01 -5.114e+01 -3.836e+02 
+ -1.001e-03 -7.867e-02  2.231e-02 -7.190e-02 -2.013e-01  4.215e-01 
+  1.089e+00  2.542e+01 -7.190e-02  5.004e+03  1.835e+02 -2.928e+03 
+  2.179e+00 -5.114e+01 -2.013e-01  1.835e+02  8.383e+02 -9.971e+02 
+ -4.675e+00 -3.836e+02  4.215e-01 -2.928e+03 -9.971e+02  5.808e+03 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2      3      4      5      6
+        1  0.55940   1.000  0.223 -0.043  0.098  0.478 -0.390
+        2  0.45466   0.223  1.000 -0.027  0.018 -0.090 -0.257
+        3  0.05822  -0.043 -0.027  1.000 -0.007 -0.047  0.037
+        4  0.59636   0.098  0.018 -0.007  1.000  0.090 -0.543
+        5  0.64092   0.478 -0.090 -0.047  0.090  1.000 -0.452
+        6  0.73981  -0.390 -0.257  0.037 -0.543 -0.452  1.000
+ **********
+ **   18 **HESSE        3000
+ **********
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-20505.9 FROM HESSE     STATUS=OK             40 CALLS         120 TOTAL
+                     EDM=1.49211e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                INTERNAL      INTERNAL  
+  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+   1  pdfOnResDK.DPiXFrac   5.26694e-01   1.54801e-01   1.03420e-03   5.34137e-02
+   2  pdfOnResDK.DpiGoodD0NumEvts   5.72521e+01   1.96433e+01   6.91112e-02   5.72521e+01
+   3  pdfOnResDK.asymSigGoodD  -2.38141e-02   1.48748e-01   2.94927e-03  -2.38164e-02
+   4  pdfOnResDK.qqBadD0NumEvts   2.38282e+03   7.08288e+01   2.24586e-01   2.38282e+03
+   5  pdfOnResDK.sigGoodD0NumEvts   1.70145e+02   2.89917e+01   8.79132e-02   1.70145e+02
+   6  pdfOnResDK.totBBNumEvts   1.13810e+03   7.63391e+01   1.01404e+00   1.13810e+03
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  12    NPAR=  6    ERR DEF=0.5
+  2.477e-02  6.883e-01 -8.737e-04  1.073e+00  2.180e+00 -4.660e+00 
+  6.883e-01  3.859e+02 -8.211e-02  2.601e+01 -5.258e+01 -3.849e+02 
+ -8.737e-04 -8.211e-02  2.229e-02 -5.972e-02 -1.647e-01  3.682e-01 
+  1.073e+00  2.601e+01 -5.972e-02  5.017e+03  1.851e+02 -2.944e+03 
+  2.180e+00 -5.258e+01 -1.647e-01  1.851e+02  8.405e+02 -1.001e+03 
+ -4.660e+00 -3.849e+02  3.682e-01 -2.944e+03 -1.001e+03  5.828e+03 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2      3      4      5      6
+        1  0.55897   1.000  0.223 -0.037  0.096  0.478 -0.388
+        2  0.45683   0.223  1.000 -0.028  0.019 -0.092 -0.257
+        3  0.05141  -0.037 -0.028  1.000 -0.006 -0.038  0.032
+        4  0.59778   0.096  0.019 -0.006  1.000  0.090 -0.544
+        5  0.64215   0.478 -0.092 -0.038  0.090  1.000 -0.452
+        6  0.74082  -0.388 -0.257  0.032 -0.544 -0.452  1.000
+ **********
+ **   23 **MINOS        3000
+ **********
+ FCN=-20505.9 FROM MINOS     STATUS=SUCCESSFUL    472 CALLS         592 TOTAL
+                     EDM=1.49211e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                  PARABOLIC         MINOS ERRORS        
+  NO.   NAME      VALUE            ERROR      NEGATIVE      POSITIVE   
+   1  pdfOnResDK.DPiXFrac   5.26694e-01   1.54801e-01  -1.54210e-01   1.60846e-01
+   2  pdfOnResDK.DpiGoodD0NumEvts   5.72521e+01   1.96433e+01  -1.90504e+01   2.02146e+01
+   3  pdfOnResDK.asymSigGoodD  -2.38141e-02   1.48748e-01  -1.49122e-01   1.51075e-01
+   4  pdfOnResDK.qqBadD0NumEvts   2.38282e+03   7.08288e+01  -7.06220e+01   7.10679e+01
+   5  pdfOnResDK.sigGoodD0NumEvts   1.70145e+02   2.89917e+01  -2.84611e+01   2.95082e+01
+   6  pdfOnResDK.totBBNumEvts   1.13810e+03   7.63391e+01  -7.54612e+01   7.72676e+01
+                               ERR DEF= 0.5
+----------------------------------------------------------
+pdfOnResDK.fit(): Doing x/y fit:
+(DeltaE, Dalitz, NnCont)
+RooRealVar::pdfOnResDK.nBB:  324041437 +/- 3564456 C 
+corrNsigAsym = -0.0380603
+RooArgSet:::
+  1) RooRealVar::dalitzHolderN.sigGoodD0.rho   :  0.77532 L(0 - +INF) 
+  2) RooRealVar::dalitzHolderN.sigGoodD0.theta :  175.26 L(0 - 360) 
+  3) RooRealVar::dalitzHolderP.sigGoodD0.rho   :  0.97875 L(0 - +INF) 
+  4) RooRealVar::dalitzHolderP.sigGoodD0.theta :  178.89 L(0 - 360) 
+pdfOnResDK.fit(): Fitting without penalty
+RooMinuit::optimizeConst: activating const optimization
+RooAbsGoodnessOfFit::initSimMode: creating slave GOF calculator #0 for state + (1932 dataset entries)
+RooAbsGoodnessOfFit::initSimMode: creating slave GOF calculator #1 for state - (1907 dataset entries)
+RooAbsOptGoodnessOfFit::constOptimize(+) Action=Activate
+RooAbsReal::optimize: component pdfOnResDK.extPdfPosSigBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.numEvtPosSigBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.sigGoodD0N.deltaEPdf.thePdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.sigGoodD0N.nnContPdf.thePdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.numEvtPosSigGoodD will be cached
+RooAbsReal::optimize: component pdfOnResDK.extPdfPosDpiBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.numEvtPosDpiBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.extPdfPosDpiGoodD will be cached
+RooAbsReal::optimize: component pdfOnResDK.numEvtPosDpiGoodD will be cached
+RooAbsReal::optimize: component pdfOnResDK.extPdfPosDpiX will be cached
+RooAbsReal::optimize: component pdfOnResDK.numEvtPosDpiX will be cached
+RooAbsReal::optimize: component pdfOnResDK.extPdfPosDKX will be cached
+RooAbsReal::optimize: component pdfOnResDK.numEvtPosDKX will be cached
+RooAbsReal::optimize: component pdfOnResDK.extPdfPosBbBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.numEvtPosBbBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.extPdfPosBbGoodD will be cached
+RooAbsReal::optimize: component pdfOnResDK.numEvtPosBbGoodD will be cached
+RooAbsReal::optimize: component pdfOnResDK.extPdfPosQqBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.numEvtPosQqBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.extPdfPosQqGoodD will be cached
+RooAbsReal::optimize: component pdfOnResDK.numEvtPosQqGoodD will be cached
+RooAbsReal::optimizeConst: The following unused tree branches are deactivated: (Deltae,qprime)
+RooAbsOptGoodnessOfFit::constOptimize(-) Action=Activate
+RooAbsReal::optimize: component pdfOnResDK.extPdfNegSigBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.numEvtNegSigBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.sigGoodD0N.deltaEPdf.thePdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.sigGoodD0N.nnContPdf.thePdf will be cached
+RooAbsReal::optimize: component pdfOnResDK.numEvtNegSigGoodD will be cached
+RooAbsReal::optimize: component pdfOnResDK.extPdfNegDpiBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.numEvtNegDpiBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.extPdfNegDpiGoodD will be cached
+RooAbsReal::optimize: component pdfOnResDK.numEvtNegDpiGoodD will be cached
+RooAbsReal::optimize: component pdfOnResDK.extPdfNegDpiX will be cached
+RooAbsReal::optimize: component pdfOnResDK.numEvtNegDpiX will be cached
+RooAbsReal::optimize: component pdfOnResDK.extPdfNegDKX will be cached
+RooAbsReal::optimize: component pdfOnResDK.numEvtNegDKX will be cached
+RooAbsReal::optimize: component pdfOnResDK.extPdfNegBbBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.numEvtNegBbBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.extPdfNegBbGoodD will be cached
+RooAbsReal::optimize: component pdfOnResDK.numEvtNegBbGoodD will be cached
+RooAbsReal::optimize: component pdfOnResDK.extPdfNegQqBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.numEvtNegQqBadD will be cached
+RooAbsReal::optimize: component pdfOnResDK.extPdfNegQqGoodD will be cached
+RooAbsReal::optimize: component pdfOnResDK.numEvtNegQqGoodD will be cached
+RooAbsReal::optimizeConst: The following unused tree branches are deactivated: (Deltae,qprime)
+ **********
+ **    9 **SET PRINT           1
+ **********
+ **********
+ **   14 **MIGRAD        2000           1
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-03
+ FCN=-19068.1 FROM MIGRAD    STATUS=INITIATE       12 CALLS          13 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  dalitzHolderN.sigGoodD0.rho   7.75320e-01   1.00000e+00   1.00000e+00  -1.14973e+00
+   2  dalitzHolderN.sigGoodD0.theta   1.75260e+02   3.60000e+01   2.01432e-01   2.23222e-01
+   3  dalitzHolderP.sigGoodD0.rho   9.78750e-01   1.00000e+00   1.00000e+00  -1.61871e-01
+   4  dalitzHolderP.sigGoodD0.theta   1.78890e+02   3.60000e+01   2.01362e-01   8.47634e+00
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-19068.9 FROM MIGRAD    STATUS=CONVERGED      84 CALLS          85 TOTAL
+                     EDM=1.79851e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  dalitzHolderN.sigGoodD0.rho   9.67750e-01   5.56332e-01   5.00693e-02   1.26235e-03
+   2  dalitzHolderN.sigGoodD0.theta   1.74522e+02   4.63467e+01   2.43613e-02   1.10079e-02
+   3  dalitzHolderP.sigGoodD0.rho   9.19264e-01   3.58293e-01   3.42900e-02   6.14472e-03
+   4  dalitzHolderP.sigGoodD0.theta   1.47319e+02   2.39195e+01   1.29274e-02   1.38646e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  4    ERR DEF=0.5
+  3.095e-01  3.873e+00  3.378e-12  6.466e-09 
+  3.873e+00  2.197e+03  2.766e-10  5.296e-07 
+  3.378e-12  2.766e-10  1.284e-01  3.007e-01 
+  6.466e-09  5.296e-07  3.007e-01  5.757e+02 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2      3      4
+        1  0.14853   1.000  0.149  0.000  0.000
+        2  0.14853   0.149  1.000  0.000  0.000
+        3  0.03498   0.000  0.000  1.000  0.035
+        4  0.03498   0.000  0.000  0.035  1.000
+ **********
+ **   19 **HESSE        2000
+ **********
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-19068.9 FROM HESSE     STATUS=OK             23 CALLS         108 TOTAL
+                     EDM=1.79208e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                INTERNAL      INTERNAL  
+  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+   1  dalitzHolderN.sigGoodD0.rho   9.67750e-01   5.57241e-01   2.00277e-03   9.67750e-01
+   2  dalitzHolderN.sigGoodD0.theta   1.74522e+02   4.62688e+01   9.74451e-04  -3.04398e-02
+   3  dalitzHolderP.sigGoodD0.rho   9.19264e-01   3.58677e-01   1.37160e-03   9.19264e-01
+   4  dalitzHolderP.sigGoodD0.theta   1.47319e+02   2.39118e+01   2.58548e-03  -1.82574e-01
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  4    ERR DEF=0.5
+  3.105e-01  3.584e+00  6.021e-08  9.128e-07 
+  3.584e+00  2.190e+03  4.899e-06  7.427e-05 
+  6.021e-08  4.899e-06  1.286e-01  2.369e-01 
+  9.128e-07  7.427e-05  2.369e-01  5.753e+02 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2      3      4
+        1  0.13744   1.000  0.137  0.000  0.000
+        2  0.13744   0.137  1.000  0.000  0.000
+        3  0.02754   0.000  0.000  1.000  0.028
+        4  0.02754   0.000  0.000  0.028  1.000
+ **********
+ **   24 **MINOS        2000
+ **********
+ MINUIT WARNING IN MIGRAD  
+ ============== Negative diagonal element 1 in Error Matrix
+ MINUIT WARNING IN MIGRAD  
+ ============== Negative diagonal element 2 in Error Matrix
+ MINUIT WARNING IN MIGRAD  
+ ============== 1.20571 added to diagonal of error matrix
+ MINUIT WARNING IN MIGRAD  
+ ============== Negative diagonal element 1 in Error Matrix
+ MINUIT WARNING IN MIGRAD  
+ ============== 3.8305 added to diagonal of error matrix
+ FCN=-19068.9 FROM MINOS     STATUS=SUCCESSFUL    632 CALLS         740 TOTAL
+                     EDM=1.79208e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                  PARABOLIC         MINOS ERRORS        
+  NO.   NAME      VALUE            ERROR      NEGATIVE      POSITIVE   
+   1  dalitzHolderN.sigGoodD0.rho   9.67750e-01   5.57241e-01  -3.68320e-01   1.23584e+00
+   2  dalitzHolderN.sigGoodD0.theta   1.74522e+02   4.62688e+01  -3.98903e+01   5.81193e+01
+   3  dalitzHolderP.sigGoodD0.rho   9.19264e-01   3.58677e-01  -2.74328e-01   5.39682e-01
+   4  dalitzHolderP.sigGoodD0.theta   1.47319e+02   2.39118e+01  -2.38920e+01   2.47697e+01
+                               ERR DEF= 0.5
+
+  RooFitResult: minimized FCN value: -19068.9, estimated distance to minimum: 1.79208e-05
+                coviarance matrix quality: Full, accurate covariance matrix
+
+    Floating Parameter    FinalValue +/-  Error   
+  --------------------  --------------------------
+  dalitzHolderN.sigGoodD0.rho    9.6775e-01 +/-  0.00e+00
+  dalitzHolderN.sigGoodD0.theta    1.7452e+02 +/-  0.00e+00
+  dalitzHolderP.sigGoodD0.rho    9.1926e-01 +/-  0.00e+00
+  dalitzHolderP.sigGoodD0.theta    1.4732e+02 +/-  0.00e+00
+
+
+Fit status = 0
+
+covariance matrix
+
+4x4 matrix  is as follows
+
+     |        0  |        1  |        2  |        3  |
+------------------------------------------------------------------
+   0 |          0           0           0           0 
+   1 |          0           0           0           0 
+   2 |          0           0           0           0 
+   3 |          0           0           0           0 
+
+correlation matrix
+
+4x4 matrix  is as follows
+
+     |        0  |        1  |        2  |        3  |
+------------------------------------------------------------------
+   0 |          1      0.1374   3.012e-07   6.829e-08 
+   1 |     0.1374           1   2.919e-07   6.618e-08 
+   2 |  3.012e-07   2.919e-07           1     0.02754 
+   3 |  6.829e-08   6.618e-08     0.02754           1 
+
+Change in dalitzHolderN.sigGoodD0.rho = 0.155708
+Change in dalitzHolderN.sigGoodD0.theta = -0.0185088
+Change in dalitzHolderP.sigGoodD0.rho = -0.216844
+Change in dalitzHolderP.sigGoodD0.theta = -1.32141
+
+  RooFitResult: minimized FCN value: -20505.9, estimated distance to minimum: 1.49211e-05
+                coviarance matrix quality: Full, accurate covariance matrix
+
+    Floating Parameter    FinalValue +/-  Error   
+  --------------------  --------------------------
+   pdfOnResDK.DPiXFrac    5.2669e-01 +/-  0.00e+00
+  pdfOnResDK.DpiGoodD0NumEvts    5.7252e+01 +/-  0.00e+00
+  pdfOnResDK.asymSigGoodD   -2.3814e-02 +/-  0.00e+00
+  pdfOnResDK.qqBadD0NumEvts    2.3828e+03 +/-  0.00e+00
+  pdfOnResDK.sigGoodD0NumEvts    1.7014e+02 +/-  0.00e+00
+  pdfOnResDK.totBBNumEvts    1.1381e+03 +/-  0.00e+00
+
+
+Fit status = 0
+
+covariance matrix
+
+6x6 matrix  is as follows
+
+     |        0  |        1  |        2  |        3  |        4  |
+------------------------------------------------------------------
+   0 |          0           0          -0           0           0 
+   1 |          0           0          -0           0          -0 
+   2 |         -0          -0           0          -0          -0 
+   3 |          0           0          -0           0           0 
+   4 |          0          -0          -0           0           0 
+   5 |         -0          -0           0          -0          -0 
+
+
+     |        5  |
+------------------------------------------------------------------
+   0 |         -0 
+   1 |         -0 
+   2 |          0 
+   3 |         -0 
+   4 |         -0 
+   5 |          0 
+
+correlation matrix
+
+6x6 matrix  is as follows
+
+     |        0  |        1  |        2  |        3  |        4  |
+------------------------------------------------------------------
+   0 |          1      0.2226    -0.03718     0.09624      0.4777 
+   1 |     0.2226           1      -0.028     0.01869    -0.09232 
+   2 |   -0.03718      -0.028           1   -0.005647    -0.03806 
+   3 |    0.09624     0.01869   -0.005647           1     0.09016 
+   4 |     0.4777    -0.09232    -0.03806     0.09016           1 
+   5 |    -0.3879     -0.2567     0.03231     -0.5445     -0.4522 
+
+
+     |        5  |
+------------------------------------------------------------------
+   0 |    -0.3879 
+   1 |    -0.2567 
+   2 |    0.03231 
+   3 |    -0.5445 
+   4 |    -0.4522 
+   5 |          1 
+
+Change in  pdfOnResDK.DPiXFrac = -0.00062139
+Change in pdfOnResDK.DpiGoodD0NumEvts = 0.000349121
+Change in pdfOnResDK.asymSigGoodD = 0.000932595
+Change in pdfOnResDK.qqBadD0NumEvts = -0.00389558
+Change in pdfOnResDK.sigGoodD0NumEvts = -0.00159125
+Change in pdfOnResDK.totBBNumEvts = 0.00124047
+
+  RooFitResult: minimized FCN value: -19068.9, estimated distance to minimum: 1.79208e-05
+                coviarance matrix quality: Full, accurate covariance matrix
+
+    Floating Parameter    FinalValue +/-  Error   
+  --------------------  --------------------------
+  dalitzHolderN.sigGoodD0.rho    9.6775e-01 +/-  0.00e+00
+  dalitzHolderN.sigGoodD0.theta    1.7452e+02 +/-  0.00e+00
+  dalitzHolderP.sigGoodD0.rho    9.1926e-01 +/-  0.00e+00
+  dalitzHolderP.sigGoodD0.theta    1.4732e+02 +/-  0.00e+00
+
+
+Fit status = 0
+
+covariance matrix
+
+4x4 matrix  is as follows
+
+     |        0  |        1  |        2  |        3  |
+------------------------------------------------------------------
+   0 |          0           0           0           0 
+   1 |          0           0           0           0 
+   2 |          0           0           0           0 
+   3 |          0           0           0           0 
+
+correlation matrix
+
+4x4 matrix  is as follows
+
+     |        0  |        1  |        2  |        3  |
+------------------------------------------------------------------
+   0 |          1      0.1374   3.012e-07   6.829e-08 
+   1 |     0.1374           1   2.919e-07   6.618e-08 
+   2 |  3.012e-07   2.919e-07           1     0.02754 
+   3 |  6.829e-08   6.618e-08     0.02754           1 
+
+Change in dalitzHolderN.sigGoodD0.rho = 0.155708
+Change in dalitzHolderN.sigGoodD0.theta = -0.0185088
+Change in dalitzHolderP.sigGoodD0.rho = -0.216844
+Change in dalitzHolderP.sigGoodD0.theta = -1.32141
+
+This is the end of ROOT -- Goodbye
+

@@ -1,0 +1,128 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Package: 
+ *    File: $Id: BdkOnResNLLYields.rdl,v 1.9 2006/06/23 20:44:52 fwinkl Exp $
+ * Authors:
+ *   Abi Soffer, Colorado State University, abi@slac.stanford.edu
+ * Description:
+ *   Applies the yields penalty on a BdkPdfOnRes
+ *
+ * History:
+ *   23-may-2006 abi  Created initial version
+ *
+ * Copyright (C) 2006 Colorado State University and SLAC
+ *****************************************************************************/
+
+#ifndef BDKONRESNLLYIELDS
+#define BDKONRESNLLYIELDS
+
+#include "TMatrixDSym.h"
+#include "RooFitCore/RooAbsReal.hh"
+#include "RooFitCore/RooRealVar.hh"
+#include "RooFitCore/RooSetProxy.hh"
+#include "BToDKTo3piK/BdkPdfOnRes.hh"
+
+class BdkPdfOnRes;
+
+
+class BdkOnResNLLYields : public RooAbsReal {
+public:
+  // Static members:
+
+  enum SystBit {EFF = 1, BRDK = 2, BR3PIoverK2PI = 4, BRK2PI = 8, NBB = 16,
+                ALL = 1+2+4+8+16};
+
+  // signal efficiency:
+  double efficiency() {
+    return (_pdf ? _pdf->absoluteEff()->getVal() : 0);}
+  double efficiencyRelErr() {
+    return (_pdf ? _pdf->absoluteEff()->getError()/efficiency() : 0);}
+
+  // B -> DK
+  double BRBtoDK() {
+    return (_pdf ? _pdf->brBtoDK()->getVal() : 0);}
+  double BRBtoDKRelErr() {
+    return (_pdf ? _pdf->brBtoDK()->getError()/BRBtoDK() : 0);}
+
+  // D -> Kpipi0
+  double BRDtoK2pi() {
+    return (_pdf ? _pdf->brDtoK2pi()->getVal() : 0);}
+  double BRDtoK2piRelErr() {
+    return (_pdf ? _pdf->brDtoK2pi()->getError()/BRDtoK2pi() : 0);}
+
+  // (D -> pi pi pi)/(D -> K pi pi)
+  double BRDto3piOverK2pi() {
+    return (_pdf ? _pdf->brDto3piOverK2pi()->getVal() : 0);}
+  double BRDto3piOverK2piRelErr() {
+    return (_pdf ? _pdf->brDto3piOverK2pi()->getError()/BRDto3piOverK2pi() : 0);}
+
+  double nBBRelErr() {
+    return (_pdf ? _pdf->nBB()->getError()/_pdf->nBB()->getVal() : 0);}
+
+
+  // instance members:
+public:
+  BdkOnResNLLYields(BdkPdfOnRes & pdf, 
+		    double corrNsigAsym,
+		    int systBit = EFF + BRDK + BR3PIoverK2PI + BRK2PI + NBB);
+
+  virtual ~BdkOnResNLLYields();
+
+  virtual TObject* clone(const char* newname) const; // RooAbsArg pure virtual
+
+  // Modifiers:
+  void setVerbose(const char * v) {_verbose = v; _verbose.ToLower();}
+
+  // Accessors:
+
+  // evaluate() returns half the chi^2, and the ErrorLevel (or ErrDef) is
+  // as in RooNLLVar, so this class can be used together with RooNLLVar.
+  virtual Double_t evaluate() const;
+  virtual Double_t defaultErrorLevel() const {return 0.5;} 
+
+  BdkPdfOnRes * pdf() {return _pdf;}
+
+  double errNsigAsym() const {return _errNsigAsym;}  
+  double noCPNsig() const {return _noCPNsig;}
+  double noCPNsigRelErr() const {return _noCPNsigRelErr;}
+  double nsig() const {return _nsig;}
+  double asym() const {return _asym;}
+  double nsigErr() const {return _nsigErr;}
+  double asymErr() const {return _asymErr;}
+
+  double expectedNsigP() const;
+  double expectedNsigN() const;
+  
+  double expectedNsig() const;
+  double expectedAsym() const;
+
+  virtual void printToStream(ostream& os, 
+			     PrintOption opt=Standard, 
+			     TString indent= "") const;  
+
+  void printParams(ostream & os) const;
+
+  const TString & verbose() const {return _verbose;}
+
+
+private:
+  mutable BdkPdfOnRes * _pdf;
+
+  double _errNsigAsym;
+  double _noCPNsig;
+  double _noCPNsigRelErr;
+  double _nsig;
+  double _asym;
+  double _nsigErr;
+  double _asymErr;
+
+  RooSetProxy _cpProxies;
+  TString _verbose;
+
+
+#if !defined(__INTERACTIVE__) 
+  ClassDef(BdkOnResNLLYields, 0)
+#endif
+};
+
+#endif

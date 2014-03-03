@@ -1,0 +1,60 @@
+//
+// Dalitz parameters for dalitzHolderN
+// 
+
+//----------------------------------------------------------------------------
+// The D0 Dalitz parameters:
+//
+
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho+_amp =  1 C 
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho+_phase =  0 C 
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho-_amp =  0.7 C 
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho-_phase = 0 C
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho0_amp =  0 C 
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho0_phase =  0 C
+
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F0_1370_amp =  0 C 
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F0_1500_amp =  0 C 
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F0_1710_amp =  0 C 
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F0_amp =  0 C 
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F2P1525_amp =  0 C 
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.F2_amp =  0 C 
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.NRPW_0P_amp =  0 C 
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.NRPW_M0_amp =  0 C 
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.NRPW_PM_amp =  0 C 
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Nonres_amp =  0 C 
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Omega_amp =  0 C 
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho1700+_amp =  0 C 
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho1700-_amp =  0 C 
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho17000_amp =  0 C 
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho2s+_amp = 0 C 
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho2s-_amp =  0 C 
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Rho2s0_amp =  0 C 
+dalitzHolderN.sigGoodD0.pdf.dalitzAmp.Sigma_amp = 0 C 
+
+
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.Rho+_amp =  1 C 
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.Rho+_phase =  0 C 
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.Rho-_amp =  0.7 C 
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.Rho-_phase = 0 C
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.Rho0_amp =  0 C 
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.Rho0_phase =  0 C
+
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.F0_1370_amp =  0 C 
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.F0_1500_amp =  0 C 
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.F0_1710_amp =  0 C 
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.F0_amp =  0 C 
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.F2P1525_amp =  0 C 
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.F2_amp =  0 C 
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.NRPW_0P_amp =  0 C 
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.NRPW_M0_amp =  0 C 
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.NRPW_PM_amp =  0 C 
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.Nonres_amp =  0 C 
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.Omega_amp =  0 C 
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.Rho1700+_amp =  0 C 
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.Rho1700-_amp =  0 C 
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.Rho17000_amp =  0 C 
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.Rho2s+_amp = 0 C 
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.Rho2s-_amp =  0 C 
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.Rho2s0_amp =  0 C 
+dalitzHolderP.sigGoodD0.pdf.dalitzAmp.Sigma_amp = 0 C 
