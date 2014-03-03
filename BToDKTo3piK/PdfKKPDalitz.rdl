@@ -1,0 +1,91 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * Description:
+ *   Signal Dalitz PDF wrapper
+ * History:
+ *   18 Oct 2005, created, Abi soffer
+ *   31 May, 2006, adapted for KKpi0 DP, Kalanand Mishra
+ *****************************************************************************/
+#ifndef PDFKKPDALITZ
+#define PDFKKPDALITZ
+
+#include "BToDKTo3piK/BdkPdfDalitzBase.hh"
+#include "BToDKTo3piK/KKPDalitzAmp.hh"
+
+class RooRealVar;
+class KKPDalitz;
+
+
+class PdfKKPDalitz : public BdkPdfDalitzBase {
+public:
+  PdfKKPDalitz();
+
+  PdfKKPDalitz(const char * theName, const char * theDesc,
+		RooAbsReal & m12, RooAbsReal & m13,
+		BdkDalitzBase::Flavor flavor = BdkDalitzBase::D0,
+		KKPDalitzAmp * externalAmp = 0,
+		Int_t componentsBit = 	     
+		KKPDalitzAmp::allComponents(),
+		Int_t spinResComp = 1); 
+  
+  virtual ~PdfKKPDalitz();
+  
+  virtual void init(const char * theName, const char * theDesc,
+		    RooAbsReal  & m12, RooAbsReal & m13, 
+		    BdkDalitzBase::Flavor flavor = BdkDalitzBase::D0) {
+    init(theName, theDesc, m12, m13, flavor,
+         0, 
+	 KKPDalitzAmp::allComponents(),
+         1);
+  }
+
+  void init(const char * theName, const char * theDesc,
+            RooAbsReal  & m12, RooAbsReal & m13, 
+            BdkDalitzBase::Flavor flavor,
+            KKPDalitzAmp * externalAmp,
+            Int_t componentsBit =   
+	    KKPDalitzAmp::allComponents(),
+            Int_t spinResComp = 1); 
+
+  void setComponentsBit(Int_t componentsBit);
+
+  virtual void setVerbose(const char * val);
+
+  virtual const BdkDalitzEff* efficiencyFunc() const;
+  virtual void setEfficiencyFunc(const BdkDalitzEff *f);
+
+  // access to the pdf in its native type:
+  KKPDalitz * pdfType() {return (KKPDalitz*)getPdf();}
+
+  virtual RooArgSet fitFractions() const;
+
+
+protected:
+  // Helpers:
+    virtual void createPdf();    
+
+private:
+  // Data:
+  Int_t _componentsBit;  
+  Int_t _spinResComp;
+  KKPDalitzAmp * _externalAmp; // not owned
+
+  ClassDef (PdfKKPDalitz,0)
+    
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+

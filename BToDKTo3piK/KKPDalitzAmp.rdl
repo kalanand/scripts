@@ -1,0 +1,211 @@
+/*****************************************************************************
+ * Project: BaBar detector at the SLAC PEP-II B-factory
+ * History:
+ *     - Nov 2005, Abi, adapted from Ben's RooDPManager
+ *     - May 2006, Kalanand, adapted from Abi's BdkDDalitzAmp
+ *  NOTE: Only works when particles 2 and 3 are CP-conjugates of each other
+ *****************************************************************************/
+
+#ifndef KKPDALITZAMP
+#define KKPDALITZAMP
+
+#include <vector>
+
+#include "TNamed.h"
+#include "TString.h"
+#include "RooFitCore/RooComplex.hh"
+#include "RooFitCore/RooAbsArg.hh"
+#include "RooFitCore/RooRealVar.hh"
+#include "RooFitCore/RooArgList.hh"
+
+class BdkDalitzBase;
+
+class KKPDalitzAmp : public TNamed {
+  // Static members: -------------------------------------------
+public:
+  enum Component {KSTARP     = 1,
+		  PHI        = 2,
+		  KSTARM     = 4,
+		  KSTAR1410P = 8,
+		  KSTAR1410M = 16,
+		  NONRESP    = 32,
+		  NONRESM    = 64,
+		  F2P1525    = 128,
+                  F0         = 256,
+                  A0         = 512};
+
+  static int allComponents() {return KSTARP + PHI + KSTARM + KSTAR1410P + 
+				KSTAR1410M + NONRESP + NONRESM + F2P1525 + F0;}
+ 
+  enum {SIZE = 12};  // Max # of contributions (see enum Component)
+
+  enum Spin {SPIN0 = 0, SPIN1 = 1, SPIN2 = 2};
+
+  enum ResDaughters {KP_KM_PI0 = 0, KP_KM = 1, KM_PI0 = 2, PI0_KP = 3};
+
+  // Normalize all objects:
+  static void normalizeAll(int nEvents = (int)1.e06); 
+
+  // Empty the registry
+  static void cleanRegistry();
+
+  // Access to the registry, really only needed for debugging:
+  static const std::vector<KKPDalitzAmp *> & registry() {return _registry;}  
+
+  static const Double_t F_D;
+
+  static const Bool_t _enforceTransversality;
+
+
+protected:
+  // A list of objects:
+  static std::vector<KKPDalitzAmp *> _registry;
+
+  
+private:
+ 
+  static const Double_t DEGTORAD;     // = PI/180
+
+  // The init function adds an object to the registry:
+  static void registerObject(KKPDalitzAmp * amp);  
+  // Remove object from registry
+  static void deregisterObject(KKPDalitzAmp * amp);
+
+
+  // Instance members: -------------------------------------------
+public:
+  /// constructors:
+  KKPDalitzAmp(const char * name, const char * title, 
+		BdkDalitzBase * pdf,
+		Int_t componentsBit = allComponents(),
+		Int_t defaultKstarSpin = SPIN1);
+  
+  virtual  ~KKPDalitzAmp();
+  
+  // modifiers:  
+  void registerParams(BdkDalitzBase * pdf);
+
+  virtual void calNorm(int events = 1000000, 
+		       Bool_t enforceNormalizeAll = kTRUE);
+
+  inline RooArgList & params() { return _params ; }
+
+  void KKPDalitzAmp::setVerbose(const char * val) {_verbose = val;}
+
+  RooRealVar* ampRes(int i) {return _ampRes[i];}
+  RooRealVar* phaseRes(int i) {return _phaseRes[i];}
+  RooRealVar* massRes(int i) {return _massRes[i];}
+  RooRealVar* gammaRes(int i) {return _gammaRes[i];}
+
+  // accessors:
+  const TString & verbose() const {return _verbose;}
+  virtual Double_t efficiency(Double_t m12, Double_t m13) const;
+  virtual Double_t getNormalization() const;
+  virtual Double_t KKPDalitzAmp::unNormalizedFitFraction(int j) const;
+  virtual RooArgSet fitFractions() const;
+
+  virtual RooComplex getamp(Double_t m12, Double_t m13) const;
+
+  Double_t SpinFactor(Double_t m12, Double_t m13, Int_t spin, 
+                      Int_t n, Int_t i) const;
+
+  virtual Double_t kinematics(Double_t m12, Double_t m13, Int_t n) const;
+  
+  RooComplex RelativisticBW(Double_t m12,Double_t m13, Double_t m0,
+			    Double_t width, Int_t i) const;
+
+  RooComplex LASS(Double_t s, Int_t i) const; 
+
+  RooComplex Flatte(Double_t m0, Double_t s) const;
+
+  RooComplex a0(Double_t s) const;
+
+  RooComplex E791Table(Double_t s) const; 
+  
+  virtual Double_t betaKin(Double_t s, Double_t m ) const;
+  virtual Double_t pionCMmom(Double_t s, Double_t m1, Double_t m2 ) const;
+  virtual Double_t pionCMmom(Double_t s, Int_t n) const;
+
+  virtual Double_t runningWidth(Double_t m12,Double_t m13, Double_t m0,
+				Double_t width, Int_t spin, Int_t n) const;
+
+ 
+  virtual Double_t dampingFactorSquared(Double_t s, Int_t n, Int_t spin) const;
+  
+  virtual Double_t FrEval(Double_t s, Double_t m0, Int_t n, Int_t spin) const;
+  
+  Bool_t inDalitz(Double_t m12, Double_t m13) const;
+  inline const RooArgList & params() const { return _params ; }
+  inline const RooArgList & normParams() const { return _normParams ; }
+  Int_t componentsBit() const {return _componentsBit;}
+  Int_t nComps() const {return _nComps;}
+  const TString & nameRes(int i) const {return _nameRes[i];}
+
+  void setIsNormalized();
+  void setNeedToNormalize(int component);
+  void setNeedToNormalizeAll();
+  Bool_t needToNormalize(int component) const;
+  Bool_t needToNormalizeAny() const;
+  
+
+
+protected:
+  // helpers:
+  void initResonance();
+
+  void addComp(const char * name, double amp, double phase, 
+	       double mass, double width, 
+	       ResDaughters trackingInfo, Int_t spin,
+	       int parSource = -1); 
+
+  inline void setPdf(BdkDalitzBase * pdf) {_pdf = pdf;}
+
+
+private:
+  KKPDalitzAmp(const KKPDalitzAmp & other);
+
+  Int_t _componentsBit;  // the bitwise integer describing the components
+  Int_t _nComps;         // the # of components
+  Int_t _defaultKstarSpin; // default spin of the K*, if want to set to 0
+
+  // normalization parameters:
+  RooRealVar * _normReal[SIZE][SIZE];
+  RooRealVar * _normImag[SIZE][SIZE];
+  RooArgList _normParams;
+
+  // resonance parameters:
+  RooRealVar* _massRes[SIZE];
+  RooRealVar* _gammaRes[SIZE];
+  Double_t _massResLast[SIZE];
+  Double_t _gammaResLast[SIZE];
+  Int_t _spinRes[SIZE];
+  TString _nameRes[SIZE];  
+  Double_t _mDaug[4];
+  Double_t _mD;
+
+
+  ResDaughters _trackinfo[SIZE];
+  RooRealVar* _ampRes[SIZE];
+  RooRealVar* _phaseRes[SIZE];
+
+  // radial parameter
+  RooRealVar* _resRadius;
+  RooRealVar* _a;           // scattering length
+  RooRealVar* _r;           // Effective Range
+  RooRealVar* _B;           // fraction of the background amplitude
+  RooRealVar* _R;           // resonant amplitude
+  RooRealVar* _phiB;        // overall background phase
+  RooRealVar* _phiR;        // overall resonant phase
+  RooRealVar* _E791;        // to use E791 Table III
+
+  TString _verbose; 
+
+  BdkDalitzBase * _pdf;
+  RooArgList _params;
+
+  ClassDef(KKPDalitzAmp,1)
+
+};
+
+#endif
+

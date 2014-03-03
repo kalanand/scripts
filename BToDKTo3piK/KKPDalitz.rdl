@@ -1,0 +1,87 @@
+/*****************************************************************************
+ * Project: D0 --> K-K+pi0
+ *
+ * RooAbsPdf subclass that fits the Dalitz distribution of D->KKpi0 decays.
+ *
+ * History: Kalanand Mishra, May 31, 2006, adapted from code by Ben Lau, 
+ *    Kalanand Mishra and Abi Soffer
+ *                                                                           *
+ *****************************************************************************/
+
+#ifndef KKPDALITZ
+#define KKPDALITZ
+
+#include "RooFitCore/RooRealProxy.hh"
+#include "BToDKTo3piK/BdkDalitzBase.hh"
+#include "BToDKTo3piK/KKPDalitzAmp.hh"
+
+
+class RooRealVar;
+
+class KKPDalitz : public BdkDalitzBase {
+public:
+
+  KKPDalitz(const char *name, const char *title,
+	     RooAbsReal& m12, RooAbsReal& m13,
+	     BdkDalitzBase::Flavor flavor, 
+	     KKPDalitzAmp * amp = 0, // if 0, makes its own amp
+	     Int_t componentsBit = 
+	     KKPDalitzAmp::allComponents(),
+	     BdkDalitzBase::Mode DdecMode = BdkDalitzBase::KKP0,
+             Int_t spinResComp = 1);
+  
+  KKPDalitz(const KKPDalitz& other, const char* name=0) ;
+
+  virtual ~KKPDalitz();
+
+  // modifiers:
+  KKPDalitzAmp * dalitzAmp() {return _dalitzAmp;}  
+
+  void setComponents(Int_t comps, 
+		     Int_t spinResComp = 1,
+		     KKPDalitzAmp * amp = 0);
+
+  // accessors:
+  virtual TObject* clone(const char* newname) const 
+  {return new KKPDalitz(*this,newname); }
+  
+  Int_t getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analVars, const char* rangeName=0) const ;
+
+  Double_t analyticalIntegral(Int_t code,const char* rangeName=0) const ;
+  
+  Double_t evaluate() const ;  
+
+  virtual RooArgSet fitFractions() const {return _dalitzAmp->fitFractions();}
+
+
+protected:
+
+  RooRealProxy _m12 ;
+  RooRealProxy _m13 ;
+
+  // the KKPDalitzAmp needs to be a pointer to allow for PDF cloning.
+  // otherwise, we need to make a viable copy constructor for it, and
+  // with all the pointer data that's a mess:
+  KKPDalitzAmp * _dalitzAmp;  
+
+
+private:
+
+  ClassDef(KKPDalitz,0) // BenDalitz PDF
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
